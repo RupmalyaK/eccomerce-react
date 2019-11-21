@@ -1,8 +1,8 @@
-import React , {useState} from 'react';
+import React from 'react';
 import {Route , Switch} from "react-router-dom"; 
-import Header from "./components/Header.component";
-import Homepage from "./pages/Homepage.component"; 
-import Shoppage from "./pages/Shop.component.js";
+import Header from "./components/Header.jsx";
+import Homepage from "./pages/Homepage.jsx"; 
+import Shoppage from "./pages/Shop.jsx";
 
 
 const App = () => {

@@ -1,20 +1,21 @@
 import React, {useState , useEffect} from "react"; 
 import styled from "styled-components"; 
-import Layout from "../components/Layout.component.js";
 import SHOP_DATA from "../data/shop-data";
-import CollectionPreview from "../components/CollectionPreview.component.js";
+import CollectionPreview from "../components/CollectionPreview.jsx";
 
-const Container = styled.div``;
+const Container = styled.div`
+padding: 0px 20px;
+`;
 
 const Shop = (props) => {
 
-    const [collection, setCollection] = useState([]);
+    //const [collection, setCollection] = useState([]);
     //So that React won't have to filter the array every render of this component
     const [filteredCollection , setFilteredCollection] = useState([]); 
-    let noOfItemsToPreview = 5;
+    const [noOfItemsToPreview] = useState(5); 
     
     useEffect( () => {
-        setCollection (SHOP_DATA);
+      //  setCollection (SHOP_DATA);
         const newItemsTypeArr = [];
         const tempCollection = SHOP_DATA;  
            tempCollection.map((itemType, index) => {
@@ -24,15 +25,14 @@ const Shop = (props) => {
                 {
                     setFilteredCollection(newItemsTypeArr);
                     return;
+                    
                 }
         })
-    },[]);
+    },[noOfItemsToPreview]);
 
 const displayCollectionsPreview = () => {
     return filteredCollection.map((section => { 
-        return (
-       <CollectionPreview key = {section.id} section = {section} />
-        );
+        return ( <CollectionPreview key = {section.id} section = {section} />);
     }))
 }    
 

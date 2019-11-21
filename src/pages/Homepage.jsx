@@ -1,13 +1,12 @@
 import React from "react"; 
 import styled from "styled-components"; 
-import Layout from "../components/Layout.component.js";
-import DirectoryItems from "../components/DirectoryItems.component.js";
+import DirectoryItems from "../components/DirectionItems.jsx";
 
 const HomepageContainer = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-padding: 20px 80px;
+padding: 20px 20px;
 `;
 const Homepage = () => {
 

@@ -1,8 +1,6 @@
 import React , {useState} from "react"; 
 import styled from "styled-components"; 
-import {Link} from "react-router-dom"; 
-import MenuItem from "./MenuItem.component.js"; 
-import Hatspage from "../pages/Hats.component.js";
+import MenuItem from "./MenuItem.jsx"; 
 
 
 const DirectoryItemsContainer = styled.div`
@@ -14,7 +12,7 @@ justify-content: space-between;
 
 const DirectoryItems = (props) => {
 
-    const [itemsArr , setItemsArr] = useState([
+    const [itemsArr] = useState([
         {
           "title": "Jackets", 
           "imageUrl": "https://i.ibb.co/px2tCc3/jackets.png", 
