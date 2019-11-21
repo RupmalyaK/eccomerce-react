@@ -11,14 +11,10 @@ padding: 20px 80px;
 `;
 const Homepage = () => {
 
-    return(
-                <Layout>
-                    <HomepageContainer>    
-                        <DirectoryItems/>
-                    </HomepageContainer>      
-                </Layout>
-        
-       
+    return(        
+        <HomepageContainer>    
+            <DirectoryItems/>
+        </HomepageContainer>       
     );
 }
 
