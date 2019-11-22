@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import styled from "styled-components"; 
 import FormInput from "./FormInput.jsx";
 import Button from "./Button.jsx";
+import {signInWithGoogle} from "../firebase/firebase.util.js"; 
+
 
 
 const Container = styled.div`
@@ -18,6 +20,11 @@ margin: 10px 0px;
 const Form = styled.form`
 `;
 
+const ButtonsContainer = styled.div`
+display:flex;
+justify-content:space-between;
+`;
+
 const SignIn = (props) => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState(''); 
@@ -29,7 +36,6 @@ const handleChange = (setState , e) =>{
 const handleSubmit = (e) => { 
     e.preventDefault(); 
     e.stopPropagation();
-    alert("@@");
     setEmail('');
     setPassword(''); 
 }
@@ -40,7 +46,11 @@ return(
     <Form>
         <FormInput name="email" type="email" value={email} label="Email" setState={setEmail} handleChange={handleChange} required />
         <FormInput name="password" type="password" value={password} label="Password" setState={setPassword} handleChange={handleChange} required />
-        <Button type="submit" handleSubmit={handleSubmit}>Sign in</Button>
+        <ButtonsContainer>
+                <Button type="submit" handleClick={handleSubmit}>Sign in</Button>
+                <Button onClick = {signInWithGoogle} isGoogleSignIn>Sign in with Google </Button>
+        </ButtonsContainer>
+        
     </Form>
 </Container>
 );
@@ -50,4 +60,3 @@ return(
 
 export default SignIn; 
 
-//<input type="submit" value= "submit form" onSubmit = {handleSubmit} />

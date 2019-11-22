@@ -34,6 +34,7 @@ const InputLabel = styled.label`
 
 
 const Input = styled.input`
+
 background: none;
 background-color: white;
 color: ${subColor};

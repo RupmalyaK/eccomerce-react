@@ -1,6 +1,17 @@
 import React from "react"; 
 import styled from "styled-components"; 
 
+
+const googleSignInButtonStyle = {
+  "background-color":"#4285f4",
+  "color":"white",
+  "&:hover": {
+    "background-color":"#357ae8",
+    "border":"none",
+    
+  }
+};
+
 const Container = styled.button`
 min-width: 165px;
 width: auto;
@@ -16,18 +27,19 @@ font-family: 'Open Sans Condensed';
 font-weight: bolder;
 border: none;
 cursor: pointer;
-
 &:hover {
   background-color: white;
   color: black;
   border: 1px solid black;
 }
+
+${props => (props.isGoogleSignIn ? googleSignInButtonStyle : null) }
 `;
 
 const Button = (props) => {
-const {handleSubmit , children, ...otherProps} = props;
+const {handleClick , children,isGoogleSignIn, ...otherProps} = props;
 return(
-<Container onSubmit = {handleSubmit} {...otherProps}>
+<Container onSubmit = {handleClick} {...otherProps} isGoogleSignIn={isGoogleSignIn}>
     {children}
 </Container>
 );

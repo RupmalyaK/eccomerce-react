@@ -1,7 +1,9 @@
 import React from "react"; 
 import styled from "styled-components"; 
 import {Link} from "react-router-dom";
+import {auth} from "../firebase/firebase.util.js";
 import {ReactComponent as Logo} from "../images/crown.svg";
+import {signInWithGoogle} from "../firebase/firebase.util.js";
 
 
 const Container = styled.div`
@@ -24,6 +26,8 @@ height: 100%;
 display: flex;
 align-items: center;
 justify-content: flex-end;
+text-transform:uppercase;
+cursor:pointer;
 `;
 
 const Option = styled(Link)`
@@ -34,7 +38,15 @@ color:black;
 `;
 
 
-const Header = () => {
+const Header = (props) => {
+    const {currentUser} = props;
+
+    const handleSignOut = (e) => {
+        auth.signOut(); 
+    }
+
+   
+
     return (
         <Container>
             <LogoContainer>
@@ -46,6 +58,10 @@ const Header = () => {
                 <Option to='/'>Homepage</Option>
                 <Option to="/shop">Shop</Option>
                 <Option to="/contactus">Contact us</Option>
+                {currentUser?
+                <Option onClick = {handleSignOut}>Sign out</Option> :
+                <Option onClick = {signInWithGoogle}>Sign in</Option>
+            }
             </Options>
         </Container>
     )
