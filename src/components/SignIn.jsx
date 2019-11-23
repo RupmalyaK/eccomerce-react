@@ -7,7 +7,7 @@ import {signInWithGoogle} from "../firebase/firebase.util.js";
 
 
 const Container = styled.div`
-width:30vw;
+width:500px;
 display:flex;
 flex-direction:column;
 `;
@@ -29,13 +29,8 @@ const SignIn = (props) => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState(''); 
 
-const handleChange = (setState , e) =>{
-    setState(e.target.value); 
-}
-
 const handleSubmit = (e) => { 
     e.preventDefault(); 
-    e.stopPropagation();
     setEmail('');
     setPassword(''); 
 }
@@ -44,8 +39,8 @@ return(
     <Title>I already have an account</Title>
     <span>let's sign in with email and password</span>
     <Form>
-        <FormInput name="email" type="email" value={email} label="Email" setState={setEmail} handleChange={handleChange} required />
-        <FormInput name="password" type="password" value={password} label="Password" setState={setPassword} handleChange={handleChange} required />
+        <FormInput name="email" type="email" value={email} label="Email" setState={setEmail} required />
+        <FormInput name="password" type="password" value={password} label="Password" setState={setPassword} required />
         <ButtonsContainer>
                 <Button type="submit" handleClick={handleSubmit}>Sign in</Button>
                 <Button onClick = {signInWithGoogle} isGoogleSignIn>Sign in with Google </Button>

@@ -4,7 +4,11 @@ import SignIn from "../components/SignIn.jsx";
 import SignUp from "../components/Signup.jsx"; 
 
 const Container = styled.div`
-padding:0px 25px;
+width: 1200px;
+display: flex;
+justify-content: space-between;
+margin: 30px auto;
+
 `;
 
 const  SignInSignUp = (props) => {
@@ -20,3 +24,7 @@ return(
 
 
 export default SignInSignUp; 
+
+
+  
+  

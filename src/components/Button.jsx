@@ -39,7 +39,7 @@ ${props => (props.isGoogleSignIn ? googleSignInButtonStyle : null) }
 const Button = (props) => {
 const {handleClick , children,isGoogleSignIn, ...otherProps} = props;
 return(
-<Container onSubmit = {handleClick} {...otherProps} isGoogleSignIn={isGoogleSignIn}>
+<Container onClick = {handleClick} {...otherProps} isGoogleSignIn={isGoogleSignIn}>
     {children}
 </Container>
 );

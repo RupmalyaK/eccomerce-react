@@ -60,10 +60,15 @@ margin: 25px 0;
 //STYLE
 
 const FormInput = (props) => {
-const {handleChange , setState, label , ...otherProps} = props; 
+const { setState, label , ...otherProps} = props;
+
+const handleChange = e => {
+    setState(e.target.value)
+}
+
 return(
 <Container>
-        <Input onChange = {e => handleChange(setState, e) } {...otherProps} />
+        <Input onChange = {handleChange } {...otherProps} />
         {
             label ? (
                 <InputLabel value = {otherProps.value}>

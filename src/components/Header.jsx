@@ -59,8 +59,8 @@ const Header = (props) => {
                 <Option to="/shop">Shop</Option>
                 <Option to="/contactus">Contact us</Option>
                 {currentUser?
-                <Option onClick = {handleSignOut}>Sign out</Option> :
-                <Option onClick = {signInWithGoogle}>Sign in</Option>
+                <Option onClick = {handleSignOut} to={"/"}>Sign out</Option> :
+                <Option to={"/signin"}>Sign in</Option>
             }
             </Options>
         </Container>

@@ -16,7 +16,8 @@ const config = {
     measurementId: "G-ZE257RT6JM"
   };
 
-firebase.initializeApp(config); 
+firebase.initializeApp(config)
+
 const auth = firebase.auth();
 const firestore = firebase.firestore(); 
 
@@ -32,8 +33,39 @@ const signInWithGoogle = () => {
     auth.signInWithPopup(provider);
 }
 
+const createUserProfileDoc = async (userAuth , additionalDetails) => {
+  if (!userAuth)
+    {
+      return; 
+    }
+    const userRef = firestore.doc("users/" + userAuth.uid);
+
+    const snapshot = await userRef.get();
+
+    if(!snapshot.exists)  
+      {
+        const {displayName, email} = userAuth; 
+        const createdAt = new Date(); 
+        try{
+         const user =  await userRef.set({
+             displayName,
+             email,
+             createdAt,
+             ...additionalDetails
+           }); 
+        }
+        catch(error)
+          {
+              console.log("Error creating user", error); 
+          }
+      }
+      console.log("debug");
+      return userRef; 
+}
+
 
 export {auth};
 export {firestore};
 export {signInWithGoogle}; 
+export {createUserProfileDoc};
 export default firebase; 

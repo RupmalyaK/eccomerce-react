@@ -4,7 +4,6 @@ import SHOP_DATA from "../data/shop-data";
 import CollectionPreview from "../components/CollectionPreview.jsx";
 
 const Container = styled.div`
-padding: 0px 20px;
 `;
 
 const Shop = (props) => {
