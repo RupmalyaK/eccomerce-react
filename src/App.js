@@ -59,7 +59,8 @@ const App = () => {
         <Switch>
           <Route path='/' exact component={Homepage} />
           <Route path="/shop" exact component={Shoppage} />
-          <Route path="/signin" exact component={SignInAndSignUp} />
+          {!currentUser? <Route path="/signin" exact component={SignInAndSignUp} currentUser={currentUser} /> : <></>}
+          
         </Switch>
         </Pages>
       </Container>

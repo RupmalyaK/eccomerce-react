@@ -1,8 +1,9 @@
 import React, {useState} from "react"; 
+import {useHistory} from "react-router-dom"; 
 import styled from "styled-components"; 
 import FormInput from "./FormInput.jsx";
 import Button from "./Button.jsx";
-import {signInWithGoogle} from "../firebase/firebase.util.js"; 
+import {signInWithGoogle, auth} from "../firebase/firebase.util.js"; 
 
 
 
@@ -28,9 +29,16 @@ justify-content:space-between;
 const SignIn = (props) => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState(''); 
-
-const handleSubmit = (e) => { 
+const history = useHistory(); 
+const handleSubmit = async (e) => { 
     e.preventDefault(); 
+    try{
+        await auth.signInWithEmailAndPassword(email , password); 
+        history.push('/');
+    }
+    catch(error){
+        console.log("Error signing in with email and password", error); 
+    }
     setEmail('');
     setPassword(''); 
 }
