@@ -1,6 +1,7 @@
+import userActionTypes from "./user.types.js";
 const setCurrentUser = user => {
     return {
-        type: "SET_CURRENT_USER",
+        type: userActionTypes.SET_CURRENT_USER,
         payLoad:user,
     }
 }

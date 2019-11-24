@@ -4,6 +4,7 @@ import FormInput from "./FormInput.jsx";
 import Button from "./Button.jsx"; 
 import {auth , createUserProfileDoc} from "../firebase/firebase.util.js";
 
+
 const Container = styled.div`
 display: flex;
 flex-direction: column;
@@ -24,6 +25,7 @@ const [displayName , setDisplayName] = useState('');
 const [email , setEmail] = useState('');
 const [password , setPassword] = useState('');
 const [confirmPassword , setConfirmPassword] = useState('');
+
 
 const handleSubmit = async (e) => {
      e.preventDefault(); 

@@ -1,5 +1,4 @@
 import React, {useState} from "react"; 
-import {useHistory} from "react-router-dom"; 
 import styled from "styled-components"; 
 import FormInput from "./FormInput.jsx";
 import Button from "./Button.jsx";
@@ -29,7 +28,7 @@ justify-content:space-between;
 const SignIn = (props) => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState(''); 
-const history = useHistory(); 
+
 
 const handleSubmit = async (e) => { 
     e.preventDefault(); 
@@ -37,7 +36,7 @@ const handleSubmit = async (e) => {
         await auth.signInWithEmailAndPassword(email , password); 
         setEmail('');
         setPassword(''); 
-        history.push('/');
+    
     }
     catch(error){
         console.log("Error signing in with email and password", error); 
