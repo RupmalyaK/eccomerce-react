@@ -7,6 +7,9 @@ import SignInAndSignUp from "./pages/SignIn&SignUp.jsx";
 import {auth, createUserProfileDoc} from "./firebase/firebase.util.js";
 import styled from "styled-components";
 import GlobalStyle from "./components/GlobalStyle.jsx";
+import {useDispatch} from "react-redux"; 
+import setCurrentUser from "./redux/user/user.action.js";
+
 
 
 const Container = styled.div`
@@ -17,7 +20,11 @@ padding: 20px 20px;
 `;
 
 const App = () => {
-  const [currentUser , setCurrentUser] = useState(null); 
+ const [currentUser] = useState(null); 
+
+  const dispatch = useDispatch(); 
+
+
  
   useEffect(
     () => {
@@ -29,37 +36,34 @@ const App = () => {
             const userRef = await createUserProfileDoc(userAuth); 
 
             userRef.onSnapshot(snapshot => {
-                setCurrentUser({
+                dispatch(setCurrentUser({
                   id:snapshot.id,
                   ...snapshot.data()
-                });    
+                })); 
             });
             return;
           }
-          setCurrentUser(userAuth); 
+          dispatch(setCurrentUser(userAuth)); 
+          return;
         }
       ); 
-      console.log(currentUser);
       return (
         () => {
           unsubscribeFromAuth(); 
         }
       );
-    },[]);
+    },[]); 
     
-    useEffect(() => {
-      console.log(currentUser); 
-    },[currentUser])
    
     return (
       <Container>
         <GlobalStyle />
-        <Header currentUser = {currentUser} />
+        <Header/>
         <Pages>
         <Switch>
           <Route path='/' exact component={Homepage} />
           <Route path="/shop" exact component={Shoppage} />
-          {!currentUser? <Route path="/signin" exact component={SignInAndSignUp} currentUser={currentUser} /> : <></>}
+          <Route path="/signin" exact component={SignInAndSignUp}  /> 
           
         </Switch>
         </Pages>

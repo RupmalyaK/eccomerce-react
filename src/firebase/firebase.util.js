@@ -16,7 +16,7 @@ const config = {
     measurementId: "G-ZE257RT6JM"
   };
 
-firebase.initializeApp(config)
+firebase.initializeApp(config);
 
 const auth = firebase.auth();
 const firestore = firebase.firestore(); 
@@ -59,7 +59,6 @@ const createUserProfileDoc = async (userAuth , additionalDetails) => {
               console.log("Error creating user", error); 
           }
       }
-      console.log("debug");
       return userRef; 
 }
 

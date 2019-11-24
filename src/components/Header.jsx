@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import {auth} from "../firebase/firebase.util.js";
 import {ReactComponent as Logo} from "../images/crown.svg";
 import {signInWithGoogle} from "../firebase/firebase.util.js";
+import {useSelector} from "react-redux";
+
 
 
 const Container = styled.div`
@@ -39,13 +41,11 @@ color:black;
 
 
 const Header = (props) => {
-    const {currentUser} = props;
+    const currentUser = useSelector(state => state.user.currentUser);
 
     const handleSignOut = (e) => {
         auth.signOut(); 
     }
-
-   
 
     return (
         <Container>

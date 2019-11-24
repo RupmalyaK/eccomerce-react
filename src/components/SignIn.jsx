@@ -30,18 +30,21 @@ const SignIn = (props) => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState(''); 
 const history = useHistory(); 
+
 const handleSubmit = async (e) => { 
     e.preventDefault(); 
     try{
         await auth.signInWithEmailAndPassword(email , password); 
+        setEmail('');
+        setPassword(''); 
         history.push('/');
     }
     catch(error){
         console.log("Error signing in with email and password", error); 
     }
-    setEmail('');
-    setPassword(''); 
+    
 }
+
 return(
 <Container>
     <Title>I already have an account</Title>
