@@ -2,6 +2,20 @@ import React from "react";
 import styled from "styled-components"; 
 
 
+const invertedStyle = {
+"background-color": "white",
+"color": "black",
+"border": "1px solid black",
+
+"&:hover": {
+  "background-color": "black",
+  "color": "white",
+  "border": "none",
+}
+}
+
+
+
 const googleSignInButtonStyle = {
   "background-color":"#4285f4",
   "color":"white",
@@ -27,19 +41,23 @@ font-family: 'Open Sans Condensed';
 font-weight: bolder;
 border: none;
 cursor: pointer;
+display:flex;
+justify-content:center;
+
 &:hover {
   background-color: white;
   color: black;
   border: 1px solid black;
 }
-
-${props => (props.isGoogleSignIn ? googleSignInButtonStyle : null) }
+${props => (props.isGoogleSignIn ? googleSignInButtonStyle : null) };
+${props => (props.isInverted ? invertedStyle : null)};
 `;
 
+
 const Button = (props) => {
-const {handleClick , children,isGoogleSignIn, ...otherProps} = props;
+const {handleClick , children,isGoogleSignIn,isInverted, ...otherProps} = props;
 return(
-<Container onClick = {handleClick} {...otherProps} isGoogleSignIn={isGoogleSignIn}>
+<Container onClick = {handleClick} {...otherProps} isGoogleSignIn={isGoogleSignIn} isInverted={isInverted}>
     {children}
 </Container>
 );

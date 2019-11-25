@@ -21,8 +21,25 @@ const showCartDropdown = () => {
     }
 }
 
-export {
+const addItemToCart= (item) => {
+    return {
+        type:cartTypes.ADD_ITEM_TO_CART,
+        payLoad:item,
+    }
+}
+
+const removeItemFromCart = (id) =>
+    {
+        return {
+            type:cartTypes.REMOVE_ITEM_FROM_CART,
+            payLoad:id,
+        }
+    }
+
+    export {
 toggleCartDropdown,
 hiddeCartDropdown,
 showCartDropdown,
+addItemToCart,
+removeItemFromCart,
 };

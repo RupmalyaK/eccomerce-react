@@ -1,12 +1,16 @@
 import React from "react"; 
 import styled from "styled-components"; 
+import Button from "./Button.jsx";
+import {useDispatch} from "react-redux"; 
+import {addItemToCart} from "../redux/cart/cart.action.js"; 
 
-const Container = styled.div`
-width: 20%;
-display: flex;
-flex-direction: column;
-height: 350px;
-align-items: center;
+
+const AddToCartButton = styled(Button)`
+width: 50%;
+opacity: 0.7;
+position: absolute;
+bottom:10%;
+display:none;
 `;
 
 const Image = styled.div`
@@ -17,6 +21,29 @@ background-size: cover;
 background-position: center;
 margin-bottom: 5px;
 `;
+
+const Container = styled.div`
+width: 20%;
+display: flex;
+flex-direction: column;
+height: 350px;
+align-items: center;
+position:relative;
+
+&:hover  {
+
+    ${AddToCartButton}{
+        display:flex;
+        border:none;
+    }
+    ${Image}
+        {
+            opacity:0.85;
+        }  
+}
+`;
+
+
 
 const Footer = styled.footer`
 width: 100%;
@@ -35,8 +62,17 @@ const Price = styled.span`
 width: 10%;
 `;
 
+
+
+
 const  CollectionItem = (props) => {
 const {item} = props; 
+const dispatch = useDispatch(); 
+
+const handleClick = e => {
+    dispatch(addItemToCart(item));
+};
+
 return(
 <Container>
     <Image imageUrl={item.imageUrl}/>
@@ -48,6 +84,7 @@ return(
             {item.price}
         </Price>
     </Footer>
+    <AddToCartButton isInverted onClick = {handleClick}>Add to Cart</AddToCartButton>
 </Container>
 );
 }

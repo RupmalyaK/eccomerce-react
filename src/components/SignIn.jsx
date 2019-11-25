@@ -53,7 +53,7 @@ return(
         <FormInput name="password" type="password" value={password} label="Password" setState={setPassword} required />
         <ButtonsContainer>
                 <Button type="submit" handleClick={handleSubmit}>Sign in</Button>
-                <Button onClick = {signInWithGoogle} isGoogleSignIn>Sign in with Google </Button>
+                <Button onClick = {signInWithGoogle} isGoogleSignIn >Sign in with Google </Button>
         </ButtonsContainer>
         
     </Form>

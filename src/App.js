@@ -61,7 +61,7 @@ const App = () => {
         <Pages>
         <Switch>
           <Route path='/' exact component={Homepage} />
-          <Route path="/shop" exact component={Shoppage} />
+          <Route path="/shop/:match?"  component={Shoppage} />
           <Route path="/signin" exact render = {
             () => (
               currentUser ? <Redirect to='/'/> : <SignInAndSignUp />)
