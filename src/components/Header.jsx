@@ -5,6 +5,7 @@ import {auth} from "../firebase/firebase.util.js";
 import {ReactComponent as Logo} from "../images/crown.svg";
 import {signInWithGoogle} from "../firebase/firebase.util.js";
 import {useSelector} from "react-redux";
+import CartIcon from "./CartIcon.jsx";
 
 
 
@@ -28,6 +29,7 @@ height: 100%;
 display: flex;
 align-items: center;
 justify-content: flex-end;
+padding:0px 10px;
 text-transform:uppercase;
 cursor:pointer;
 `;
@@ -62,7 +64,9 @@ const Header = (props) => {
                 <Option onClick = {handleSignOut} to={"/"}>Sign out</Option> :
                 <Option to={"/signin"}>Sign in</Option>
             }
+             <CartIcon />
             </Options>
+            
         </Container>
     )
 }

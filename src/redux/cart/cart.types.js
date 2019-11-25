@@ -1,0 +1,7 @@
+const cartTypes = {
+    "TOGGLE_CART_DROPDOWN": "TOGGLE_CART_DROPDOWN",
+    "HIDE_CART_DROPDOWN": "HIDE_CART_DROPDOWN",
+    "SHOW_CART_DROPDOWN": "SHOW_CART_DROPDOWN",
+}
+
+export default cartTypes; 
