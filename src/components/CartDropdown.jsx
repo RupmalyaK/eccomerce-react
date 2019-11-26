@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "./Button.jsx"; 
 import CartItem from "./CartItem.jsx"; 
 import {useSelector} from "react-redux"; 
+import {selectCartItems } from "../redux/cart/cart.selector.js";
 import {useHistory} from "react-router-dom";
 
 const Container = styled.div`
@@ -36,7 +37,7 @@ font-size:11px;
 
 const CartDropdown = (props) => {
 
-const cartItems = useSelector(state => state.cart.items);
+const cartItems = useSelector(selectCartItems);
 const history = useHistory();
 
 const handleClick = e => {

@@ -37,7 +37,7 @@ font-size: 36px;
 
 const Checkout = (props) => {
 const {name , description , quantity , price} = useSelector(state => state.cart.items); 
-console.log(name,description,quantity,price);
+
 return(
 <Container>
     <CheckoutHeader>

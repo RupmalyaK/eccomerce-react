@@ -4,6 +4,7 @@ import {ReactComponent as ShoppingIcon} from "../images/shopping-bag.svg";
 import CartDropdown from "./CartDropdown.jsx";
 import {useSelector, useDispatch} from "react-redux";  
 import {toggleCartDropdown} from "../redux/cart/cart.action.js";
+import {selectCartItemsTotalQuantity} from "../redux/cart/cart.selector";
 
 
 const Container = styled.div`
@@ -30,18 +31,9 @@ bottom: 12px;
 
 const CartIcon = (props) => {
 const isDropdownHidden = useSelector(state => state.cart.isDropdownHidden);
-const items = useSelector(state => state.cart.items);
+const itemsTotalQuantity = useSelector(selectCartItemsTotalQuantity);
 const dispatch = useDispatch();
 
-
-const calculateTotalItems = () => {
-    let total = 0; 
-    const totalItems = items.reduce( (total , item) => {
-        return total + item.quantity; 
-    }, 0);
-
-    return totalItems; 
-}
 
 const handleClick = e => {
  dispatch(toggleCartDropdown());
@@ -50,7 +42,7 @@ const handleClick = e => {
 return(
 <Container onClick = {handleClick}>
     <Icon />
-    <ItemCount>{calculateTotalItems()}</ItemCount>
+    <ItemCount>{itemsTotalQuantity}</ItemCount>
     {!isDropdownHidden ? <CartDropdown/> : <></>}
 </Container>
 );
