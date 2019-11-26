@@ -9,6 +9,7 @@ import styled from "styled-components";
 import GlobalStyle from "./components/GlobalStyle.jsx";
 import {useSelector , useDispatch} from "react-redux"; 
 import setCurrentUser from "./redux/user/user.action.js";
+import CheckoutPage from "./pages/Checkout.jsx";
 
 
 
@@ -66,6 +67,7 @@ const App = () => {
             () => (
               currentUser ? <Redirect to='/'/> : <SignInAndSignUp />)
               }  /> 
+           <Route path="/checkout" exact component={CheckoutPage} />   
           
         </Switch>
         </Pages>

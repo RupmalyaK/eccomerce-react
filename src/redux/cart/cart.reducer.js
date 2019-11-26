@@ -1,5 +1,5 @@
 import cartTypes from "./cart.types.js";
-import {addItemToCart} from "./carts.util.js"; 
+import {addItemToCart, removeItemFromCart} from "./carts.util.js"; 
 
 
 const INITIAL_STATEE = {
@@ -39,9 +39,7 @@ const cartReducer = (state = INITIAL_STATEE , action) =>
                   case cartTypes.REMOVE_ITEM_FROM_CART:
                       return {
                           ...state,
-                          items: state.items.slice().filter((item) => {
-                              return item.id != payLoad;
-                          }),
+                          items: removeItemFromCart(state.items, payLoad),
                       }   
                     
                  default:

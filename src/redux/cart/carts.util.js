@@ -15,8 +15,23 @@ const addItemToCart = (cartItems , newCartItem) => {
         return [...cartItems, {...newCartItem, quantity: 1}  ]
 }
 
+const removeItemFromCart = (cartItems , id) =>
+    {
+        const newCartItems = cartItems.filter(item => {
+            if( item.id === id)
+                {
+                    if ((item.quantiy >= 1) )
+                        {
+                            return  {...item, quantity: item.quantiy - 1}; 
+                        }
+                       return;  
+                }
+               return item;      
+        });
+    }
 
 export {
     addItemToCart, 
+    removeItemFromCart,
 }
 
