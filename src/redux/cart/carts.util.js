@@ -17,21 +17,35 @@ const addItemToCart = (cartItems , newCartItem) => {
 
 const removeItemFromCart = (cartItems , id) =>
     {
-        const newCartItems = cartItems.filter(item => {
-            if( item.id === id)
-                {
-                    if ((item.quantiy >= 1) )
-                        {
-                            return  {...item, quantity: item.quantiy - 1}; 
-                        }
-                       return;  
-                }
-               return item;      
-        });
+        const existingItem = cartItems.find(item => item.id === id);
+        if (existingItem.quantity > 1)
+            {
+                const newCartItems = cartItems.map(item => {
+                        if (item.id === id)
+                            {
+                                return {...item , quantity:item.quantity - 1}
+                            }
+                            return item; 
+                         });
+                return newCartItems; 
+            }
+          if (existingItem.quantity === 1)
+            {
+                console.log("IS TIS PART EVEN GETTING EXECUTED")
+                const newCartItems = cartItems.filter(item => item.id !== id)
+                return newCartItems; 
+            }  
+            return cartItems;
     }
 
+ const removeItemFromCartCompletely = (cartItems , id) =>
+    {
+        const newItemsArr = cartItems.filter(item => item.id !== id);
+        return newItemsArr; 
+    }   
 export {
     addItemToCart, 
     removeItemFromCart,
+    removeItemFromCartCompletely, 
 }
 

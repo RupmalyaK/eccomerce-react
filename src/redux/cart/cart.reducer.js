@@ -1,5 +1,5 @@
 import cartTypes from "./cart.types.js";
-import {addItemToCart, removeItemFromCart} from "./carts.util.js"; 
+import {addItemToCart, removeItemFromCart, removeItemFromCartCompletely} from "./carts.util.js"; 
 
 
 const INITIAL_STATEE = {
@@ -41,7 +41,12 @@ const cartReducer = (state = INITIAL_STATEE , action) =>
                           ...state,
                           items: removeItemFromCart(state.items, payLoad),
                       }   
-                    
+                  
+                  case cartTypes.REMOVE_ITEM_FROM_CART_COMPLETELY:
+                      return {
+                          ...state,
+                          items:removeItemFromCartCompletely(state.items, payLoad),
+                      }    
                  default:
                      return state;   
                       

@@ -1,6 +1,7 @@
 import React from "react"; 
 import styled from "styled-components"; 
-import {useSelector} from "react-redux"; 
+import {useSelector, useDispatch} from "react-redux"; 
+import {removeItemFromCartCompletely, removeItemFromCart, addItemToCart} from "../redux/cart/cart.action.js";
 
 
 const nameQuantityPriceStyle = {
@@ -32,10 +33,15 @@ const Name = styled.span`
 ${nameQuantityPriceStyle}
 `;
 
+
 const Quantity = styled.span`
 ${nameQuantityPriceStyle};
-padding-left: 20px;
+display:flex;
+`;
 
+const Value = styled.span`
+margin:0 10px;
+padding-top:2px;
 `;
 
 const Price = styled.span`
@@ -50,8 +56,26 @@ cursor: pointer;
 
 `;
 
+const Arrow = styled.div`
+cursor:pointer;
+`
+
 const CheckoutItem = (props) => {
-const {imageUrl , name, price, quantity} = props.item; 
+const {imageUrl , name, price, quantity, id} = props.item; 
+const dispatch = useDispatch(); 
+
+const handleRemoveItem = e => {
+  dispatch(removeItemFromCart(id));
+};
+
+const handleAddItemToCart = e => {
+  dispatch(addItemToCart(props.item));
+}
+
+const handleRemoveCompletelyClick = e => {
+dispatch(removeItemFromCartCompletely(id)); 
+}
+
 
 return(
 <Container>
@@ -62,12 +86,14 @@ return(
           {name}
       </Name>
       <Quantity>
-          {quantity}
+         <Arrow onClick = {handleRemoveItem}>&#10094;</Arrow>
+           <Value>{quantity}</Value> 
+            <Arrow onClick={handleAddItemToCart}>&#10095;</Arrow>
       </Quantity>
       <Price>
           ${price}
       </Price>
-      <RemoveButton>
+      <RemoveButton onClick={handleRemoveCompletelyClick}>
           &#10005;
       </RemoveButton>
 </Container>

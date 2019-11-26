@@ -36,10 +36,18 @@ const removeItemFromCart = (id) =>
         }
     }
 
+ const removeItemFromCartCompletely = (id) => {
+     return {
+         type:cartTypes.REMOVE_ITEM_FROM_CART_COMPLETELY,
+         payLoad:id,
+     }
+ }   
+
     export {
 toggleCartDropdown,
 hiddenCartDropdown,
 showCartDropdown,
 addItemToCart,
 removeItemFromCart,
+removeItemFromCartCompletely,
 };
