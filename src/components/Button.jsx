@@ -43,6 +43,7 @@ border: none;
 cursor: pointer;
 display:flex;
 justify-content:center;
+padding:0px;
 
 &:hover {
   background-color: white;

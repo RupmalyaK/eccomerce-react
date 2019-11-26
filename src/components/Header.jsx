@@ -5,13 +5,15 @@ import {auth} from "../firebase/firebase.util.js";
 import {ReactComponent as Logo} from "../images/crown.svg";
 import {signInWithGoogle} from "../firebase/firebase.util.js";
 import {useSelector} from "react-redux";
+import {selectCurrentUser} from "../redux/user/user.selector.js";
 import CartIcon from "./CartIcon.jsx";
+
 
 
 
 const Container = styled.div`
 height: 70px;
-width: 100%;
+width: 98vw;
 display: flex;
 justify-content: space-between;
 margin-bottom: 25px;
@@ -43,7 +45,7 @@ color:black;
 
 
 const Header = (props) => {
-    const currentUser = useSelector(state => state.user.currentUser);
+    const currentUser = useSelector(selectCurrentUser);
 
     const handleSignOut = (e) => {
         auth.signOut(); 

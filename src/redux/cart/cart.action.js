@@ -7,7 +7,7 @@ const toggleCartDropdown = () => {
     }
 }
 
-const hiddeCartDropdown = () => {
+const hiddenCartDropdown = () => {
     return {
         type:cartTypes.HIDE_CART_DROPDOWN,
         payLoad:null,
@@ -38,7 +38,7 @@ const removeItemFromCart = (id) =>
 
     export {
 toggleCartDropdown,
-hiddeCartDropdown,
+hiddenCartDropdown,
 showCartDropdown,
 addItemToCart,
 removeItemFromCart,

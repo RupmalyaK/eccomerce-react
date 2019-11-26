@@ -11,6 +11,7 @@ opacity: 0.7;
 position: absolute;
 bottom:10%;
 display:none;
+
 `;
 
 const Image = styled.div`

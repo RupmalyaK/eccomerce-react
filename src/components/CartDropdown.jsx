@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components"; 
 import Button from "./Button.jsx"; 
 import CartItem from "./CartItem.jsx"; 
-import {useSelector} from "react-redux"; 
+import {useSelector, useDispatch} from "react-redux"; 
 import {selectCartItems } from "../redux/cart/cart.selector.js";
 import {useHistory} from "react-router-dom";
+import {hiddenCartDropdown} from "../redux/cart/cart.action.js";
 
 const Container = styled.div`
 position: absolute;
@@ -35,13 +36,23 @@ margin-top: auto;
 font-size:11px;
 `
 
+const EmptyMessage = styled.span`
+font-size:18px;
+margin:50px auto;
+
+`;
+
 const CartDropdown = (props) => {
 
 const cartItems = useSelector(selectCartItems);
+const dispatch = useDispatch(); 
 const history = useHistory();
+
 
 const handleClick = e => {
 history.push('/checkout');
+dispatch(hiddenCartDropdown());
+
 };
 
 const displayCartitems = () => {
@@ -58,7 +69,9 @@ const displayCartitems = () => {
 return(
 <Container>
     <CartItems>
-      {displayCartitems() }
+      {cartItems.length ? displayCartitems() :
+        <EmptyMessage>Your cart is empty!</EmptyMessage>
+      }
     </CartItems>
     <CheckOutButton onClick={handleClick}>Go to Checkout</CheckOutButton>
 </Container>
