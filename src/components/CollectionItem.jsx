@@ -24,7 +24,7 @@ margin-bottom: 5px;
 `;
 
 const Container = styled.div`
-width: 20%;
+width: 20vw;
 display: flex;
 flex-direction: column;
 height: 350px;
