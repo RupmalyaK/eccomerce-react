@@ -16,7 +16,6 @@ const CollectionOverview = (props) => {
             {
                 if (filteredCollection.hasOwnProperty(key))
                     { 
-                       
                        collectionArr.push(
                         <CollectionPreview key = {filteredCollection[key].id} section = {filteredCollection[key]} />
                        );

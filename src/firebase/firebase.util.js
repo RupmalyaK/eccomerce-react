@@ -23,13 +23,13 @@ const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
-provider.setCustomParameters({
+/*provider.setCustomParameters({
 'login_hint': 'user@example.com'
 });
+*/
 
 
-
-const signInWithGoogle = () => {
+const signInWithGoogle = () => { 
     auth.signInWithPopup(provider);
 }
 

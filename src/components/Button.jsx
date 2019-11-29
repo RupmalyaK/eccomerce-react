@@ -17,6 +17,7 @@ const invertedStyle = {
 
 
 const googleSignInButtonStyle = {
+  "padding":"0px 35px",
   "background-color":"#4285f4",
   "color":"white",
   "&:hover": {
@@ -32,7 +33,7 @@ width: auto;
 height: 50px;
 letter-spacing: 0.5px;
 line-height: 50px;
-padding: 0 35px 0 35px;
+padding: 0px 35px 0px 35px;
 font-size: 15px;
 background-color: black;
 color: white;
