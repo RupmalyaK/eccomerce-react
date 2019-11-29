@@ -29,7 +29,7 @@ const Collection = (props) => {
 const {categoryid} = useParams();
 const collection = useSelector(selectCollection(categoryid)).items;
 
-console.log(collection, ":COLLECTION");
+
 const displayCollection = () => {
     const itemsArr = collection.map (item => 
                                             <Item  key= {item.id}><CollectionItem item={item}/> </Item>);

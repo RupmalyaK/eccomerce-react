@@ -11,7 +11,7 @@ const centsPrice = price * 100;
 const publishableKey = "pk_test_qhHgNG3x3y8JTmQuCZG96jDu00Y43Njp5E";
 
 const handleToken = token => {
-    console.log(token);
+
     alert("Payment successful"); 
 }
 return(

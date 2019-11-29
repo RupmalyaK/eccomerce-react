@@ -31,7 +31,7 @@ const removeItemFromCart = (cartItems , id) =>
             }
           if (existingItem.quantity === 1)
             {
-                console.log("IS TIS PART EVEN GETTING EXECUTED")
+                
                 const newCartItems = cartItems.filter(item => item.id !== id)
                 return newCartItems; 
             }  

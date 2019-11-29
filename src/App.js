@@ -32,7 +32,7 @@ const App = () => {
       unsubscribeFromAuth = auth.onAuthStateChanged(
         async userAuth => {
         if(userAuth)
-          { console.log(userAuth);
+          { 
             const userRef = await createUserProfileDoc(userAuth); 
 
             userRef.onSnapshot(snapshot => {

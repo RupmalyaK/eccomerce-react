@@ -80,7 +80,7 @@ const MenuItem = (props) => {
     const match = useRouteMatch();
   
     const handleClick = (e) => {
-      console.log("This is " , match.url)
+
       history.push(match.url + "shop/" + routeUrl);
     }
     
