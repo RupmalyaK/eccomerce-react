@@ -4,7 +4,7 @@ const COLLECTIONID_MAP = {
     hats:1,
     sneakers:2,
     jackets:3,
-    womens:2,
+    womens:4,
     mens:5
 };
 
@@ -18,7 +18,7 @@ const selectCollectionFilteredCollections = createSelector(selectShop, state => 
 
 const selectCollection = collectionParam => 
 createSelector(selectCollections, 
-    collections =>  collections.find(collection => collection.id === COLLECTIONID_MAP[collectionParam] ));
+    collections =>  collections[collectionParam]);
 
 
 export {

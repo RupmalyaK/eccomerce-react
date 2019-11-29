@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {useSelector} from "react-redux"; 
 import {selectCartItems, selectCartItemsTotalPrice} from "../redux/cart/cart.selector.js"
 import CheckoutItem from "../components/CheckoutItem.jsx";
+import StripeCheckoutButton from "../components/StripeButton.jsx";
 
 const Container = styled.div`
 width: 70%;
@@ -36,6 +37,12 @@ margin-left: auto;
 font-size: 36px;
 `;
 
+const TestWarning = styled.div`
+text-align:center;
+margin:40px 0px;
+font-size:24px;
+color:red;
+`;
 
 const Checkout = (props) => {
 const cartItems = useSelector(selectCartItems);
@@ -71,6 +78,16 @@ return(
     </CheckoutHeader>
     {displayCheckoutItems() }
     <Total>TOTAL:${total}</Total>
+    <TestWarning>
+        *Please use the following test credit card for payments*
+        <br/>
+        4242 4242 4242 4242 
+        <br/>
+        Expiry date:-any future date 
+        <br/>
+        CVV:- any three digit numbers
+    </TestWarning>
+    <StripeCheckoutButton price={total} />
 </Container>
 );
 }

@@ -20,6 +20,7 @@ justify-content: space-between;
 
 const CollectionPreview = (props) => { 
 const {section} = props; 
+
 const displayCollectionItem = () => {
     const itemsArr = section.items.map(
         (item) => {
@@ -30,6 +31,7 @@ const displayCollectionItem = () => {
     );
     return itemsArr;
 }
+
 return(
 <Container>
 

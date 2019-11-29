@@ -9,11 +9,21 @@ const Container = styled.div``;
 const CollectionOverview = (props) => {
     const filteredCollection = useSelector(selectCollectionFilteredCollections); 
 
+
     const displayFilteredCollectionsPreview = () => {
-        return filteredCollection.map((section => { 
-            return ( <CollectionPreview key = {section.id} section = {section} />);
-        }))
-    }    
+        const collectionArr = [];
+        for (const key in filteredCollection)
+            {
+                if (filteredCollection.hasOwnProperty(key))
+                    { 
+                       
+                       collectionArr.push(
+                        <CollectionPreview key = {filteredCollection[key].id} section = {filteredCollection[key]} />
+                       );
+                    }
+            }
+            return collectionArr; 
+    }
 return(
 <Container>
     {displayFilteredCollectionsPreview()}

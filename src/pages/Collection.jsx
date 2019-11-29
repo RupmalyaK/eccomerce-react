@@ -31,7 +31,8 @@ const collection = useSelector(selectCollection(categoryid)).items;
 
 console.log(collection, ":COLLECTION");
 const displayCollection = () => {
-    const itemsArr = collection.map (item => <Item><CollectionItem key= {item.id} item={item}/> </Item>);
+    const itemsArr = collection.map (item => 
+                                            <Item  key= {item.id}><CollectionItem item={item}/> </Item>);
     return itemsArr; 
 }
 

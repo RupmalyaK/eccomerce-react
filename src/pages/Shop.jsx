@@ -30,21 +30,3 @@ return(
 
 export default Shop; 
 
-
-/** <Container>
-            {!match ? 
-            <CollectionOverview />
-            : displayCompleteCollectionBySection()
-        }
-        </Container>        
-); */
-
-/*const displayCompleteCollectionBySection = () => {
-   const temp = collection.filter((section) => {
-        return (section.routeName.toUpperCase() === match.toUpperCase());
-   })[0];
- 
-  return (
-       temp ? <CollectionPreview section={temp}/> : null
-   );
-}*/
