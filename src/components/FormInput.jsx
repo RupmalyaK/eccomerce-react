@@ -1,16 +1,18 @@
 import React from "react"; 
-import styled from "styled-components"; 
+import styled , {css} from "styled-components"; 
 
 
 
 const mainColor = "black"; 
 const subColor = "grey"; 
 
-const shrinkLabel = {
-"top": "-14px",
-"font-size": "12px",
-"color": mainColor
-}
+
+
+const shrinkLabel = css`
+top: -14px;
+font-size: 12px;
+color: mainColor;
+`;
 
 const Container = styled.div`
 position: relative;
