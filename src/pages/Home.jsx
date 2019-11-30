@@ -1,6 +1,6 @@
 import React from "react"; 
 import styled from "styled-components"; 
-import DirectoryItems from "../components/DirectionItems.jsx";
+import MenuItems from "../components/MenuItems.jsx";
 
 const HomepageContainer = styled.div`
 display: flex;
@@ -11,7 +11,7 @@ const Homepage = () => {
 
     return(        
         <HomepageContainer>    
-            <DirectoryItems/>
+            <MenuItems/>
         </HomepageContainer>       
     );
 }

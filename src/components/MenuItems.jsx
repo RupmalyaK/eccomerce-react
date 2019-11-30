@@ -5,14 +5,14 @@ import {useSelector} from "react-redux";
 import {selectItems} from "../redux/directory/directory.selector.js"
 
 
-const DirectoryItemsContainer = styled.div`
+const Container = styled.div`
 width: 100%;
 display: flex;
 flex-wrap: wrap;
 justify-content: space-between;    
 `;
 
-const DirectoryItems = (props) => {
+const MenuItems = (props) => {
 
     const itemsArr = useSelector(selectItems); 
 
@@ -30,12 +30,12 @@ const DirectoryItems = (props) => {
     } 
 
     return (
-        <DirectoryItemsContainer>
+        <Container>
             {displayMenuItems()}
-        </DirectoryItemsContainer>
+        </Container>
     ); 
 }
 
 
 
-export default DirectoryItems; 
+export default MenuItems; 

@@ -1,31 +1,30 @@
 import React from "react"; 
-import styled from "styled-components"; 
+import styled , {css} from "styled-components"; 
 
 
-const invertedStyle = {
-"background-color": "white",
-"color": "black",
-"border": "1px solid black",
+const invertedStyle = css`
+background-color: white;
+color: black;
+border: 1px solid black;
 
-"&:hover": {
-  "background-color": "black",
-  "color": "white",
-  "border": "none",
+&:hover: {
+  background-color: black;
+  color: white;
+  border: none;
 }
+`;
+
+
+const googleSignInButtonStyle = css`
+padding:0px 35px;
+background-color:#4285f4;
+color:white;
+&:hover: {
+  background-color:#357ae8;
+  border:none;
 }
+`;
 
-
-
-const googleSignInButtonStyle = {
-  "padding":"0px 35px",
-  "background-color":"#4285f4",
-  "color":"white",
-  "&:hover": {
-    "background-color":"#357ae8",
-    "border":"none",
-    
-  }
-};
 
 const Container = styled.button`
 min-width: 165px;

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components"; 
 
 
-//STYLE
+
 const mainColor = "black"; 
 const subColor = "grey"; 
 
@@ -54,10 +54,13 @@ margin: 25px 0;
     &:focus ~ ${InputLabel} {
         ${shrinkLabel}
       }
+
+      :-webkit-autofill ~ ${InputLabel}  {
+        ${shrinkLabel}
+      }
 `;
 
 
-//STYLE
 
 const FormInput = (props) => {
 const { setState, label , ...otherProps} = props;

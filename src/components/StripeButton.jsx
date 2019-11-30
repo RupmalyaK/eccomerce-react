@@ -23,7 +23,7 @@ return(
     image="https://sendeyo.com/up/d/f3eb2117da"
     description={"Your total is $" + price}
     amount={centsPrice}
-    panelLabel="pPay now"
+    panelLabel="Pay now"
     token={handleToken}
     stripeKey={publishableKey}
     />
