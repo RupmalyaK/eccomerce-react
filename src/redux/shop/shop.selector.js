@@ -13,7 +13,16 @@ const selectShop = state => state.shop;
 
 const selectCollections = createSelector(selectShop, 
     state =>  state.collections);
-    
+
+const selectCollectionsAsArray = createSelector(selectCollections, 
+    state =>  {
+        const collectionsArr = Object.keys(state).map(key => {
+            const newObj = state[key];
+            return newObj;
+        })
+        return collectionsArr
+    });
+        
 const selectCollectionFilteredCollections = createSelector(selectShop, state => state.filteredCollections); 
 
 const selectCollection = collectionParam => 
@@ -26,4 +35,5 @@ export {
     selectCollections,
     selectCollectionFilteredCollections,
     selectCollection,
+    selectCollectionsAsArray,
 }

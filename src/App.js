@@ -13,6 +13,9 @@ import CheckoutPage from "./pages/Checkout.jsx";
 
 
 
+
+
+
 const Container = styled.div`
 `;
 
@@ -23,8 +26,6 @@ padding: 20px 20px;
 const App = () => {
   const currentUser = useSelector(state => state.user.currentUser);
   const dispatch = useDispatch(); 
-
-
  
   useEffect(
     () => {
@@ -47,11 +48,9 @@ const App = () => {
           return;
         }
       ); 
-      return (
-        () => {
-          unsubscribeFromAuth(); 
-        }
-      );
+      
+      const handleUnmount = () => unsubscribeFromAuth();
+      return handleUnmount;
     },[]); 
     
    
@@ -72,7 +71,6 @@ const App = () => {
         </Switch>
         </Pages>
       </Container>
-     
   );
 }
 

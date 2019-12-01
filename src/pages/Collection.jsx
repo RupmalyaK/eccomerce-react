@@ -27,13 +27,21 @@ margin-bottom: 30px;
 
 const Collection = (props) => {
 const {categoryid} = useParams();
-const collection = useSelector(selectCollection(categoryid)).items;
+const collection = useSelector(selectCollection(categoryid));
+console.log(collection);
+let items = [];
+if (collection)
+  {
+    items = collection.items; 
+  }
+
 
 
 const displayCollection = () => {
-    const itemsArr = collection.map (item => 
-                                            <Item  key= {item.id}><CollectionItem item={item}/> </Item>);
-    return itemsArr; 
+    const itemsArr = items.map (item => 
+        <Item  key= {item.id}><CollectionItem item={item}/> </Item>);
+     
+     return itemsArr; 
 }
 
 return(

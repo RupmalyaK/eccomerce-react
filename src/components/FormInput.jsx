@@ -6,8 +6,6 @@ import styled , {css} from "styled-components";
 const mainColor = "black"; 
 const subColor = "grey"; 
 
-
-
 const shrinkLabel = css`
 top: -14px;
 font-size: 12px;
