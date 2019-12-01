@@ -10,15 +10,24 @@ import {Route} from "react-router-dom";
 import {firestore, convertCollectionsSnapshotToMap} from "../firebase/firebase.util.js";
 import {updateCollections} from "../redux/shop/shop.actions.js";
 import {useDispatch} from "react-redux";
+import LoadingSpinner from "../components/LoadingSpinner.jsx";
+
+const CollectionOverviewWithSpinner = LoadingSpinner(CollectionOverview);
+const CollectionPageWithSpinner = LoadingSpinner(CollectionPage);
 
 const Container = styled.div`
+width:100vw;
+height:100vh;
+max-width:100%;
+max-height:100%;
 `;
+
 
 const Shop = (props) => {
   
     const {match} = useParams();  
     const dispatch = useDispatch();
- 
+    const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     let unsubscribeFromCollectionsSnapshot = null; 
@@ -26,15 +35,24 @@ const Shop = (props) => {
     unsubscribeFromCollectionsSnapshot = collectionsRef.onSnapshot(collectionsSnapshot => {
         const collectionsObj = convertCollectionsSnapshotToMap(collectionsSnapshot);
         dispatch(updateCollections(collectionsObj));
+        setIsLoading(false); 
     });
     const handleUnmount = () => unsubscribeFromCollectionsSnapshot();
     return handleUnmount;
   },[])
 
+
 return(
        <Container>
-           <Route exact path={"/shop"} component={CollectionOverview} />
-           <Route exact path={"/shop/:categoryid"} component={CollectionPage} />
+            <Route exact path={"/shop"} render={(props) => {
+              return (
+                <CollectionOverviewWithSpinner isLoading = {isLoading} />
+              );
+            }} />
+
+            <Route exact path={"/shop/:categoryid"} render = {(props) => {
+                return (<CollectionPageWithSpinner isLoading={isLoading} /> )
+            }} />
        </Container>
 
     )

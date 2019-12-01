@@ -10,6 +10,7 @@ import Homepage from "./pages/Home.jsx";
 import Shoppage from "./pages/Shop.jsx";
 import SignInAndSignUpPage from "./pages/SignIn&SignUp.jsx";
 import CheckoutPage from "./pages/Checkout.jsx";
+import LoadingSpinner from "./components/LoadingSpinner.jsx";
 
 
 
@@ -60,6 +61,7 @@ const App = () => {
         <Header/>
         <Pages>
         <Switch>
+          <Route path='/test' exact component={LoadingSpinner} />
           <Route path='/' exact component={Homepage} />
           <Route path="/shop/:match?"  component={Shoppage} />
           <Route path="/signin" exact render = {
