@@ -1,6 +1,6 @@
 import React from "react"; 
 import styled from "styled-components"; 
-import Button from "./Button.jsx"; 
+import Button from "./CustomButton.jsx"; 
 import CartItem from "./CartItem.jsx"; 
 import {useSelector, useDispatch} from "react-redux"; 
 import {selectCartItems } from "../redux/cart/cart.selector.js";
