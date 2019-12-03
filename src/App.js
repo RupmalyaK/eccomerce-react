@@ -3,7 +3,6 @@ import styled from "styled-components";
 import GlobalStyle from "./components/GlobalStyle.jsx";
 import {auth, createUserProfileDoc} from "./firebase/firebase.util.js";
 import {useSelector , useDispatch} from "react-redux"; 
-import {setCurrentUser} from "./redux/user/user.action.js";
 import {Route , Switch , Redirect} from "react-router-dom"; 
 import Header from "./components/Header.jsx";
 import Homepage from "./pages/Home.jsx"; 
@@ -11,6 +10,10 @@ import Shoppage from "./pages/Shop.jsx";
 import SignInAndSignUpPage from "./pages/SignIn&SignUp.jsx";
 import CheckoutPage from "./pages/Checkout.jsx";
 import LoadingSpinner from "./components/LoadingSpinner.jsx";
+import {selectCurrentUser,selectUnsubscriber} from "./redux/user/user.selector.js";
+import {checkSession} from "./redux/user/user.action.js";
+
+
 
 
 
@@ -25,36 +28,19 @@ padding: 20px 20px;
 `;
 
 const App = () => {
-  const currentUser = useSelector(state => state.user.currentUser);
-  const dispatch = useDispatch(); 
- 
-  useEffect(
-    () => {
-      let unsubscribeFromAuth = null;
-      unsubscribeFromAuth = auth.onAuthStateChanged(
-        async userAuth => {
-        if(userAuth)
-          { 
-            const userRef = await createUserProfileDoc(userAuth); 
-
-            userRef.onSnapshot(snapshot => {
-                dispatch(setCurrentUser({
-                  id:snapshot.id,
-                  ...snapshot.data()
-                })); 
-            });
-            return;
-          }
-          dispatch(setCurrentUser(userAuth)); 
-          return;
-        }
-      ); 
-      
-      const handleUnmount = () => unsubscribeFromAuth();
-      return handleUnmount;
-    },[]); 
-    
+  const currentUser = useSelector(selectCurrentUser);
+  const unsubscriber = useSelector(selectUnsubscriber);
+  const dispatch = useDispatch();
    
+ 
+
+  useEffect(() => {
+    dispatch(checkSession());
+    const handleUnmount = () => unsubscriber(); 
+    return handleUnmount; 
+  },[]);
+  
+
     return (
       <Container>
         <GlobalStyle />

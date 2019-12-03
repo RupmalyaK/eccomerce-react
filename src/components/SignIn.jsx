@@ -3,6 +3,8 @@ import styled from "styled-components";
 import FormInput from "./FormInput.jsx";
 import Button from "./CustomButton.jsx";
 import {signInWithGoogle, auth} from "../firebase/firebase.util.js"; 
+import {useDispatch} from "react-redux"; 
+import {signInUserWithEmailAndPasswordAsync} from "../redux/user/user.action";
 
 
 
@@ -27,23 +29,20 @@ justify-content:space-between;
 
 const SignIn = (props) => {
 const [email, setEmail] = useState('');
-const [password, setPassword] = useState(''); 
+const [password, setPassword] = useState('');
+const dispatch = useDispatch();  
 
 
 
 
 const handleSubmit = async (e) => { 
     e.preventDefault(); 
-    try{
-        await auth.signInWithEmailAndPassword(email , password); 
+        dispatch(signInUserWithEmailAndPasswordAsync({
+            email:email,
+            password:password,
+        }));
         setEmail('');
         setPassword(''); 
-    
-    }
-    catch(error){
-        console.log("Error signing in with email and password", error); 
-    }
-    
 }
 
 return(
