@@ -29,7 +29,7 @@ const selectCollection = collectionParam =>
 createSelector(selectCollections, 
     collections =>  collections[collectionParam]);
 
-
+export const selectIsFetching = createSelector(selectShop, state => state.isFetching);
 export {
     selectShop,
     selectCollections,
