@@ -2,14 +2,14 @@ import {createSelector} from "reselect";
 
 
 
-const selectCart = state => state.cart; 
+export const selectCart = state => state.cart; 
 
 
-const selectCartItems = createSelector(selectCart, (cart) =>{
+export const selectCartItems = createSelector(selectCart, (cart) =>{
     return cart.items;
 });
 
-const selectCartItemsTotalQuantity = createSelector(
+export const selectCartItemsTotalQuantity = createSelector(
     selectCartItems, (cartItems) => {
         const totalItemsQuantity = cartItems.reduce( (total , item) => {
             return total + item.quantity; 
@@ -18,11 +18,11 @@ const selectCartItemsTotalQuantity = createSelector(
     }
 );
 
-const selectIsDropdownHidden = createSelector(selectCart , cart => {
+export const selectIsDropdownHidden = createSelector(selectCart , cart => {
     return cart.isDropdownHidden;
 });
 
-const selectCartItemsTotalPrice = createSelector(selectCartItems, 
+export const selectCartItemsTotalPrice = createSelector(selectCartItems, 
     cartItems => {
         const total = cartItems.reduce(
             (count, item ) => {
@@ -32,10 +32,3 @@ const selectCartItemsTotalPrice = createSelector(selectCartItems,
             return total; 
     });
 
-export {
-    selectCart,
-    selectCartItems,
-    selectCartItemsTotalQuantity,
-    selectIsDropdownHidden,
-    selectCartItemsTotalPrice,
-};

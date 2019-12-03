@@ -9,7 +9,6 @@ const Container = styled.div``;
 const CollectionOverview = (props) => {
     const filteredCollection = useSelector(selectCollectionFilteredCollections); 
 
-    console.log(filteredCollection , "::DEBUG");
     const displayFilteredCollectionsPreview = () => {
         const collectionArr = [];
         for (const key in filteredCollection)

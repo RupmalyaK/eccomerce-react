@@ -1,34 +1,34 @@
 import cartTypes from "./cart.types"; 
 
-const toggleCartDropdown = () => {
+export const toggleCartDropdown = () => {
     return {
         type:cartTypes.TOGGLE_CART_DROPDOWN,
         payLoad:null, 
     }
 }
 
-const hiddenCartDropdown = () => {
+export const hiddenCartDropdown = () => {
     return {
         type:cartTypes.HIDE_CART_DROPDOWN,
         payLoad:null,
     }
 }
 
-const showCartDropdown = () => {
+export const showCartDropdown = () => {
     return {
         type:cartTypes.SHOW_CART_DROPDOWN,
         payLoad:null
     }
 }
 
-const addItemToCart= (item) => {
+export const addItemToCart= (item) => {
     return {
         type:cartTypes.ADD_ITEM_TO_CART,
         payLoad:item,
     }
 }
 
-const removeItemFromCart = (id) =>
+export const removeItemFromCart = (id) =>
     {
         return {
             type:cartTypes.REMOVE_ITEM_FROM_CART,
@@ -36,18 +36,10 @@ const removeItemFromCart = (id) =>
         }
     }
 
- const removeItemFromCartCompletely = (id) => {
+export const removeItemFromCartCompletely = (id) => {
      return {
          type:cartTypes.REMOVE_ITEM_FROM_CART_COMPLETELY,
          payLoad:id,
      }
  }   
 
-    export {
-toggleCartDropdown,
-hiddenCartDropdown,
-showCartDropdown,
-addItemToCart,
-removeItemFromCart,
-removeItemFromCartCompletely,
-};

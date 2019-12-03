@@ -245,5 +245,5 @@ const INITIAL_SHOP_DATA = {
     ]
   }
 };
-
+console.log("DEBUFFO")
 export default INITIAL_SHOP_DATA;

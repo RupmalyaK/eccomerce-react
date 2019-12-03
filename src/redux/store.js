@@ -14,13 +14,12 @@ if(process.env.NODE_ENV === "development")
 
 const store = createStore(rootReducer , applyMiddleware(...middlewares));
 
-const persistor = persistStore(store); 
+export const persistor = persistStore(store); 
 
-export {
-    persistor,
-}; 
+export default store;  
 
-export default store ;
+
+
 
 
 

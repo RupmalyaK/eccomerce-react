@@ -1,5 +1,5 @@
 
-const filterItems = (collection) => {
+export const filterItems = (collection) => {
     const noOfItemsToPreview = 5;
     const newObj = {}; 
     for (var key in collection) {
@@ -9,10 +9,4 @@ const filterItems = (collection) => {
       }
       return newObj;
 }
-
-
-export {
-    filterItems,
-};
-
 

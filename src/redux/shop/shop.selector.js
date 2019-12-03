@@ -1,6 +1,6 @@
 import {createSelector} from "reselect"; 
 
-const COLLECTIONID_MAP = {
+export const COLLECTIONID_MAP = {
     hats:1,
     sneakers:2,
     jackets:3,
@@ -9,12 +9,12 @@ const COLLECTIONID_MAP = {
 };
 
 
-const selectShop = state => state.shop; 
+export const selectShop = state => state.shop; 
 
-const selectCollections = createSelector(selectShop, 
+export const selectCollections = createSelector(selectShop, 
     state =>  state.collections);
 
-const selectCollectionsAsArray = createSelector(selectCollections, 
+export const selectCollectionsAsArray = createSelector(selectCollections, 
     state =>  {
         const collectionsArr = Object.keys(state).map(key => {
             const newObj = state[key];
@@ -23,17 +23,10 @@ const selectCollectionsAsArray = createSelector(selectCollections,
         return collectionsArr
     });
         
-const selectCollectionFilteredCollections = createSelector(selectShop, state => state.filteredCollections); 
+export const selectCollectionFilteredCollections = createSelector(selectShop, state => state.filteredCollections); 
 
-const selectCollection = collectionParam => 
+export const selectCollection = collectionParam => 
 createSelector(selectCollections, 
     collections =>  collections[collectionParam]);
 
 export const selectIsFetching = createSelector(selectShop, state => state.isFetching);
-export {
-    selectShop,
-    selectCollections,
-    selectCollectionFilteredCollections,
-    selectCollection,
-    selectCollectionsAsArray,
-}

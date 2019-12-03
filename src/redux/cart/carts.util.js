@@ -1,4 +1,4 @@
-const addItemToCart = (cartItems , newCartItem) => { 
+export const addItemToCart = (cartItems , newCartItem) => { 
     const cartItemExist = cartItems.find(cartItem => cartItem.id === newCartItem.id); 
      if (cartItemExist)
         {
@@ -15,7 +15,7 @@ const addItemToCart = (cartItems , newCartItem) => {
         return [...cartItems, {...newCartItem, quantity: 1}  ]
 }
 
-const removeItemFromCart = (cartItems , id) =>
+export const removeItemFromCart = (cartItems , id) =>
     {
         const existingItem = cartItems.find(item => item.id === id);
         if (existingItem.quantity > 1)
@@ -38,14 +38,9 @@ const removeItemFromCart = (cartItems , id) =>
             return cartItems;
     }
 
- const removeItemFromCartCompletely = (cartItems , id) =>
+ export const removeItemFromCartCompletely = (cartItems , id) =>
     {
         const newItemsArr = cartItems.filter(item => item.id !== id);
         return newItemsArr; 
     }   
-export {
-    addItemToCart, 
-    removeItemFromCart,
-    removeItemFromCartCompletely, 
-}
 

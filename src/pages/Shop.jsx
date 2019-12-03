@@ -1,6 +1,5 @@
 import React, {useState , useEffect} from "react"; 
 import styled from "styled-components"; 
-import SHOP_DATA from "../data/shop-data";
 import CollectionPreview from "../components/CollectionPreview.jsx";
 import {useParams} from "react-router-dom";
 import CollectionOverview from "../components/CollectionOverview.jsx";
@@ -28,10 +27,10 @@ const Shop = (props) => {
     const {match} = useParams();  
     const dispatch = useDispatch();
     const isFetching = useSelector(selectIsFetching);
-
     useEffect(() => {
       dispatch(fetchCollectionStartAsync());
-    },[])
+    }, [])
+    
 
 return(
        <Container>

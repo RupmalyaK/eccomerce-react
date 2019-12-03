@@ -1,5 +1,5 @@
 import userActionTypes from "./user.types.js";
-const setCurrentUser = user => {
+export const setCurrentUser = user => {
     return {
         type: userActionTypes.SET_CURRENT_USER,
         payLoad:user,
@@ -7,4 +7,3 @@ const setCurrentUser = user => {
 }
 
 
-export default setCurrentUser;

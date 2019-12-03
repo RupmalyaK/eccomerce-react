@@ -3,7 +3,7 @@ import styled from "styled-components";
 import GlobalStyle from "./components/GlobalStyle.jsx";
 import {auth, createUserProfileDoc} from "./firebase/firebase.util.js";
 import {useSelector , useDispatch} from "react-redux"; 
-import setCurrentUser from "./redux/user/user.action.js";
+import {setCurrentUser} from "./redux/user/user.action.js";
 import {Route , Switch , Redirect} from "react-router-dom"; 
 import Header from "./components/Header.jsx";
 import Homepage from "./pages/Home.jsx"; 

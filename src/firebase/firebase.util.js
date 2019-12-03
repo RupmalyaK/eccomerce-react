@@ -18,22 +18,19 @@ const config = {
 
 firebase.initializeApp(config);
 
-const auth = firebase.auth();
-const firestore = firebase.firestore(); 
+export const auth = firebase.auth();
+export const firestore = firebase.firestore(); 
 
-const provider = new firebase.auth.GoogleAuthProvider();
-
-/*provider.setCustomParameters({
-'login_hint': 'user@example.com'
-});
-*/
+export const provider = new firebase.auth.GoogleAuthProvider();
 
 
-const signInWithGoogle = () => { 
+
+
+export const signInWithGoogle = () => { 
     auth.signInWithPopup(provider);
 }
 
-const createUserProfileDoc = async (userAuth , additionalDetails) => {
+export const createUserProfileDoc = async (userAuth , additionalDetails) => {
   if (!userAuth)
     {
       return; 
@@ -62,7 +59,7 @@ const createUserProfileDoc = async (userAuth , additionalDetails) => {
       return userRef; 
 }
 
-const addCollectionandDocuments = async (collectionKey , objectToAdd) => {
+export const addCollectionandDocuments = async (collectionKey , objectToAdd) => {
   const collectionRef = firestore.collection(collectionKey); 
   const batch = firestore.batch();
     objectToAdd.forEach(obj => {
@@ -89,9 +86,5 @@ export const convertCollectionsSnapshotToMap = (collectionsSnapshot) =>
       return collectionsObj;
   }
 
-export {auth};
-export {firestore};
-export {signInWithGoogle}; 
-export {createUserProfileDoc};
-export {addCollectionandDocuments};
+
 export default firebase; 
