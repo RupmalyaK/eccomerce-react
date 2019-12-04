@@ -3,8 +3,10 @@ import styled from "styled-components";
 import FormInput from "./FormInput.jsx";
 import Button from "./CustomButton.jsx";
 import {signInWithGoogle, auth} from "../firebase/firebase.util.js"; 
-import {useDispatch} from "react-redux"; 
+import { useDispatch} from "react-redux"; 
 import {signInUserWithEmailAndPasswordAsync} from "../redux/user/user.action";
+import {useHistory} from "react-router-dom"; 
+
 
 
 
@@ -31,16 +33,14 @@ const SignIn = (props) => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const dispatch = useDispatch();  
-
+const history = useHistory();
 
 
 
 const handleSubmit = async (e) => { 
-    e.preventDefault(); 
-        dispatch(signInUserWithEmailAndPasswordAsync({
-            email:email,
-            password:password,
-        }));
+        e.preventDefault(); 
+        dispatch(signInUserWithEmailAndPasswordAsync(email , password));
+        history.push('/');
         setEmail('');
         setPassword(''); 
 }

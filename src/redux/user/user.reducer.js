@@ -1,29 +1,41 @@
-import userActionType from "./user.types.js";
+import userActionTypes from "./user.types.js";
 
 const INITIAL_STATE = {
 currentUser:null,
-isFetching:false,
-errorFetching:"",
-unsubscriberFR:null, 
+sessionError:"",
+unsubscriberFR:null,
+isCheckingSession:false, 
+isSigningIn:false, 
+isSigningOut:false,
+signUpError:null, 
 };
 
 const userReducer = (state = INITIAL_STATE , action) => {
 const {type , payLoad} = action; 
 switch(type)
     {
-        case userActionType.SIGN_IN_START: 
-            return {...state , isFetching:true}; 
-
-        case userActionType.SIGN_IN_SUCCESS:
-            return {...state , isFetching:false, currentUser:payLoad};
-            
-        case userActionType.SIGN_IN_FAILURE:
-            return {...state, error:payLoad};  
+        case userActionTypes.SIGN_IN_START: 
+            return {...state , isSigningIn:true}; 
+        case userActionTypes.SIGN_IN_SUCCESS:
+            return {...state , isSigningIn:false, currentUser:payLoad, isSignedIn:true};     
+        case userActionTypes.SIGN_IN_FAILURE:
+            return {...state, isSigningIn:false, sessionError:payLoad};  
         
-        case userActionType.SET_USER:
-            return {...state, currentUser:payLoad};
-        case userActionType.SET_UNSUBSCRIBER:
+        case userActionTypes.CHECK_SESSION_START: console.log("DEBUG:::");
+            return {...state, isCheckingSession:true};
+        case userActionTypes.CHECK_SESSION_SUCCESS:
+            return {...state, isCheckingSession:false, currentUser:payLoad};
+        case userActionTypes.CHECK_SESSION_FAILURE:
+            return {...state, isCheckingSession:false, sessionError:payLoad};   
+        case userActionTypes.SET_UNSUBSCRIBER:
             return {...state, unsubscriberFR:payLoad};
+        case userActionTypes.SIGN_OUT_START:
+             return {...state, isSigningOut:true};
+        case userActionTypes.SIGN_OUT_SUCCESS:
+             return {...state, isSigningOut:false, currentUser:null, };   
+        case userActionTypes.SIGN_OUT_FAILURE:
+             return {...state, isSigningOut:false, sessionError:payLoad}  
+
         default:
             return state; 
     }

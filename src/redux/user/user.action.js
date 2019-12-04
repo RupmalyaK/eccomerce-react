@@ -1,59 +1,91 @@
 import userActionTypes from "./user.types.js";
-import userActionType from "./user.types.js";
-import {auth,createUserProfileDoc} from "../../firebase/firebase.util.js";
+import {auth,createUserProfileDoc, provider} from "../../firebase/firebase.util.js";
 
 export const signInStart = () => {
-    return {type:userActionType.SIGN_IN_START,         
+    return {type:userActionTypes.SIGN_IN_START,         
     };
 }
 
 export const signInSuccess = (currentUser) => {
-    return {type:userActionType.SIGN_IN_SUCCESS,
+    return {type:userActionTypes.SIGN_IN_SUCCESS,
             payLoad:currentUser};
 }
 
-export const signInUserFailure = error => {
-    return {type:userActionType.SIGN_IN_FAILURE,
+export const signInFailure = error => {
+    return {type:userActionTypes.SIGN_IN_FAILURE,
             payLoad:error};
 }
 
-export const signInUserWithEmailAndPasswordAsync = (emailAndPassword) => {
-    const {email , password} = emailAndPassword;   
+export const signInUserWithEmailAndPasswordAsync = (email , password) => {
   return async (dispatch) => {
     dispatch(signInStart());
+    try{
     const currentUser = await auth.signInWithEmailAndPassword(email , password); 
     dispatch(signInSuccess(currentUser));
+    }
+    catch(error)
+    {
+        dispatch(signInFailure(error));
+    }
   }
 }
 
-export const setCurrentUser = (user) =>
+export const signInWithGoogleAsync = () => {
+    return async dispatch => {
+        dispatch(signInStart());
+        try{
+            await auth.signInWithPopup(provider);
+            dispatch(signInSuccess());
+        }
+        catch(error)
+            {
+                dispatch(signInFailure(error)); 
+            }
+    }
+}
+
+
+export const checkSessionStart = () => { 
+    return {
+        type:userActionTypes.CHECK_SESSION_START,
+    };
+}
+export const checkSessionSuccess = (user) =>
     {
         return {
-            type:userActionType.SET_USER,
+            type:userActionTypes.CHECK_SESSION_SUCCESS,
             payLoad:user
         };
     }
 
-    
-export const setUnsubscriber = (UnsubscriberfunctionReference) => {
+export const checkSessionFailure = (error) => {
     return {
-        type:userActionType.SET_UNSUBSCRIBER,
-        payLoad:UnsubscriberfunctionReference,
-    };
+        type:userActionTypes.CHECK_SESSION_FAILURE,
+        sessionError:error,
+    }
+}    
+
+export const setUnsubscriber = (unsubscriberFR) => {
+    return {
+        type:userActionTypes.SET_UNSUBSCRIBER,
+        payLoad:unsubscriberFR,
+    }
 }
-export const checkSession = () => { 
+
+export const checkSessionAsync = () => { 
     return async (dispatch) => {
+        dispatch(checkSessionStart());
         let unsubscriber = null; 
         unsubscriber = auth.onAuthStateChanged(
             async userAuth => {
                 if(userAuth)
-                { 
+                {         
                     const userRef = await createUserProfileDoc(userAuth);     
-                    userRef.onSnapshot(snapshot => { console.log()
-                        dispatch(setCurrentUser({
+                    userRef.onSnapshot(snapshot => { 
+                        dispatch(checkSessionSuccess({
                         id:snapshot.id,
                         ...snapshot.data()
-                        })); 
+                        }, )); 
                     });
                     return;
                 }
@@ -64,6 +96,55 @@ export const checkSession = () => {
             dispatch(setUnsubscriber(unsubscriber))
         }
 }
+
+export const signOutStart = () => {
+return {
+    type:userActionTypes.SIGN_OUT_START,
+}
+}
+
+export const signOutSuccess = data => {
+    return {
+        type:userActionTypes.SIGN_OUT_SUCCESS,
+        payLoad:data,
+    }
+}
+
+export const signOutFailure = error => {
+    return {
+        type:userActionTypes.SIGN_OUT_FAILURE,
+        payLoad:error,
+    };
+}
+
+export const signOutAsync = () => {
+    return async dispatch => {
+        dispatch(signOutStart());
+        try{
+        await auth.signOut();
+        dispatch(signOutSuccess());
+        }
+        catch(error)
+            {
+                dispatch(signOutFailure(error));
+            }
+    }
+}
+
+export const signUpStart = () =>
+    {
+        return {
+            type:userActionTypes.SIGN_UP_START,
+        };
+    }
+
+export const signUpSuccess = (user) => {
+    return {
+        type:userActionTypes.SIGN_UP_SUCCESS,
+        payLoad:user,
+    };
+}    
+
 
 
 

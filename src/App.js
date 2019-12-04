@@ -11,13 +11,11 @@ import SignInAndSignUpPage from "./pages/SignIn&SignUp.jsx";
 import CheckoutPage from "./pages/Checkout.jsx";
 import LoadingSpinner from "./components/LoadingSpinner.jsx";
 import {selectCurrentUser,selectUnsubscriber} from "./redux/user/user.selector.js";
-import {checkSession} from "./redux/user/user.action.js";
+import {checkSessionAsync} from "./redux/user/user.action.js";
+import {selectIsSigningIn, selectIsCheckingSession} from "./redux/user/user.selector.js";
+import Layout from "./components/Layout.jsx"; 
 
-
-
-
-
-
+const LayoutWithLoadingSpinner = LoadingSpinner(Layout);
 
 
 const Container = styled.div`
@@ -28,15 +26,17 @@ padding: 20px 20px;
 `;
 
 const App = () => {
+  const isCheckingSession = useSelector(selectIsCheckingSession);
   const currentUser = useSelector(selectCurrentUser);
   const unsubscriber = useSelector(selectUnsubscriber);
+  const isSigningIn = useSelector(selectIsSigningIn);
   const dispatch = useDispatch();
-   
+ 
  
 
   useEffect(() => {
-    dispatch(checkSession());
-    const handleUnmount = () => unsubscriber(); 
+    dispatch(checkSessionAsync());
+    const handleUnmount = () => console.log("component unmounet app::DEBUGGG"); 
     return handleUnmount; 
   },[]);
   
@@ -44,8 +44,8 @@ const App = () => {
     return (
       <Container>
         <GlobalStyle />
+        <LayoutWithLoadingSpinner isLoading={isSigningIn || isCheckingSession}>
         <Header/>
-        <Pages>
         <Switch>
           <Route path='/test' exact component={LoadingSpinner} />
           <Route path='/' exact component={Homepage} />
@@ -57,9 +57,10 @@ const App = () => {
            <Route path="/checkout" exact component={CheckoutPage} />   
           
         </Switch>
-        </Pages>
+       </LayoutWithLoadingSpinner>
       </Container>
   );
 }
+
 
 export default App;
