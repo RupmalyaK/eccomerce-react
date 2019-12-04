@@ -1,11 +1,13 @@
-import React, {useState} from "react"; 
+import React, {useState, useEffect} from "react"; 
 import styled from "styled-components"; 
 import FormInput from "./FormInput.jsx";
 import Button from "./CustomButton.jsx";
+import {useSelector} from "react-redux";
 import {signInWithGoogle, auth} from "../firebase/firebase.util.js"; 
 import { useDispatch} from "react-redux"; 
-import {signInUserWithEmailAndPasswordAsync} from "../redux/user/user.action";
+import {signInUserWithEmailAndPasswordAsync, clearSignInError} from "../redux/user/user.action";
 import {useHistory} from "react-router-dom"; 
+import {selectSignInError} from "../redux/user/user.selector.js"
 
 
 
@@ -32,6 +34,7 @@ justify-content:space-between;
 const SignIn = (props) => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
+const signInError = useSelector(selectSignInError);
 const dispatch = useDispatch();  
 const history = useHistory();
 
@@ -44,6 +47,14 @@ const handleSubmit = async (e) => {
         setEmail('');
         setPassword(''); 
 }
+
+useEffect(() => {
+        if(signInError)
+            {
+                alert(signInError);
+            }
+        dispatch(clearSignInError());
+} , []);
 
 return(
 <Container>

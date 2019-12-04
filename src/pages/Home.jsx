@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components"; 
 import MenuItems from "../components/MenuItems.jsx";
 
+
 const HomepageContainer = styled.div`
 display: flex;
 flex-direction: column;

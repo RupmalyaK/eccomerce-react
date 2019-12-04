@@ -44,7 +44,6 @@ export const signInWithGoogleAsync = () => {
     }
 }
 
-
 export const checkSessionStart = () => { 
     return {
         type:userActionTypes.CHECK_SESSION_START,
@@ -89,6 +88,7 @@ export const checkSessionAsync = () => {
                     });
                     return;
                 }
+                 dispatch(checkSessionSuccess(null));   
                 return;
                 }
             ); 
@@ -138,13 +138,47 @@ export const signUpStart = () =>
         };
     }
 
-export const signUpSuccess = (user) => {
+export const signUpSuccess = () => {
     return {
         type:userActionTypes.SIGN_UP_SUCCESS,
-        payLoad:user,
     };
-}    
+} 
 
+export const signUpFailure = (error) => {
+    return {
+        type:userActionTypes.SIGN_UP_FAILURE,
+        payLoad:error
+    };
+}
+
+export const signUpAsync = (userInfo) => {
+    return async dispatch => {
+            dispatch(signUpStart()); 
+            const {email ,password, displayName, user} = userInfo;
+           
+            try{
+                const {user} = await auth.createUserWithEmailAndPassword(email , password);
+
+                await createUserProfileDoc(user , {displayName});
+                dispatch(signUpSuccess());
+            }
+            catch(error){
+                dispatch(signUpFailure(error));
+            }
+    }
+}
+
+export const clearSignInError = () => {
+    return {type:userActionTypes.SIGN_IN_ERROR_CLEAR};
+}
+
+export const clearSignUpError = () => {
+    return {type:userActionTypes.SIGN_UP_ERROR_CLEAR};
+}
+
+export const clearSignOutError = () => {
+    return {type:userActionTypes.SIGN_OUT_ERROR_CLEAR};
+}
 
 
 

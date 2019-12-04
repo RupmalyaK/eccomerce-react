@@ -1,8 +1,15 @@
-import React, {useState} from "react"; 
+import React, {useState,useEffect} from "react"; 
 import styled from "styled-components"; 
 import FormInput from "./FormInput.jsx";
 import Button from "./CustomButton.jsx"; 
 import {auth , createUserProfileDoc} from "../firebase/firebase.util.js";
+import {useSelector , useDispatch} from "react-redux"; 
+import {selectSignUpError} from "../redux/user/user.selector.js";
+import {signUpAsync} from "../redux/user/user.action.js";
+import {clearSignUpError} from "../redux/user/user.action";
+import {useHistory} from "react-router-dom"; 
+
+
 
 
 const Container = styled.div`
@@ -25,30 +32,36 @@ const [displayName , setDisplayName] = useState('');
 const [email , setEmail] = useState('');
 const [password , setPassword] = useState('');
 const [confirmPassword , setConfirmPassword] = useState('');
-
+const signUpError = useSelector(selectSignUpError); 
+const history = useHistory();
+const dispatch = useDispatch();
 
 const handleSubmit = async (e) => {
-     e.preventDefault(); 
-    if(password != confirmPassword)
-        {
-            alert("Password and confirm password didn't match");
-            return; 
-        }
-    try{
-        const {user} = await auth.createUserWithEmailAndPassword(email , password);
-
-        await createUserProfileDoc(user , {displayName});
-
+    if (password != confirmPassword)
+    {
+        alert("Password and Confirm password didn't match");
+        return; 
+    }
+       dispatch(signUpAsync({
+            displayName, email, password, confirmPassword,
+        }));
+        history.push('/');
         setDisplayName('');
         setEmail('');
         setPassword('');
         setConfirmPassword('');
-    }
-    catch(error){
-        console.log("error creating user", error);
-    }
-
 }
+
+useEffect(() => {
+if (signUpError)
+    {
+        alert(signUpError); 
+        dispatch(clearSignUpError());   
+    }    
+},[signUpError]);
+
+ 
+      
 
 return(
 <Container>

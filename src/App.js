@@ -10,9 +10,10 @@ import Shoppage from "./pages/Shop.jsx";
 import SignInAndSignUpPage from "./pages/SignIn&SignUp.jsx";
 import CheckoutPage from "./pages/Checkout.jsx";
 import LoadingSpinner from "./components/LoadingSpinner.jsx";
+import {useHistory} from "react-router-dom";
 import {selectCurrentUser,selectUnsubscriber} from "./redux/user/user.selector.js";
 import {checkSessionAsync} from "./redux/user/user.action.js";
-import {selectIsSigningIn, selectIsCheckingSession} from "./redux/user/user.selector.js";
+import {selectIsSigningIn, selectIsCheckingSession, selectSignInError, selectSignUpError, selectIsSigningUp} from "./redux/user/user.selector.js";
 import Layout from "./components/Layout.jsx"; 
 
 const LayoutWithLoadingSpinner = LoadingSpinner(Layout);
@@ -30,7 +31,12 @@ const App = () => {
   const currentUser = useSelector(selectCurrentUser);
   const unsubscriber = useSelector(selectUnsubscriber);
   const isSigningIn = useSelector(selectIsSigningIn);
+  const isSigningUp = useSelector(selectIsSigningUp);
+  const signInError = useSelector(selectSignInError);
+  const signUpError = useSelector(selectSignUpError);
+  const history = useHistory();
   const dispatch = useDispatch();
+  
  
  
 
@@ -39,12 +45,28 @@ const App = () => {
     const handleUnmount = () => console.log("component unmounet app::DEBUGGG"); 
     return handleUnmount; 
   },[]);
-  
 
+
+  useEffect(() => {
+    if (signInError)
+      {
+        history.push("/signin");
+      }  
+  }, [signInError]);
+
+
+  useEffect(() => {
+    if(signUpError)
+      {
+        history.push("/signin");
+      }
+  },[signUpError]);
+  
+    console.log(isSigningUp , "DEBUGGO");
     return (
       <Container>
         <GlobalStyle />
-        <LayoutWithLoadingSpinner isLoading={isSigningIn || isCheckingSession}>
+        <LayoutWithLoadingSpinner isLoading={isSigningIn || isCheckingSession || isSigningUp }>
         <Header/>
         <Switch>
           <Route path='/test' exact component={LoadingSpinner} />
