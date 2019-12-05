@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const path = require("path"); 
 const Stripe = require("stripe");
 const dotEnv = require("dotenv"); 
-
+__dirname = path.resolve();
 if(process.env.NODE_ENV !== "production")
     {
         dotEnv.config(); 
