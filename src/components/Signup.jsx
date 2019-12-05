@@ -60,9 +60,6 @@ if (signUpError)
     }    
 },[signUpError]);
 
- 
-      
-
 return(
 <Container>
     <Title>If you don't have an account</Title>
