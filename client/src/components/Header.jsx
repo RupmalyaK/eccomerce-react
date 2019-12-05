@@ -4,9 +4,10 @@ import {Link} from "react-router-dom";
 import {auth} from "../firebase/firebase.util.js";
 import {ReactComponent as Logo} from "../images/crown.svg";
 import {signInWithGoogle} from "../firebase/firebase.util.js";
-import {useSelector} from "react-redux";
+import {useSelector , useDispatch} from "react-redux";
 import {selectCurrentUser} from "../redux/user/user.selector.js";
 import CartIcon from "./CartIcon.jsx";
+import {signOutAsync} from "../redux/user/user.action.js";
 
 
 
@@ -46,9 +47,10 @@ color:black;
 
 const Header = (props) => {
     const currentUser = useSelector(selectCurrentUser);
+    const dispatch = useDispatch(); 
 
     const handleSignOut = (e) => {
-        auth.signOut(); 
+       dispatch(signOutAsync());
     }
 
     return (
