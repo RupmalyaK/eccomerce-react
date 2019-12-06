@@ -1,9 +1,9 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const path = require("path"); 
-const Stripe = require("stripe");
-const dotEnv = require("dotenv"); 
+import express from "express"; 
+import cors from "cors";
+import bodyParser from "body-parser"; 
+import path from "path";
+import Stripe from "stripe";
+import dotEnv from "dotenv";
 
 if(process.env.NODE_ENV !== "production")
     {
@@ -38,7 +38,7 @@ app.listen(port , err => {
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-app.post("/payment" , (req, res) => { 
+const test = app.post("/payment" , (req, res) => { 
     const body = {
         source:req.body.token.id,
         amount:req.body.amount,
@@ -56,7 +56,6 @@ app.post("/payment" , (req, res) => {
             res.status(200).send({"res":result}); 
     });
 });
-
 
 
 
