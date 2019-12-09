@@ -11,6 +11,15 @@ opacity: 0.7;
 position: absolute;
 bottom:10%;
 display:none;
+@media screen and (max-width:800px)
+{
+    display:block;
+    opacity:0.9;
+    min-width:unset;
+    padding:0px 10px;
+    font-size:0.6rem;
+    font-weight:700;
+}
 
 `;
 
@@ -41,6 +50,21 @@ position:relative;
         {
             opacity:0.85;
         }  
+}
+@media screen and (max-width:800px)
+{
+    width:40vw;
+    &:hover  {
+
+        ${AddToCartButton}{
+            display:flex;
+            border:none;
+        }
+        ${Image}
+            {
+                opacity:unset;
+            }  
+    }
 }
 `;
 

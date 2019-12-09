@@ -57,6 +57,10 @@ overflow:hidden;
         opacity: 1;
     }
     }
+    @media screen and (max-width:800px)
+    {
+        height:200px;
+    }
   }
 `;
 

@@ -2,11 +2,28 @@ import {createGlobalStyle} from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+body {
+    font-family: 'Open Sans Condensed';
+    padding: 20px 20px;
+
+    @media screen and (max-width:800px)
+    {
+        padding:0px;
+        font-size:0.5rem;
+    }
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+
+
+  
 `;
 
 export default GlobalStyle;
