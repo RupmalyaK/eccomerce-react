@@ -4,14 +4,10 @@ const GlobalStyle = createGlobalStyle`
 
 body {
     font-family: 'Open Sans Condensed';
-    padding: 0px 0px;
+    padding: 0px;
+    margin:0px;
     background-color:#f8f9fa;
 
-    @media screen and (max-width:800px)
-    {
-        padding:0px;
-        font-size:0.5rem;
-    }
   }
   
   a {
@@ -20,11 +16,19 @@ body {
   }
   
   * {
-    background-color:#f8f9fa;
   }
 
 
   
 `;
+
+/**
+ * 
+    @media screen and (max-width:800px)
+    {
+        padding:0px;
+        font-size:0.5rem;
+    }
+ */
 
 export default GlobalStyle;

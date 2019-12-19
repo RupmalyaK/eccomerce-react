@@ -9,14 +9,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 
+
 const Container = styled.div`
     
-    margin-left:25px;
+    margin-left:auto;
     margin-right:25px;
     display:inline-flex;
     &:after{
         content: "${props => props.itemCount}";
-        z-index:100;
         display:flex;
         position:relative;
         width:20px;
@@ -30,8 +30,9 @@ const Container = styled.div`
 const IconContainer = styled(FontAwesomeIcon)`
     cursor:pointer;
 }
-
 `;
+
+
 
 const CartIcon = (props) => {
 const isDropdownHidden = useSelector(selectIsDropdownHidden);
@@ -44,7 +45,8 @@ const handleClick = e => {
 }
 
 return(
-<Container itemCount= {itemsTotalQuantity} >
+
+<Container itemCount= {itemsTotalQuantity} {...props}>
     <IconContainer icon={faShoppingCart} onClick = {handleClick} />
     {!isDropdownHidden ? <CartDropdown/> : <></>} 
 </Container>
