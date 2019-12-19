@@ -26,7 +26,7 @@ switch(type)
         case userActionTypes.SIGN_IN_ERROR_CLEAR:
             return {...state, signInError:null}    
         
-        case userActionTypes.CHECK_SESSION_START: console.log("DEBUG:::");
+        case userActionTypes.CHECK_SESSION_START: 
             return {...state, isCheckingSession:true};
         case userActionTypes.CHECK_SESSION_SUCCESS:
             return {...state, isCheckingSession:false, currentUser:payLoad};

@@ -4,7 +4,8 @@ const GlobalStyle = createGlobalStyle`
 
 body {
     font-family: 'Open Sans Condensed';
-    padding: 20px 20px;
+    padding: 0px 0px;
+    background-color:#f8f9fa;
 
     @media screen and (max-width:800px)
     {
@@ -19,7 +20,7 @@ body {
   }
   
   * {
-    box-sizing: border-box;
+    background-color:#f8f9fa;
   }
 
 

@@ -49,7 +49,7 @@ const test = app.post("/payment" , (req, res) => {
     stripe.charges.create(body, (err , result) => {
         if (err)
             {
-                console.log(err);
+                console.error(err);
                 res.status(500).send({"error":err});
                 return;
             }

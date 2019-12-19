@@ -6,6 +6,9 @@ const INITIAL_STATE = {
     filteredCollections:{},
     isFetching:false, 
     errorMessage:"",
+    featuredItems:[],
+    isFetchingFeaturedItems:false,
+    FeaturedItemsFetchingError:null,
 }
 
 const shopReducer = (state = INITIAL_STATE , action) => {
@@ -19,7 +22,15 @@ const shopReducer = (state = INITIAL_STATE , action) => {
             case shopActionTypes.FETCH_COLLECTION_SUCCESS:
                 return {...state, isFetching:false, collections:payLoad, filteredCollections:filterItems(payLoad)};
             case shopActionTypes.FETCH_COLLECTION_FAILURE:
-                return {...state, iseFetching:false, errorMessage:payLoad};        
+                return {...state, iseFetching:false, errorMessage:payLoad};     
+
+            case shopActionTypes.FETCH_FEATURED_ITEMS_START:
+                    return {...state, isFetchingFeaturedItems:true};
+            case shopActionTypes.FETCH_FEATURED_ITEMS_SUCCESS:
+                    return {...state, featuredItems:payLoad, isFetchingFeaturedItems:false};
+            case shopActionTypes.FETCH_FEATURED_ITEMS_FAILURE:
+                    return {...state, FeaturedItemsFetchingError:payLoad, isFetchingFeaturedItems:false};
+
             default:
                 return state; 
         }

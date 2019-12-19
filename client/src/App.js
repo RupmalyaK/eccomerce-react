@@ -15,6 +15,10 @@ import {selectCurrentUser,selectUnsubscriber} from "./redux/user/user.selector.j
 import {checkSessionAsync} from "./redux/user/user.action.js";
 import {selectIsSigningIn, selectIsCheckingSession, selectSignInError, selectSignUpError, selectIsSigningUp} from "./redux/user/user.selector.js";
 import Layout from "./components/Layout.jsx"; 
+import {addCollectionandDocuments} from "./firebase/firebase.util.js";
+import {fetchFeaturedItemsAsync} from "./redux/shop/shop.actions.js";
+
+
 
 const LayoutWithLoadingSpinner = LoadingSpinner(Layout);
 
@@ -37,12 +41,13 @@ const App = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   
- 
- 
+  
+dispatch(fetchFeaturedItemsAsync());
 
   useEffect(() => {
     dispatch(checkSessionAsync());
-    const handleUnmount = () => console.log("component unmounet app::DEBUGGG"); 
+    
+    const handleUnmount = () => console.log("App unmounted"); 
     return handleUnmount; 
   },[]);
 
@@ -62,7 +67,7 @@ const App = () => {
       }
   },[signUpError]);
   
-    console.log(isSigningUp , "DEBUGGO");
+
     return (
       <Container>
         <GlobalStyle />
