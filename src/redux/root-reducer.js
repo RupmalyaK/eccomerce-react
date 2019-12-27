@@ -8,7 +8,7 @@ import directoryReducer from './directory/directory.reducer';
 import shopReducer from './shop/shop.reducer';
 
 const persistConfig = {
-  key: 'root',
+  key: 'graphql-lesson-app',
   storage,
   whitelist: ['cart']
 };
