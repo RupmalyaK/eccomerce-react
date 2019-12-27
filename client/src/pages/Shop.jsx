@@ -2,7 +2,7 @@ import React, {useState , useEffect} from "react";
 import styled from "styled-components"; 
 import CollectionPreview from "../components/CollectionPreview.jsx";
 import {useParams} from "react-router-dom";
-import CollectionOverview from "../components/CollectionOverview.jsx";
+import CollectionOverview from "../components/CollectionsOverview.jsx";
 import CollectionPage from "./Collection.jsx";
 import {Route} from "react-router-dom"; 
 import {firestore, convertCollectionsSnapshotToMap} from "../firebase/firebase.util.js";
@@ -29,7 +29,7 @@ const Shop = (props) => {
     const isFetching = useSelector(selectIsFetching);
     useEffect(() => {
       dispatch(fetchCollectionStartAsync());
-    }, [])
+    }, []);
     
 
 return(

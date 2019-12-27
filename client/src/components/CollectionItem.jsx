@@ -3,13 +3,16 @@ import styled from "styled-components";
 import Button from "./CustomButton.jsx";
 import {useDispatch} from "react-redux"; 
 import {addItemToCart} from "../redux/cart/cart.action.js"; 
+import {Card} from "react-bootstrap";
 
 
 const AddToCartButton = styled(Button)`
 width: 50%;
 opacity: 0.7;
 position: absolute;
-bottom:10%;
+bottom:35%;
+left:20%;
+
 display:none;
 @media screen and (max-width:800px)
 {
@@ -20,7 +23,6 @@ display:none;
     font-size:0.6rem;
     font-weight:700;
 }
-
 `;
 
 const Image = styled.div`
@@ -33,13 +35,7 @@ margin-bottom: 5px;
 `;
 
 const Container = styled.div`
-width: 20vw;
-display: flex;
-flex-direction: column;
-height: 350px;
-align-items: center;
-position:relative;
-
+background:red;
 &:hover  {
 
     ${AddToCartButton}{
@@ -68,7 +64,39 @@ position:relative;
 }
 `;
 
+const CustomCard = styled(Card)`
+&:hover  {
 
+    ${AddToCartButton}{
+        display:flex;
+        border:none;
+    }
+    ${Image}
+        {
+            opacity:0.85;
+        }  
+}
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
+@media screen and (max-width:800px)
+{
+    width:40vw;
+    &:hover  {
+
+        ${AddToCartButton}{
+            display:flex;
+            border:none;
+        }
+        ${Image}
+            {
+                opacity:unset;
+            }  
+    }
+}
+`;
 
 const Footer = styled.footer`
 width: 100%;
@@ -91,16 +119,29 @@ width: 10%;
 
 
 const  CollectionItem = (props) => {
-const {item} = props; 
+const {item, selected} = props; 
 const dispatch = useDispatch(); 
 
 const handleClick = e => {
-    dispatch(addItemToCart(item));
+   dispatch(addItemToCart(item));
 };
 
 return(
-<Container>
-    <Image imageUrl={item.imageUrl}/>
+
+        <CustomCard style={{ width: '18rem', height:"440px"}} className={`menu-item ${selected ? 'active' : ''}`}>
+        <Card.Img variant="top" src={item.imageUrl} style={{height:"300px"}}/>
+        <Card.Body className="text-center">
+            <Card.Title>{item.name}</Card.Title>
+            <Card.Text>
+            ${item.price}
+            </Card.Text>
+            <AddToCartButton isInverted onClick = {handleClick}>Add to Cart</AddToCartButton>
+        </Card.Body>
+        </CustomCard>
+);
+}
+
+/** <Image imageUrl={item.imageUrl}/>
     <Footer>
         <Name>
             {item.name}
@@ -109,11 +150,6 @@ return(
             {item.price}
         </Price>
     </Footer>
-    <AddToCartButton isInverted onClick = {handleClick}>Add to Cart</AddToCartButton>
-</Container>
-);
-}
-
-
+    <AddToCartButton isInverted onClick = {handleClick}>Add to Cart</AddToCartButton> */
 
 export default CollectionItem; 

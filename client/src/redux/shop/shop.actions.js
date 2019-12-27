@@ -18,7 +18,7 @@ const fetchCollectionSuccess = (collectionsObj ) => {
 const fetchCollectionFailure = (errorMessage) =>
     {
         return {
-            type:shopActionTypes.fetchCollectionFailure,
+            type:shopActionTypes.FETCH_COLLECTION_FAILURE,
             payLoad:errorMessage, 
         }
     }

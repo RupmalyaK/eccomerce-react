@@ -25,6 +25,8 @@ export const selectCollectionsAsArray = createSelector(selectCollections,
         
 export const selectCollectionFilteredCollections = createSelector(selectShop, state => state.filteredCollections); 
 
+export const selectFeaturedItems = createSelector(selectShop, state => state.featuredItems);
+
 export const selectCollection = collectionParam => 
 createSelector(selectCollections, 
     collections =>  collections[collectionParam]);

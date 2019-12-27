@@ -29,7 +29,7 @@ opacity:70%;
 const MenuItemContainer = styled.div`
 position:relative;
 min-width: 30%;
-height: ${(props) => (props.size === "large" ? "400px" : "240px")} ;
+height: ${(props) => (props.size === "large" ? "400px" : "240px")} ; 
 flex: 1 1 auto;
 display: flex;
 align-items: center;
@@ -64,7 +64,7 @@ overflow:hidden;
   }
 `;
 
-
+/**height: ${(props) => (props.size === "large" ? "400px" : "240px")} ; */
 
 const Title = styled.h1`
 font-weight: bold;
@@ -89,16 +89,23 @@ const MenuItem = (props) => {
     }
     
     return (
-            <MenuItemContainer imageUrl = {imageUrl} size= {size} onClick = {handleClick}>
+       <>
+          <MenuItemContainer imageUrl = {imageUrl} size= {size} onClick = {handleClick}>
                 <BackgroundImageContainer imageUrl = {imageUrl} />  
                 <Content>
                     <Title>{title}</Title>
                     <Subtitle>Shop Now</Subtitle>
                 </Content>
-            </MenuItemContainer>
-    )
+          </MenuItemContainer>
+       </>
+
+    );
   }     
 
 
 
 export default MenuItem; 
+
+/**
+ *  
+ */
