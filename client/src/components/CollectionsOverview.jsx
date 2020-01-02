@@ -8,17 +8,21 @@ import {Row,Col} from "react-bootstrap";
 const Container = styled.div`
 border:1px solid black;
 margin-left:10px;
-padding:40px 20px 40px 20px;
+
 margin-top:55px;
 position:relative;
+
 .border-text{
-    display:block;
-    position:absolute;
-    top:-1.2%;
-    background:inherit;
-    padding:0px 90px;
+    width:auto;
+    top:-30px;
+    font-size:2rem;
+    height:40px;
     background:#ffff;
-    left:20%;
+}
+
+.sm-text{
+    width:200px;
+    margin: 20px 0px;
 }
 
 `;
@@ -42,11 +46,12 @@ const CollectionOverview = (props) => {
             return collectionArr; 
     }
 return(
-<Container>
+<Container className="pb-sm-5 pt-sm-5">
+    <h1 className="d-none d-sm-block border-text text-nowrap ml-sm-5 px-sm-5 position-absolute">Featured Items</h1>
+    <h2 className="sm-text d-sm-none d-xs-block mx-auto text-nowrap">Featured Items</h2>
     <Row>
     {displayFilteredCollectionsPreview()}
     </Row>
-    <h1 className="border-text">Featured Items</h1>
 </Container>
 );
 }

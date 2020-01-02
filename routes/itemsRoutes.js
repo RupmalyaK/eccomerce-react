@@ -1,0 +1,64 @@
+import CollectionsModel from "../model/CollectionsModel.js";
+import { Mongoose } from "mongoose";
+const collectionsRoutesCreator = (app) => {
+const routeString = "/api/collections/collection/";    
+app.route(routeString + "items")
+.post(async (req , res, next) => {
+    const {collectionType ,name, primaryImageUrl, isFeatured, price} = req.body; 
+    if (typeof collectionType === "undefined" || typeof name === "undefined "|| typeof primaryImageUrl === "undefined" || typeof isFeatured === "undefined")
+        {
+            res.status(400).json({error: "all the required fields are not present"});
+            return;
+        }
+   
+    const newItem = {collectionType, name , primaryImageUrl , isFeatured, price};
+    try {
+        const collection = await CollectionsModel.findOne({title:collectionType});
+        collection.items.push(newItem); 
+        const updatedCollection = await collection.save();
+        res.status(200).json(updatedCollection);
+        }
+     catch(error)
+        { 
+            res.status(400);
+            next(error);
+        }
+});
+app.route(routeString + "items/:title")
+.get( async (req, res, next) => {
+    const {title:collectionTitle} = req.params; 
+    const {isFeatured} = req.query;
+    if (isFeatured)
+        { 
+            try{
+                const collection = await CollectionsModel.findOne({title:collectionTitle}); 
+                if (collection === null)
+                    {
+                        const error = new Error("Collection not present");
+                        res.status(400);
+                        next(error);
+                        return; 
+                    }
+               
+                if(!collection.items)
+                    { 
+                        const error = new Error("items does not present in the collection");
+                        next(error);
+                        return; 
+                    }
+                const featuredItemsArr = collection.items.filter(item => item.isFeatured);
+                console.log(collection.title,featuredItemsArr);
+                res.status(200).json({title:collection.title,featuredItems:featuredItemsArr});
+            }
+            catch(error)
+            {
+                res.status(400);
+                next(error); 
+            }  
+            }
+});
+
+}
+
+
+export default collectionsRoutesCreator;

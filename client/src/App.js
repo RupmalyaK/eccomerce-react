@@ -20,6 +20,8 @@ import {fetchFeaturedItemsAsync} from "./redux/shop/shop.actions.js";
 
 
 
+
+
 const LayoutWithLoadingSpinner = LoadingSpinner(Layout);
 
 
@@ -43,6 +45,7 @@ const App = () => {
   
   
 dispatch(fetchFeaturedItemsAsync());
+
 
   useEffect(() => {
     dispatch(checkSessionAsync());

@@ -18,6 +18,9 @@ transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }    
 }
+.arrow{
+padding:-20px;
+}
 `;
 
 const Title = styled.h1`
@@ -36,7 +39,7 @@ const CollectionPreview = (props) => {
     const [selected, setSelected] = useState(section.items[0].id);
     const [itemCount, setItemCount] = useState(section.items.length-1);
     const Arrow = (icon) => {
-      return (<FontAwesomeIcon icon={icon} style={{margin:"20px", fontSize:"30px"}}/>);
+      return (<FontAwesomeIcon icon={icon} style={{fontSize:"20px", color:"grey"}}/>);
     };
 
   
@@ -61,7 +64,7 @@ const CollectionPreview = (props) => {
     setSelected(key);
     };
 return(
-<Container  className="" >
+<Container  className="px-md-5" >
 <Title>
         {section.title}
 </Title>
@@ -72,13 +75,17 @@ return(
     selected={selected}
     scrollToSelected={true}
     alignCenter={false}
+    alignOnResize={true}
     clickWhenDrag={false}
+    hideArrows={true}
     hideSingleArrow={true}
     wheel={false}
     itemCount={itemCount}
     dragging={true}
     translate= {0}
     transition= {0.3}
+
+    arrowClass="arrow mx-md-2"
   />
 </Container>
 );

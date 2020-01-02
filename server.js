@@ -4,6 +4,10 @@ import bodyParser from "body-parser";
 import path from "path";
 import Stripe from "stripe";
 import dotEnv from "dotenv";
+import mongoose from "mongoose";
+import collectionsRoutes from "./routes/collectionsRoutes.js";
+import collectionRoutes from "./routes/collectionRoutes.js";
+import itemsRoutes from "./routes/itemsRoutes.js";
 
 if(process.env.NODE_ENV !== "production")
     {
@@ -11,7 +15,6 @@ if(process.env.NODE_ENV !== "production")
     }
 
 const app = express(); 
-
 const port = process.env.PORT || 5000; 
 
 app.use(bodyParser.json());
@@ -35,6 +38,23 @@ app.listen(port , err => {
      console.log("server running on port ", + port);     
 });  
 
+(async () => {
+    try {
+    await mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true, dbName: "snatchkart-db"});
+    const db = mongoose.connection; 
+    db.on("error", err => {
+        console.log(error);
+    });
+    }
+    catch(error)
+        {
+            console.log("MONGODB ERROR: ",error);
+        }
+})();
+
+collectionsRoutes(app); 
+collectionRoutes(app);
+itemsRoutes(app);
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 

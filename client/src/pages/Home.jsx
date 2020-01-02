@@ -12,7 +12,7 @@ import {fetchCollectionStartAsync} from "../redux/shop/shop.actions.js";
 
 const CollectionOverviewWithSpinner = LoadingSpinner(CollectionOverview);
 const HomepageContainer = styled.div`
-
+overflow:hidden;
 `;
 
 const IntroductionSection = styled.div`
@@ -71,8 +71,3 @@ const Homepage = () => {
 
 export default Homepage; 
 
-/*
- <HomepageContainer>    
-            <MenuItems/> 
-        </HomepageContainer>  
-        */
