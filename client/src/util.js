@@ -38,3 +38,13 @@ export const toMongoDB = async () => {
         console.log({error});
       }  
   }
+
+export const collectionsArrToObj = (collectionsArr) => {
+    console.log("::DEBUGGG", collectionsArr);
+    const newObj = {};
+    collectionsArr.forEach(collection => {
+        const {title , ...rest} = collection; 
+        newObj[title] = {rest}
+    });
+    return newObj; 
+}

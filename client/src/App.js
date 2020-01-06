@@ -16,7 +16,7 @@ import {checkSessionAsync} from "./redux/user/user.action.js";
 import {selectIsSigningIn, selectIsCheckingSession, selectSignInError, selectSignUpError, selectIsSigningUp} from "./redux/user/user.selector.js";
 import Layout from "./components/Layout.jsx"; 
 import {addCollectionandDocuments} from "./firebase/firebase.util.js";
-import {fetchFeaturedItemsAsync} from "./redux/shop/shop.actions.js";
+import {fetchFeaturedItemsAsync, fetchAutocompleteAsync} from "./redux/shop/shop.actions.js";
 
 
 
@@ -45,6 +45,7 @@ const App = () => {
   
   
 dispatch(fetchFeaturedItemsAsync());
+
 
 
   useEffect(() => {

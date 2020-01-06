@@ -6,7 +6,7 @@ import CollectionOverview from "../components/CollectionsOverview.jsx";
 import CollectionPage from "./Collection.jsx";
 import {Route} from "react-router-dom"; 
 import {firestore, convertCollectionsSnapshotToMap} from "../firebase/firebase.util.js";
-import {fetchCollectionStartAsync} from "../redux/shop/shop.actions.js";
+import {fetchCollectionsStartAsync} from "../redux/shop/shop.actions.js";
 import {useDispatch, useSelector} from "react-redux";
 import {selectIsFetching} from "../redux/shop/shop.selector.js"
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
@@ -28,7 +28,7 @@ const Shop = (props) => {
     const dispatch = useDispatch();
     const isFetching = useSelector(selectIsFetching);
     useEffect(() => {
-      dispatch(fetchCollectionStartAsync());
+      dispatch(fetchCollectionsStartAsync());
     }, []);
     
 

@@ -9,6 +9,9 @@ const INITIAL_STATE = {
     featuredItems:[],
     isFetchingFeaturedItems:false,
     FeaturedItemsFetchingError:null,
+    autocompleteCollections:null, 
+    isFetchingAutocompleteCollections:false,
+    autocompleteError:null, 
 }
 
 const shopReducer = (state = INITIAL_STATE , action) => {
@@ -17,11 +20,11 @@ const shopReducer = (state = INITIAL_STATE , action) => {
     switch(type)
         {
            
-            case shopActionTypes.FETCH_COLLECTION_START: 
+            case shopActionTypes.FETCH_COLLECTIONS_START: 
                 return {...state, isFetching:true};
-            case shopActionTypes.FETCH_COLLECTION_SUCCESS:
+            case shopActionTypes.FETCH_COLLECTIONS_SUCCESS:
                 return {...state, isFetching:false, collections:payLoad, filteredCollections:filterItems(payLoad)};
-            case shopActionTypes.FETCH_COLLECTION_FAILURE:
+            case shopActionTypes.FETCH_COLLECTIONS_FAILURE:
                 return {...state, iseFetching:false, errorMessage:payLoad};     
 
             case shopActionTypes.FETCH_FEATURED_ITEMS_START:
@@ -30,7 +33,13 @@ const shopReducer = (state = INITIAL_STATE , action) => {
                     return {...state, featuredItems:payLoad, isFetchingFeaturedItems:false};
             case shopActionTypes.FETCH_FEATURED_ITEMS_FAILURE:
                     return {...state, FeaturedItemsFetchingError:payLoad, isFetchingFeaturedItems:false};
-
+            
+            case shopActionTypes.FETCH_AUTOCOMPLETE_ITEMS_START:
+                    return {...state, isFetchingAutocompleteCollections:true};
+            case shopActionTypes.FETCH_AUTOCOMPLETE_ITEMS_FAILURE:
+                    return {...state, isFetchingAutocompleteCollections:false ,autocompleteError:payLoad}
+            case shopActionTypes.FETCH_AUTOCOMPLETE_ITEMS_SUCCESS:
+                    return {...state, isFetchingAutocompleteCollections:false,autocompleteCollections:payLoad}                
             default:
                 return state; 
         }

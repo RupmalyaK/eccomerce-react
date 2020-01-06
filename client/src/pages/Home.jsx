@@ -6,9 +6,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectFeaturedItems} from "../redux/shop/shop.selector.js";
 import {Carousel,Container} from "react-bootstrap"; 
 import CollectionOverview from "../components/CollectionsOverview.jsx";
-import {selectIsFetching} from "../redux/shop/shop.selector.js"
+import {selectIsFetchingFeaturedItems} from "../redux/shop/shop.selector.js"
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
-import {fetchCollectionStartAsync} from "../redux/shop/shop.actions.js";
+import {fetchFeaturedItemsAsync} from "../redux/shop/shop.actions.js";
 
 const CollectionOverviewWithSpinner = LoadingSpinner(CollectionOverview);
 const HomepageContainer = styled.div`
@@ -31,9 +31,9 @@ const Homepage = () => {
     const [direction, setDirection] = useState(null);
     const featuredItems = useSelector(selectFeaturedItems);
     const dispatch = useDispatch();
-    const isFetching = useSelector(selectIsFetching);
+    const isFetchingFeaturedItems = useSelector(selectIsFetchingFeaturedItems);
     useEffect(() => {
-      dispatch(fetchCollectionStartAsync());
+      dispatch(fetchFeaturedItemsAsync());
     }, [])
     const handleSelect = (selectedIndex, e) => {
       setIndex(selectedIndex);
@@ -62,7 +62,7 @@ const Homepage = () => {
       <HomepageContainer>
         <Slider slideArr = {slideArr}/>
         <MenuItems style={{marginTop:"50px"}}/>
-        <CollectionOverviewWithSpinner isLoading = {isFetching} />
+        <CollectionOverviewWithSpinner isLoading = {isFetchingFeaturedItems} />
       </HomepageContainer>
       
    

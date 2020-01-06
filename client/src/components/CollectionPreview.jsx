@@ -6,6 +6,7 @@ import ScrollMenu from 'react-horizontal-scrolling-menu';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 import { faArrowRight} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
 
 const Container = styled.div`  
 
@@ -35,7 +36,6 @@ text-align:center;
 
 const CollectionPreview = (props) => { 
     const {section} = props; 
-
     const [selected, setSelected] = useState(section.items[0].id);
     const [itemCount, setItemCount] = useState(section.items.length-1);
     const Arrow = (icon) => {
@@ -60,13 +60,12 @@ const CollectionPreview = (props) => {
     }
 
     const handleSelect = key => {
-      console.log(`onSelect: ${key}`);
     setSelected(key);
     };
 return(
 <Container  className="px-md-5" >
 <Title>
-        {section.title}
+       <Link to={"/shop/" + section.routeName} style={{color:"black"}}>{section.title}</Link>
 </Title>
   <ScrollMenu data={displayCollectionItems()}
     arrowLeft={ArrowLeft}

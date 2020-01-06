@@ -129,7 +129,7 @@ const handleClick = e => {
 return(
 
         <CustomCard style={{ width: '18rem', height:"440px"}} className={`menu-item ${selected ? 'active' : ''}`}>
-        <Card.Img variant="top" src={item.imageUrl} style={{height:"300px"}}/>
+        <Card.Img variant="top" src={item.primaryImageUrl} style={{height:"300px"}}/>
         <Card.Body className="text-center">
             <Card.Title>{item.name}</Card.Title>
             <Card.Text>

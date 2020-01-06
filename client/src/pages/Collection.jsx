@@ -28,7 +28,7 @@ margin-bottom: 30px;
 const Collection = (props) => {
 const {categoryid} = useParams();
 const collection = useSelector(selectCollection(categoryid));
-console.log(collection);
+
 let items = [];
 if (collection)
   {
@@ -36,10 +36,9 @@ if (collection)
   }
 
 
-
 const displayCollection = () => {
     const itemsArr = items.map (item => 
-        <Item  key= {item.id}><CollectionItem item={item}/> </Item>);
+        <Item  key= {item._id}><CollectionItem item={item}/> </Item>);
      
      return itemsArr; 
 }

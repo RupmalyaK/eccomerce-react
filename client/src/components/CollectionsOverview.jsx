@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components"; 
 import {useSelector} from "react-redux"; 
 import CollectionPreview from "./CollectionPreview.jsx"; 
-import {selectCollectionFilteredCollections} from "../redux/shop/shop.selector.js";
+import {selectFeaturedItems} from "../redux/shop/shop.selector.js";
 import {Row,Col} from "react-bootstrap";
 
 const Container = styled.div`
@@ -28,17 +28,16 @@ position:relative;
 `;
 
 const CollectionOverview = (props) => {
-    const filteredCollection = useSelector(selectCollectionFilteredCollections); 
-
-    const displayFilteredCollectionsPreview = () => {
-        const collectionArr = [];
-        for (const key in filteredCollection)
+    const featuredCollection = useSelector(selectFeaturedItems); 
+    const displayfeaturedCollectionsPreview = () => { 
+      const collectionArr = [];
+        for (const key in featuredCollection)
             {
-                if (filteredCollection.hasOwnProperty(key))
+                if (featuredCollection.hasOwnProperty(key))
                     { 
                        collectionArr.push(
-                        <Col lg="12" key = {filteredCollection[key].id}> 
-                        <CollectionPreview  section = {filteredCollection[key]} />
+                        <Col lg="12" key = {featuredCollection[key]._id}> 
+                        <CollectionPreview  section = {featuredCollection[key]} />
                         </Col>  
                        );
                     }
@@ -50,7 +49,7 @@ return(
     <h1 className="d-none d-sm-block border-text text-nowrap ml-sm-5 px-sm-5 position-absolute">Featured Items</h1>
     <h2 className="sm-text d-sm-none d-xs-block mx-auto text-nowrap">Featured Items</h2>
     <Row>
-    {displayFilteredCollectionsPreview()}
+    {displayfeaturedCollectionsPreview()}
     </Row>
 </Container>
 );

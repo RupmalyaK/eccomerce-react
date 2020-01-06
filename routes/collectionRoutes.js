@@ -1,8 +1,9 @@
 import CollectionsModel from "../model/CollectionsModel.js";
+import {checkIfAuthenticated} from "../controller/authController.js";
 const collectionsRoutesCreator = (app) => {
 const routeString = "/api/collections/";    
 app.route(routeString + "collection")
-.post(async (req, res, next) => {
+.post(checkIfAuthenticated,async (req, res, next) => {
     const {title, routeName  } = req.body;
   
     if (title === undefined || routeName === undefined)

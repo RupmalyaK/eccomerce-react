@@ -1,46 +1,51 @@
 import shopActionTypes from "./shop.types.js";
-import {firestore, convertCollectionsSnapshotToMap} from "../../firebase/firebase.util.js"; 
+import {auth} from "../../firebase/firebase.util.js"; 
+import axios from "axios";
+import {collectionsArrToObj} from "../../util.js";
 
-const fetchCollectionStart = () => {
+const fetchCollectionsStart = () => {
     return {
-        type:shopActionTypes.FETCH_COLLECTION_START,
+        type:shopActionTypes.FETCH_COLLECTIONS_START,
     };
 }
 
 
-const fetchCollectionSuccess = (collectionsObj ) => {
+const fetchCollectionsSuccess = (collectionsObj ) => {
     return {
-        type:shopActionTypes.FETCH_COLLECTION_SUCCESS,
+        type:shopActionTypes.FETCH_COLLECTIONS_SUCCESS,
         payLoad:collectionsObj,
     };
 }
 
-const fetchCollectionFailure = (errorMessage) =>
+const fetchCollectionsFailure = (errorMessage) =>
     {
         return {
-            type:shopActionTypes.FETCH_COLLECTION_FAILURE,
+            type:shopActionTypes.FETCH_COLLECTIONS_FAILURE,
             payLoad:errorMessage, 
         }
     }
 
 
 
-export const fetchCollectionStartAsync =  () => {
-    return async dispatch => {
-        const collectionsRef = firestore.collection("collections"); 
-        dispatch(fetchCollectionStart());
+export const fetchCollectionsStartAsync =  () => {
+    return async (dispatch )=> {
+       dispatch(fetchCollectionsStart()); 
+   
         try{
-        const collectionsSnapshot = await collectionsRef.get();
-        const collectionsObj = convertCollectionsSnapshotToMap(collectionsSnapshot);
-        dispatch(fetchCollectionSuccess(collectionsObj));
-         }
-         catch(error)
+             const collections = await axios({
+                 url:"/api/collections",
+                 method:"GET",
+             });  
+             console.log(collections);
+             dispatch(fetchCollectionsSuccess(collections.data));   
+           }
+        catch(error)
             {
-                dispatch(fetchCollectionFailure(error));
-            }
-        
+             dispatch(fetchCollectionsFailure(error));       
+            }     
     }
 }
+
 
 const fetchFeaturedItemsStart = () => {
     return {type:shopActionTypes.FETCH_FEATURED_ITEMS_START};
@@ -55,22 +60,53 @@ const fetchFeaturedItemsSuccess = items => {
 
 export const fetchFeaturedItemsAsync = () => {
     return async dispatch => {
-        const collectionsRef = firestore.collection("collections"); 
-        dispatch(fetchFeaturedItemsStart());
-        try {
-            const collectionsSnapshot = await collectionsRef.get();
-            const collectionSnapshotsArr = collectionsSnapshot.docs;
-          
-           let featuredItems = collectionSnapshotsArr.map(collectionSnap => { 
-               const featuredItem = collectionSnap.data().items.find(item => item.featured === true);
-                return featuredItem; 
-            }, []);
-            featuredItems = featuredItems.filter(item => item != undefined);
-            dispatch(fetchFeaturedItemsSuccess(featuredItems));
+     dispatch(fetchFeaturedItemsStart());
+     try{
+        
+           const featuredItems = await axios({
+                url:"/api/collections/collection/items/all?isFeatured=true",
+                method:"GET",
+              
+            });
+           dispatch(fetchFeaturedItemsSuccess(featuredItems.data));
+        }
+     catch(error)
+        {
+            dispatch(fetchFeaturedItemsFailure(error)); 
+        }   
+    }
+}
+
+export const fetchAutocompleteStart = () => {
+    return {type:shopActionTypes.FETCH_AUTOCOMPLETE_ITEMS_START}
+} 
+
+export const fetchAutocompleteFailure = (error) => {
+    return {type:shopActionTypes.FETCH_AUTOCOMPLETE_ITEMS_FAILURE, payLoad:error};
+}
+
+export const fetchAutocompleteSuccess = (autocompleteItems) => {
+    return {type:shopActionTypes.FETCH_AUTOCOMPLETE_ITEMS_SUCCESS, payLoad:autocompleteItems};
+}
+
+export const fetchAutocompleteAsync = (string) => {
+    return async (dispatch) => {
+        dispatch(fetchAutocompleteStart());
+        if(!string)
+            {
+                fetchAutocompleteSuccess(null);
+                return; 
             }
+        try{
+            const autocompleteCollections = await axios({
+                url:"/api/collections/autocomplete?" + "string=" + string ,
+                method:"GET",
+            });
+            dispatch(fetchAutocompleteSuccess(autocompleteCollections.data));
+           }
         catch(error)
             {
-                dispatch(fetchFeaturedItemsFailure(error));
-            }
+                dispatch(fetchAutocompleteFailure(error));
+            }  
     }
 }

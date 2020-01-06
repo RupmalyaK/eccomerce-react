@@ -8,6 +8,14 @@ import mongoose from "mongoose";
 import collectionsRoutes from "./routes/collectionsRoutes.js";
 import collectionRoutes from "./routes/collectionRoutes.js";
 import itemsRoutes from "./routes/itemsRoutes.js";
+import admin from "firebase-admin";
+import secrets from "./secrets.js"
+
+admin.initializeApp({
+    credential: admin.credential.cert(secrets),
+    databaseURL: 'https://react-rupkart-d6edf.firebaseio.com'
+  });
+
 
 if(process.env.NODE_ENV !== "production")
     {

@@ -27,8 +27,13 @@ export const selectCollectionFilteredCollections = createSelector(selectShop, st
 
 export const selectFeaturedItems = createSelector(selectShop, state => state.featuredItems);
 
+export const selectIsFetchingFeaturedItems = createSelector(selectShop, state => state.isFetchingFeaturedItems);
+
 export const selectCollection = collectionParam => 
 createSelector(selectCollections, 
     collections =>  collections[collectionParam]);
 
 export const selectIsFetching = createSelector(selectShop, state => state.isFetching);
+
+export const selectIsFetchingAutocompleteCollections = createSelector(selectShop, state => state.isFetchingAutocompleteCollections);
+

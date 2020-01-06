@@ -1,3 +1,4 @@
+import { collectionsArrToObj } from "../../util"
 
 export const filterItems = (collection) => {
     const noOfItemsToPreview = 5;
@@ -9,4 +10,6 @@ export const filterItems = (collection) => {
       }
       return newObj;
 }
+
+
 

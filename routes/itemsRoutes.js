@@ -1,9 +1,10 @@
 import CollectionsModel from "../model/CollectionsModel.js";
-import { Mongoose } from "mongoose";
+import { Mongoose, Collection } from "mongoose";
+import {checkIfAuthenticated} from "../controller/authController.js";
 const collectionsRoutesCreator = (app) => {
 const routeString = "/api/collections/collection/";    
 app.route(routeString + "items")
-.post(async (req , res, next) => {
+.post(checkIfAuthenticated,async (req , res, next) => {
     const {collectionType ,name, primaryImageUrl, isFeatured, price} = req.body; 
     if (typeof collectionType === "undefined" || typeof name === "undefined "|| typeof primaryImageUrl === "undefined" || typeof isFeatured === "undefined")
         {
@@ -28,6 +29,33 @@ app.route(routeString + "items/:title")
 .get( async (req, res, next) => {
     const {title:collectionTitle} = req.params; 
     const {isFeatured} = req.query;
+    if(collectionTitle === "all")
+        {
+            if(isFeatured)
+                {
+                    try{
+                    const collections = await CollectionsModel.find({})
+                    const newObj = {}; 
+                    collections.forEach(collection => {
+                        const {title, routeName, items, _id} = collection; 
+                        const featuredItems = items.filter(item => item.isFeatured);
+                        newObj[title.toLowerCase()] = {_id, title,routeName,items:featuredItems}; 
+                        return; 
+                         });
+                         res.status(200).json(newObj); 
+                        return;  
+                       }
+                    catch(error)
+                        {
+                            res.status(400); 
+                            next(error); 
+                            return; 
+                        }   
+
+                }
+          return;   
+        }
+
     if (isFeatured)
         { 
             try{
