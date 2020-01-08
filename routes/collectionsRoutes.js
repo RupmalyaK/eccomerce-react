@@ -50,7 +50,6 @@ app.route(routeString + "collections/autocomplete")
        const startItemsName = await ItemsNameModel.find({name:{$regex:beginingRegExpString, $options:'i'}});
        startItemsName.splice(10,startItemsName.length-1); 
        const itemsName = await ItemsNameModel.find({name:{$regex:searchString, $options:'i'}});
-       itemsName.splice(10,itemsName.length-1); 
         let retItemsName = itemsName.filter(name => startItemsName.findIndex(n => n._id.toString() === name._id.toString()) === -1);
         retItemsName =  startItemsName.concat(retItemsName);
         retItemsName.splice(10,retItemsName.length-1);
