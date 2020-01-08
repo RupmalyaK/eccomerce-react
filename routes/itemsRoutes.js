@@ -1,20 +1,22 @@
 import CollectionsModel from "../model/CollectionsModel.js";
 import { Mongoose, Collection } from "mongoose";
 import {checkIfAuthenticated} from "../controller/authController.js";
+import ItemesNameModel from "../model/ItemesNameModel.js";
 const collectionsRoutesCreator = (app) => {
 const routeString = "/api/collections/collection/";    
 app.route(routeString + "items")
-.post(checkIfAuthenticated,async (req , res, next) => {
-    const {collectionType ,name, primaryImageUrl, isFeatured, price} = req.body; 
-    if (typeof collectionType === "undefined" || typeof name === "undefined "|| typeof primaryImageUrl === "undefined" || typeof isFeatured === "undefined")
+.post(async (req , res, next) => {
+    const {collectionTitle,name, primaryImageUrl, isFeatured, price} = req.body; 
+    if (typeof collectionTitle === "undefined" || typeof name === "undefined "|| typeof primaryImageUrl === "undefined" || typeof isFeatured === "undefined")
         {
             res.status(400).json({error: "all the required fields are not present"});
             return;
         }
    
-    const newItem = {collectionType, name , primaryImageUrl , isFeatured, price};
+    const newItem = {collectionTitle, name , primaryImageUrl , isFeatured, price};
     try {
-        const collection = await CollectionsModel.findOne({title:collectionType});
+        const collection = await CollectionsModel.findOne({title:collectionTitle});
+        await ItemesNameModel.create({name});
         collection.items.push(newItem); 
         const updatedCollection = await collection.save();
         res.status(200).json(updatedCollection);
@@ -25,6 +27,7 @@ app.route(routeString + "items")
             next(error);
         }
 });
+
 app.route(routeString + "items/:title")
 .get( async (req, res, next) => {
     const {title:collectionTitle} = req.params; 

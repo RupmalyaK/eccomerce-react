@@ -17,7 +17,7 @@ import {selectIsSigningIn, selectIsCheckingSession, selectSignInError, selectSig
 import Layout from "./components/Layout.jsx"; 
 import {addCollectionandDocuments} from "./firebase/firebase.util.js";
 import {fetchFeaturedItemsAsync, fetchAutocompleteAsync} from "./redux/shop/shop.actions.js";
-
+import {toMongoDB} from "./util.js"
 
 
 
@@ -50,7 +50,7 @@ dispatch(fetchFeaturedItemsAsync());
 
   useEffect(() => {
     dispatch(checkSessionAsync());
-    
+    //toMongoDB();
     const handleUnmount = () => console.log("App unmounted"); 
     return handleUnmount; 
   },[]);

@@ -36,7 +36,6 @@ export const fetchCollectionsStartAsync =  () => {
                  url:"/api/collections",
                  method:"GET",
              });  
-             console.log(collections);
              dispatch(fetchCollectionsSuccess(collections.data));   
            }
         catch(error)
@@ -99,7 +98,7 @@ export const fetchAutocompleteAsync = (string) => {
             }
         try{
             const autocompleteCollections = await axios({
-                url:"/api/collections/autocomplete?" + "string=" + string ,
+                url:"/api/collections/autocomplete?" + "searchString=" + string ,
                 method:"GET",
             });
             dispatch(fetchAutocompleteSuccess(autocompleteCollections.data));

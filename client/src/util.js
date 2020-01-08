@@ -14,7 +14,7 @@ export const toMongoDB = async () => {
                   routeName
                 }
         });
-        console.log(res)
+    
         collection.items.forEach(async (item) => {
           const {name , imageUrl:primaryImageUrl , price} = item;
           const isFeatured = Math.random() >= 0.7; 
@@ -22,14 +22,14 @@ export const toMongoDB = async () => {
             url:"/api/collections/collection/items/",
             method:"post",
             data:{
-                  collectionType:title, 
+                  collectionTitle:title, 
                   name,
                   primaryImageUrl,
                   price,
                   isFeatured
                 },   
              });
-             console.log(res); 
+          
           });  
       });
       }

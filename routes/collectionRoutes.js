@@ -1,9 +1,10 @@
 import CollectionsModel from "../model/CollectionsModel.js";
+import ItemsNameModel from "../model/ItemesNameModel.js"; 
 import {checkIfAuthenticated} from "../controller/authController.js";
 const collectionsRoutesCreator = (app) => {
 const routeString = "/api/collections/";    
 app.route(routeString + "collection")
-.post(checkIfAuthenticated,async (req, res, next) => {
+.post(async (req, res, next) => {
     const {title, routeName  } = req.body;
   
     if (title === undefined || routeName === undefined)
@@ -40,7 +41,12 @@ app.route(routeString + "collection")
             next(error);  
         }  
 })
+app.route("/test")
+.get( async (req, res) => {
+    const itemsName = await ItemsNameModel.find({});
+    res.status(200).json(itemsName);
+});
 }
-//CollectionsModel.deleteMany({}, () => {});
+//CollectionsModel.deleteMany({}, () => {}); ItemsNameModel.deleteMany({}, () => {});
 
 export default collectionsRoutesCreator;

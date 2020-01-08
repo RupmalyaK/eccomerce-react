@@ -36,7 +36,7 @@ text-align:center;
 
 const CollectionPreview = (props) => { 
     const {section} = props; 
-    const [selected, setSelected] = useState(section.items[0].id);
+    const [selected, setSelected] = useState(section.items[0]._id);
     const [itemCount, setItemCount] = useState(section.items.length-1);
     const Arrow = (icon) => {
       return (<FontAwesomeIcon icon={icon} style={{fontSize:"20px", color:"grey"}}/>);

@@ -1,5 +1,7 @@
 import CollectionsModel from "../model/CollectionsModel.js";
 import {checkIfAuthenticated} from "../controller/authController.js";
+import ItemsNameModel from "../model/ItemesNameModel.js"; 
+
 const collectionsRoutesCreator = (app) => {
 const routeString = "/api/";    
 app.route(routeString + "collections")
@@ -20,7 +22,7 @@ app.route(routeString + "collections")
         next(error);  
      }   
 })
-.post(checkIfAuthenticated,async (req, res, next) => {
+.post(async (req, res, next) => {
     const {collections} = req.body;
     if (!collections)
         {
@@ -42,24 +44,26 @@ app.route(routeString + "collections")
 
 app.route(routeString + "collections/autocomplete")
 .get(async(req, res, next) => {
-    const {string} = req.query; 
+    const {searchString} = req.query; 
+   const beginingRegExpString = `^${searchString}`; 
     try{
-            const collections = await CollectionsModel.find({});
-            const items = {};
-            collections.forEach(collection => {
-                const {_id, title, routeName} = collection; 
-                const collectionItems = collection.items.filter(item => item.name.match(new RegExp(string, 'i')));
-                items[title.toLowerCase()] = {_id, title, routeName , items:collectionItems};
-            });
-            res.status(200).json(items);
-       }
+       const startItemsName = await ItemsNameModel.find({name:{$regex:beginingRegExpString, $options:'i'}});
+       startItemsName.splice(10,startItemsName.length-1); 
+       const itemsName = await ItemsNameModel.find({name:{$regex:searchString, $options:'i'}});
+       itemsName.splice(10,itemsName.length-1); 
+        let retItemsName = itemsName.filter(name => startItemsName.findIndex(n => n._id.toString() === name._id.toString()) === -1);
+        retItemsName =  startItemsName.concat(retItemsName);
+        retItemsName.splice(10,retItemsName.length-1);
+        res.status(200).json(retItemsName);
+       }    
     catch(error)
-       {
-           res.status(400);
-           next(error); 
-       }
+    {
+        res.status(400);
+        next(error); 
+    }  
 });
 }
 
 
 export default collectionsRoutesCreator;
+//5e15c523c4293b168ce1be54 5e15c523c4293b168ce1be54"
