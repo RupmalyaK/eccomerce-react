@@ -9,7 +9,7 @@ const INITIAL_STATE = {
     featuredItems:[],
     isFetchingFeaturedItems:false,
     FeaturedItemsFetchingError:null,
-    autocompleteCollections:null, 
+    autocompleteCollections:[], 
     isFetchingAutocompleteCollections:false,
     autocompleteError:null, 
 }

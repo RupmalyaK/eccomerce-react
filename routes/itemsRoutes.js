@@ -16,7 +16,7 @@ app.route(routeString + "items")
     const newItem = {collectionTitle, name , primaryImageUrl , isFeatured, price};
     try {
         const collection = await CollectionsModel.findOne({title:collectionTitle});
-        await ItemesNameModel.create({name});
+        await ItemesNameModel.create({name,type:collectionTitle});
         collection.items.push(newItem); 
         const updatedCollection = await collection.save();
         res.status(200).json(updatedCollection);

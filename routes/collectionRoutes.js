@@ -41,7 +41,7 @@ app.route(routeString + "collection")
             next(error);  
         }  
 })
-app.route("/test")
+app.route("/api/itemsname")
 .get( async (req, res) => {
     const itemsName = await ItemsNameModel.find({});
     res.status(200).json(itemsName);

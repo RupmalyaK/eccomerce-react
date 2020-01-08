@@ -37,3 +37,5 @@ export const selectIsFetching = createSelector(selectShop, state => state.isFetc
 
 export const selectIsFetchingAutocompleteCollections = createSelector(selectShop, state => state.isFetchingAutocompleteCollections);
 
+export const selectAutocompleteCollections = createSelector(selectShop, state => state.autocompleteCollections);
+
