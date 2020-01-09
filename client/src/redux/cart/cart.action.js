@@ -28,18 +28,18 @@ export const addItemToCart= (item) => {
     }
 }
 
-export const removeItemFromCart = (id) =>
+export const removeItemFromCart = (_id) =>
     {
         return {
             type:cartTypes.REMOVE_ITEM_FROM_CART,
-            payLoad:id,
+            payLoad:_id,
         }
     }
 
-export const removeItemFromCartCompletely = (id) => {
+export const removeItemFromCartCompletely = (_id) => {
      return {
          type:cartTypes.REMOVE_ITEM_FROM_CART_COMPLETELY,
-         payLoad:id,
+         payLoad:_id,
      }
  }   
 

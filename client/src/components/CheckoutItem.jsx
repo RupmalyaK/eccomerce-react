@@ -62,11 +62,11 @@ cursor:pointer;
 `
 
 const CheckoutItem = (props) => {
-const {imageUrl , name, price, quantity, id} = props.item; 
+const {primaryImageUrl , name, price, quantity, _id} = props.item; 
 const dispatch = useDispatch(); 
 
 const handleRemoveItem = e => {
-  dispatch(removeItemFromCart(id));
+  dispatch(removeItemFromCart(_id));
 };
 
 const handleAddItemToCart = e => {
@@ -74,14 +74,14 @@ const handleAddItemToCart = e => {
 }
 
 const handleRemoveCompletelyClick = e => {
-dispatch(removeItemFromCartCompletely(id)); 
+dispatch(removeItemFromCartCompletely(_id)); 
 }
 
 
 return(
 <Container>
       <ImageContainer>
-          <Image src={imageUrl} alt="item"/>
+          <Image src={primaryImageUrl} alt="item"/>
       </ImageContainer>
       <Name>
           {name}

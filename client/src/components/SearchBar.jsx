@@ -9,7 +9,7 @@ const Container = styled.div``;
 
 const SuggestionBox = styled.div`
 background:white;
-width:40%;
+width:450px;
 height:240px;
 bottom:-230px;
 position:absolute;
@@ -20,7 +20,7 @@ display: ${props => props.isHide ? "none" : "block"};
 const Suggestion = styled.div
 `
 border-bottom:1px solid black;
-padding:10px;
+padding:10px 10px 5px 10px;
 `; 
 
 const SearchBar = (props) => {
@@ -42,7 +42,7 @@ const SearchBar = (props) => {
         const suggestions = itemNames.map(itemName => {
             return (
                 <Suggestion key={itemName._id}>
-                     <span>{itemName.name}</span>
+                    <h6 className="d-inline">{itemName.name}</h6>
                     <em style={{float:"right"}}>{itemName.type}</em>
                 </Suggestion>
             );

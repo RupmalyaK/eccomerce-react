@@ -57,9 +57,9 @@ dispatch(hiddenCartDropdown());
 
 const displayCartitems = () => {
   const itemArr = cartItems.map(item => {
-    const {id , name , imageUrl , price , quantity} = item;
+    const {id , name , primaryImageUrl , price , quantity} = item;
     return (
-      <CartItem key={id} name={name} imageUrl={imageUrl} price={price} quantity={quantity}/>
+      <CartItem key={id} name={name} imageUrl={primaryImageUrl} price={price} quantity={quantity}/>
     );
   });
 

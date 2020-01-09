@@ -3,8 +3,8 @@ import {checkIfAuthenticated} from "../controller/authController.js";
 import ItemsNameModel from "../model/ItemesNameModel.js"; 
 
 const collectionsRoutesCreator = (app) => {
-const routeString = "/api/";    
-app.route(routeString + "collections")
+const routeString = "/api/collections";    
+app.route(routeString)
 .get(async (req, res, next) => {
 
    try{
@@ -42,7 +42,7 @@ app.route(routeString + "collections")
 ;
 
 
-app.route(routeString + "collections/autocomplete")
+app.route(routeString + "/autocomplete")
 .get(async(req, res, next) => {
     const {searchString} = req.query; 
    const beginingRegExpString = `^${searchString}`; 
@@ -60,6 +60,29 @@ app.route(routeString + "collections/autocomplete")
         res.status(400);
         next(error); 
     }  
+});
+
+app.route(routeString + "/all")
+.get(async(req, res, next) => {
+    const {name} = req.query; 
+    try{
+        const collections = await CollectionsModel.find({}); 
+        const items = [];
+        collections.forEach(collection => {
+            console.log(collection);
+            const itemsFromCollection = collection.items.filter(item => {
+                const flag = item.name === name; 
+                return flag;
+            });
+            items.concat(itemsFromCollection);
+        });
+        res.status(200).json(items); 
+       }
+    catch(error)
+        {
+        res.status(400);
+        next(error); 
+        }   
 });
 }
 
