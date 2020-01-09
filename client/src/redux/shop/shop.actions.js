@@ -93,7 +93,7 @@ export const fetchAutocompleteAsync = (string) => {
         dispatch(fetchAutocompleteStart());
         if(!string)
             {
-                fetchAutocompleteSuccess(null);
+                fetchAutocompleteSuccess([]);
                 return; 
             }
         try{

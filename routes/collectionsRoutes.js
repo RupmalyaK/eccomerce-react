@@ -1,6 +1,6 @@
 import CollectionsModel from "../model/CollectionsModel.js";
 import {checkIfAuthenticated} from "../controller/authController.js";
-import ItemsNameModel from "../model/ItemesNameModel.js"; 
+import {searchItemsByTitle} from "../controller/collectionsController.js";
 
 const collectionsRoutesCreator = (app) => {
 const routeString = "/api/collections";    
@@ -45,38 +45,24 @@ app.route(routeString)
 app.route(routeString + "/autocomplete")
 .get(async(req, res, next) => {
     const {searchString} = req.query; 
-   const beginingRegExpString = `^${searchString}`; 
-    try{
-       const startItemsName = await ItemsNameModel.find({name:{$regex:beginingRegExpString, $options:'i'}});
-       startItemsName.splice(10,startItemsName.length-1); 
-       const itemsName = await ItemsNameModel.find({name:{$regex:searchString, $options:'i'}});
-        let retItemsName = itemsName.filter(name => startItemsName.findIndex(n => n._id.toString() === name._id.toString()) === -1);
-        retItemsName =  startItemsName.concat(retItemsName);
-        retItemsName.splice(10,retItemsName.length-1);
-        res.status(200).json(retItemsName);
-       }    
+    try {
+            const items = await searchItemsByTitle(CollectionsModel , searchString);
+            items.splice(9,items.length - 1); 
+            res.status(200).json(items); 
+        }
     catch(error)
-    {
-        res.status(400);
-        next(error); 
-    }  
+        {
+            res.status(400);
+            next(error); 
+        }    
 });
 
 app.route(routeString + "/all")
 .get(async(req, res, next) => {
-    const {name} = req.query; 
+    const {searchString} = req.query; 
     try{
-        const collections = await CollectionsModel.find({}); 
-        const items = [];
-        collections.forEach(collection => {
-            console.log(collection);
-            const itemsFromCollection = collection.items.filter(item => {
-                const flag = item.name === name; 
-                return flag;
-            });
-            items.concat(itemsFromCollection);
-        });
-        res.status(200).json(items); 
+         const items = await searchItemsByTitle(CollectionsModel, searchString);
+         res.status(200).json(items);
        }
     catch(error)
         {

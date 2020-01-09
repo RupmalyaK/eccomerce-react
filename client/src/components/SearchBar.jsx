@@ -27,7 +27,7 @@ const SearchBar = (props) => {
     const {compact , ...rest} = props; 
     const [searchText , setSearchText] = useState("");
     const dispatch = useDispatch(); 
-    const itemNames = useSelector(selectAutocompleteCollections);
+    const items = useSelector(selectAutocompleteCollections);
     
    
     const handleChange = e => {
@@ -35,11 +35,11 @@ const SearchBar = (props) => {
     }
 
     const displaySuggestions = () => {
-        if(itemNames.length === 0)
+        if(items.length === 0)
             {
                 return (<></>);
             }
-        const suggestions = itemNames.map(itemName => {
+        const suggestions = items.map(itemName => {
             return (
                 <Suggestion key={itemName._id}>
                     <h6 className="d-inline">{itemName.name}</h6>
@@ -58,7 +58,7 @@ return(
     <Form inline style={{position:"relative"}} {...rest}>
         <FormControl type="text" onChange={handleChange} placeholder="Search product..." className=" m-0 w-75" />
         {compact ? <></> : <Button className="ml-1" variant="outline-success">Search</Button>}
-        {itemNames.length === 0 ? <></> :(<SuggestionBox>
+        {items.length === 0 ? <></> :(<SuggestionBox>
             {displaySuggestions()}
         </SuggestionBox>) }
     </Form>  
