@@ -3,6 +3,7 @@ export const searchItemsByTitle = (CollectionsModel, searchString) => {
         try{
         const collections = await CollectionsModel.find({}); 
         let items = [];
+        let startItems = []; 
         collections.forEach(collection => {
             const itemsFromCollections = [];
             const itemsStartWithFromCollections = []; 
@@ -10,6 +11,7 @@ export const searchItemsByTitle = (CollectionsModel, searchString) => {
                 item = {...item._doc , type:collection.title};
                if (item.name.match(new RegExp(`^${searchString}`, 'i')))
                 {
+
                     itemsStartWithFromCollections.push(item)
                 }
                 else if  (item.name.match(new RegExp(searchString, 'i')) !== null)
@@ -25,9 +27,10 @@ export const searchItemsByTitle = (CollectionsModel, searchString) => {
 
             if (itemsFromCollections.length != 0)
                 {
-                   items = items.concat(itemsFromCollections); 
+                   startItems = startItems.concat(itemsFromCollections); 
                 }
         });
+        items = items.concat(startItems); 
         resolve(items); 
        }    
     catch(error)

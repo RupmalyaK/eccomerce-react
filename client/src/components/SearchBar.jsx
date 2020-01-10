@@ -1,4 +1,4 @@
-import React, {useState} from "react"; 
+import React, {useState, useRef} from "react"; 
 import styled from "styled-components"; 
 import {Form, FormControl, Button} from "react-bootstrap";
 import {fetchAutocompleteAsync} from "../redux/shop/shop.actions.js"
@@ -26,13 +26,26 @@ padding:10px 10px 5px 10px;
 const SearchBar = (props) => {
     const {compact , ...rest} = props; 
     const [searchText , setSearchText] = useState("");
+    const [isOpen, setIsOpen] = useState(false); 
     const dispatch = useDispatch(); 
     const items = useSelector(selectAutocompleteCollections);
+    const suggestionBoxRef = useRef(); 
     
-   
+    
     const handleChange = e => {
         setSearchText(e.target.value); 
+        if (!e.target.value)
+            {
+                setIsOpen(false); 
+            }
+          else{
+                if(!isOpen)
+                    {
+                        setIsOpen(true); 
+                    }
+              }
     }
+
 
     const displaySuggestions = () => {
         if(items.length === 0)
@@ -51,16 +64,41 @@ const SearchBar = (props) => {
 
     }
 
+    const handleClickOutsideSuggestionBox = e => {
+        if(suggestionBoxRef.current.contains(e.target))
+            {
+                return; 
+            }
+        
+    }
+
+    useEffect(() => {   
+        if (isOpen) {
+            document.addEventListener("mousedown", handleClickOutsideSuggestionBox);
+          } else {
+            document.removeEventListener("mousedown", handleClickOutsideSuggestionBox);
+          }
+    
+        const handleUnmount =  () => {
+          document.removeEventListener("mousedown", handleClickOutsideSuggestionBox);
+        };
+
+        return handleUnmount;
+      }, [isOpen]);
+      
     useEffect(() => {
-        dispatch(fetchAutocompleteAsync(searchText))
-    },[searchText])
+        dispatch(fetchAutocompleteAsync(searchText));
+    },[searchText]);
+
 return(
     <Form inline style={{position:"relative"}} {...rest}>
         <FormControl type="text" onChange={handleChange} placeholder="Search product..." className=" m-0 w-75" />
         {compact ? <></> : <Button className="ml-1" variant="outline-success">Search</Button>}
-        {(searchText.length === 0) ? <></> :(<SuggestionBox>
+        {(!isOpen || items.length === 0 )? <></> :(
+        <SuggestionBox ref={suggestionBoxRef}>
             {displaySuggestions()}
-        </SuggestionBox>) }
+        </SuggestionBox>
+        )}
     </Form>  
 );
 }
