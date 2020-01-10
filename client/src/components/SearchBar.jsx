@@ -29,7 +29,7 @@ const SearchBar = (props) => {
     const [isOpen, setIsOpen] = useState(false); 
     const dispatch = useDispatch(); 
     const items = useSelector(selectAutocompleteCollections);
-    const suggestionBoxRef = useRef(); 
+    const suggestionBoxRef = useRef(null); 
     
     
     const handleChange = e => {
@@ -69,10 +69,11 @@ const SearchBar = (props) => {
             {
                 return; 
             }
-        
+            setIsOpen(false); 
     }
 
     useEffect(() => {   
+   
         if (isOpen) {
             document.addEventListener("mousedown", handleClickOutsideSuggestionBox);
           } else {
@@ -82,7 +83,6 @@ const SearchBar = (props) => {
         const handleUnmount =  () => {
           document.removeEventListener("mousedown", handleClickOutsideSuggestionBox);
         };
-
         return handleUnmount;
       }, [isOpen]);
       
@@ -90,12 +90,16 @@ const SearchBar = (props) => {
         dispatch(fetchAutocompleteAsync(searchText));
     },[searchText]);
 
+useEffect (() => {
+console.log("DEBUGGOO:" ,suggestionBoxRef);
+},[suggestionBoxRef]) ;  
+
 return(
-    <Form inline style={{position:"relative"}} {...rest}>
+    <Form inline style={{position:"relative"}} {...rest} ref={suggestionBoxRef} >
         <FormControl type="text" onChange={handleChange} placeholder="Search product..." className=" m-0 w-75" />
         {compact ? <></> : <Button className="ml-1" variant="outline-success">Search</Button>}
         {(!isOpen || items.length === 0 )? <></> :(
-        <SuggestionBox ref={suggestionBoxRef}>
+        <SuggestionBox >
             {displaySuggestions()}
         </SuggestionBox>
         )}

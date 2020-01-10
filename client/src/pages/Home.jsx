@@ -10,7 +10,7 @@ import {selectIsFetchingFeaturedItems} from "../redux/shop/shop.selector.js"
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
 import {fetchFeaturedItemsAsync} from "../redux/shop/shop.actions.js";
 
-const CollectionOverviewWithSpinner = LoadingSpinner(CollectionOverview);
+//const CollectionOverviewWithSpinner = LoadingSpinner(CollectionOverview);
 const HomepageContainer = styled.div`
 overflow:hidden;
 `;
@@ -62,7 +62,7 @@ const Homepage = () => {
       <HomepageContainer>
         <Slider slideArr = {slideArr}/>
         <MenuItems style={{marginTop:"50px"}}/>
-        <CollectionOverviewWithSpinner isLoading = {isFetchingFeaturedItems} />
+        <CollectionOverview/>
       </HomepageContainer>
       
    
