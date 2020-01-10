@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {ReactComponent as ShoppingIcon} from "../images/shopping-bag.svg"; 
 import CartDropdown from "./CartDropdown.jsx";
 import {useSelector, useDispatch} from "react-redux";  
-import {toggleCartDropdown} from "../redux/cart/cart.action.js";
+import {showCartDropdown, hideCartDropdown} from "../redux/cart/cart.action.js";
 import {selectIsDropdownHidden, selectCartItemsTotalQuantity} from "../redux/cart/cart.selector";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
@@ -21,7 +21,7 @@ const Container = styled.div`
         position:relative;
         width:20px;
         height:20px;
-        top:-10px;
+        top:0px;
         justify-content:center;
         opacity:0.8;
     };
@@ -29,6 +29,8 @@ const Container = styled.div`
 
 const IconContainer = styled(FontAwesomeIcon)`
     cursor:pointer;
+    width:120px;
+    height:50px;
 }
 `;
 
@@ -40,14 +42,18 @@ const itemsTotalQuantity = useSelector(selectCartItemsTotalQuantity);
 const dispatch = useDispatch();
 
 
-const handleClick = e => {
- dispatch(toggleCartDropdown());
+const handleOnMouseOver = e => {
+ dispatch(showCartDropdown());
+}
+
+const handleMouseOut = e => {
+    dispatch(hideCartDropdown());    
 }
 
 return(
 
-<Container itemCount= {itemsTotalQuantity} {...props}>
-    <IconContainer icon={faShoppingCart} onClick = {handleClick} />
+<Container itemCount= {itemsTotalQuantity} onMouseEnter = {handleOnMouseOver} onMouseLeave = {handleMouseOut} {...props}>
+    <IconContainer icon={faShoppingCart}  />
     {!isDropdownHidden ? <CartDropdown/> : <></>} 
 </Container>
 );

@@ -5,7 +5,7 @@ import CartItem from "./CartItem.jsx";
 import {useSelector, useDispatch} from "react-redux"; 
 import {selectCartItems } from "../redux/cart/cart.selector.js";
 import {useHistory} from "react-router-dom";
-import {hiddenCartDropdown} from "../redux/cart/cart.action.js";
+import {hideCartDropdown,showCartDropdown} from "../redux/cart/cart.action.js";
 
 const Container = styled.div`
 position: absolute;
@@ -16,8 +16,8 @@ flex-direction: column;
 padding: 20px 5px;
 border: 1px solid black;
 background-color: white;
-top: 70px;
-right: 0px;
+top: 50px;
+right: 30px;
 z-index: 5;
   `;
 
@@ -51,9 +51,17 @@ const history = useHistory();
 
 const handleClick = e => {
 history.push('/checkout');
-dispatch(hiddenCartDropdown());
-
+dispatch(hideCartDropdown());
 };
+
+const handleOnMouseOver = e => {
+  dispatch(showCartDropdown());
+ }
+ 
+ const handleMouseOut = e => {
+  dispatch(hideCartDropdown());    
+ }
+ 
 
 const displayCartitems = () => {
   const itemArr = cartItems.map(item => {
@@ -67,7 +75,7 @@ const displayCartitems = () => {
 }
 
 return(
-<Container>
+<Container onMouseOver = {handleOnMouseOver} onMouseLeave={handleMouseOut}>
     <CartItems>
       {cartItems.length ? displayCartitems() :
         <EmptyMessage>Your cart is empty!</EmptyMessage>

@@ -58,7 +58,7 @@ return(
     <Form inline style={{position:"relative"}} {...rest}>
         <FormControl type="text" onChange={handleChange} placeholder="Search product..." className=" m-0 w-75" />
         {compact ? <></> : <Button className="ml-1" variant="outline-success">Search</Button>}
-        {items.length === 0 ? <></> :(<SuggestionBox>
+        {(searchText.length === 0) ? <></> :(<SuggestionBox>
             {displaySuggestions()}
         </SuggestionBox>) }
     </Form>  
