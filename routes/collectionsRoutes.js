@@ -1,6 +1,6 @@
 import CollectionsModel from "../model/CollectionsModel.js";
 import {checkIfAuthenticated} from "../controller/authController.js";
-import {searchItemsByTitle} from "../controller/collectionsController.js";
+import {searchItemsByName} from "../controller/collectionsController.js";
 
 const collectionsRoutesCreator = (app) => {
 const routeString = "/api/collections";    
@@ -46,7 +46,7 @@ app.route(routeString + "/autocomplete")
 .get(async(req, res, next) => {
     const {searchString} = req.query; 
     try {
-            const items = await searchItemsByTitle(CollectionsModel , searchString);
+            const items = await searchItemsByName(CollectionsModel , searchString);
             items.splice(9,items.length - 1); 
             res.status(200).json(items); 
         }
@@ -57,11 +57,17 @@ app.route(routeString + "/autocomplete")
         }    
 });
 
-app.route(routeString + "/all")
+app.route(routeString + "/itemName")
 .get(async(req, res, next) => {
-    const {searchString} = req.query; 
+    const {searchString, isSplice, sortBy} = req.query;
+    
     try{
-         const items = await searchItemsByTitle(CollectionsModel, searchString);
+         const items = await searchItemsByName(CollectionsModel, searchString);
+         if(isSplice)
+            {
+                items.splice(9,items.length - 1); 
+            }
+         
          res.status(200).json(items);
        }
     catch(error)

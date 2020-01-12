@@ -18,6 +18,7 @@ import Layout from "./components/Layout.jsx";
 import {addCollectionandDocuments} from "./firebase/firebase.util.js";
 import {fetchFeaturedItemsAsync, fetchAutocompleteAsync} from "./redux/shop/shop.actions.js";
 import {toMongoDB} from "./util.js"
+import BrowsePage from "./pages/Browse.jsx"
 
 
 
@@ -81,6 +82,7 @@ dispatch(fetchFeaturedItemsAsync());
           <Route path='/test' exact component={LoadingSpinner} />
           <Route path='/' exact component={Homepage} />
           <Route path="/shop/:match?"  component={Shoppage} />
+          <Route path="/browse" component={BrowsePage} />
           <Route path="/signin" exact render = {
             () => (
               currentUser ? <Redirect to='/'/> : <SignInAndSignUpPage/>)

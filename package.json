@@ -6,7 +6,6 @@
     "npm": "6.12.0"
   },
   "scripts": {
-    "heroku-prebuild": "rm -rf node_modules",
     "client": "cd client && npm start",
     "server": "nodemon --exec babel-node server.js",
     "build": "cd client && npm run build",
@@ -24,11 +23,7 @@
     "helmet": "^3.21.2",
     "mongoose": "^5.8.3",
     "nodemon": "^2.0.1",
-    "stripe": "6.28.0",
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
-    "@babel/node": "^7.7.4",
-    "@babel/preset-env": "^7.7.4"
+    "stripe": "6.28.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",

@@ -1,4 +1,4 @@
-export const searchItemsByTitle = (CollectionsModel, searchString) => {
+export const searchItemsByName = (CollectionsModel, searchString) => {
     return new Promise (async (resolve, reject) => {
         try{
         const collections = await CollectionsModel.find({}); 

@@ -98,7 +98,7 @@ export const fetchAutocompleteAsync = (string) => {
             }
         try{
             const autocompleteCollections = await axios({
-                url:"/api/collections/autocomplete?" + "searchString=" + string ,
+                url:"/api/collections/itemName?" + "searchString=" + string + "&isSplice=true" ,
                 method:"GET",
             });
             dispatch(fetchAutocompleteSuccess(autocompleteCollections.data));

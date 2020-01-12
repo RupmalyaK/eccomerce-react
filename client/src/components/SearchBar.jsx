@@ -3,8 +3,12 @@ import styled from "styled-components";
 import {Form, FormControl, Button} from "react-bootstrap";
 import {fetchAutocompleteAsync} from "../redux/shop/shop.actions.js"
 import {selectAutocompleteCollections} from "../redux/shop/shop.selector.js";
+import {fetchItemsAsync} from "../redux/browse/browse.actions.js";
+import {selectItems} from "../redux/browse/browse.selector.js";
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
+import {useHistory} from "react-router-dom";
+
 const Container = styled.div``;
 
 const SuggestionBox = styled.div`
@@ -29,6 +33,8 @@ const SearchBar = (props) => {
     const [isOpen, setIsOpen] = useState(false); 
     const dispatch = useDispatch(); 
     const items = useSelector(selectAutocompleteCollections);
+    const history = useHistory(); 
+    //const items = useSelector(selectItems);
     const suggestionBoxRef = useRef(null); 
     
     
@@ -90,14 +96,15 @@ const SearchBar = (props) => {
         dispatch(fetchAutocompleteAsync(searchText));
     },[searchText]);
 
-useEffect (() => {
-console.log("DEBUGGOO:" ,suggestionBoxRef);
-},[suggestionBoxRef]) ;  
+    const handleClick = e => {
+        dispatch(fetchItemsAsync({searchString:searchText}));
+        history.push("/browse"); 
+    }
 
 return(
     <Form inline style={{position:"relative"}} {...rest} ref={suggestionBoxRef} >
         <FormControl type="text" onChange={handleChange} placeholder="Search product..." className=" m-0 w-75" />
-        {compact ? <></> : <Button className="ml-1" variant="outline-success">Search</Button>}
+        {compact ? <></> : <Button className="ml-1" onClick={handleClick} variant="outline-success">Search</Button>}
         {(!isOpen || items.length === 0 )? <></> :(
         <SuggestionBox >
             {displaySuggestions()}
