@@ -97,7 +97,11 @@ const SearchBar = (props) => {
     },[searchText]);
 
     const handleClick = e => {
-        dispatch(fetchItemsAsync({searchString:searchText}));
+        dispatch(fetchItemsAsync({searchString:searchText, sortBy:"price", isAsc:true}));
+        if(isOpen)
+            {
+                setIsOpen(false);
+            }
         history.push("/browse"); 
     }
 

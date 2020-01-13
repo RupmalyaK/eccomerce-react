@@ -15,12 +15,38 @@ export const fetchItemsSuccess = (search) => {
 }
 
 export const fetchItemsAsync = (search) => {
-    const {searchString,priceRange,price,type} = search; 
-    return async (dispatch) => {
+    let {searchString,priceRange,price,type, sortBy, isAsc} = search; 
+    return async (dispatch, getState) => {
+         const currentBrowseState = getState().browse; 
+         if(typeof searchString === "undefined")
+            {
+                searchString = currentBrowseState.searchString; 
+            }
+         if (typeof priceRange === "undefined")
+            {
+                priceRange = currentBrowseState.priceRange; 
+            }   
+        if (typeof price === "undefined") 
+            {
+                price = currentBrowseState.price; 
+            }
+        if (typeof type === "undefined")
+            {
+                type = currentBrowseState.type; 
+            }
+        if (typeof sortBy === "undefined")
+            {
+                sortBy = currentBrowseState.sortBy;
+            }
+        if (typeof isAsc === "undefined") 
+            {
+                isAsc = currentBrowseState.isAsc;
+            }   
+         console.log(sortBy);           
         dispatch(fetchItemsStart()); 
         try {
             const {data:items} = await axios({
-                url:"/api/collections/itemName?" + "searchString=" + searchString ,
+                url:"/api/collections/itemName?" + "searchString=" + searchString + "&sortBy=" + sortBy + "&isAsc=" + isAsc,
                 method:"GET",
             }); 
             dispatch(fetchItemsSuccess({items, searchString})); 

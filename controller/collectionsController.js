@@ -39,3 +39,24 @@ export const searchItemsByName = (CollectionsModel, searchString) => {
     }  
     });
 }
+
+export const sortByPrice = (items, isAsc) =>
+    {
+        items.sort((itemA, itemB) => {
+        
+            if (isAsc === "true")
+                {
+                   
+                    return itemA.price - itemB.price;      
+                }
+                return itemB.price - itemA.price;      
+          });
+          return items; 
+    }
+
+export const sortByName = (items, isAsc) =>
+    {
+        items.sort((itemA, itemB) => {
+            return itemA.name.localeCompare(itemB.name);
+        });
+    }    

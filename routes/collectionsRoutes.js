@@ -1,6 +1,6 @@
 import CollectionsModel from "../model/CollectionsModel.js";
 import {checkIfAuthenticated} from "../controller/authController.js";
-import {searchItemsByName} from "../controller/collectionsController.js";
+import {searchItemsByName, sortByPrice, sortByName} from "../controller/collectionsController.js";
 
 const collectionsRoutesCreator = (app) => {
 const routeString = "/api/collections";    
@@ -59,15 +59,26 @@ app.route(routeString + "/autocomplete")
 
 app.route(routeString + "/itemName")
 .get(async(req, res, next) => {
-    const {searchString, isSplice, sortBy} = req.query;
-    
+    const {searchString, isSplice, sortBy, isAsc} = req.query;
+
     try{
-         const items = await searchItemsByName(CollectionsModel, searchString);
+         let items = await searchItemsByName(CollectionsModel, searchString);
          if(isSplice)
             {
                 items.splice(9,items.length - 1); 
             }
-         
+            switch(sortBy)
+                {
+                    case "price":
+                        sortByPrice(items , isAsc); 
+                        break;
+                    case "name":
+                            items.sort((itemA, itemB) => {
+                                return itemA.name.localeCompare(itemB.name);
+                            });
+                            break;    
+                    default: break;    
+                }
          res.status(200).json(items);
        }
     catch(error)

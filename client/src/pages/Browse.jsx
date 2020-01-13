@@ -3,34 +3,20 @@ import {useSelector, useDispatch} from "react-redux";
 import {fetchItemsAsync} from "../redux/browse/browse.actions.js";
 import {selectItems} from "../redux/browse/browse.selector.js";
 import styled from "styled-components";
-import {Row,Col} from "react-bootstrap"
+import {Row,Col,Container as BContainer} from "react-bootstrap"
 import axios from "axios"; 
+import BrowseItem from "../components/BrowseItem";
+import SortBy from "../components/SortBy.jsx";
 
-const Container = styled.div``;
+const Container = styled.div`
+    
+`;
 
-const BrowseItem = props => {
- 
-    const {name, price, isFeatured, primaryImageUrl, type, _id} = props.item;  
-    return (
-            <Col key={_id} lg={12}>
-                <span>name: {name}</span>
-                price: {price}
-                isFeatured:{isFeatured}
-                primaryImageUrl:{primaryImageUrl}
-                type:{type}
-            </Col>
-            );
-}
 
 const Browse = props => {
-    const {searchString} = props; 
-    const items = useSelector(selectItems);
-    
-    const dispatch = useDispatch(); 
 
-    useEffect(() => {
-        dispatch(fetchItemsAsync({searchString}));
-    }, [searchString]); 
+    const items = useSelector(selectItems);
+    const dispatch = useDispatch(); 
 
     const displayBrowseItems = () => {
         const browseItemsArr = items.map(item => {
@@ -40,11 +26,13 @@ const Browse = props => {
         }
 
     return (
-        <Container>
+        <BContainer as={Container} style={{marginTop:"90px"}}>
+           
+             <SortBy />
              <Row>
                 {displayBrowseItems()}
              </Row>                    
-        </Container>        
+        </BContainer>        
     );
 }
 
