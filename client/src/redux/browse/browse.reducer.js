@@ -6,7 +6,7 @@ const INITIAL_STATE = {
     priceRange:null,
     searchString:"",
     sortBy:"",
-    isAsc:true,
+    isAsc:"true",
     isFetching:false, 
     fetchError:"",
 };

@@ -14,3 +14,6 @@ export const selectIsFetching = createSelector(selectBrowse, state => state.isFe
 
 export const selectFetchingError = createSelector(selectBrowse, state => state.fetchingError); 
 
+export const selectSortBy = createSelector(selectBrowse, state => state.sortBy);
+
+export const selectIsAsc = createSelector(selectBrowse, state => state.isAsc);

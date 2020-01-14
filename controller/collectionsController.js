@@ -57,6 +57,12 @@ export const sortByPrice = (items, isAsc) =>
 export const sortByName = (items, isAsc) =>
     {
         items.sort((itemA, itemB) => {
-            return itemA.name.localeCompare(itemB.name);
+            if(isAsc === "true")
+                {
+                    return itemA.name.localeCompare(itemB.name);
+                }
+
+                return itemB.name.localeCompare(itemA.name);
         });
-    }    
+    }  
+        

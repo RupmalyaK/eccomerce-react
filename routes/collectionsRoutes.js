@@ -73,11 +73,14 @@ app.route(routeString + "/itemName")
                         sortByPrice(items , isAsc); 
                         break;
                     case "name":
-                            items.sort((itemA, itemB) => {
-                                return itemA.name.localeCompare(itemB.name);
-                            });
-                            break;    
-                    default: break;    
+                            sortByName(items, isAsc)
+                            break;            
+                    default: 
+                        if(isAsc === "false")
+                            {
+                              items.reverse();  
+                            } 
+                        break;    
                 }
          res.status(200).json(items);
        }

@@ -2,36 +2,61 @@
 import React, {useState, useEffect} from "react"; 
 import styled from "styled-components"; 
 import {ButtonToolbar, ToggleButtonGroup, ToggleButton} from "react-bootstrap";
-import {useDispatch} from "react-redux";
-import {fetchItemsAsync} from "../redux/browse/browse.actions.js"
+import {useDispatch, useSelector} from "react-redux";
+import {fetchItemsAsync} from "../redux/browse/browse.actions.js";
+import {selectSortBy, selectIsAsc} from "../redux/browse/browse.selector.js";
+
 
 const Container = styled.div`
     margin-bottom:20px;
     padding:20px;
     border:.5px solid black;
+
+    .is-asc {
+        float:right !important;
+    }
 `;
 
 const SortBy =  () => {
-    const [value, setValue] = useState("price");
+    const sortBy = useSelector(selectSortBy); 
+    const isAsc = useSelector(selectIsAsc);
+    
+    const [toggleSortByValue, setToggleSortByValue] = useState("relevance");
+    const [toggleIsAscValue, setToggleIsAscValue] = useState("true");
+
+ 
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(fetchItemsAsync({sortBy:value}));
-    }, [value]);
+        console.log(toggleIsAscValue);
+        dispatch(fetchItemsAsync({sortBy:toggleSortByValue, isAsc:toggleIsAscValue}));
+    }, [toggleSortByValue, toggleIsAscValue]);
 
     
-    const handleChange = val => {
-        setValue(val);
+    const handlesortByChange = val => {
+        setToggleSortByValue(val);
     }
+
+    const handleIsAscChange = val => {
+        setToggleIsAscValue(val); 
+    }
+    
   
     return (
         <Container>
             <span>Sort By </span>
-            <ButtonToolbar className="d-inline">
-                <ToggleButtonGroup type="radio" name="options" defaultValue="price" onChange={handleChange}>
+            <ButtonToolbar className="d-inline sort-by">
+                <ToggleButtonGroup type="radio" name="sortBy" defaultValue={sortBy || "relevance"} onChange={handlesortByChange}>
+                <ToggleButton value="relevance">Relevance</ToggleButton>    
                 <ToggleButton value="price">Price</ToggleButton>
                 <ToggleButton value="name">Name</ToggleButton>
-                <ToggleButton value="relevance">Relevance</ToggleButton>
+                </ToggleButtonGroup>
+            </ButtonToolbar>
+
+            <ButtonToolbar className="d-inline is-asc">
+                <ToggleButtonGroup type="radio" name="isAsc" defaultValue={isAsc || "true"} onChange={handleIsAscChange}>
+                <ToggleButton value="true">Asc</ToggleButton>    
+                <ToggleButton value="false">Dsc</ToggleButton>
                 </ToggleButtonGroup>
             </ButtonToolbar>
             </Container>

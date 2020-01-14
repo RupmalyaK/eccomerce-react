@@ -42,14 +42,14 @@ export const fetchItemsAsync = (search) => {
             {
                 isAsc = currentBrowseState.isAsc;
             }   
-         console.log(sortBy);           
+                
         dispatch(fetchItemsStart()); 
         try {
             const {data:items} = await axios({
                 url:"/api/collections/itemName?" + "searchString=" + searchString + "&sortBy=" + sortBy + "&isAsc=" + isAsc,
                 method:"GET",
             }); 
-            dispatch(fetchItemsSuccess({items, searchString})); 
+            dispatch(fetchItemsSuccess({items, searchString, price, priceRange, sortBy, isAsc})); 
             }
          catch(error)
             {

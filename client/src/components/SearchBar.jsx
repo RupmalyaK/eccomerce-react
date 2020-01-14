@@ -4,7 +4,7 @@ import {Form, FormControl, Button} from "react-bootstrap";
 import {fetchAutocompleteAsync} from "../redux/shop/shop.actions.js"
 import {selectAutocompleteCollections} from "../redux/shop/shop.selector.js";
 import {fetchItemsAsync} from "../redux/browse/browse.actions.js";
-import {selectItems} from "../redux/browse/browse.selector.js";
+import {selectSortBy} from "../redux/browse/browse.selector.js";
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
 import {useHistory} from "react-router-dom";
@@ -32,6 +32,7 @@ const SearchBar = (props) => {
     const [searchText , setSearchText] = useState("");
     const [isOpen, setIsOpen] = useState(false); 
     const dispatch = useDispatch(); 
+    const sortBy = useSelector(selectSortBy); 
     const items = useSelector(selectAutocompleteCollections);
     const history = useHistory(); 
     //const items = useSelector(selectItems);
@@ -97,7 +98,7 @@ const SearchBar = (props) => {
     },[searchText]);
 
     const handleClick = e => {
-        dispatch(fetchItemsAsync({searchString:searchText, sortBy:"price", isAsc:true}));
+        dispatch(fetchItemsAsync({searchString:searchText, sortBy:sortBy || "relevance", isAsc:true}));
         if(isOpen)
             {
                 setIsOpen(false);
