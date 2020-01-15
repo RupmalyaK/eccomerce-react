@@ -4,7 +4,7 @@ import {Row,Col} from "react-bootstrap";
 import Button from "./CustomButton.jsx";
 
 const Container = styled.div`
-border-bottom:1px solid black;
+border-bottom:0.2px solid black;
 margin-bottom:25px;
 padding-bottom:10px;
 

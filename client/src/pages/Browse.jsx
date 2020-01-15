@@ -7,10 +7,13 @@ import {Row,Col,Container as BContainer} from "react-bootstrap"
 import axios from "axios"; 
 import BrowseItem from "../components/BrowseItem";
 import SortBy from "../components/SortBy.jsx";
+import AdvanceSearch from "../components/AdvanceSearch.jsx";
 
 const Container = styled.div`
-    
+   display:flex;
+    justify-content:space-between;
 `;
+
 
 
 const Browse = props => {
@@ -26,13 +29,15 @@ const Browse = props => {
         }
 
     return (
-        <BContainer as={Container} style={{marginTop:"90px"}}>
-           
+        <Container style={{marginTop:"90px", marginLeft:"10px", marginRight:"50px", overflow:"hidden"}}>
+        <AdvanceSearch />
+        <div  style={{ width:"70%"}}>
              <SortBy />
              <Row>
                 {displayBrowseItems()}
              </Row>                    
-        </BContainer>        
+        </div>   
+        </Container>     
     );
 }
 
