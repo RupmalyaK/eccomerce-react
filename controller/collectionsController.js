@@ -30,7 +30,7 @@ export const searchItemsByName = (searchObj) => {
                       
                         flag = false; 
                     }
-                console.log(categories);
+            
                  if(categories)
                     {
                         if(categories.indexOf(item.type.toLowerCase()) === -1)
