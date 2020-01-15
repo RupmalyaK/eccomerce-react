@@ -4,8 +4,6 @@ export const selectBrowse = state => state.browse;
 
 export const selectItems = createSelector(selectBrowse, state => state.items); 
 
-export const selectPrice = createSelector(selectBrowse, state => state.price); 
-
 export const selectString = createSelector(selectBrowse, state => state.string); 
 
 export const selectPriceRange = createSelector(selectBrowse, state => state.priceRange); 

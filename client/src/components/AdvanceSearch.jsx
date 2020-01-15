@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"; 
 import styled from "styled-components"; 
 import {Row,Col,Form,Button} from "react-bootstrap";
+import {useDispatch} from "react-redux"; 
+import {fetchItemsAsync} from "../redux/browse/browse.actions.js"
 
 const Container = styled.div`
 height:450px;
@@ -24,11 +26,21 @@ border:0.1px solid black;
 const AdvanceSearch = props => {
 
     const [categories , setCategories] = useState([]); 
-    
- 
+    const [priceRange, setPriceRange] = useState([]); 
+    const [isFeatured, setIsFeatured] = useState(false); 
+    useEffect(() => {
+        console.log(categories)
+    }, [categories])
+    const dispatch = useDispatch();
+
+
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(e)
+       dispatch(fetchItemsAsync({
+            categories: categories, 
+            priceRange: priceRange,
+            isFeatured: isFeatured
+        }));
     }
 
     const addCategory = category => { 
@@ -51,6 +63,7 @@ const AdvanceSearch = props => {
     const handleCategoryChange = e => {
         const checked = e.target.checked;
         const func = checked ? addCategory : removeCategory; 
+
         switch(e.target.id)
             {
                 case "hats-check":
@@ -66,11 +79,33 @@ const AdvanceSearch = props => {
                                 func("mens");  
                                 break; 
                 case "shoes-check":
-                                func("shoes");  
+                                func("sneakers");  
                                 break;
                 default: break;                                                                             
             }
         }
+    
+    const handlePriceRangeChange = e => {
+        const newPriceRange = [...priceRange]; 
+        const value = e.target.value; 
+        switch(e.target.id)
+            {
+                case "priceMin":
+                                newPriceRange[0] = value;
+                                setPriceRange(newPriceRange); 
+                                break;
+                case "priceMax":
+                                newPriceRange[1] = value;
+                                setPriceRange(newPriceRange);
+                                break;
+                default: 
+                        break;                                     
+            }
+    }   
+    
+    const handleIsFeaturedChange = e => {
+        setIsFeatured(e.target.checked); 
+    }
 
     return (
     <Container>
@@ -122,21 +157,22 @@ const AdvanceSearch = props => {
                         Featured
                 </Form.Label>
                 <Col sm="6">
-                <Form.Check
+                <Form.Check 
+                        onChange = {handleIsFeaturedChange}
                         type="checkbox"
                         name="formHorizontalcheckboxs"
-                        id="formHorizontalcheckboxs3"
+                        id="featured-check"
                         />
                 </Col>
                 
                 </Form.Group>
-            <Row>
+            <Row onChange={handlePriceRangeChange}>
             <p as={Col} sm="3">Price Range</p>    
-            <Form.Group as={Col} sm= "3" controlId="formHorizontalHigherThan">
+            <Form.Group as={Col} sm= "3" controlId="priceMin">
                 <Form.Control type="higherThanPrice" placeholder="0" />
             </Form.Group>
             -
-            <Form.Group as={Col} sm="3" controlId="formHorizontalLesserThan">
+            <Form.Group as={Col} sm="3" controlId="priceMax">
                 <Form.Control type="lesserThanPrice" placeholder="0" />
             </Form.Group>
             </Row>

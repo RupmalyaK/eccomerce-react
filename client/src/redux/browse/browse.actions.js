@@ -10,12 +10,12 @@ export const fetchItemsFailure = error => {
 }
 
 export const fetchItemsSuccess = (search) => {
-    const {items, searchString, priceRange, price, sortBy} = search; 
-    return ({type:browseActionTypes.FETCH_ITEMS_SUCCESS , payLoad: {items, searchString,price,priceRange,sortBy}});
+    const {items, searchString, priceRange, sortBy, isFeatured, categories} = search; 
+    return ({type:browseActionTypes.FETCH_ITEMS_SUCCESS , payLoad: {items, searchString,priceRange,sortBy,isFeatured,priceRange, categories}});
 }
 
 export const fetchItemsAsync = (search) => {
-    let {searchString,priceRange,price,type, sortBy, isAsc} = search; 
+    let {searchString,priceRange,type, sortBy, isAsc,categories, isFeatured} = search; 
     return async (dispatch, getState) => {
          const currentBrowseState = getState().browse; 
          if(typeof searchString === "undefined")
@@ -26,10 +26,7 @@ export const fetchItemsAsync = (search) => {
             {
                 priceRange = currentBrowseState.priceRange; 
             }   
-        if (typeof price === "undefined") 
-            {
-                price = currentBrowseState.price; 
-            }
+
         if (typeof type === "undefined")
             {
                 type = currentBrowseState.type; 
@@ -41,15 +38,32 @@ export const fetchItemsAsync = (search) => {
         if (typeof isAsc === "undefined") 
             {
                 isAsc = currentBrowseState.isAsc;
-            }   
-                
+            }
+       if (typeof categories === "undefined")
+            {
+                categories = currentBrowseState.categories;
+            } 
+        if (typeof isFeatured === "undefined")
+            {
+                isFeatured = currentBrowseState.isFeatued; 
+            }       
+   
         dispatch(fetchItemsStart()); 
         try {
             const {data:items} = await axios({
-                url:"/api/collections/itemName?" + "searchString=" + searchString + "&sortBy=" + sortBy + "&isAsc=" + isAsc,
+                url:"/api/collections/itemName",
                 method:"GET",
+                params:{
+                   searchString,
+                   sortBy,
+                   isAsc,
+                   isFeatured,
+                   priceMin:priceRange[0],
+                   priceMax:priceRange[1], 
+                   categories 
+                },
             }); 
-            dispatch(fetchItemsSuccess({items, searchString, price, priceRange, sortBy, isAsc})); 
+            dispatch(fetchItemsSuccess({items, searchString,priceRange, sortBy, isAsc, categories, isFeatured})); 
             }
          catch(error)
             {

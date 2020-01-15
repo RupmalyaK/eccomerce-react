@@ -2,13 +2,15 @@ import browseActionTypes from "./browse.types.js";
 
 const INITIAL_STATE = {
     items:[],
-    price:"",
-    priceRange:null,
+    priceRange:[],
     searchString:"",
     sortBy:"",
     isAsc:"true",
     isFetching:false, 
     fetchError:"",
+    numberOfItems:"",
+    isFeatured:false, 
+    categories:[],
 };
 
 const browseReducer = (state = INITIAL_STATE, action) => {
@@ -21,8 +23,9 @@ const browseReducer = (state = INITIAL_STATE, action) => {
             case browseActionTypes.FETCH_ITEMS_FAILURE:
                     return {...state, isFetching:false, fetchError:payLoad};
             case browseActionTypes.FETCH_ITEMS_SUCCESS:
-                    const {items, searchString, price , priceRange, sortBy} = payLoad
-                    return {...state, isFetching:false, items, searchString, price, priceRange, sortBy};                     
+                    const {items, searchString, price , priceRange, sortBy, categories, isFeatured} = payLoad;
+                    const numberOfItems = items.length.toString(); 
+                    return {...state, isFetching:false, items, searchString, priceRange, sortBy, numberOfItems, categories, isFeatured};                     
             default:
                     return state; 
         }

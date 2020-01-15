@@ -1,4 +1,14 @@
-export const searchItemsByName = (CollectionsModel, searchString) => {
+export const searchItemsByName = (searchObj) => {
+    const {CollectionsModel, searchString,categories,isFeatured} = searchObj;
+    let {priceMin, priceMax} = searchObj; 
+    if (!priceMin)
+        {
+            priceMin = 0;
+        }
+    if (!priceMax || priceMax === "0")
+        {
+            priceMax = Number.MAX_VALUE;
+        }    
     return new Promise (async (resolve, reject) => {
         try{
         const collections = await CollectionsModel.find({}); 
@@ -9,12 +19,31 @@ export const searchItemsByName = (CollectionsModel, searchString) => {
             const itemsStartWithFromCollections = []; 
            collection.items.forEach(item => {
                 item = {...item._doc , type:collection.title};
-               if (item.name.match(new RegExp(`^${searchString}`, 'i')))
+                let flag = true; 
+                if(item.price < priceMin || item.price > priceMax)
+                    {
+                        flag = false;
+                    }
+                
+                if(isFeatured === "true" && !item.isFeatured)
+                    {
+                      
+                        flag = false; 
+                    }
+                console.log(categories);
+                 if(categories)
+                    {
+                        if(categories.indexOf(item.type.toLowerCase()) === -1)
+                            {
+                               
+                                flag = false;
+                            }
+                    }           
+               if (item.name.match(new RegExp(`^${searchString}`, 'i')) && flag)
                 {
-
                     itemsStartWithFromCollections.push(item)
                 }
-                else if  (item.name.match(new RegExp(searchString, 'i')) !== null)
+                else if  ( (item.name.match(new RegExp(searchString, 'i')) !== null) && flag)
                     {
                         itemsFromCollections.push(item); 
                     }
