@@ -17,9 +17,13 @@ import {selectIsSigningIn, selectIsCheckingSession, selectSignInError, selectSig
 import Layout from "./components/Layout.jsx"; 
 import {addCollectionandDocuments} from "./firebase/firebase.util.js";
 import {fetchFeaturedItemsAsync, fetchAutocompleteAsync} from "./redux/shop/shop.actions.js";
-import {toMongoDB} from "./util.js"
-import BrowsePage from "./pages/Browse.jsx"
+import {toMongoDB} from "./util.js";
+import BrowsePage from "./pages/Browse.jsx";
+import {selectIsFetching} from "./redux/browse/browse.selector.js";
 
+
+
+const CustomLoadingSpinner = LoadingSpinner(BrowsePage);
 
 
 
@@ -35,6 +39,7 @@ padding: 20px 20px;
 
 const App = () => {
   const isCheckingSession = useSelector(selectIsCheckingSession);
+  const isFetchingItems = useSelector(selectIsFetching);
   const currentUser = useSelector(selectCurrentUser);
   const unsubscriber = useSelector(selectUnsubscriber);
   const isSigningIn = useSelector(selectIsSigningIn);
@@ -82,7 +87,7 @@ dispatch(fetchFeaturedItemsAsync());
           <Route path='/test' exact component={LoadingSpinner} />
           <Route path='/' exact component={Homepage} />
           <Route path="/shop/:match?"  component={Shoppage} />
-          <Route path="/browse" component={BrowsePage} />
+          <Route path="/browse" render={props => <BrowsePage isLoading={isFetchingItems}/>} />
           <Route path="/signin" exact render = {
             () => (
               currentUser ? <Redirect to='/'/> : <SignInAndSignUpPage/>)

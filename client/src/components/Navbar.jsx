@@ -44,7 +44,7 @@ const CustomNavbar = (props) => {
                 <SearchBar className="d-none w-50 d-lg-inline-flex justify-content-end" style={{flex:1}}/>
                         <Nav className="ml-auto text-uppercase w-100 justify-content-end text-center" style={{flex:1}}>       
                                 <BLink as={NavLink} to='/' activeClassName="active" exact>Homepage</BLink>
-                                <BLink as={NavLink} to="/shop" exact>Shop</BLink>
+                                <BLink as={NavLink} to="/Browse" exact>Browse</BLink>
                                 <BLink as={NavLink} to="/contactus" exact>Contact us</BLink>
                                 {currentUser?
                                     <BLink  onClick = {handleSignOut} to={"/"}>Sign out</BLink> :

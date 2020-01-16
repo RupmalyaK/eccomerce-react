@@ -64,6 +64,3 @@ return(
 export default CartIcon; 
 
 
-/**<Icon onClick = {handleClick}/>
-    <ItemCount>{itemsTotalQuantity}</ItemCount>
-    {!isDropdownHidden ? <CartDropdown/> : <></>} */

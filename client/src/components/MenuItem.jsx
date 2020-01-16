@@ -64,7 +64,7 @@ overflow:hidden;
   }
 `;
 
-/**height: ${(props) => (props.size === "large" ? "400px" : "240px")} ; */
+
 
 const Title = styled.h1`
 font-weight: bold;
@@ -106,6 +106,3 @@ const MenuItem = (props) => {
 
 export default MenuItem; 
 
-/**
- *  
- */

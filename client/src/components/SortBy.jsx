@@ -47,17 +47,17 @@ const SortBy =  () => {
         <Container>
             <span>Sort By </span>
             <ButtonToolbar className="d-inline sort-by">
-                <ToggleButtonGroup type="radio" name="sortBy" defaultValue={sortBy || "relevance"} onChange={handlesortByChange}>
-                <ToggleButton value="relevance">Relevance</ToggleButton>    
-                <ToggleButton value="price">Price</ToggleButton>
-                <ToggleButton value="name">Name</ToggleButton>
+                <ToggleButtonGroup type="radio" name="sortBy" defaultValue={sortBy || "relevance"} onChange={handlesortByChange} >
+                <ToggleButton value="relevance"  variant="dark">Relevance</ToggleButton>    
+                <ToggleButton value="price" variant="dark">Price</ToggleButton>
+                <ToggleButton value="name" variant="dark">Name</ToggleButton>
                 </ToggleButtonGroup>
             </ButtonToolbar>
 
             <ButtonToolbar className="d-inline is-asc">
                 <ToggleButtonGroup type="radio" name="isAsc" defaultValue={isAsc || "true"} onChange={handleIsAscChange}>
-                <ToggleButton value="true">Asc</ToggleButton>    
-                <ToggleButton value="false">Dsc</ToggleButton>
+                <ToggleButton value="true" variant="dark">Asc</ToggleButton>    
+                <ToggleButton value="false" variant="dark">Dsc</ToggleButton>
                 </ToggleButtonGroup>
             </ButtonToolbar>
             </Container>

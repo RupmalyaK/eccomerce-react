@@ -207,12 +207,6 @@ const AdvanceSearch = props => {
                     type="lesserThanPrice" placeholder="0" />
                 </Form.Group>
             </Row> 
-
-            {/*<Form.Group as={Row}>
-                <Col sm={{ span: 6, offset: 2 }}>
-                <Button className="search-button" type="submit">Search</Button>
-                </Col>
-               </Form.Group>*/}
                <Button variant="dark" className="search-button" type="submit" >Search</Button>
          </Form>
             
@@ -221,6 +215,3 @@ const AdvanceSearch = props => {
 }
 
 export default AdvanceSearch;
-/** <div className="category">
-                <p>Category</p>
-            </div> */

@@ -48,7 +48,4 @@ const MenuItems = (props) => {
 }
 
 
-/**
- * {displayMenuItems()}
- */
 export default MenuItems; 

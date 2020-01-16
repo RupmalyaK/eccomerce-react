@@ -2,6 +2,9 @@ import React, {useEffect} from "react";
 import styled from "styled-components";
 import {Row,Col} from "react-bootstrap";
 import Button from "./CustomButton.jsx";
+import {useHistory} from "react-router-dom";
+import {useDispatch} from "react-redux"; 
+import {addItemToCart} from "../redux/cart/cart.action.js"; 
 
 const Container = styled.div`
 border-bottom:0.2px solid black;
@@ -54,18 +57,32 @@ padding:0px 10px;
 
 
 const BrowseItem = props => {
- 
-    const {name, price, isFeatured, primaryImageUrl, type, _id} = props.item;  
+    const {name,price, isFeatured, primaryImageUrl, type, _id} = props.item;  
+    const dispatch = useDispatch();
+    const history = useHistory(); 
+
+    const handleAddToCart = e => {
+        dispatch(addItemToCart(props.item));
+    }
+
+    const handleGoToCategoryPage = e => {
+        history.push("/shop/" + type.toLowerCase());
+    }
+
+    const handleGoToSellerPage = e => {
+        history.push("/seller/RupmalyaKumar"  )
+    }
+   
     return (
             <Col as={Container} key={_id} lg={12}>
                <img className="img-thumbnail" src={primaryImageUrl} alt={name}/>
                 <div className="content"> 
                     <h5 className="name">{name}</h5>
-                         <p style={{display:"inline"}}>Sold by {"Rupmalya Kumar"}</p>
+                         <p style={{display:"inline", cursor:"pointer"}} onClick={handleGoToSellerPage}>Sold by {"Rupmalya Kumar"}</p>
                          {isFeatured ? <i className= "featured">FEATURED</i> : <></>}
-                        <i style={{display:"block"}}>in {type}</i>
+                        <i style={{display:"block", cursor:"pointer"}} onClick={handleGoToCategoryPage}>in {type}</i>
                          <div className="price"><h4>${price}</h4></div>
-                      <AddToCartButton>Add to Cart</AddToCartButton>  
+                      <AddToCartButton onClick= {handleAddToCart}>Add to Cart</AddToCartButton>  
                 </div>
             </Col>
             );

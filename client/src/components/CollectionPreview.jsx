@@ -91,15 +91,6 @@ return(
 }
 
 
-
-/**  <Title>
-        {section.title}
-    </Title>
-        <Row className="preview-row">
-            {displayCollectionItem()}
-        <h1 className="shadow-effect"></h1>
-        </Row>
-     */
 export default CollectionPreview; 
 
 

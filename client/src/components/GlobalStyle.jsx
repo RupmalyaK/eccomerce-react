@@ -22,13 +22,5 @@ body {
   
 `;
 
-/**
- * 
-    @media screen and (max-width:800px)
-    {
-        padding:0px;
-        font-size:0.5rem;
-    }
- */
 
 export default GlobalStyle;

@@ -141,15 +141,5 @@ return(
 );
 }
 
-/** <Image imageUrl={item.imageUrl}/>
-    <Footer>
-        <Name>
-            {item.name}
-        </Name>
-        <Price>
-            {item.price}
-        </Price>
-    </Footer>
-    <AddToCartButton isInverted onClick = {handleClick}>Add to Cart</AddToCartButton> */
 
 export default CollectionItem; 
