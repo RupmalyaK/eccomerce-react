@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react"; 
 import styled from "styled-components"; 
 import {Row,Col,Form,Button} from "react-bootstrap";
-import {useDispatch} from "react-redux"; 
-import {fetchItemsAsync} from "../redux/browse/browse.actions.js"
+import {useDispatch, useSelector} from "react-redux"; 
+import {fetchItemsAsync} from "../redux/browse/browse.actions.js";
+import {selectCategories, selectIsFeatured, selectPriceRange} from "../redux/browse/browse.selector.js";
 
 const Container = styled.div`
 height:450px;
 width:29%;
 position:relative; 
+font-size:1.4rem;
 display:block;
 border:0.1px solid black;
 .heading{
@@ -15,11 +17,25 @@ border:0.1px solid black;
     margin-top:30px;
     }
 .form{
-    margin-left:30px;
+    position:relative;
+    padding:10px 20px;
+    height:100%;
+    width:100%;    
 } 
 
 .search-button{
-    padding:10px 20px;
+    padding:10px 60px;
+    bottom:50px;
+    position:relative;
+    margin:0 auto;
+    border-radius:0px;
+    font-size:1rem;
+    display:block;
+    top:10px;
+}
+
+.row {
+    margin:0;
 }
 `;
 
@@ -28,9 +44,12 @@ const AdvanceSearch = props => {
     const [categories , setCategories] = useState([]); 
     const [priceRange, setPriceRange] = useState([]); 
     const [isFeatured, setIsFeatured] = useState(false); 
-    useEffect(() => {
-        console.log(categories)
-    }, [categories])
+
+    const storeIsFeatured = useSelector(selectIsFeatured);
+    const storePriceRange = useSelector(selectPriceRange); 
+    const storeCategories = useSelector(selectCategories); 
+
+   
     const dispatch = useDispatch();
 
 
@@ -107,42 +126,49 @@ const AdvanceSearch = props => {
         setIsFeatured(e.target.checked); 
     }
 
+    const isStoreCategoryPresent = category => !(storeCategories.indexOf(category) === -1);
+
     return (
     <Container>
         <h3 className="heading">Advance Search</h3>
-        <div className="content">
+       
         <Form className="form" onSubmit={handleSubmit}>
             <fieldset>
                 <Form.Group as={Row} onChange={handleCategoryChange} >
                 <Form.Label as="legend">
                     Categories
                 </Form.Label>
-                <Col sm={10} >
+                <Col sm={12} >
                     <Form.Check
+                    defaultChecked = {isStoreCategoryPresent("hats")}
                     type="checkbox"
                     label="Hats"
                     name="formHorizontalcheckboxs"
                     id="hats-check"
                     />
                     <Form.Check
+                    defaultChecked = {isStoreCategoryPresent("jackets")}
                     type="checkbox"
                     label="Jackets"
                     name="formHorizontalcheckboxs"
                     id="jackets-check"
                     />
                     <Form.Check
+                    defaultChecked = {isStoreCategoryPresent("womens")}
                     type="checkbox"
                     label="Womens"
                     name="formHorizontalcheckboxs"
                     id="womens-check"
                     />
                      <Form.Check
+                    defaultChecked = {isStoreCategoryPresent("mens")}
                     type="checkbox"
                     label="Mens"
                     name="formHorizontalcheckboxs"
                     id="mens-check"
                     />
                      <Form.Check
+                    defaultChecked = {isStoreCategoryPresent("sneakers")}
                     type="checkbox"
                     label="Shoes"
                     name="formHorizontalcheckboxs"
@@ -158,6 +184,7 @@ const AdvanceSearch = props => {
                 </Form.Label>
                 <Col sm="6">
                 <Form.Check 
+                        defaultChecked = {storeIsFeatured}
                         onChange = {handleIsFeaturedChange}
                         type="checkbox"
                         name="formHorizontalcheckboxs"
@@ -166,25 +193,29 @@ const AdvanceSearch = props => {
                 </Col>
                 
                 </Form.Group>
-            <Row onChange={handlePriceRangeChange}>
-            <p as={Col} sm="3">Price Range</p>    
-            <Form.Group as={Col} sm= "3" controlId="priceMin">
-                <Form.Control type="higherThanPrice" placeholder="0" />
-            </Form.Group>
-            -
-            <Form.Group as={Col} sm="3" controlId="priceMax">
-                <Form.Control type="lesserThanPrice" placeholder="0" />
-            </Form.Group>
-            </Row>
+            <Row onChange={handlePriceRangeChange}> 
+                <p as={Col} sm="3">Price Range</p>    
+                <Form.Group as={Col} sm= "3" controlId="priceMin">
+                    <Form.Control 
+                    defaultValue = {storePriceRange[0]}
+                    type="higherThanPrice" placeholder="0" />
+                </Form.Group>
+                -
+                <Form.Group as={Col} sm="3" controlId="priceMax">
+                    <Form.Control 
+                    defaultValue = {storePriceRange[1]}
+                    type="lesserThanPrice" placeholder="0" />
+                </Form.Group>
+            </Row> 
 
-            <Form.Group as={Row}>
+            {/*<Form.Group as={Row}>
                 <Col sm={{ span: 6, offset: 2 }}>
                 <Button className="search-button" type="submit">Search</Button>
                 </Col>
-            </Form.Group>
+               </Form.Group>*/}
+               <Button variant="dark" className="search-button" type="submit" >Search</Button>
          </Form>
             
-        </div>
         
     </Container>);
 }
