@@ -4,10 +4,14 @@ import {useSelector} from "react-redux";
 import CollectionItem from "../components/CollectionItem.jsx"; 
 import {selectCollection} from "../redux/shop/shop.selector.js";
 import {useParams} from "react-router-dom";
+import {Row, Col , Container as BContainer} from "react-bootstrap"; 
 
+//margin:100px 20px 0px 20px;
 const Container = styled.div`
-display: flex;
-flex-direction: column;
+margin-top:100px;
+background:orange;
+padding:5px 10px;
+
 `;
 
 const Title = styled.span`
@@ -21,9 +25,7 @@ grid-template-columns: 1fr 1fr 1fr 1fr;
 grid-gap: 10px;
 `;
 
-const Item = styled.div`
-margin-bottom: 30px;
-`;
+
 
 const Collection = (props) => {
 const {categoryid} = useParams();
@@ -38,25 +40,37 @@ if (collection)
 
 const displayCollection = () => {
     const itemsArr = items.map (item => 
-        <Item  key= {item._id}><CollectionItem item={item}/> </Item>);
+        <Col style={{marginBottom:"10px"}} xl="2" lg="4"  sm="6" xs="12"  key= {item._id}>
+            <CollectionItem  item={item}/> 
+        </Col>);
      
      return itemsArr; 
 }
 
 return(
-<Container>
-        <Title>
+<Container as={Container} fluid={true}>
+        <Title style={{display:"block", textAlign:"center"}}> 
             {categoryid.toUpperCase()}
         </Title>
-        <Items>
-            
+            <Row  style={{background:"yellow"}}>
             {displayCollection()}
+            </Row>
            
-        </Items>
 </Container>
 );
 }
 
+/**<BContainer style={{marginTop:"100px"}}>
+        <Title style={{display:"block", textAlign:"center"}}> 
+            {categoryid.toUpperCase()}
+        </Title>
+        <Items>
+            <Row>
+            {displayCollection()}
+            </Row>
+           
+        </Items>
+</BContainer> */
 
 
 export default Collection; 

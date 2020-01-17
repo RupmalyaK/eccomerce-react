@@ -40,7 +40,7 @@ const Slider = (props) => {
         const itemArr = slideArr.map((slide, index) => {
           return (
             <Carousel.Item key={index}>
-              <PHDiv color="coral" url={process.env.PUBLIC_URL + "/images/" + slide.imageName}>
+              <PHDiv color="white" url={process.env.PUBLIC_URL + "/images/" + slide.imageName}>
               </PHDiv>
                 
                 <Carousel.Caption as={Jumbotron} style={{background:"#282828aa"}}>

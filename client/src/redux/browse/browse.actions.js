@@ -47,8 +47,11 @@ export const fetchItemsAsync = (search) => {
             {
                 isFeatured = currentBrowseState.isFeatued; 
             }       
-   
-        dispatch(fetchItemsStart()); 
+         if(searchString === "")
+            {
+                dispatch(fetchItemsSuccess({items:[],searchString,priceRange, sortBy, isAsc, categories, isFeatured})); 
+                return; 
+            }   
         try {
             const {data:items} = await axios({
                 url:"/api/collections/itemName",

@@ -11,8 +11,8 @@ app.route(routeString)
     const dataObj = await CollectionsModel.find({});
      const newDataObj = {};
      dataObj.forEach(collection => {
-         const {title , routeName , items , _id} = collection;
-         newDataObj[title.toLowerCase()] = {_id, title, routeName , items}; 
+         const {_id, title , routeName , numberOfIems, items} = collection;
+         newDataObj[title.toLowerCase()] = {_id, title , routeName , numberOfIems, items}; 
      });
     res.status(200).send(newDataObj );
     }

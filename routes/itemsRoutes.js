@@ -1,7 +1,6 @@
 import CollectionsModel from "../model/CollectionsModel.js";
 import { Mongoose, Collection } from "mongoose";
 import {checkIfAuthenticated} from "../controller/authController.js";
-import ItemesNameModel from "../model/ItemesNameModel.js";
 const collectionsRoutesCreator = (app) => {
 const routeString = "/api/collections/collection/";    
 app.route(routeString + "items")
@@ -16,8 +15,8 @@ app.route(routeString + "items")
     const newItem = {collectionTitle, name , primaryImageUrl , isFeatured, price};
     try {
         const collection = await CollectionsModel.findOne({title:collectionTitle});
-        await ItemesNameModel.create({name,type:collectionTitle});
         collection.items.push(newItem); 
+        collection.items.numberOfItems = collection.items.length; 
         const updatedCollection = await collection.save();
         res.status(200).json(updatedCollection);
         }

@@ -15,13 +15,7 @@ const HomepageContainer = styled.div`
 overflow:hidden;
 `;
 
-const IntroductionSection = styled.div`
-    height:95vh;
-    width:100%;
-    background-image:url(${(props) => props.imageUrl});
-    background-size: cover;
-    background-position: center;
-`;
+
 
 
 

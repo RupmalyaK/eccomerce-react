@@ -1,5 +1,4 @@
 import CollectionsModel from "../model/CollectionsModel.js";
-import ItemsNameModel from "../model/ItemesNameModel.js"; 
 import {checkIfAuthenticated} from "../controller/authController.js";
 const collectionsRoutesCreator = (app) => {
 const routeString = "/api/collections/";    

@@ -76,6 +76,7 @@ const CustomCard = styled(Card)`
             opacity:0.85;
         }  
 }
+margin:0 auto;
 -webkit-user-select: none;
 -khtml-user-select: none;
 -moz-user-select: none;
