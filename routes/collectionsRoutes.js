@@ -93,4 +93,3 @@ app.route(routeString + "/itemName")
 
 
 export default collectionsRoutesCreator;
-//5e15c523c4293b168ce1be54 5e15c523c4293b168ce1be54"
