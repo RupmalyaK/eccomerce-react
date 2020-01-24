@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 
 const reviewSchema = new mongoose.Schema({
-    user:[mongoose.ObjectId],
+    user:String,
     text: {
             type:String,
             default:"",
@@ -25,7 +25,7 @@ const itemsSchema = new mongoose.Schema({
                type:Number,
                default:0, 
                 },
-     averageRating:{
+    averageRating:{
                      type:Number,
                      default:0,   
                    }                            

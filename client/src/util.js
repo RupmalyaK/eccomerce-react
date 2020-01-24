@@ -17,7 +17,7 @@ export const toMongoDB = async () => {
     
         collection.items.forEach(async (item) => {
           const {name , imageUrl:primaryImageUrl , price} = item;
-          const isFeatured = Math.random() >= 0.7; 
+          const isFeatured = Math.random() >= 0.4; 
           res = await axios({
             url:"/api/collections/collection/items/",
             method:"post",

@@ -46,6 +46,6 @@ app.route("/api/itemsname")
     res.status(200).json(itemsName);
 });
 }
-//CollectionsModel.deleteMany({}, () => {}); ItemsNameModel.deleteMany({}, () => {});
+//CollectionsModel.deleteMany({}, () => {}); 
 
 export default collectionsRoutesCreator;

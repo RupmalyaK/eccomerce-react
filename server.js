@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import collectionsRoutes from "./routes/collectionsRoutes.js";
 import collectionRoutes from "./routes/collectionRoutes.js";
 import itemsRoutes from "./routes/itemsRoutes.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
 import admin from "firebase-admin";
 import secrets from "./secrets.js"
 
@@ -63,6 +64,7 @@ app.listen(port , err => {
 collectionsRoutes(app); 
 collectionRoutes(app);
 itemsRoutes(app);
+reviewRoutes(app);
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 

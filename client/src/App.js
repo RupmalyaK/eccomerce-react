@@ -20,6 +20,7 @@ import {fetchFeaturedItemsAsync, fetchAutocompleteAsync} from "./redux/shop/shop
 import {toMongoDB} from "./util.js";
 import BrowsePage from "./pages/Browse.jsx";
 import {selectIsFetching} from "./redux/browse/browse.selector.js";
+import ReviewsAndRatings from "./components/ReviewsAndRatings";
 
 
 
@@ -83,6 +84,7 @@ dispatch(fetchFeaturedItemsAsync());
         <GlobalStyle />
         <LayoutWithLoadingSpinner isLoading={isSigningIn || isCheckingSession || isSigningUp }>
         <Header/>
+        <Route path="/reviews"  component={ReviewsAndRatings} />
         <Switch>
           <Route path='/test' exact component={LoadingSpinner} />
           <Route path='/' exact component={Homepage} />
@@ -93,7 +95,6 @@ dispatch(fetchFeaturedItemsAsync());
               currentUser ? <Redirect to='/'/> : <SignInAndSignUpPage/>)
               }  /> 
            <Route path="/checkout" exact component={CheckoutPage} />   
-          
         </Switch>
        </LayoutWithLoadingSpinner>
       </Container>
