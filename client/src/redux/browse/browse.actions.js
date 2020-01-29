@@ -74,3 +74,7 @@ export const fetchItemsAsync = (search) => {
             }   
     }
 }
+
+export const setCurrentItem = (currentItem) => {
+    return {type:browseActionTypes.SET_CURRENT_ITEM, payLoad:currentItem};
+}

@@ -159,7 +159,7 @@ export const signUpAsync = (userInfo) => {
            
             try{
                 const {user} = await auth.createUserWithEmailAndPassword(email , password);
-
+                console.log(user);
                 await createUserProfileDoc(user , {displayName});
                 dispatch(signUpSuccess());
             }
@@ -168,6 +168,7 @@ export const signUpAsync = (userInfo) => {
             }
     }
 }
+
 
 export const clearSignInError = () => {
     return {type:userActionTypes.SIGN_IN_ERROR_CLEAR};
@@ -180,6 +181,8 @@ export const clearSignUpError = () => {
 export const clearSignOutError = () => {
     return {type:userActionTypes.SIGN_OUT_ERROR_CLEAR};
 }
+
+
 
 
 

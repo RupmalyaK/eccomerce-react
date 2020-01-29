@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 
 const reviewSchema = new mongoose.Schema({
-    user:String,
+    user:{
+      uid:String,
+      displayName:String,
+      email:String
+    },
     text: {
             type:String,
             default:"",

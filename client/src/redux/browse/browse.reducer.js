@@ -11,6 +11,7 @@ const INITIAL_STATE = {
     numberOfItems:"",
     isFeatured:false, 
     categories:[],
+    currentItem:null,
 };
 
 const browseReducer = (state = INITIAL_STATE, action) => {
@@ -25,7 +26,9 @@ const browseReducer = (state = INITIAL_STATE, action) => {
             case browseActionTypes.FETCH_ITEMS_SUCCESS:
                     const {items, searchString, price , priceRange, sortBy, categories, isFeatured} = payLoad;
                     const numberOfItems = items.length.toString(); 
-                    return {...state, isFetching:false, items, searchString, priceRange, sortBy, numberOfItems, categories, isFeatured};                     
+                    return {...state, isFetching:false, items, searchString, priceRange, sortBy, numberOfItems, categories, isFeatured}; 
+            case browseActionTypes.SET_CURRENT_ITEM:
+                     return {...state, currentItem:payLoad}                               
             default:
                     return state; 
         }

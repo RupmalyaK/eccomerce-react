@@ -20,6 +20,8 @@ export const selectNumberOfItems = createSelector(selectBrowse, state => state.n
 
 export const selectIsFeatured = createSelector(selectBrowse, state => state.isFeatured);
 
-export const selectCategories = createSelector(selectBrowse, state => state.categories); 
+export const selectCategories = createSelector(selectBrowse, state => state.categories);
+
+export const selectCurrentItem = createSelector(selectBrowse, state => state.currentItem); 
 
 

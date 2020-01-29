@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import GlobalStyle from "./components/GlobalStyle.jsx";
-import {auth, createUserProfileDoc} from "./firebase/firebase.util.js";
+import {getFirebaseUserById} from "./firebase/firebase.util.js";
 import {useSelector , useDispatch} from "react-redux"; 
 import {Route , Switch , Redirect} from "react-router-dom"; 
 import Header from "./components/Header.jsx";
@@ -19,6 +19,7 @@ import {addCollectionandDocuments} from "./firebase/firebase.util.js";
 import {fetchFeaturedItemsAsync, fetchAutocompleteAsync} from "./redux/shop/shop.actions.js";
 import {toMongoDB} from "./util.js";
 import BrowsePage from "./pages/Browse.jsx";
+import Itempage from "./pages/Item.jsx";
 import {selectIsFetching} from "./redux/browse/browse.selector.js";
 import ReviewsAndRatings from "./components/ReviewsAndRatings";
 
@@ -51,12 +52,9 @@ const App = () => {
   const dispatch = useDispatch();
   
   
-dispatch(fetchFeaturedItemsAsync());
-
-
-
   useEffect(() => {
     dispatch(checkSessionAsync());
+    
     //toMongoDB();
     const handleUnmount = () => console.log("App unmounted"); 
     return handleUnmount; 
@@ -89,7 +87,9 @@ dispatch(fetchFeaturedItemsAsync());
           <Route path='/test' exact component={LoadingSpinner} />
           <Route path='/' exact component={Homepage} />
           <Route path="/shop/:match?"  component={Shoppage} />
-          <Route path="/browse" render={props => <BrowsePage isLoading={isFetchingItems}/>} />
+          <Route exact path="/browse" render={props => <BrowsePage isLoading={isFetchingItems}/>} />
+          <Route path="/browse/:item?"  component={Itempage} />
+
           <Route path="/signin" exact render = {
             () => (
               currentUser ? <Redirect to='/'/> : <SignInAndSignUpPage/>)

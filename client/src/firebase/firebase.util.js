@@ -89,5 +89,16 @@ export const convertCollectionsSnapshotToMap = (collectionsSnapshot) =>
       return collectionsObj;
   }
 
+export const getFirebaseUserById = async (id) => {
+ try{
+    const user = await firestore.collection("users").doc(id).get();
+    return user.data();
+  }
+  catch(error)
+    {
+      return error;
+    }
+}
+
 
 export default firebase; 

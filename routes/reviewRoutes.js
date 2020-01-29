@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 import {calculateAverageRating} from "../controller/reviewController.js"
 import {checkIfAuthenticated} from "../controller/authController.js";
 
-const reveiwRoutesCreator = (app) => {
+const reveiwRoutesCreator = (app, admin) => {
+    const db = admin.firestore();
     const routeString = "/api/collections/collection/item";
     app.route(routeString + "/review")
     .post(async (req, res, next) => {
@@ -16,7 +17,10 @@ const reveiwRoutesCreator = (app) => {
         try{
             const collection = await CollectionsModel.findOne({title:itemType});
             const item = collection.items.id(itemObjectId);
-            const review = {user:userObjectId,rating,text};
+            const userRef = await db.collection("users").doc(userObjectId)
+            const userDoc = await userRef.get();
+            const {displayName, email} = userDoc.data();
+            const review = {user:{uid:userObjectId, displayName, email},rating,text}; 
             let flag = false;
             item.reviews.forEach(review => {
                 if(review.user === userObjectId)
@@ -32,8 +36,9 @@ const reveiwRoutesCreator = (app) => {
         }
         catch(error)
             {
-                res.status(200);
-                next(error);
+                res.status(400);
+                console.log(error)
+                next({error});
             }
        
     });
