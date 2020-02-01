@@ -159,7 +159,6 @@ export const signUpAsync = (userInfo) => {
            
             try{
                 const {user} = await auth.createUserWithEmailAndPassword(email , password);
-                console.log(user);
                 await createUserProfileDoc(user , {displayName});
                 dispatch(signUpSuccess());
             }

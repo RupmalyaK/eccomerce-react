@@ -32,6 +32,7 @@ const Shop = (props) => {
     }, []);
     
 
+
 return(
        <Container>
             <Route exact path={"/shop"} render={(props) => {

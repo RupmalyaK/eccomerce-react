@@ -46,7 +46,6 @@ const displayCollection = () => {
      
      return itemsArr; 
 }
-
 return(
 <Container as={Container} fluid={true}>
         <Title style={{display:"block", textAlign:"center"}}> 
@@ -59,19 +58,6 @@ return(
 </Container>
 );
 }
-
-/**<BContainer style={{marginTop:"100px"}}>
-        <Title style={{display:"block", textAlign:"center"}}> 
-            {categoryid.toUpperCase()}
-        </Title>
-        <Items>
-            <Row>
-            {displayCollection()}
-            </Row>
-           
-        </Items>
-</BContainer> */
-
 
 export default Collection; 
 

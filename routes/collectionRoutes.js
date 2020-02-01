@@ -1,3 +1,4 @@
+import mongoose from "mongoose"; 
 import CollectionsModel from "../model/CollectionsModel.js";
 import {checkIfAuthenticated} from "../controller/authController.js";
 const collectionsRoutesCreator = (app) => {
@@ -44,6 +45,28 @@ app.route("/api/itemsname")
 .get( async (req, res) => {
     const itemsName = await ItemsNameModel.find({});
     res.status(200).json(itemsName);
+});
+
+app.route("/api/item/")
+.get(async(req, res, next) => { 
+    const {_id, type} = req.query; 
+    
+    try{
+        const collection = await CollectionsModel.findOne({title:type});
+        const item = collection.items.filter(item => {
+            if(item._id.toString() === _id)
+                {
+                    return true;
+                }
+        });
+       res.status(200).json(item[0] ? item[0] : null);
+       }
+     catch(error)
+        {
+            console.log(error);
+            res.status(400);
+            next(error);
+        }  
 });
 }
 //CollectionsModel.deleteMany({}, () => {}); 

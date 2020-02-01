@@ -17,6 +17,7 @@ export const fetchItemsSuccess = (search) => {
 export const fetchItemsAsync = (search) => {
     let {searchString,priceRange,type, sortBy, isAsc,categories, isFeatured} = search; 
     return async (dispatch, getState) => {
+        dispatch(fetchItemsStart());
          const currentBrowseState = getState().browse; 
          if(typeof searchString === "undefined")
             {
@@ -75,6 +76,36 @@ export const fetchItemsAsync = (search) => {
     }
 }
 
-export const setCurrentItem = (currentItem) => {
-    return {type:browseActionTypes.SET_CURRENT_ITEM, payLoad:currentItem};
+
+export const fetchCurrentItemStart = () => {
+    return {type:browseActionTypes.FETCH_CURRENT_ITEM_START};
+}
+
+export const fetchCurrentItemSuccess = (currentItem) => {
+    return {type:browseActionTypes.FETCH_CURRENT_ITEM_SUCCESS, payLoad:currentItem};
+}
+
+export const fetchCurrentItemFailure = error => {
+    return {type:browseActionTypes.FETCH_CURRENT_ITEM_FAILURE, payLoad:error};
+}
+
+export const fetchCurrentItemAsync = (_id, type) => {
+    return (async (dispatch) => {
+        dispatch(fetchCurrentItemStart());
+        try{
+            const {data:currentItem} = await axios({
+                url:"/api/item/",
+                params:{
+                    _id,
+                    type
+                }
+            });
+            dispatch(fetchCurrentItemSuccess(currentItem));
+           }
+        catch(error)
+            {
+                dispatch(fetchCurrentItemFailure(error));
+            }   
+        
+    });
 }

@@ -53,7 +53,7 @@ app.listen(port , err => {
     await mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true, dbName: "snatchkart-db"});
     const db = mongoose.connection; 
     db.on("error", err => {
-        console.log(error);
+        throw error; 
     });
     }
     catch(error)

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import GlobalStyle from "./components/GlobalStyle.jsx";
 import {getFirebaseUserById} from "./firebase/firebase.util.js";
 import {useSelector , useDispatch} from "react-redux"; 
-import {Route , Switch , Redirect} from "react-router-dom"; 
+import {Route , Switch , Redirect, useParams} from "react-router-dom"; 
 import Header from "./components/Header.jsx";
 import Homepage from "./pages/Home.jsx"; 
 import Shoppage from "./pages/Shop.jsx";
@@ -25,11 +25,9 @@ import ReviewsAndRatings from "./components/ReviewsAndRatings";
 
 
 
-const CustomLoadingSpinner = LoadingSpinner(BrowsePage);
-
-
 
 const LayoutWithLoadingSpinner = LoadingSpinner(Layout);
+const ItemPageWithLoadingSpinner = LoadingSpinner(Itempage);
 
 
 const Container = styled.div`
@@ -80,15 +78,15 @@ const App = () => {
     return (
       <Container>
         <GlobalStyle />
-        <LayoutWithLoadingSpinner isLoading={isSigningIn || isCheckingSession || isSigningUp }>
+        <LayoutWithLoadingSpinner isLoading={isSigningIn || isCheckingSession || isSigningUp}>
         <Header/>
         <Route path="/reviews"  component={ReviewsAndRatings} />
         <Switch>
           <Route path='/test' exact component={LoadingSpinner} />
           <Route path='/' exact component={Homepage} />
           <Route path="/shop/:match?"  component={Shoppage} />
-          <Route exact path="/browse" render={props => <BrowsePage isLoading={isFetchingItems}/>} />
-          <Route path="/browse/:item?"  component={Itempage} />
+          <Route exact path="/browse" render={props => <BrowsePage />} />
+          <Route path="/browse/item/:itemid/:type"  component={Itempage}/>
 
           <Route path="/signin" exact render = {
             () => (

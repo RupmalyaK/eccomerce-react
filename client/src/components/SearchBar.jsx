@@ -53,17 +53,21 @@ const SearchBar = (props) => {
               }
     }
 
+    const handleSuggestionClick =  item => {
+        setIsOpen(false);
+        history.push(`/browse/item/${item._id}/${item.type}`);
+    }
 
     const displaySuggestions = () => {
         if(items.length === 0)
             {
                 return (<></>);
             }
-        const suggestions = items.map(itemName => {
+        const suggestions = items.map(item => {
             return (
-                <Suggestion key={itemName._id}>
-                    <h6 className="d-inline">{itemName.name}</h6>
-                    <em style={{float:"right"}}>{itemName.type}</em>
+                <Suggestion key={item._id} style={{cursor:"pointer"}} onClick={e => handleSuggestionClick(item)}>
+                    <h6 className="d-inline">{item.name}</h6>
+                    <em style={{float:"right"}}>{item.type}</em>
                 </Suggestion>
             );
         });

@@ -24,4 +24,6 @@ export const selectCategories = createSelector(selectBrowse, state => state.cate
 
 export const selectCurrentItem = createSelector(selectBrowse, state => state.currentItem); 
 
+export const selectIsFetchingCurrentItem = createSelector(selectBrowse, state => state.isFetchingCurrentItem);
+
 
