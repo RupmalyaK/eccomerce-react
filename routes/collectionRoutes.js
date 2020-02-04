@@ -53,13 +53,15 @@ app.route("/api/item/")
     
     try{
         const collection = await CollectionsModel.findOne({title:type});
-        const item = collection.items.filter(item => {
+        const itemArr = collection.items.filter(item => {
             if(item._id.toString() === _id)
                 {
                     return true;
                 }
         });
-       res.status(200).json(item[0] ? item[0] : null);
+       const item = itemArr[0].toObject();
+       item.type = type;
+       res.status(200).json(item ? item : {});
        }
      catch(error)
         {

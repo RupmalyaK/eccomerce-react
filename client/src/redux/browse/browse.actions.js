@@ -16,6 +16,7 @@ export const fetchItemsSuccess = (search) => {
 
 export const fetchItemsAsync = (search) => {
     let {searchString,priceRange,type, sortBy, isAsc,categories, isFeatured} = search; 
+    
     return async (dispatch, getState) => {
         dispatch(fetchItemsStart());
          const currentBrowseState = getState().browse; 

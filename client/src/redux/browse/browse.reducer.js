@@ -11,7 +11,7 @@ const INITIAL_STATE = {
     numberOfItems:"",
     isFeatured:false, 
     categories:[],
-    currentItem:null,
+    currentItem:{},
     isFetchingCurrentItem:false,
     fetchCurrentItemError:null,
 };
