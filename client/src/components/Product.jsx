@@ -6,6 +6,7 @@ import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 import CustomButton from "../components/CustomButton";
 import {useSelector} from "react-redux"; 
 import {Row, Col} from "react-bootstrap";
+import ReviewsAndRatings from "../components/ReviewsAndRatings.jsx";
 
 const Container = styled.div`
 margin:20px;
@@ -45,7 +46,8 @@ const AddToCartButton = styled(CustomButton)`
 
 const Product = props => {
     const item = useSelector(selectCurrentItem); 
-    const {primaryImageUrl, /*secondaryImageUrls, */isFeatured, name, dateCreated:dateAdded, averageRating,Reviews,price, type } = item;    
+    const {primaryImageUrl, /*secondaryImageUrls, */isFeatured, name, dateCreated:dateAdded, averageRating,reviews,price, type,offers } = item;  
+  //  const {isFreeShipping,isZeroEmi,isFastDelivery} = offers; 
     const [mainImageUrl, setMainImageUrl]= useState(primaryImageUrl); 
     const secondaryImageUrls = [primaryImageUrl];
     const allImages = [primaryImageUrl , ...secondaryImageUrls, "https://i.picsum.photos/id/1/5616/3744.jpg","https://i.picsum.photos/id/100/2500/1656.jpg","https://i.picsum.photos/id/1005/5760/3840.jpg","https://picsum.photos/id/1015/6000/4000"];
@@ -66,7 +68,7 @@ const Product = props => {
         })
         return allImagesElements; 
     }
-
+    
     return(
         <Container> 
             <Row>
@@ -100,15 +102,22 @@ const Product = props => {
                                  {isFeatured ? ( <div className="featured" style={{float:"right",marginRight:"10px"}}>
                                     <FontAwesomeIcon icon={faCheckCircle}/><span>Featured!</span>   
                                 </div> ): <></>}   
-                               
                             </div>
                         </div>
                         <hr/>
-                            <span style={{fontSize:"30px"}}>Price:{price}$</span>                            
+                            <span style={{fontSize:"30px"}} className="price">Price:{price}$</span>  
+                            <div className="available-offers">
+                                <span style={{display:"block"}}>Available offers:</span>
+                                {/*isFreeShipping? 
+                                <span>No Cost in shipping.</span>
+                                :<></>*/}
+                                
+                                     
+                            </div>                       
                      </div>   
                 </Col>
              </Row>
-             
+             <ReviewsAndRatings reviews={reviews} averageRating={averageRating}/>
         </Container>
     );
 }

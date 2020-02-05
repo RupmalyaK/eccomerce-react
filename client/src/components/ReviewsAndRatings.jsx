@@ -49,24 +49,29 @@ const ReviewsAndRatings = props => {
                             starSpacing={"10px"}
                           />
                         </div>
+                          <div style={{marginLeft:"10px"}}>
                           <span style={{padding:"5px"}}>{user.displayName}</span>
-                          <section style={{background:"coral",width:"100%",height:"100%",marginBottom:"10px"}}>
+                          <section style={{width:"100%",height:"100%",marginBottom:"10px"}}>
                                 {text}
-                          </section>     
+                          </section> 
+                          </div>
+                            
                     </div>
                 );
             });
 
             return ReviewsComponents;
     };
-
+  
     return (
         <Container>
             <div className="averageRating"> 
             <h2 className="average-rating-points">{averageRating}/5</h2>
                  <StarIcon icon={faStar}/>
             </div>
-             {displayAllReviews()}
+             {reviews && reviews.length != 0 ? displayAllReviews():
+             <h3>No reviews</h3>
+             }
         </Container>
     ); 
 }
