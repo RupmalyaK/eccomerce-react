@@ -14,8 +14,6 @@ margin:20px;
     padding-right:0;
     padding-left:0;
 }
-
-
 .left-col{
     display:flex;
     flex-direction:column;
@@ -38,6 +36,10 @@ margin:20px;
     height:700px;
     width:70%;
 }
+
+.max-width{
+    max-width:550px;
+}
 `;
 
 const AddToCartButton = styled(CustomButton)`
@@ -46,8 +48,9 @@ const AddToCartButton = styled(CustomButton)`
 
 const Product = props => {
     const item = useSelector(selectCurrentItem); 
-    const {primaryImageUrl, /*secondaryImageUrls, */isFeatured, name, dateCreated:dateAdded, averageRating,reviews,price, type,offers } = item;  
-  //  const {isFreeShipping,isZeroEmi,isFastDelivery} = offers; 
+    console.log(item);
+    const {primaryImageUrl, /*secondaryImageUrls, */isFeatured, name, dateCreated:dateAdded, averageRating,reviews,price, type,offers,sizes } = item;  
+    
     const [mainImageUrl, setMainImageUrl]= useState(primaryImageUrl); 
     const secondaryImageUrls = [primaryImageUrl];
     const allImages = [primaryImageUrl , ...secondaryImageUrls, "https://i.picsum.photos/id/1/5616/3744.jpg","https://i.picsum.photos/id/100/2500/1656.jpg","https://i.picsum.photos/id/1005/5760/3840.jpg","https://picsum.photos/id/1015/6000/4000"];
@@ -68,7 +71,59 @@ const Product = props => {
         })
         return allImagesElements; 
     }
-    
+    const displayOffers = () => {
+        const {isOneDayDelivery,isZeroEmi,isFreeShipping,isTwoDaysDelivery,isSameDayDelivery} = offers; 
+       return (
+        <div className="available-offers">
+        <span style={{display:"block"}}>Available offers:</span>
+            {
+                isFreeShipping ? <>
+                <li>No cost shipping.</li>
+                </>:<></>
+            }     
+            {
+            isZeroEmi ? <>
+            <li>Zero cost EMI on selected cards.</li>    
+            </>:<></>
+            }
+            {
+              isOneDayDelivery ? <>
+            <li>Items can be delivered to your location in one day</li>           
+              </>:<></>  
+            }
+            {
+              isTwoDaysDelivery ? <>
+            <li>Items can be delivered to youe location in two days</li>           
+              </>:<></>  
+            }
+            {
+              isSameDayDelivery ? <>
+            <li>Items can be delivered to your location in the same day</li>           
+              </>:<></>  
+            }
+        </div> 
+       ); 
+    } 
+    const selectSize = () => {
+        
+        const sizeArr = sizes.map(size => {
+            return(
+                <span style={{display:"flex",borderRadius:"100%",border:"1px solid inherit",boxShadow:"10px #888888",marginLeft:"10px",width:"50px",height:"50px",justifyContent:"center",alignItems:"center"}} className="shadow-lg">
+                    <div style ={{}}>{size}</div>
+                </span>    
+            )
+        })
+        return(<div>
+            <h5>Select size:</h5>
+            <div className="sizes" style={{display:"flex",marginBottom:"20px"}}>
+                {sizeArr}
+            </div>
+        </div>)        
+    }
+    if(Object.keys(item).length === 0)
+        {
+            return(<></>);
+        }
     return(
         <Container> 
             <Row>
@@ -94,29 +149,62 @@ const Product = props => {
                 </Col>
                 <Col>
                      <div className="right-col">
-                            <div className="primary-information" style={{background:"coral", display:"inline-block", width:"30vw"}}>
+                            <div className="primary-information" style={{display:"inline-block", width:"30vw"}}>
                                 <h1 className="name" style={{textAlign:"center"}}>{name}</h1>
                                 <span className="type" style={{float:"right", marginRight:"30px"}}><i>{type}</i></span>
                                 <span className="seller" style={{float:"left",marginLeft:"10px"}}><i>Sold By: {"Rupmalya Kumar"}</i></span>
-                                <div style={{background:"red"}} style={{display:"inline-block", width:"30vw", background:"red"}}>
+                                <div style={{background:"red"}} style={{display:"inline-block", width:"30vw"}}>
                                  {isFeatured ? ( <div className="featured" style={{float:"right",marginRight:"10px"}}>
                                     <FontAwesomeIcon icon={faCheckCircle}/><span>Featured!</span>   
                                 </div> ): <></>}   
                             </div>
                         </div>
                         <hr/>
-                            <span style={{fontSize:"30px"}} className="price">Price:{price}$</span>  
-                            <div className="available-offers">
-                                <span style={{display:"block"}}>Available offers:</span>
-                                {/*isFreeShipping? 
-                                <span>No Cost in shipping.</span>
-                                :<></>*/}
+                            {selectSize()}
+                            <span style={{fontSize:"30px"}} className="price">Price:{price}$</span> 
+                            {displayOffers()}  
+                            <div className="shadow summary" style={{width:"100%", height:"500px",marginTop:"10px",padding:"0px 20px",fontSize:"1.5rem",marginTop:"20px"}}>
+                                <h2>Specifications</h2>
+                                <Row className="padding-0 max-width">
+                                    <Col xs={6}>
+                                    Colors Available:
+                                    </Col>
+                                    Red,Orange,Yellow
+                                    <Col xs={6}>
+                                    </Col>
+                                </Row>
+                                <Row className="padding-0 max-width">
+                                    <Col xs={6}>
+                                    Pattern:
+                                    </Col>
+                                    Solid
+                                    <Col xs={6}>
+                                    </Col>
+                                </Row>
+                                <Row className="padding-0 max-width">
+                                    <Col xs={6}>
+                                    Technology:
+                                    </Col>
+                                    Lightweight
+                                    <Col xs={6}>
+                                    </Col>
+                                </Row>
+                                <Row className="padding-0 max-width">
+                                    <Col xs={6}>
+                                    Available Sizes:
+                                    </Col>
+                                    XS,ML,S,XL,XLL
+                                    <Col xs={6}>
+                                    </Col>
+                                </Row>
                                 
-                                     
-                            </div>                       
+                                <span></span>
+                                 
+                            </div>  
                      </div>   
                 </Col>
              </Row>
+             <hr/>
              <ReviewsAndRatings reviews={reviews} averageRating={averageRating}/>
         </Container>
     );

@@ -14,6 +14,15 @@ const reviewSchema = new mongoose.Schema({
      rating:Number,     
 });
 
+const offerSchema = new mongoose.Schema({
+  isOneDayDelivery:{type:Boolean, default:false},
+  isZeroEmi:{type:Boolean,default:false},
+  isFreeShipping:{type:Boolean,default:false},
+  isSameDayDelivery:{type:Boolean,default:false},
+  isTwoDaysDelivery:{type:Boolean,default:false},
+});
+
+
 const itemsSchema = new mongoose.Schema({
     name:String,
     primaryImageUrl:String,
@@ -21,6 +30,8 @@ const itemsSchema = new mongoose.Schema({
     isFeatured:{type : Boolean, default:false},
     dateCreated:{ type: Date, default: Date.now },
     price:{type:Number, default:0.0},
+    offers:offerSchema,
+    sizes:{type:[String],default:[]},
     reviews:{
             type:[reviewSchema],
             default:[]

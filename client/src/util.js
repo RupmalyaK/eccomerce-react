@@ -18,6 +18,49 @@ export const toMongoDB = async () => {
         collection.items.forEach(async (item) => {
           const {name , imageUrl:primaryImageUrl , price} = item;
           const isFeatured = Math.random() >= 0.4; 
+          const offers = {
+            isOneDayDelivery:Math.random() >= 0.5, 
+            isZeroEmi:Math.random() >= 0.5, 
+            isFreeShipping:Math.random() >= 0.5, 
+            isSameDayDelivery:Math.random() >= 0.5, 
+            isTwoDaysDelivery:Math.random() >= 0.5, 
+          };
+          const sizes = []; 
+          if(title === "Hats")
+            {
+              sizes.push("Kids","Adults");
+            }
+         else if(title === "Sneakers") 
+            {
+               const num = Math.random() * 10;
+               for(let i =5; i <= num+4; i++)
+                {
+                  sizes.push(i);
+                }
+            }
+          else
+            {
+              if(Math.random() >= 0.5)
+                {
+                  sizes.push('XS');
+                }
+              if(Math.random() >= 0.5)
+                {
+                  sizes.push('S');
+                }
+                if(Math.random() >= 0.5)
+                {
+                  sizes.push('X');
+                } 
+                if(Math.random() >= 0.5)
+                {
+                  sizes.push('XL');
+                } 
+                if(Math.random() >= 0.5)
+                {
+                  sizes.push('XLL');
+                }    
+            }  
           res = await axios({
             url:"/api/collections/collection/items/",
             method:"post",
@@ -26,7 +69,10 @@ export const toMongoDB = async () => {
                   name,
                   primaryImageUrl,
                   price,
-                  isFeatured
+                  isFeatured,
+                  offers,
+                  sizes
+
                 },   
              });
           

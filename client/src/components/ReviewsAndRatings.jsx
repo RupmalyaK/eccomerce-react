@@ -10,7 +10,7 @@ const Container = styled.div`
 
 width:1080px;
 margin:0 auto;
-margin-top:250px;
+margin-top:35px;
 margin-bottom:10px;
 .averageRating{
     display:inline-flex;
@@ -36,12 +36,13 @@ font-size:20px;
 
 
 const ReviewsAndRatings = props => {
-    const {averageRating, reviews} = props; 
+    const {averageRating, reviews, ...otherProps} = props; 
     const displayAllReviews =  () => {
             const ReviewsComponents = reviews.map( (review,index) => {
                 const {text,_id,user,rating} = review;
                 return (
-                    <div key={_id} style={{border:"1px solid black",height:"250px",overflow:"hidden"}}>
+                    <div key={_id} style={{height:"250px",overflow:"hidden"}}>
+                        <hr />
                         <div className="stars" style={{padding:"10px"}}>
                         <StarRatings 
                             rating={rating}
@@ -68,6 +69,7 @@ const ReviewsAndRatings = props => {
             <div className="averageRating"> 
             <h2 className="average-rating-points">{averageRating}/5</h2>
                  <StarIcon icon={faStar}/>
+                 out of {reviews ? reviews.length : <></>} reviews
             </div>
              {reviews && reviews.length != 0 ? displayAllReviews():
              <h3>No reviews</h3>
