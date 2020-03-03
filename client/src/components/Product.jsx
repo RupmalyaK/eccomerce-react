@@ -40,7 +40,26 @@ margin:20px;
 .max-width{
     max-width:550px;
 }
+.sizes{
+    display:flex;
+    margin-bottom:20px;
+    cursor:pointer;
+}
+
+.size{
+display:flex;
+border-radius:100%;
+border:1px solid inherit;
+box-shadow:10px #888888;
+margin-left:10px;
+width:50px;
+height:50px;
+justify-content:center;
+align-items:center;
+}
 `;
+
+
 
 const AddToCartButton = styled(CustomButton)`
 `; 
@@ -48,13 +67,17 @@ const AddToCartButton = styled(CustomButton)`
 
 const Product = props => {
     const item = useSelector(selectCurrentItem); 
-    console.log(item);
-    const {primaryImageUrl, /*secondaryImageUrls, */isFeatured, name, dateCreated:dateAdded, averageRating,reviews,price, type,offers,sizes } = item;  
+    const [selectedSize, setSelectedSize] = useState(item.sizes ? item.sizes[0] : null);
+    const {primaryImageUrl, /*secondaryImageUrls,*/isFeatured, name, dateCreated:dateAdded, averageRating,reviews,price, type,offers,sizes } = item;  
     
     const [mainImageUrl, setMainImageUrl]= useState(primaryImageUrl); 
     const secondaryImageUrls = [primaryImageUrl];
     const allImages = [primaryImageUrl , ...secondaryImageUrls, "https://i.picsum.photos/id/1/5616/3744.jpg","https://i.picsum.photos/id/100/2500/1656.jpg","https://i.picsum.photos/id/1005/5760/3840.jpg","https://picsum.photos/id/1015/6000/4000"];
-    
+    const handleClickSize = (e) => {
+        e.preventDefault();
+        setSelectedSize(e.currentTarget.id);
+    }
+    console.log(type);
 
     const handleMouseEnterImageButton = e => {
         console.log(e.target.src || e.target.children[0].src);
@@ -108,14 +131,14 @@ const Product = props => {
         
         const sizeArr = sizes.map(size => {
             return(
-                <span style={{display:"flex",borderRadius:"100%",border:"1px solid inherit",boxShadow:"10px #888888",marginLeft:"10px",width:"50px",height:"50px",justifyContent:"center",alignItems:"center"}} className="shadow-lg">
-                    <div style ={{}}>{size}</div>
+                <span id={size} className={selectedSize === size ? "shadow-lg size" : "shadow-sm size"}  onClick={handleClickSize}>
+                    <div>{size}</div>
                 </span>    
             )
         })
         return(<div>
             <h5>Select size:</h5>
-            <div className="sizes" style={{display:"flex",marginBottom:"20px"}}>
+            <div className="sizes">
                 {sizeArr}
             </div>
         </div>)        
@@ -163,7 +186,7 @@ const Product = props => {
                             {selectSize()}
                             <span style={{fontSize:"30px"}} className="price">Price:{price}$</span> 
                             {displayOffers()}  
-                            <div className="shadow summary" style={{width:"100%", height:"500px",marginTop:"10px",padding:"0px 20px",fontSize:"1.5rem",marginTop:"20px"}}>
+                            <div className="shadow summary" style={{width:"100%", height:"250px",marginTop:"10px",padding:"0px 20px",fontSize:"1.5rem",marginTop:"20px"}}>
                                 <h2>Specifications</h2>
                                 <Row className="padding-0 max-width">
                                     <Col xs={6}>
@@ -193,7 +216,17 @@ const Product = props => {
                                     <Col xs={6}>
                                     Available Sizes:
                                     </Col>
-                                    XS,ML,S,XL,XLL
+                                    {type === "Sneakers" ? <span style={{marginRight:"6px"}}>UK:</span> : ""}
+                                    {(() => { 
+                                       const sizeElements = sizes.map((size , index) => {
+                                         if(index === 0)
+                                            {
+                                            return(<span>{size}</span>);
+                                            }  
+                                        return(<span>,{size}</span>);
+                                       });
+                                       return sizeElements;
+                                    })()}
                                     <Col xs={6}>
                                     </Col>
                                 </Row>
