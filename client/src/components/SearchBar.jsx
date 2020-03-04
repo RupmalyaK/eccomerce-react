@@ -35,7 +35,6 @@ const SearchBar = (props) => {
     const sortBy = useSelector(selectSortBy); 
     const items = useSelector(selectAutocompleteCollections);
     const history = useHistory(); 
-    //const items = useSelector(selectItems);
     const suggestionBoxRef = useRef(null); 
     
     
@@ -55,7 +54,7 @@ const SearchBar = (props) => {
 
     const handleSuggestionClick =  item => {
         setIsOpen(false);
-        history.push(`/browse/item/${item._id}/${item.type}`);
+        history.push(`/browse/item/${item.type}/${item._id}`);
     }
 
     const displaySuggestions = () => {

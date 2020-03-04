@@ -5,28 +5,25 @@ import {selectCartItems, selectCartItemsTotalPrice, selectBuyNowItem} from "../r
 import {useParams} from "react-router-dom"; 
 import CheckoutItem from "../components/CheckoutItem.jsx";
 import StripeCheckoutButton from "../components/StripeButton.jsx";
+import {Row,Col} from "react-bootstrap";
 
 const Container = styled.div`
 width: 70%;
-min-height: 90vh;
 display: flex;
 flex-direction: column;
 align-items: center;
-margin: 50px auto 0;
+margin: 100px auto 0;
 `;
 
 const CheckoutHeader = styled.div`
 width: 100%;
 padding: 10px 0;
-display: flex;
-justify-content: space-between;
-border-bottom: 1px solid darkgrey;
 `;
 
 const HeaderBlock = styled.div`
 text-transform: capitalize;
 width: 23%;
-
+text-align:center;
 &:last-child {
   width: 8%;
 }
@@ -62,25 +59,36 @@ const displayCheckoutItems = () => {
 
 return(
 <Container>
-    <CheckoutHeader>
-        <HeaderBlock>
-            <span>Product</span>
-        </HeaderBlock>
-        <HeaderBlock>
-            <span>Description</span>
-        </HeaderBlock>
-        <HeaderBlock>
-            <span>Quantity</span>
-        </HeaderBlock>
-        <HeaderBlock>
-            <span>Price</span>
-        </HeaderBlock>
-        <HeaderBlock>
-            <span>Remove</span>
-        </HeaderBlock>
+        <CheckoutHeader as={Row}>
+            <Col xs={2}>
+                <HeaderBlock>
+                    <span>Product</span>
+                </HeaderBlock>
+            </Col>
+            <Col xs={2}>
+                <HeaderBlock>
+                    <span>Description</span>
+                </HeaderBlock>
+            </Col>
+            <Col xs={2}>
+                <HeaderBlock>
+                    <span>Size</span>
+                </HeaderBlock>
+            </Col>   
+            <Col xs={2}>
+                <HeaderBlock>
+                    <span>Quantity</span>
+                </HeaderBlock>
+            </Col> 
+            <Col xs={2}>
+                <span>Price</span>
+            </Col>
+            <Col xs={2}>
+                <span>Remove</span>
+            </Col>
     </CheckoutHeader>
-    {isBuyNow ? (buyNowItem ? (<CheckoutItem isBuyNow item={buyNowItem}></CheckoutItem>) : <></>): displayCheckoutItems() }
-    <Total>TOTAL:${isBuyNow? (buyNowItem ? buyNowItem.price : 0) : total}</Total>
+    {isBuyNow === "true"? (buyNowItem ? (<CheckoutItem isBuyNow item={buyNowItem}></CheckoutItem>) : <></>): displayCheckoutItems() }
+    <Total>TOTAL:${isBuyNow === "true"? (buyNowItem ? buyNowItem.total : 0) : total}</Total>
     <TestWarning>
         *Please use the following test credit card for payments*
         <br/>
@@ -90,7 +98,7 @@ return(
         <br/>
         CVV:- any three digit numbers
     </TestWarning>
-    <StripeCheckoutButton price={isBuyNow? (buyNowItem ? buyNowItem.price : 0 ):  total} />
+    <StripeCheckoutButton price={isBuyNow === "true"? (buyNowItem ? buyNowItem.total : 0 ):  total} />
 </Container>
 );
 }
@@ -98,6 +106,5 @@ return(
 
 
 export default Checkout; 
-
 
 

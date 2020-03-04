@@ -79,7 +79,7 @@ const Product = props => {
     const [selectedSize, setSelectedSize] = useState(item.sizes ? item.sizes[0] : null);
     const history = useHistory();
     const dispatch = useDispatch(); 
-    
+    console.log("DEBUGOO", selectedSize);
     
     const [mainImageUrl, setMainImageUrl]= useState(primaryImageUrl); 
     const secondaryImageUrls = [primaryImageUrl];
@@ -95,7 +95,7 @@ const Product = props => {
     } 
 
     const handleClickBuyNow = e => {
-        dispatch(addNewBuyNowItem(item));
+        dispatch(addNewBuyNowItem(item,selectedSize));
         history.push("/checkout/true");
     }
 

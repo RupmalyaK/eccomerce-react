@@ -43,8 +43,10 @@ export const removeItemFromCartCompletely = (_id) => {
      }
  }
  
- export const addNewBuyNowItem = (item) => {
+ export const addNewBuyNowItem = (item,size) => {
     item.quantity = 1;
+    item.total = item.price; 
+    item.size = size; 
      return{
         type:cartTypes.ADD_NEW_BUY_NOW_ITEM,
         payLoad:item,

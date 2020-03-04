@@ -2,10 +2,9 @@ import React, {useEffect} from "react";
 import styled from "styled-components";
 import {Row,Col} from "react-bootstrap";
 import Button from "./CustomButton.jsx";
-import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux"; 
 import {addItemToCart} from "../redux/cart/cart.action.js"; 
-
+import {useHistory} from "react-router-dom";
 const Container = styled.div`
 border-bottom:0.2px solid black;
 margin-bottom:25px;
@@ -61,6 +60,10 @@ const BrowseItem = props => {
     const dispatch = useDispatch();
     const history = useHistory(); 
 
+    const handleGoToItemPage = e => {
+        history.push(`/browse/item/${type}/${_id}`);
+    }
+
     const handleAddToCart = e => {
         dispatch(addItemToCart(props.item));
     }
@@ -77,7 +80,7 @@ const BrowseItem = props => {
             <Col as={Container} key={_id} lg={12}>
                <img className="img-thumbnail" src={primaryImageUrl} alt={name}/>
                 <div className="content"> 
-                    <h5 className="name">{name}</h5>
+                    <h5 className="name" style={{cursor:"pointer"}} onClick={handleGoToItemPage}>{name}</h5>
                          <p style={{display:"inline", cursor:"pointer"}} onClick={handleGoToSellerPage}>Sold by {"Rupmalya Kumar"}</p>
                          {isFeatured ? <i className= "featured">FEATURED</i> : <></>}
                         <i style={{display:"block", cursor:"pointer"}} onClick={handleGoToCategoryPage}>in {type}</i>

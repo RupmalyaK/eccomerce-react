@@ -56,6 +56,7 @@ const cartReducer = (state = INITIAL_STATEE , action) =>
                   case cartTypes.ADD_BUY_NOW_ITEM:{
                         const newBuyNowItem = {...state.buyNowItem};
                         ++newBuyNowItem.quantity; 
+                        newBuyNowItem.total += newBuyNowItem.price; 
                         return{
                             ...state,
                             buyNowItem:newBuyNowItem, 
@@ -63,6 +64,7 @@ const cartReducer = (state = INITIAL_STATEE , action) =>
                    case cartTypes.REMOVE_BUY_NOW_ITEM:{
                        let newBuyNowItem = {...state.buyNowItem};
                        --newBuyNowItem.quantity;
+                       newBuyNowItem.total -= newBuyNowItem.price; 
                         if(newBuyNowItem.quantity === 0)
                             {
                                 newBuyNowItem = null; 
