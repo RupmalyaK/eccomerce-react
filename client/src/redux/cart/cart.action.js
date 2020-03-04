@@ -41,5 +41,25 @@ export const removeItemFromCartCompletely = (_id) => {
          type:cartTypes.REMOVE_ITEM_FROM_CART_COMPLETELY,
          payLoad:_id,
      }
- }   
+ }
+ 
+ export const addNewBuyNowItem = (item) => {
+    item.quantity = 1;
+     return{
+        type:cartTypes.ADD_NEW_BUY_NOW_ITEM,
+        payLoad:item,
+     };
+ }
+
+ export const addBuyNowItem = () => {
+     return {
+         type:cartTypes.ADD_BUY_NOW_ITEM,
+     };
+ }
+
+ export const removeBuyNowItem = () => {
+     return {
+        type:cartTypes.REMOVE_BUY_NOW_ITEM,
+     };
+ }
 

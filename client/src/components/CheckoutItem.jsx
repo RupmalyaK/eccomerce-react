@@ -1,7 +1,7 @@
 import React from "react"; 
 import styled from "styled-components"; 
 import {useSelector, useDispatch} from "react-redux"; 
-import {removeItemFromCartCompletely, removeItemFromCart, addItemToCart} from "../redux/cart/cart.action.js";
+import {removeItemFromCartCompletely, removeItemFromCart, addItemToCart, addBuyNowItem, removeBuyNowItem} from "../redux/cart/cart.action.js";
 
 
 const nameQuantityPriceStyle = {
@@ -61,15 +61,26 @@ const Arrow = styled.div`
 cursor:pointer;
 `
 
-const CheckoutItem = (props) => {
+const CheckoutItem = (props) => {  
+const {isBuyNow} = props; 
 const {primaryImageUrl , name, price, quantity, _id} = props.item; 
 const dispatch = useDispatch(); 
 
 const handleRemoveItem = e => {
+  if(isBuyNow)
+    {
+      dispatch(removeBuyNowItem());
+      return; 
+    }
   dispatch(removeItemFromCart(_id));
 };
 
 const handleAddItemToCart = e => {
+  if(isBuyNow)
+    {
+      dispatch(addBuyNowItem());
+      return; 
+    }
   dispatch(addItemToCart(props.item));
 }
 

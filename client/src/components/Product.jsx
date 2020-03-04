@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react"; 
 import styled from "styled-components";
+import {useHistory} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import {selectCurrentItem} from "../redux/browse/browse.selector.js"; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +9,7 @@ import CustomButton from "../components/CustomButton";
 import {useSelector} from "react-redux"; 
 import {Row, Col} from "react-bootstrap";
 import ReviewsAndRatings from "../components/ReviewsAndRatings.jsx";
+import {addItemToCart, addNewBuyNowItem} from "../redux/cart/cart.action.js"; 
 
 const Container = styled.div`
 margin:20px;
@@ -64,11 +67,19 @@ align-items:center;
 const AddToCartButton = styled(CustomButton)`
 `; 
 
+const BuyNowButton = styled(CustomButton)`
+margin-top:10px;
+margin-buttom:10px;
+`; 
+
 
 const Product = props => {
     const item = useSelector(selectCurrentItem); 
-    const [selectedSize, setSelectedSize] = useState(item.sizes ? item.sizes[0] : null);
     const {primaryImageUrl, /*secondaryImageUrls,*/isFeatured, name, dateCreated:dateAdded, averageRating,reviews,price, type,offers,sizes } = item;  
+    const [selectedSize, setSelectedSize] = useState(item.sizes ? item.sizes[0] : null);
+    const history = useHistory();
+    const dispatch = useDispatch(); 
+    
     
     const [mainImageUrl, setMainImageUrl]= useState(primaryImageUrl); 
     const secondaryImageUrls = [primaryImageUrl];
@@ -78,6 +89,15 @@ const Product = props => {
         setSelectedSize(e.currentTarget.id);
     }
     console.log(type);
+
+    const handleClickAddToCart = e => {
+        dispatch(addItemToCart(item));
+    } 
+
+    const handleClickBuyNow = e => {
+        dispatch(addNewBuyNowItem(item));
+        history.push("/checkout/true");
+    }
 
     const handleMouseEnterImageButton = e => {
         console.log(e.target.src || e.target.children[0].src);
@@ -161,7 +181,7 @@ const Product = props => {
                                <Col sm={11}>
                                     <img className="primary-img" src={mainImageUrl} alt="primary image"/>
                                     <div className="addtocart-wishlist-button" style={{marginTop:"5px",display:"flex",width:"70%",justifyContent:"center"}}>
-                                     <AddToCartButton  style={{display:"block"}}>Add To Cart</AddToCartButton>
+                                     <AddToCartButton onClick = {handleClickAddToCart} style={{display:"block"}}>Add To Cart</AddToCartButton>
                                      <AddToCartButton  style={{display:"block", marginLeft:"10px"}}>Add to Wishlist</AddToCartButton>
                                     </div>
                                     
@@ -186,6 +206,7 @@ const Product = props => {
                             {selectSize()}
                             <span style={{fontSize:"30px"}} className="price">Price:{price}$</span> 
                             {displayOffers()}  
+                            <BuyNowButton onClick={handleClickBuyNow}>Buy Now</BuyNowButton>
                             <div className="shadow summary" style={{width:"100%", height:"250px",marginTop:"10px",padding:"0px 20px",fontSize:"1.5rem",marginTop:"20px"}}>
                                 <h2>Specifications</h2>
                                 <Row className="padding-0 max-width">

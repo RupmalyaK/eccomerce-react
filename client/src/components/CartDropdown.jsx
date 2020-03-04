@@ -50,7 +50,7 @@ const history = useHistory();
 
 
 const handleClick = e => {
-history.push('/checkout');
+history.push("/checkout/false");
 dispatch(hideCartDropdown());
 };
 

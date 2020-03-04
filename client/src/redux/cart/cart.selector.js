@@ -32,3 +32,5 @@ export const selectCartItemsTotalPrice = createSelector(selectCartItems,
             return total; 
     });
 
+ export const selectBuyNowItem = createSelector(selectCart, cart => cart.buyNowItem);    
+

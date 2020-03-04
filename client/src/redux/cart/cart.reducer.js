@@ -5,6 +5,7 @@ import {addItemToCart, removeItemFromCart, removeItemFromCartCompletely} from ".
 const INITIAL_STATEE = {
     isDropdownHidden:true,
     items:[],
+    buyNowItem:[], 
 };
 
 const cartReducer = (state = INITIAL_STATEE , action) =>
@@ -46,7 +47,30 @@ const cartReducer = (state = INITIAL_STATEE , action) =>
                       return {
                           ...state,
                           items:removeItemFromCartCompletely(state.items, payLoad),
-                      }    
+                      }   
+                  case cartTypes.ADD_NEW_BUY_NOW_ITEM:
+                        return{
+                            ...state,
+                            buyNowItem:payLoad, 
+                        };
+                  case cartTypes.ADD_BUY_NOW_ITEM:{
+                        const newBuyNowItem = {...state.buyNowItem};
+                        ++newBuyNowItem.quantity; 
+                        return{
+                            ...state,
+                            buyNowItem:newBuyNowItem, 
+                        };};
+                   case cartTypes.REMOVE_BUY_NOW_ITEM:{
+                       let newBuyNowItem = {...state.buyNowItem};
+                       --newBuyNowItem.quantity;
+                        if(newBuyNowItem.quantity === 0)
+                            {
+                                newBuyNowItem = null; 
+                            }
+                        return {
+                            ...state,
+                            buyNowItem:newBuyNowItem,
+                        };};  
                  default:
                      return state;   
                       

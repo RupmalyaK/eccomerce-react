@@ -1,7 +1,8 @@
 import React from "react"; 
 import styled from "styled-components"; 
 import {useSelector} from "react-redux"; 
-import {selectCartItems, selectCartItemsTotalPrice} from "../redux/cart/cart.selector.js"
+import {selectCartItems, selectCartItemsTotalPrice, selectBuyNowItem} from "../redux/cart/cart.selector.js";
+import {useParams} from "react-router-dom"; 
 import CheckoutItem from "../components/CheckoutItem.jsx";
 import StripeCheckoutButton from "../components/StripeButton.jsx";
 
@@ -47,6 +48,8 @@ color:red;
 const Checkout = (props) => {
 const cartItems = useSelector(selectCartItems);
 const total = useSelector(selectCartItemsTotalPrice);  
+const buyNowItem = useSelector(selectBuyNowItem); 
+const {isBuyNow} = useParams(); 
 
 const displayCheckoutItems = () => {
     const arr = cartItems.map((item) => {
@@ -76,8 +79,8 @@ return(
             <span>Remove</span>
         </HeaderBlock>
     </CheckoutHeader>
-    {displayCheckoutItems() }
-    <Total>TOTAL:${total}</Total>
+    {isBuyNow ? (buyNowItem ? (<CheckoutItem isBuyNow item={buyNowItem}></CheckoutItem>) : <></>): displayCheckoutItems() }
+    <Total>TOTAL:${isBuyNow? (buyNowItem ? buyNowItem.price : 0) : total}</Total>
     <TestWarning>
         *Please use the following test credit card for payments*
         <br/>
@@ -87,7 +90,7 @@ return(
         <br/>
         CVV:- any three digit numbers
     </TestWarning>
-    <StripeCheckoutButton price={total} />
+    <StripeCheckoutButton price={isBuyNow? (buyNowItem ? buyNowItem.price : 0 ):  total} />
 </Container>
 );
 }

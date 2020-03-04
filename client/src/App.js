@@ -92,7 +92,7 @@ const App = () => {
             () => (
               currentUser ? <Redirect to='/'/> : <SignInAndSignUpPage/>)
               }  /> 
-           <Route path="/checkout" exact component={CheckoutPage} />   
+           <Route path="/checkout/:isBuyNow" exact component={CheckoutPage} />   
         </Switch>
        </LayoutWithLoadingSpinner>
       </Container>

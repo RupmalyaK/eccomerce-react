@@ -42,5 +42,7 @@ export const removeItemFromCart = (cartItems , _id) =>
     {
         const newItemsArr = cartItems.filter(item => item._id !== _id);
         return newItemsArr; 
-    }   
+    } 
+    
+
 
