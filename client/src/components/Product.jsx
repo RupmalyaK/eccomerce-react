@@ -79,8 +79,6 @@ const Product = props => {
     const [selectedSize, setSelectedSize] = useState(item.sizes ? item.sizes[0] : null);
     const history = useHistory();
     const dispatch = useDispatch(); 
-    console.log("DEBUGOO", selectedSize);
-    
     const [mainImageUrl, setMainImageUrl]= useState(primaryImageUrl); 
     const secondaryImageUrls = [primaryImageUrl];
     const allImages = [primaryImageUrl , ...secondaryImageUrls, "https://i.picsum.photos/id/1/5616/3744.jpg","https://i.picsum.photos/id/100/2500/1656.jpg","https://i.picsum.photos/id/1005/5760/3840.jpg","https://picsum.photos/id/1015/6000/4000"];

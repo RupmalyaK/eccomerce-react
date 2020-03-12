@@ -10,8 +10,7 @@ export const fetchItemsFailure = error => {
 }
 
 export const fetchItemsSuccess = (search) => {
-    const {items, searchString, priceRange, sortBy, isFeatured, categories} = search; 
-    return ({type:browseActionTypes.FETCH_ITEMS_SUCCESS , payLoad: {items, searchString,priceRange,sortBy,isFeatured,priceRange, categories}});
+    return ({type:browseActionTypes.FETCH_ITEMS_SUCCESS , payLoad: {...search}});
 }
 
 export const fetchItemsAsync = (search) => {
@@ -68,6 +67,7 @@ export const fetchItemsAsync = (search) => {
                    categories 
                 },
             }); 
+            
             dispatch(fetchItemsSuccess({items, searchString,priceRange, sortBy, isAsc, categories, isFeatured})); 
             }
          catch(error)

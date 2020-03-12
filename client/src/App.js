@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import GlobalStyle from "./components/GlobalStyle.jsx";
-import {getFirebaseUserById} from "./firebase/firebase.util.js";
 import {useSelector , useDispatch} from "react-redux"; 
 import {Route , Switch , Redirect, useParams} from "react-router-dom"; 
 import Header from "./components/Header.jsx";
@@ -15,12 +14,9 @@ import {selectCurrentUser,selectUnsubscriber} from "./redux/user/user.selector.j
 import {checkSessionAsync} from "./redux/user/user.action.js";
 import {selectIsSigningIn, selectIsCheckingSession, selectSignInError, selectSignUpError, selectIsSigningUp} from "./redux/user/user.selector.js";
 import Layout from "./components/Layout.jsx"; 
-import {addCollectionandDocuments} from "./firebase/firebase.util.js";
-import {fetchFeaturedItemsAsync, fetchAutocompleteAsync} from "./redux/shop/shop.actions.js";
-import {toMongoDB} from "./util.js";
 import BrowsePage from "./pages/Browse.jsx";
 import Itempage from "./pages/Item.jsx";
-import {selectIsFetching} from "./redux/browse/browse.selector.js";
+import {selectIsFetching as selectIsFetchingItems} from "./redux/browse/browse.selector.js";
 import ReviewsAndRatings from "./components/ReviewsAndRatings";
 
 
@@ -28,6 +24,7 @@ import ReviewsAndRatings from "./components/ReviewsAndRatings";
 
 const LayoutWithLoadingSpinner = LoadingSpinner(Layout);
 const ItemPageWithLoadingSpinner = LoadingSpinner(Itempage);
+const BrowsePageWithLoadingSpinner = LoadingSpinner(BrowsePage);
 
 
 const Container = styled.div`
@@ -39,13 +36,13 @@ padding: 20px 20px;
 
 const App = () => {
   const isCheckingSession = useSelector(selectIsCheckingSession);
-  const isFetchingItems = useSelector(selectIsFetching);
+  const isFetchingItems = useSelector(selectIsFetchingItems);
   const currentUser = useSelector(selectCurrentUser);
-  const unsubscriber = useSelector(selectUnsubscriber);
   const isSigningIn = useSelector(selectIsSigningIn);
   const isSigningUp = useSelector(selectIsSigningUp);
   const signInError = useSelector(selectSignInError);
   const signUpError = useSelector(selectSignUpError);
+
   const history = useHistory();
   const dispatch = useDispatch();
   
@@ -85,7 +82,7 @@ const App = () => {
           <Route path='/test' exact component={LoadingSpinner} />
           <Route path='/' exact component={Homepage} />
           <Route path="/shop/:match?"  component={Shoppage} />
-          <Route exact path="/browse" render={props => <BrowsePage />} />
+          <Route exact path="/browse" render={props => <BrowsePageWithLoadingSpinner isLoading={isFetchingItems}/>} />
           <Route path="/browse/item/:type/:itemid"  component={Itempage}/>
 
           <Route path="/signin" exact render = {

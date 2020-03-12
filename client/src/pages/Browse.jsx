@@ -1,10 +1,8 @@
 import React, {useEffect} from "react"; 
 import {useSelector, useDispatch} from "react-redux"; 
-import {fetchItemsAsync} from "../redux/browse/browse.actions.js";
 import {selectItems} from "../redux/browse/browse.selector.js";
 import styled from "styled-components";
 import {Row,Col,Container as BContainer} from "react-bootstrap"
-import axios from "axios"; 
 import BrowseItem from "../components/BrowseItem";
 import SortBy from "../components/SortBy.jsx";
 import AdvanceSearch from "../components/AdvanceSearch.jsx";

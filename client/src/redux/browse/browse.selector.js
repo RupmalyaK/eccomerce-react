@@ -2,6 +2,8 @@ import {createSelector} from "reselect";
 
 export const selectBrowse = state => state.browse; 
 
+export const selectSearchString = createSelector(selectBrowse, browse => browse.searchString);
+
 export const selectItems = createSelector(selectBrowse, state => state.items); 
 
 export const selectString = createSelector(selectBrowse, state => state.string); 

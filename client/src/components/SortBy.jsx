@@ -21,28 +21,14 @@ const Container = styled.div`
 const SortBy =  () => {
     const sortBy = useSelector(selectSortBy); 
     const isAsc = useSelector(selectIsAsc);
-    
-    const [toggleSortByValue, setToggleSortByValue] = useState("relevance");
-    const [toggleIsAscValue, setToggleIsAscValue] = useState("true");
-
- 
     const dispatch = useDispatch();
-    
-    useEffect(() => {
-        console.log(toggleIsAscValue);
-        dispatch(fetchItemsAsync({sortBy:toggleSortByValue, isAsc:toggleIsAscValue}));
-    }, [toggleSortByValue, toggleIsAscValue]);
-
-    
     const handlesortByChange = val => {
-        setToggleSortByValue(val);
+        dispatch(fetchItemsAsync({sortBy:val, isAsc}));
+    }
+    const handleIsAscChange = val => {
+        dispatch(fetchItemsAsync({sortBy,isAsc:val}));
     }
 
-    const handleIsAscChange = val => {
-        setToggleIsAscValue(val); 
-    }
-    
-  
     return (
         <Container>
             <span>Sort By </span>
@@ -55,9 +41,9 @@ const SortBy =  () => {
             </ButtonToolbar>
 
             <ButtonToolbar className="d-inline is-asc">
-                <ToggleButtonGroup type="radio" name="isAsc" defaultValue={isAsc || "true"} onChange={handleIsAscChange}>
-                <ToggleButton value="true" variant="dark">Asc</ToggleButton>    
-                <ToggleButton value="false" variant="dark">Dsc</ToggleButton>
+                <ToggleButtonGroup type="radio" name="isAsc" defaultValue={isAsc} onChange={handleIsAscChange}>
+                <ToggleButton value={true}variant="dark">Asc</ToggleButton>    
+                <ToggleButton value={false} variant="dark">Dsc</ToggleButton>
                 </ToggleButtonGroup>
             </ButtonToolbar>
             </Container>

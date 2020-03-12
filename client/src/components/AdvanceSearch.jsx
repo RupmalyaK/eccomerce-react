@@ -207,7 +207,7 @@ const AdvanceSearch = props => {
                     type="lesserThanPrice" placeholder="0" />
                 </Form.Group>
             </Row> 
-               <Button variant="dark" className="search-button" type="submit" >Search</Button>
+               <Button variant="dark" className="search-button" type="submit" >Filter</Button>
          </Form>
             
         

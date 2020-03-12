@@ -77,21 +77,16 @@ const SearchBar = (props) => {
     const handleClickOutsideSuggestionBox = e => {
         if(suggestionBoxRef.current.contains(e.target))
             {
-                return; 
+                setIsOpen(true);
+                return;
             }
             setIsOpen(false); 
     }
 
     useEffect(() => {   
-   
-        if (isOpen) {
-            document.addEventListener("mousedown", handleClickOutsideSuggestionBox);
-          } else {
-            document.removeEventListener("mousedown", handleClickOutsideSuggestionBox);
-          }
-    
+        document.addEventListener("mousedown", handleClickOutsideSuggestionBox);
         const handleUnmount =  () => {
-          document.removeEventListener("mousedown", handleClickOutsideSuggestionBox);
+            document.removeEventListener("mousedown", handleClickOutsideSuggestionBox);
         };
         return handleUnmount;
       }, [isOpen]);
@@ -100,7 +95,7 @@ const SearchBar = (props) => {
         dispatch(fetchAutocompleteAsync(searchText));
     },[searchText]);
 
-    const handleClick = e => {
+    const handleClickSearch = e => {
         dispatch(fetchItemsAsync({searchString:searchText, sortBy:sortBy || "relevance", isAsc:true}));
         if(isOpen)
             {
@@ -110,9 +105,9 @@ const SearchBar = (props) => {
     }
 
 return(
-    <Form inline style={{position:"relative"}} {...rest} ref={suggestionBoxRef} >
-        <FormControl type="text" onChange={handleChange} placeholder="Search product..." className=" m-0 w-75" />
-        {compact ? <></> : <Button className="ml-1" onClick={handleClick} variant="outline-success">Search</Button>}
+    <Form inline style={{position:"relative"}} {...rest}>
+        <FormControl ref={suggestionBoxRef} type="text" onChange={handleChange} placeholder="Search product..." className=" m-0 w-75" />
+        {compact ? <></> : <Button className="ml-1" onClick={handleClickSearch} variant="outline-success">Search</Button>}
         {(!isOpen || items.length === 0 )? <></> :(
         <SuggestionBox >
             {displaySuggestions()}
