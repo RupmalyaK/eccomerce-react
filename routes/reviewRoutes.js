@@ -19,12 +19,13 @@ const reveiwRoutesCreator = (app, admin) => {
             const item = collection.items.id(itemObjectId);
             const userRef = await db.collection("users").doc(userObjectId)
             const userDoc = await userRef.get();
-            const {displayName, email} = userDoc.data();
+            const {displayName, email} = userDoc.data(); 
             const review = {user:{uid:userObjectId, displayName, email},rating,text}; 
             let flag = false;
-            item.reviews.forEach(review => {
-                if(review.user === userObjectId)
+            item.reviews.forEach(review => { 
+                if(review.user.uid === userObjectId)
                     {
+                        console.log("DEBUG");
                         flag = true;
                         throw new Error("User already reviewed this product");
                     }
@@ -55,3 +56,11 @@ export default reveiwRoutesCreator;
  * userObjectId:dlwjco20RwgkxM8qskaGC89tVYm2
  * itemObjectId:5e15ef92a1d75b428c67ae7c
  */
+
+ /**
+  * 0] {
+[0]   email: 'rupzonthemove@gmail.com',
+[0]   displayName: 'Rup',
+[0]   createdAt: Timestamp { _seconds: 1575032950, _nanoseconds: 371000000 }
+[0] }
+  */
