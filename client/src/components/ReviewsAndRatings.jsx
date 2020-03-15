@@ -45,15 +45,30 @@ font-size:20px;
 `;
 
 
+const useForceUpdate = () => useState()[1];
 
 const ReviewsAndRatings = props => {
         const {averageRating, reviews, itemObjectId, itemType} = props; 
         const [currentRating, setCurrentRating] = useState(1);
         const [text, setText] = useState(""); 
+        const [justReviewed, setJustReviewed] = useState(false);
         const currentUser = useSelector(selectCurrentUser); 
         const maxLengthOfTextArea = "120";
 
-
+        const currentUserReviewIndex = reviews.findIndex(review => {
+            if(review.user.uid === currentUser.id)
+                {
+                    return true;
+                }
+             }
+            );
+            const currentUserReview = currentUserReviewIndex > -1 ? reviews[currentUserReviewIndex] : null; 
+           
+            if(currentUserReview)
+                {
+                     reviews.splice(currentUserReviewIndex,1);
+                }
+               
         const displayAllReviews =  () => {
                 const ReviewsComponents = reviews.map( (review,index) => {
                     const {text,_id,user,rating} = review;
@@ -84,32 +99,63 @@ const ReviewsAndRatings = props => {
             setText(e.target.value);
         }
 
-        const handleSendReviewClick = e => {
+        const handleSendReviewClick = async e => {
             e.preventDefault();
-         
-            axios(
-                {
-                    method:"POST",
-                    url:"/api/collections/collection/item/review",
-                    data:{
-                        itemType,
-                        itemObjectId,
-                        userObjectId:currentUser.id,
-                        rating:currentRating,
-                        text
+            try{
+                await axios(
+                    {
+                        method:"POST",
+                        url:"/api/collections/collection/item/review",
+                        data:{
+                            itemType,
+                            itemObjectId,
+                            userObjectId:currentUser.id,
+                            rating:currentRating,
+                            text
+                        }
                     }
+                );
+                window.location.reload(false);
+            }
+            catch(error)
+                {
 
                 }
-            );
-        }
           
+        }
+        
+        const displayCurrentUserReview = () => {
+            
+            const {rating,user,text} = currentUserReview;
+            return (<div style={{height:"250px",overflow:"hidden", border:"1px solid black", padding:"10px",marginBottom:"40px"}}>
+                            <h4>Your review</h4>
+                            <hr />
+                            <div className="stars" style={{padding:"10px"}}>
+                            <StarRatings 
+                                rating={rating}
+                                starDimension={"30px"}
+                                starSpacing={"10px"}
+                            />
+                            </div>
+                            <div style={{marginLeft:"10px"}}>
+                            <span style={{padding:"5px"}}>{user.displayName}</span>
+                            <section style={{width:"100%",height:"100%",marginBottom:"10px"}}>
+                                    {text}
+                            </section> 
+                            </div>
+                                
+                        </div>);
+        }
+        const getNumberOfReviews = () => {
+            return reviews.length + (currentUserReview ? 1 : 0);
+        }
         const displayWriteReviewForm = () => {
             if(!currentUser)
                 {
                    return;
                 }
                 return(
-                    <div style={{border:"1px solid black", padding:"10px"}}>
+                    <div style={{border:"1px solid black", padding:"10px",marginBottom:"40px"}}>
                         <p>Write this review as <em>{currentUser.displayName}.</em></p>
                         <p>Your rating</p>
                         <StarRatings 
@@ -121,7 +167,7 @@ const ReviewsAndRatings = props => {
                                 starSpacing={"10px"}
                             />
                             <Form.Group controlId="writeReviewTextArea" style={{marginTop:"10px"}}>
-                                <Form.Label>Write your own review here (Limit {maxLengthOfTextArea - text.length} more characters)</Form.Label>
+                                <Form.Label>Write your own review here (Limit:{maxLengthOfTextArea - text.length} more characters)</Form.Label>
                                 <Form.Control as="textarea" rows="3" maxLength={maxLengthOfTextArea} onChange={handleWriteYourReviewChange}/>
                             </Form.Group>
                             <SendReviewButton onClick={handleSendReviewClick}>Send</SendReviewButton>    
@@ -133,9 +179,9 @@ const ReviewsAndRatings = props => {
             <div className="averageRating"> 
             <h2 className="average-rating-points">{averageRating}/5</h2>
                  <StarIcon icon={faStar}/>
-                 <em>out of {reviews ? reviews.length : <></>} reviews</em>
+                 <em>out of {reviews ? getNumberOfReviews() : <></>} reviews</em>
             </div>
-               {displayWriteReviewForm()}
+               {currentUserReview ? displayCurrentUserReview() : displayWriteReviewForm()}
              {reviews && reviews.length != 0 ? displayAllReviews():
              <h4 style={{marginTop:"-20px"}}>No reviews</h4>
              }
