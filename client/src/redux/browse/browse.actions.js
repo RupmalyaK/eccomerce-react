@@ -95,6 +95,7 @@ export const fetchCurrentItemAsync = (_id, type) => {
         dispatch(fetchCurrentItemStart());
         try{
             const {data:currentItem} = await axios({
+                mathod:"GET",
                 url:"/api/item/",
                 params:{
                     _id,

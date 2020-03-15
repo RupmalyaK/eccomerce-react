@@ -86,7 +86,7 @@ const Product = props => {
         e.preventDefault();
         setSelectedSize(e.currentTarget.id);
     }
-    console.log(type);
+
 
     const handleClickAddToCart = e => {
         dispatch(addItemToCart(item));
@@ -257,7 +257,7 @@ const Product = props => {
                 </Col>
              </Row>
              <hr/>
-             <ReviewsAndRatings reviews={reviews} averageRating={averageRating}/>
+             <ReviewsAndRatings reviews={reviews} averageRating={averageRating} itemType={item.type} itemObjectId={item._id}/>
         </Container>
     );
 }

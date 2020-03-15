@@ -8,6 +8,13 @@ import StarRatings from "react-star-ratings";
 import {getFirebaseUserById} from "../firebase/firebase.util.js";
 import {selectCurrentUser} from "../redux/user/user.selector.js";
 import {selectCurrentItem} from "../redux/browse/browse.selector.js";
+import {Form} from "react-bootstrap";
+import axios from "axios";
+import CustomButton from "./CustomButton.jsx";
+
+const SendReviewButton = styled(CustomButton)`
+
+`;
 
 
 const Container = styled.div`
@@ -40,11 +47,13 @@ font-size:20px;
 
 
 const ReviewsAndRatings = props => {
-        const {averageRating, reviews, ...otherProps} = props; 
-        const [currentRating, setCurrentRating] = useState(0);
+        const {averageRating, reviews, itemObjectId, itemType} = props; 
+        const [currentRating, setCurrentRating] = useState(1);
         const [text, setText] = useState(""); 
         const currentUser = useSelector(selectCurrentUser); 
-        console.log("DEBUGOOO: ", currentUser);
+        const maxLengthOfTextArea = "120";
+
+
         const displayAllReviews =  () => {
                 const ReviewsComponents = reviews.map( (review,index) => {
                     const {text,_id,user,rating} = review;
@@ -71,14 +80,38 @@ const ReviewsAndRatings = props => {
                 return ReviewsComponents;
         };
 
+        const handleWriteYourReviewChange = e => {
+            setText(e.target.value);
+        }
+
+        const handleSendReviewClick = e => {
+            e.preventDefault();
+         
+            axios(
+                {
+                    method:"POST",
+                    url:"/api/collections/collection/item/review",
+                    data:{
+                        itemType,
+                        itemObjectId,
+                        userObjectId:currentUser.id,
+                        rating:currentRating,
+                        text
+                    }
+
+                }
+            );
+        }
+          
         const displayWriteReviewForm = () => {
             if(!currentUser)
                 {
                    return;
                 }
                 return(
-                    <div>
-                        <p>Write your review here</p>
+                    <div style={{border:"1px solid black", padding:"10px"}}>
+                        <p>Write this review as <em>{currentUser.displayName}.</em></p>
+                        <p>Your rating</p>
                         <StarRatings 
                                 rating={currentRating}
                                 changeRating={(newRating) => {
@@ -87,7 +120,11 @@ const ReviewsAndRatings = props => {
                                 starDimension={"30px"}
                                 starSpacing={"10px"}
                             />
-
+                            <Form.Group controlId="writeReviewTextArea" style={{marginTop:"10px"}}>
+                                <Form.Label>Write your own review here (Limit {maxLengthOfTextArea - text.length} more characters)</Form.Label>
+                                <Form.Control as="textarea" rows="3" maxLength={maxLengthOfTextArea} onChange={handleWriteYourReviewChange}/>
+                            </Form.Group>
+                            <SendReviewButton onClick={handleSendReviewClick}>Send</SendReviewButton>    
                     </div>
                 );
         }
@@ -109,4 +146,6 @@ const ReviewsAndRatings = props => {
 }
 
 export default ReviewsAndRatings;
+
+
 
