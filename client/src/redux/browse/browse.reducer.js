@@ -35,7 +35,10 @@ const browseReducer = (state = INITIAL_STATE, action) => {
             case browseActionTypes.FETCH_CURRENT_ITEM_FAILURE:
                       return {...state, isFetchingCurrentItem:false, fetchCurrentItemError:payLoad};
             case browseActionTypes.FETCH_CURRENT_ITEM_SUCCESS:
-                       return {...state, isFetchingCurrentItem:false, currentItem:payLoad};                                                        
+                       return {...state, isFetchingCurrentItem:false, currentItem:payLoad};  
+                       
+             case browseActionTypes.SET_CURRENT_ITEM:
+                        return {...state, currentItem:payLoad};          
             default:
                     return state; 
         }

@@ -111,3 +111,7 @@ export const fetchCurrentItemAsync = (_id, type) => {
         
     });
 }
+
+export const setCurrentItem = (currentItem) => {
+    return  {type:browseActionTypes.SET_CURRENT_ITEM, payLoad:currentItem};
+}

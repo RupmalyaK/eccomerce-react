@@ -17,12 +17,14 @@ margin-top:100px;
 const ItemPage = props => {
     const isFetchingCurrentItem = useSelector(selectIsFetchingCurrentItem); 
     const dispatch = useDispatch();
-    const {itemid, type} = useParams();
+    const {itemid, type,doFetch} = useParams();
     const history = useHistory();
-    
-    
+   
    useEffect(() => {
-        dispatch(fetchCurrentItemAsync(itemid,type));
+       if(doFetch === "true")
+        {
+            dispatch(fetchCurrentItemAsync(itemid,type));
+        }
     },[itemid,type]);
     return (
         <Container>

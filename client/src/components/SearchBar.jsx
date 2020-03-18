@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Form, FormControl, Button} from "react-bootstrap";
 import {fetchAutocompleteAsync} from "../redux/shop/shop.actions.js"
 import {selectAutocompleteCollections} from "../redux/shop/shop.selector.js";
-import {fetchItemsAsync} from "../redux/browse/browse.actions.js";
+import {fetchItemsAsync, setCurrentItem} from "../redux/browse/browse.actions.js";
 import {selectSortBy} from "../redux/browse/browse.selector.js";
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
@@ -36,6 +36,7 @@ const SearchBar = (props) => {
     const items = useSelector(selectAutocompleteCollections);
     const history = useHistory(); 
     const suggestionBoxRef = useRef(null); 
+    const suggestionRef = useRef(null); 
     
     
     const handleChange = e => {
@@ -54,7 +55,8 @@ const SearchBar = (props) => {
 
     const handleSuggestionClick =  item => {
         setIsOpen(false);
-        history.push(`/browse/item/${item.type}/${item._id}`);
+        dispatch(setCurrentItem(item));
+        history.push(`/browse/item/${item.type}/${item._id}/false`);
     }
 
     const displaySuggestions = () => {
@@ -64,7 +66,7 @@ const SearchBar = (props) => {
             }
         const suggestions = items.map(item => {
             return (
-                <Suggestion key={item._id} style={{cursor:"pointer"}} onClick={e => handleSuggestionClick(item)}>
+                <Suggestion ref={suggestionRef} key={item._id} style={{cursor:"pointer"}} onClick={e => handleSuggestionClick(item)}>
                     <h6 className="d-inline">{item.name}</h6>
                     <em style={{float:"right"}}>{item.type}</em>
                 </Suggestion>
@@ -75,6 +77,12 @@ const SearchBar = (props) => {
     }
 
     const handleClickOutsideSuggestionBox = e => {
+       if(suggestionRef && suggestionRef.current) 
+        {
+            setIsOpen(true);
+            return;
+        }
+      
         if(suggestionBoxRef.current.contains(e.target))
             {
                 setIsOpen(true);

@@ -18,6 +18,8 @@ const userActionType = {
 "SIGN_UP_SUCCESS":"SIGN_UP_SUCCESS",
 "SIGN_UP_FAILURE":"SIGN_UP_FAILURE",
 "SIGN_UP_ERROR_CLEAR":"SIGN_UP_ERROR_CLEAR",
+
+"SET_CURRENT_ITEM":"SET_CURRENT_ITEM",
 }
 
 export default userActionType; 
