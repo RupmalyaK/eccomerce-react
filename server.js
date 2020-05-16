@@ -7,7 +7,6 @@ import dotEnv from "dotenv";
 import mongoose from "mongoose";
 import collectionsRoutes from "./routes/collectionsRoutes.js";
 import collectionRoutes from "./routes/collectionRoutes.js";
-import userRoutes from "./routes/userRoutes.js"; 
 import itemsRoutes from "./routes/itemsRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import admin from "firebase-admin";
