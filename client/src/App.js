@@ -83,7 +83,7 @@ const App = () => {
           <Route path='/' exact component={Homepage} />
           <Route path="/shop/:match?"  component={Shoppage} />
           <Route exact path="/browse" render={props => <BrowsePageWithLoadingSpinner isLoading={isFetchingItems}/>} />
-          <Route path="/browse/item/:type/:itemid/:doFetch"  component={Itempage}/>
+          <Route path="/browse/item/:type/:itemid/"  component={Itempage}/>
 
           <Route path="/signin" exact render = {
             () => (

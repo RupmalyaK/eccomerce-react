@@ -61,7 +61,9 @@ const BrowseItem = props => {
     const history = useHistory(); 
 
     const handleGoToItemPage = e => {
-        history.push(`/browse/item/${type}/${_id}/true`);
+        history.push({
+            pathname:`/browse/item/${type}/${_id}`,
+    });
     }
 
     const handleAddToCart = e => {

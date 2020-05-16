@@ -56,7 +56,7 @@ const SearchBar = (props) => {
     const handleSuggestionClick =  item => {
         setIsOpen(false);
         dispatch(setCurrentItem(item));
-        history.push(`/browse/item/${item.type}/${item._id}/false`);
+        history.push(`/browse/item/${item.type}/${item._id}/`);
     }
 
     const displaySuggestions = () => {

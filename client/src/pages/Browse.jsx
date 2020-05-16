@@ -22,7 +22,7 @@ const Browse = props => {
     const noOfItems = useSelector(selectNumberOfItems);
     const dispatch = useDispatch();
     
-
+    console.log("TESTING PASSING", props.test);
     const displayBrowseItems = () => {
         const browseItemsArr = items.map(item => {
             return (<BrowseItem as={Col} key={item._id} item={item} />);
