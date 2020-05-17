@@ -4,6 +4,7 @@ import {Row,Col} from "react-bootstrap";
 import Button from "./CustomButton.jsx";
 import {useDispatch} from "react-redux"; 
 import {addItemToCart} from "../redux/cart/cart.action.js"; 
+import {setCurrentItem} from "../redux/browse/browse.actions";
 import {useHistory} from "react-router-dom";
 const Container = styled.div`
 border-bottom:0.2px solid black;
@@ -61,6 +62,7 @@ const BrowseItem = props => {
     const history = useHistory(); 
 
     const handleGoToItemPage = e => {
+        dispatch(setCurrentItem(props.item));
         history.push({
             pathname:`/browse/item/${type}/${_id}`,
     });
