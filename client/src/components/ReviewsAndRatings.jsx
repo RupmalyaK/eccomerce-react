@@ -56,7 +56,7 @@ const ReviewsAndRatings = props => {
         const maxLengthOfTextArea = "120";
 
         const currentUserReviewIndex = reviews.findIndex(review => {
-            if(review.user.uid === currentUser.id)
+            if(currentUser && review.user.uid === currentUser.id)
                 {
                     return true;
                 }
