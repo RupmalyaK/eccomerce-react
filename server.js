@@ -45,18 +45,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({"extended":true}));
 app.use(cors());
 
+
+/*EXPRESS ROUTES */
+collectionsRoutes(app); 
+collectionRoutes(app);
+itemsRoutes(app);
+reviewRoutes(app, admin);
+
+/*PRODUCTION CONFIG*/
+
 if(process.env.NODE_ENV ==="production")
-    {
+    {   
         app.use(express.static(path.join(__dirname, "client/build")));
 
-       /* app.get('*', (req, res) => {
+       app.get('*', (req, res) => {
             res.sendFile(path.join(__dirname, "client/build" , "index.html"));
-        });*/
+        });
     }
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build" , "index.html"));
-});
+/*STARTING APP*/    
 app.listen(port , err => {
     if(err)
         {
@@ -65,6 +72,7 @@ app.listen(port , err => {
      console.log("server running on port ", + port);     
 });  
 
+/*MONGOOSE CONFIG*/
 (async () => {
     try {
     await mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true, dbName: "snatchkart-db"});
@@ -79,12 +87,8 @@ app.listen(port , err => {
         }
 })();
 
-collectionsRoutes(app); 
-collectionRoutes(app);
-itemsRoutes(app);
-reviewRoutes(app, admin);
 
-
+/*STRIPE CONFIG*/
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const test = app.post("/payment" , (req, res) => { 

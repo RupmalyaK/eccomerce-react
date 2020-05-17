@@ -22,6 +22,9 @@ import ReviewsAndRatings from "./components/ReviewsAndRatings";
 
 
 
+
+
+
 const LayoutWithLoadingSpinner = LoadingSpinner(Layout);
 const ItemPageWithLoadingSpinner = LoadingSpinner(Itempage);
 const BrowsePageWithLoadingSpinner = LoadingSpinner(BrowsePage);

@@ -66,7 +66,7 @@ export const fetchFeaturedItemsAsync = () => {
                 url:"/api/collections/collection/items/all?isFeatured=true",
                 method:"GET",
               
-            });
+            }); console.log("this are f items",featuredItems);
            dispatch(fetchFeaturedItemsSuccess(featuredItems.data));
         }
      catch(error)
