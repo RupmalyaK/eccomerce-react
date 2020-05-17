@@ -10,14 +10,14 @@ import collectionRoutes from "./routes/collectionRoutes.js";
 import itemsRoutes from "./routes/itemsRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import admin from "firebase-admin";
-import secrets from "./secrets.js"
+
 
 
 if(process.env.NODE_ENV !== "production")
     {
         dotEnv.config(); 
     }
-console.log("testing env",process.env.FB_PROJECT_ID);
+
 
 admin.initializeApp({
     credential: admin.credential.cert({
@@ -49,11 +49,14 @@ if(process.env.NODE_ENV ==="production")
     {
         app.use(express.static(path.join(__dirname, "client/build")));
 
-        app.get('*', (req, res) => {
+       /* app.get('*', (req, res) => {
             res.sendFile(path.join(__dirname, "client/build" , "index.html"));
-        });
+        });*/
     }
 
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, "client/build" , "index.html"));
+    });
 app.listen(port , err => {
     if(err)
         {
