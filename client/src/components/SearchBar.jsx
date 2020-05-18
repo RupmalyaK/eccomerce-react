@@ -36,7 +36,7 @@ const SearchBar = (props) => {
     const items = useSelector(selectAutocompleteCollections);
     const history = useHistory(); 
     const suggestionBoxRef = useRef(null); 
-    const suggestionRef = useRef(null); 
+ 
     
     
     const handleChange = e => {
@@ -66,7 +66,7 @@ const SearchBar = (props) => {
             }
         const suggestions = items.map(item => {
             return (
-                <Suggestion ref={suggestionRef} key={item._id} style={{cursor:"pointer"}} onClick={e => handleSuggestionClick(item)}>
+                <Suggestion key={item._id} style={{cursor:"pointer"}} onClick={e => handleSuggestionClick(item)}>
                     <h6 className="d-inline">{item.name}</h6>
                     <em style={{float:"right"}}>{item.type}</em>
                 </Suggestion>
@@ -77,17 +77,13 @@ const SearchBar = (props) => {
     }
 
     const handleClickOutsideSuggestionBox = e => {
-       if(suggestionRef && suggestionRef.current) 
-        {
-            setIsOpen(true);
-            return;
-        }
-      
         if(suggestionBoxRef.current.contains(e.target))
             {
+    
                 setIsOpen(true);
                 return;
             }
+            
             setIsOpen(false); 
     }
 
@@ -113,8 +109,8 @@ const SearchBar = (props) => {
     }
 
 return(
-    <Form inline style={{position:"relative"}} {...rest}>
-        <FormControl ref={suggestionBoxRef} type="text" onChange={handleChange} placeholder="Search product..." className=" m-0 w-75" />
+    <Form inline style={{position:"relative"}} {...rest} ref={suggestionBoxRef}>
+        <FormControl type="text" onChange={handleChange} placeholder="Search product..." className=" m-0 w-75" />
         {compact ? <></> : <Button className="ml-1" onClick={handleClickSearch} variant="outline-success">Search</Button>}
         {(!isOpen || items.length === 0 )? <></> :(
         <SuggestionBox >

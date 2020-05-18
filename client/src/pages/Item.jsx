@@ -19,7 +19,7 @@ const ItemPage = props => {
     const currentItem = useSelector(selectCurrentItem);
     const dispatch = useDispatch();
     const {itemid, type} = useParams();
-    console.log("TESTING CURREENT ITEM", currentItem);
+
    useEffect(() => {
        if(Object.keys(currentItem).length === 0 && currentItem.constructor === Object)
         {
