@@ -1,12 +1,11 @@
 import CollectionsModel from "../model/CollectionsModel.js";
-import {checkIfAuthenticated} from "../controller/authController.js";
+import {isAuthenticated} from "../controller/authController.js";
 import {searchItemsByName, sortByPrice, sortByName} from "../controller/collectionsController.js";
 
 const collectionsRoutesCreator = (app) => {
 const routeString = "/api/collections";    
 app.route(routeString)
 .get(async (req, res, next) => {
-
    try{
     const dataObj = await CollectionsModel.find({});
      const newDataObj = {};
@@ -24,9 +23,9 @@ app.route(routeString)
 })
 .post(async (req, res, next) => {
     const {collections} = req.body;
-    if (!collections)
+    if (!collections || collections.isArray())
         {
-            res.status(400).send({"error":"need to include collections array"}); 
+            res.status(400).send({"error":"Request body need to include collections array"}); 
             return; 
         }
     try{

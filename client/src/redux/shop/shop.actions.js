@@ -28,13 +28,12 @@ const fetchCollectionsFailure = (errorMessage) =>
 
 
 export const fetchCollectionsStartAsync =  () => {
+
     return async (dispatch )=> {
-       dispatch(fetchCollectionsStart()); 
-   
         try{
              const collections = await axios({
                  url:"/api/collections",
-                 method:"GET",
+                 method:"GET"
              });  
              dispatch(fetchCollectionsSuccess(collections.data));   
            }

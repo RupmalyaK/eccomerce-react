@@ -5,12 +5,12 @@ import RatingStar from "./RatingStar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
 import StarRatings from "react-star-ratings"; 
-import {getFirebaseUserById} from "../firebase/firebase.util.js";
 import {selectCurrentUser} from "../redux/user/user.selector.js";
-import {selectCurrentItem} from "../redux/browse/browse.selector.js";
 import {Form} from "react-bootstrap";
 import axios from "axios";
+import {auth} from "../firebase/firebase.util";
 import CustomButton from "./CustomButton.jsx";
+
 
 const SendReviewButton = styled(CustomButton)`
 
@@ -101,6 +101,8 @@ const ReviewsAndRatings = props => {
 
         const handleSendReviewClick = async e => {
             e.preventDefault();
+            const accessToken = await auth.currentUser.getIdToken();
+            
             try{
                 await axios(
                     {
@@ -112,6 +114,9 @@ const ReviewsAndRatings = props => {
                             userObjectId:currentUser.id,
                             rating:currentRating,
                             text
+                        },
+                        headers: {
+                            authorization:"Bearer " + accessToken,
                         }
                     }
                 );

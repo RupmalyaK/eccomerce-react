@@ -9,7 +9,6 @@ import {Row, Col , Container as BContainer} from "react-bootstrap";
 //margin:100px 20px 0px 20px;
 const Container = styled.div`
 margin-top:100px;
-background:orange;
 padding:5px 10px;
 
 `;
@@ -51,7 +50,7 @@ return(
         <Title style={{display:"block", textAlign:"center"}}> 
             {categoryid.toUpperCase()}
         </Title>
-            <Row  style={{background:"yellow"}}>
+            <Row>
             {displayCollection()}
             </Row>
            

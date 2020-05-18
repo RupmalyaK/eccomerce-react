@@ -1,5 +1,10 @@
 import admin from "firebase-admin"; 
 
+const notAuthorizedErrorThrow = (res) => {
+  return res
+           .status(401)
+           .send({ error: 'You are not authorized to make this request' });
+}
 const getAuthToken = (req, res, next) => {
     if (
       req.headers.authorization &&
@@ -12,10 +17,15 @@ const getAuthToken = (req, res, next) => {
     next();
   };
 
-  export const checkIfAuthenticated = (req, res, next) => {
+  export const isAuthenticated = (req, res, next) => {
     getAuthToken(req, res, async () => {
        try {
          const { authToken } = req;
+         if(authToken === null)
+          {
+            notAuthorizedErrorThrow(res);
+            return;
+          }
          const userInfo = await admin
            .auth()
            .verifyIdToken(authToken);
@@ -23,9 +33,8 @@ const getAuthToken = (req, res, next) => {
          return next();
        } catch (e) { 
         console.log(e);
-         return res
-           .status(401)
-           .send({ error: 'You are not authorized to make this request' });
+        notAuthorizedErrorThrow(res);
+        return;
        }
      });
    };

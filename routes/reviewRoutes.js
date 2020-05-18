@@ -1,13 +1,14 @@
 import CollectionsModel from "../model/CollectionsModel.js";
 import mongoose from "mongoose";
 import {calculateAverageRating} from "../controller/reviewController.js"
-import {checkIfAuthenticated} from "../controller/authController.js";
+import {isAuthenticated} from "../controller/authController.js";
 
-const reveiwRoutesCreator = (app, admin) => {
+const reveiwRoutes = (app, admin) => {
     const db = admin.firestore();
     const routeString = "/api/collections/collection/item";
+
     app.route(routeString + "/review")
-    .post(async (req, res, next) => {
+    .post(isAuthenticated,async (req, res, next) => {
         const {rating, text , itemObjectId, itemType,  userObjectId} = req.body; 
         if(typeof rating === undefined || rating > 5 || rating < 0)
             {
@@ -47,7 +48,7 @@ const reveiwRoutesCreator = (app, admin) => {
 
 }
 
-export default reveiwRoutesCreator; 
+export default reveiwRoutes; 
 
 
 /**
