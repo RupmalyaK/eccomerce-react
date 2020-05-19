@@ -72,7 +72,6 @@ export const searchItemsByName = (searchObj) => {
 export const sortByPrice = (items, isAsc) =>
     {
         items.sort((itemA, itemB) => {
-        
             if (isAsc === "true")
                 {
                    
