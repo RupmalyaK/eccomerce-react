@@ -7,9 +7,7 @@ import {selectCurrentUser,selectUnsubscriber} from "./redux/user/user.selector.j
 import {checkSessionAsync} from "./redux/user/user.action.js";
 import {selectIsSigningIn, selectIsCheckingSession, selectSignInError, selectSignUpError, selectIsSigningUp} from "./redux/user/user.selector.js";
 import {selectIsFetching as selectIsFetchingItems} from "./redux/browse/browse.selector.js";
-import Layout from "./components/Layout"; 
-import BrowsePage from "./pages/Browse.jsx";
-import Itempage from "./pages/Item.jsx";
+import Itempage from "./pages/Item";
 import ReviewsAndRatings from "./components/ReviewsAndRatings";
 import SignInAndSignUpPage from "./pages/SignIn&SignUp";
 import CheckoutPage from "./pages/Checkout";
@@ -17,12 +15,9 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import Header from "./components/Header";
 import Homepage from "./pages/Home"; 
 import Shoppage from "./pages/Shop";
+import Layout from "./components/Layout"; 
+import BrowsePage from "./pages/Browse";
 import GlobalStyle from "./components/GlobalStyle";
-
-
-
-
-
 
 
 const LayoutWithLoadingSpinner = LoadingSpinner(Layout);

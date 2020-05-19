@@ -1,17 +1,13 @@
 import React, {useEffect} from "react";
-import styled from "styled-components"; 
 import {useSelector, useDispatch} from "react-redux"; 
-import {selectIsFetchingCurrentItem, selectCurrentItem} from "../redux/browse/browse.selector.js"; 
-import {fetchCurrentItemAsync} from "../redux/browse/browse.actions.js";
+import {selectIsFetchingCurrentItem, selectCurrentItem} from "../../redux/browse/browse.selector.js"; 
+import {fetchCurrentItemAsync} from "../../redux/browse/browse.actions.js";
 import {useParams} from "react-router-dom";
-import LoadingSpinner from "../components/LoadingSpinner";
-import Product from "../components/Product";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import Product from "../../components/Product";
 
 
 const ProductWithLoadingSpinner = LoadingSpinner(Product); 
-const Container = styled.div`
-margin-top:100px;
-`;
 
 
 const ItemPage = props => {
@@ -27,9 +23,9 @@ const ItemPage = props => {
         }
     },[itemid,type]);
     return (
-        <Container>
+        <div style={{marginTop:"100px"}}>
            <ProductWithLoadingSpinner isLoading={isFetchingCurrentItem} /> 
-        </Container>
+        </div>
     );
 }
 

@@ -1,23 +1,18 @@
 import React, {useEffect} from "react"; 
-import styled from "styled-components"; 
 import {useParams} from "react-router-dom";
 import {Route} from "react-router-dom"; 
-import {fetchCollectionsStartAsync} from "../redux/shop/shop.actions.js";
 import {useDispatch, useSelector} from "react-redux";
-import {selectIsFetching} from "../redux/shop/shop.selector.js"
-import LoadingSpinner from "../components/LoadingSpinner";
-import CollectionOverview from "../components/CollectionsOverview";
-import CollectionPage from "./Collection";
+import {fetchCollectionsStartAsync} from "../../redux/shop/shop.actions.js";
+import {selectIsFetching} from "../../redux/shop/shop.selector.js"
+import LoadingSpinner from "../../components/LoadingSpinner";
+import CollectionOverview from "../../components/CollectionsOverview";
+import CollectionPage from "./../Collection";
+import {Container} from "./style.jsx";
 
 const CollectionOverviewWithSpinner = LoadingSpinner(CollectionOverview);
 const CollectionPageWithSpinner = LoadingSpinner(CollectionPage);
 
-const Container = styled.div`
-width:100vw;
-height:100vh;
-max-width:100%;
-max-height:100%;
-`;
+
 
 
 const Shop = (props) => {
