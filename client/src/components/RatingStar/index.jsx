@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import StarRatings from "react-star-ratings"; 
 import {Container} from "./style.jsx";
 

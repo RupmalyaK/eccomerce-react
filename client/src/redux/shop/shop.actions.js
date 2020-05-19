@@ -1,7 +1,6 @@
 import shopActionTypes from "./shop.types.js";
-import {auth} from "../../firebase/firebase.util.js"; 
 import axios from "axios";
-import {collectionsArrToObj} from "../../util.js";
+
 
 const fetchCollectionsStart = () => {
     return {
@@ -30,6 +29,7 @@ const fetchCollectionsFailure = (errorMessage) =>
 export const fetchCollectionsStartAsync =  () => {
 
     return async (dispatch )=> {
+        dispatch(fetchCollectionsStart());
         try{
              const collections = await axios({
                  url:"/api/collections",
@@ -65,7 +65,7 @@ export const fetchFeaturedItemsAsync = () => {
                 url:"/api/collections/collection/items/all?isFeatured=true",
                 method:"GET",
               
-            }); console.log("this are f items",featuredItems);
+            });
            dispatch(fetchFeaturedItemsSuccess(featuredItems.data));
         }
      catch(error)

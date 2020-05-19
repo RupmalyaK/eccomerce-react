@@ -1,12 +1,12 @@
 import React from "react"; 
 import {useSelector} from "react-redux"; 
-import {Row, Col , Container as BContainer} from "react-bootstrap"; 
+import {Row, Col} from "react-bootstrap"; 
 import {selectCollection} from "../../redux/shop/shop.selector.js";
 import {useParams} from "react-router-dom";
 import CollectionItem from "../../components/CollectionItem"; 
-import {Container,Title,Items} from "./style.jsx";
+import {Container,Title} from "./style.jsx";
 
-const Collection = (props) => {
+const Collection = () => {
 const {categoryid} = useParams();
 const collection = useSelector(selectCollection(categoryid));
 

@@ -6,7 +6,7 @@ export const toMongoDB = async () => {
       Object.keys(collections).forEach(async (key) => {
           const collection = collections[key];
           const {title, routeName} = collection; 
-          let res = await axios({
+           await axios({
             url:"/api/collections/collection",
             method:"post",
             data:{
@@ -61,7 +61,7 @@ export const toMongoDB = async () => {
                   sizes.push('XLL');
                 }    
             }  
-          res = await axios({
+           await axios({
             url:"/api/collections/collection/items/",
             method:"post",
             data:{
@@ -86,7 +86,7 @@ export const toMongoDB = async () => {
   }
 
 export const collectionsArrToObj = (collectionsArr) => {
-    console.log("::DEBUGGG", collectionsArr);
+  
     const newObj = {};
     collectionsArr.forEach(collection => {
         const {title , ...rest} = collection; 

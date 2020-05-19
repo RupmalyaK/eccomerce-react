@@ -1,5 +1,4 @@
 import React from "react"; 
-import styled from "styled-components"; 
 import SignIn from "../../components/SignIn"; 
 import SignUp from "../../components/SignUp"; 
 import {Container} from "./style.jsx";

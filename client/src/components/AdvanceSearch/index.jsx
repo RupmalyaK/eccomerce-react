@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react"; 
-import styled from "styled-components"; 
+import React, {useState} from "react"; 
 import {Row,Col,Form,Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux"; 
 import {fetchItemsAsync} from "../../redux/browse/browse.actions.js";
@@ -43,7 +42,7 @@ const AdvanceSearch = props => {
     const removeCategory = category => {
         if(categories.indexOf(category) !== -1 )
             {
-                const newCategories = categories.filter(elem => elem != category );
+                const newCategories = categories.filter(elem => elem !== category );
                 setCategories(newCategories);
             }
     }

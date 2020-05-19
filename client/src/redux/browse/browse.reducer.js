@@ -26,7 +26,7 @@ const browseReducer = (state = INITIAL_STATE, action) => {
             case browseActionTypes.FETCH_ITEMS_FAILURE:
                     return {...state, isFetching:false, fetchError:payLoad};
             case browseActionTypes.FETCH_ITEMS_SUCCESS:
-                    const {items, searchString, price , priceRange, sortBy, categories, isFeatured,isAsc} = payLoad;
+                    const {items, searchString, priceRange, sortBy, categories, isFeatured,isAsc} = payLoad;
                     const numberOfItems = items.length.toString(); 
                     return {...state, isFetching:false, items, searchString, priceRange, sortBy, numberOfItems, categories, isFeatured,isAsc}; 
                     

@@ -15,7 +15,7 @@ import {BuyNowButton} from "./style.jsx";
 
 const ProductRightPanel = () => {
     const item = useSelector(selectCurrentItem); 
-    const {isFeatured, name, dateCreated:dateAdded, averageRating,reviews,price, type,offers,sizes } = item;  
+    const {isFeatured, name,price, type,offers,sizes } = item;  
     const history = useHistory();
     const dispatch = useDispatch(); 
     
@@ -38,7 +38,7 @@ const ProductRightPanel = () => {
                                 <h1 className="name" style={{textAlign:"center"}}>{name}</h1>
                                 <span className="type" style={{float:"right", marginRight:"30px"}}><i>{type}</i></span>
                                 <span className="seller" style={{float:"left",marginLeft:"10px"}}><i>Sold By: {"Rupmalya Kumar"}</i></span>
-                                <div style={{background:"red"}} style={{display:"inline-block", width:"30vw"}}>
+                                <div style={{display:"inline-block", width:"30vw"}}>
                                  {isFeatured ? ( <div className="featured" style={{float:"right",marginRight:"10px"}}>
                                     <FontAwesomeIcon icon={faCheckCircle}/><span>Featured!</span>   
                                 </div> ): <></>}   

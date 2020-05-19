@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react"; 
 import {useDispatch,useSelector} from "react-redux";
-import styled from "styled-components"; 
 import {Row,Col} from "react-bootstrap";
 import {addItemToCart} from "../../redux/cart/cart.action.js";
 import {selectCurrentItem} from "../../redux/browse/browse.selector.js";
@@ -32,7 +31,7 @@ const ProductLeftPanel = () => {
         const allImagesElements = allImages.map((imageUrl,index) => {
              return(
                  <div className="img-button" key={index}>
-                       <img onMouseOver={handleMouseEnterImageButton } className= "secondary-img" src={imageUrl} alt="secondaryImage"/>  
+                       <img onMouseOver={handleMouseEnterImageButton } className= "secondary-img" src={imageUrl} alt="secondary"/>  
                  </div> 
              );
          })
@@ -49,7 +48,7 @@ const ProductLeftPanel = () => {
                             </div>
                         </Col>
                         <Col sm={11}>
-                            <img className="primary-img" src={mainImageUrl} alt="primary image"/>
+                            <img className="primary-img" src={mainImageUrl} alt="primary"/>
                             <div className="addtocart-wishlist-button" style={{marginTop:"5px",display:"flex",width:"70%",justifyContent:"center"}}>
                                 <CustomButton onClick = {handleClickAddToCart} style={{display:"block"}}>Add To Cart</CustomButton>
                                 <CustomButton  style={{display:"block", marginLeft:"10px"}}>Add to Wishlist</CustomButton>

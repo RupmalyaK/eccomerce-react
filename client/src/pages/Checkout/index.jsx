@@ -1,5 +1,4 @@
 import React from "react"; 
-import styled from "styled-components"; 
 import {useSelector} from "react-redux"; 
 import {selectCartItems, selectCartItemsTotalPrice, selectBuyNowItem} from "../../redux/cart/cart.selector.js";
 import {useParams} from "react-router-dom"; 
@@ -9,7 +8,7 @@ import {Row,Col} from "react-bootstrap";
 import {Container,CheckoutHeader,HeaderBlock,Total,TestWarning} from "./style.jsx";
 
 
-const Checkout = (props) => {
+const Checkout = () => {
 const cartItems = useSelector(selectCartItems);
 const total = useSelector(selectCartItemsTotalPrice);  
 const buyNowItem = useSelector(selectBuyNowItem); 

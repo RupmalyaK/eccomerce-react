@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import styled from "styled-components";
+import React, {useEffect} from 'react';
 import {useSelector , useDispatch} from "react-redux"; 
-import {Route , Switch , Redirect, useParams} from "react-router-dom"; 
+import {Route , Switch , Redirect} from "react-router-dom"; 
 import {useHistory} from "react-router-dom";
-import {selectCurrentUser,selectUnsubscriber} from "./redux/user/user.selector.js";
+import {selectCurrentUser} from "./redux/user/user.selector.js";
 import {checkSessionAsync} from "./redux/user/user.action.js";
 import {selectIsSigningIn, selectIsCheckingSession, selectSignInError, selectSignUpError, selectIsSigningUp} from "./redux/user/user.selector.js";
 import {selectIsFetching as selectIsFetchingItems} from "./redux/browse/browse.selector.js";
@@ -21,16 +20,9 @@ import GlobalStyle from "./components/GlobalStyle";
 
 
 const LayoutWithLoadingSpinner = LoadingSpinner(Layout);
-const ItemPageWithLoadingSpinner = LoadingSpinner(Itempage);
 const BrowsePageWithLoadingSpinner = LoadingSpinner(BrowsePage);
 
 
-const Container = styled.div`
-`;
-
-const Pages = styled.div`
-padding: 20px 20px; 
-`;
 
 const App = () => {
   const isCheckingSession = useSelector(selectIsCheckingSession);
@@ -71,7 +63,7 @@ const App = () => {
   
 
     return (
-      <Container>
+      <div>
         <GlobalStyle />
         <LayoutWithLoadingSpinner isLoading={isSigningIn || isCheckingSession || isSigningUp}>
         <Header/>
@@ -90,7 +82,7 @@ const App = () => {
            <Route path="/checkout/:isBuyNow" exact component={CheckoutPage} />   
         </Switch>
        </LayoutWithLoadingSpinner>
-      </Container>
+      </div>
   );
 }
 

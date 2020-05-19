@@ -1,9 +1,6 @@
-import React, {useState} from "react"; 
-import styled from "styled-components";
-import {useHistory} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {selectCurrentItem} from "../../redux/browse/browse.selector.js"; 
+import React from "react"; 
 import {useSelector} from "react-redux"; 
+import {selectCurrentItem} from "../../redux/browse/browse.selector.js"; 
 import {Row} from "react-bootstrap";
 import ReviewsAndRatings from "../ReviewsAndRatings";
 import ProductLeftPanel from "../ProductLeftPanel";
@@ -14,9 +11,7 @@ import {Container} from "./style.jsx";
 const Product = props => {
     const item = useSelector(selectCurrentItem); 
     const {_id,averageRating,reviews, type} = item;  
-    const [selectedSize, setSelectedSize] = useState(item.sizes ? item.sizes[0] : null);
-    const history = useHistory();
-    const dispatch = useDispatch(); 
+
 
     if(Object.keys(item).length === 0)
         {

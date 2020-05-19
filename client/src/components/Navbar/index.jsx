@@ -4,7 +4,7 @@ import {ReactComponent as Logo} from "../../images/crown.svg";
 import {useSelector , useDispatch} from "react-redux";
 import {selectCurrentUser} from "../../redux/user/user.selector.js";
 import {signOutAsync} from "../../redux/user/user.action.js";
-import {Navbar, Nav, NavItem , Container as BContainer} from "react-bootstrap";
+import {Navbar, Nav} from "react-bootstrap";
 import {Container,CustomBContainer} from "./style.jsx";
 import SearchBar from "../SearchBar";
 import CartIcon from "../CartIcon";

@@ -17,7 +17,7 @@ const Specifications = (props) => {
     }
 
     return (
-        <div className="shadow summary" style={{width:"100%", height:"250px",marginTop:"10px",padding:"0px 20px",fontSize:"1.5rem",marginTop:"20px"}}>
+        <div className="shadow summary" style={{width:"100%", height:"250px",padding:"0px 20px",marginTop:"20px"}}>
             <h2>Specifications</h2>
             <Row className="padding-0 max-width">
                 <Col xs={6}>

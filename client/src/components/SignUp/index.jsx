@@ -1,5 +1,4 @@
 import React, {useState,useEffect} from "react"; 
-import styled from "styled-components"; 
 import {useSelector , useDispatch} from "react-redux"; 
 import {selectSignUpError} from "../../redux/user/user.selector.js";
 import {signUpAsync} from "../../redux/user/user.action.js";
@@ -22,7 +21,7 @@ const history = useHistory();
 const dispatch = useDispatch();
 
 const handleSubmit = async (e) => {
-    if (password != confirmPassword)
+    if (password !== confirmPassword)
     {
         alert("Password and Confirm password didn't match");
         return; 

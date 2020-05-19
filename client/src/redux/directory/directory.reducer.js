@@ -33,7 +33,7 @@ const INITIAL_STATE = {
 }
 
 const directoryReducer = (state = INITIAL_STATE , action) => {
-    const {type , payLoad} = action; 
+    const {type} = action; 
     switch(type)
         {
             default:

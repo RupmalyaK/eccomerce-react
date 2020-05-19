@@ -10,7 +10,7 @@ const publishableKey = "pk_test_qhHgNG3x3y8JTmQuCZG96jDu00Y43Njp5E";
 
 const handleToken = async token => {
    try{ 
-   const res = await axios({
+     await axios({
         url:"payment",
         method:"post",
         data:{
