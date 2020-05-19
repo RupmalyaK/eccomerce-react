@@ -1,10 +1,7 @@
 import React from "react"; 
-import styled from "styled-components"; 
 import StripeCheckout from "react-stripe-checkout"; 
 import axios from "axios";
 
-
-const Container = styled.div``;
 
 const  StripeButton = (props) => {
 const {price} = props; 

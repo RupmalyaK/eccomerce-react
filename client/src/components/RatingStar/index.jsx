@@ -1,16 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import StarRatings from "react-star-ratings"; 
-
-
-
-
-const Container = styled.div`
-margin:0 auto;
-width:auto;
-background:yellow;
-`;
-
+import {Container} from "./style.jsx";
 
 const RatingStar = props => {
     const {rating,starSize,spacing} = props; 

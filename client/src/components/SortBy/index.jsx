@@ -1,22 +1,12 @@
 
-import React, {useState, useEffect} from "react"; 
-import styled from "styled-components"; 
+import React from "react"; 
 import {ButtonToolbar, ToggleButtonGroup, ToggleButton} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchItemsAsync} from "../../redux/browse/browse.actions.js";
 import {selectSortBy, selectIsAsc} from "../../redux/browse/browse.selector.js";
+import {Container} from "./style.jsx";
 
 
-const Container = styled.div`
-    margin-bottom:20px;
-    padding:20px;
-    border:.5px solid black;
-
-    .is-asc {
-        float:right !important;
-        
-    }
-`;
 
 const SortBy =  () => {
     const sortBy = useSelector(selectSortBy); 

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react"; 
-import styled from "styled-components"; 
 import {useSelector} from "react-redux";
 import {signInWithGoogle, auth} from "../../firebase/firebase.util.js"; 
 import { useDispatch} from "react-redux"; 
@@ -8,28 +7,8 @@ import {selectSignInError} from "../../redux/user/user.selector.js";
 import {useHistory} from "react-router-dom"; 
 import FormInput from "../FormInput";
 import Button from "../CustomButton";
+import {Container,Title,Form,ButtonsContainer} from "./style.jsx";
 
-
-
-
-const Container = styled.div`
-width:500px;
-display:flex;
-flex-direction:column;
-`;
-
-
-const Title = styled.h2`
-margin: 10px 0px;
-`;
-
-const Form = styled.form`
-`;
-
-const ButtonsContainer = styled.div`
-display:flex;
-justify-content:space-between;
-`;
 
 const SignIn = (props) => {
 const [email, setEmail] = useState('');

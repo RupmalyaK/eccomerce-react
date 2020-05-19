@@ -7,22 +7,8 @@ import {clearSignUpError} from "../../redux/user/user.action";
 import {useHistory} from "react-router-dom"; 
 import FormInput from "../FormInput";
 import Button from "../CustomButton"; 
+import {Container,Title} from "./style.jsx";
 
-
-
-
-const Container = styled.div`
-display: flex;
-flex-direction: column;
-width: 500px;
-`; 
-
-const Title = styled.h2`
-margin: 10px 0;
-`;
-
-const Subtext = styled.span``;
-const Form = styled.form``;
 
 
 const SignUp = (props) => {
@@ -62,14 +48,14 @@ if (signUpError)
 return(
 <Container>
     <Title>If you don't have an account</Title>
-    <Subtext>let's create one</Subtext>
-    <Form>
+    <span>let's create one</span>
+    <form>
         <FormInput type="text" label="Display name" value={displayName} setState={setDisplayName} required />
         <FormInput type="email" label="Email" value={email} setState={setEmail} required />
         <FormInput type="password" label="Password" value={password} setState={setPassword} required />
         <FormInput type="password" label="Confirm password" value={confirmPassword} setState={setConfirmPassword} required />
         <Button type="submit" handleClick={handleSubmit}>Sign up</Button>
-    </Form>
+    </form>
 </Container>
 );
 }

@@ -1,30 +1,6 @@
 import React, {useState} from "react"; 
-import styled from "styled-components";
 import {Carousel, Jumbotron} from "react-bootstrap"; 
-import CustomButton from "../CustomButton";
-
-const Container = styled.div`
-height:90vh;
-width:100%;
-`;
-
-const PHDiv = styled.div`
-width:100%;
-height:100vh;
-background-image: url(${props => props.url});
-background-repeat:no-repeat;
-background-position:center;
-background-size:cover;
-background-color: ${props => props.color};
-
-`;
-
-const ShopNowButton = styled(CustomButton)`
-margin:0 auto;
-padding:0 !important;
-
-
-`;
+import {PHDiv, ShopNowButton} from "./style.jsx"; 
 
 const Slider = (props) => {
     const [index, setIndex] = useState(0);

@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from "react";
 import {useSelector} from "react-redux";
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
 import StarRatings from "react-star-ratings"; 
 import {selectCurrentUser} from "../../redux/user/user.selector.js";
@@ -9,42 +7,10 @@ import {Form} from "react-bootstrap";
 import axios from "axios";
 import {auth} from "../../firebase/firebase.util";
 import CustomButton from "../CustomButton";
+import {Container,StarIcon} from "./style.jsx";
 
 
-const SendReviewButton = styled(CustomButton)`
 
-`;
-
-
-const Container = styled.div`
-
-width:1080px;
-margin:0 auto;
-margin-top:35px;
-margin-bottom:10px;
-.averageRating{
-    display:inline-flex;
-    padding:5px;
-    flex-direction:columns;
-    margin-bottom:5px;
-  
-}
-
-.average-rating-points{
-
-    align-self:center;
-}
-`;
-
-const StarIcon = styled(FontAwesomeIcon)`
-width:50px;
-height:75px;
-color:#171B24;
-font-size:20px;
-`;
-
-
-const useForceUpdate = () => useState()[1];
 
 const ReviewsAndRatings = props => {
         const {averageRating, reviews, itemObjectId, itemType} = props; 
@@ -174,7 +140,7 @@ const ReviewsAndRatings = props => {
                                 <Form.Label>Write your own review here (Limit:{maxLengthOfTextArea - text.length} more characters)</Form.Label>
                                 <Form.Control as="textarea" rows="3" maxLength={maxLengthOfTextArea} onChange={handleWriteYourReviewChange}/>
                             </Form.Group>
-                            <SendReviewButton onClick={handleSendReviewClick}>Send</SendReviewButton>    
+                            <CustomButton onClick={handleSendReviewClick}>Send</CustomButton>    
                     </div>
                 );
         }
