@@ -3,8 +3,8 @@ import styled from "styled-components";
 import {useSelector} from "react-redux"; 
 import {selectCartItems, selectCartItemsTotalPrice, selectBuyNowItem} from "../redux/cart/cart.selector.js";
 import {useParams} from "react-router-dom"; 
-import CheckoutItem from "../components/CheckoutItem.jsx";
-import StripeCheckoutButton from "../components/StripeButton.jsx";
+import CheckoutItem from "../components/CheckoutItem";
+import StripeCheckoutButton from "../components/StripeButton";
 import {Row,Col} from "react-bootstrap";
 
 const Container = styled.div`

@@ -1,12 +1,13 @@
-import React, {useEffect} from "react"; 
+import React from "react"; 
 import {useSelector, useDispatch} from "react-redux"; 
 import {selectItems} from "../redux/browse/browse.selector.js";
 import styled from "styled-components";
-import {Row,Col,Container as BContainer} from "react-bootstrap"
-import BrowseItem from "../components/BrowseItem";
-import SortBy from "../components/SortBy.jsx";
-import AdvanceSearch from "../components/AdvanceSearch.jsx";
+import {Row,Col,Container as BContainer} from "react-bootstrap";
 import {selectNumberOfItems} from "../redux/browse/browse.selector.js"
+import BrowseItem from "../components/BrowseItem";
+import SortBy from "../components/SortBy";
+import AdvanceSearch from "../components/AdvanceSearch";
+
 
 
 const Container = styled.div`

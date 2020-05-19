@@ -1,15 +1,13 @@
-import React, {useState , useEffect} from "react"; 
+import React, {useEffect} from "react"; 
 import styled from "styled-components"; 
-import CollectionPreview from "../components/CollectionPreview.jsx";
 import {useParams} from "react-router-dom";
-import CollectionOverview from "../components/CollectionsOverview.jsx";
-import CollectionPage from "./Collection.jsx";
 import {Route} from "react-router-dom"; 
-import {firestore, convertCollectionsSnapshotToMap} from "../firebase/firebase.util.js";
 import {fetchCollectionsStartAsync} from "../redux/shop/shop.actions.js";
 import {useDispatch, useSelector} from "react-redux";
 import {selectIsFetching} from "../redux/shop/shop.selector.js"
-import LoadingSpinner from "../components/LoadingSpinner.jsx";
+import LoadingSpinner from "../components/LoadingSpinner";
+import CollectionOverview from "../components/CollectionsOverview";
+import CollectionPage from "./Collection";
 
 const CollectionOverviewWithSpinner = LoadingSpinner(CollectionOverview);
 const CollectionPageWithSpinner = LoadingSpinner(CollectionPage);

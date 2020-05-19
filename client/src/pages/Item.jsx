@@ -4,8 +4,8 @@ import {useSelector, useDispatch} from "react-redux";
 import {selectIsFetchingCurrentItem, selectCurrentItem} from "../redux/browse/browse.selector.js"; 
 import {fetchCurrentItemAsync} from "../redux/browse/browse.actions.js";
 import {useParams} from "react-router-dom";
-import LoadingSpinner from "../components/LoadingSpinner.jsx";
-import Product from "../components/Product.jsx";
+import LoadingSpinner from "../components/LoadingSpinner";
+import Product from "../components/Product";
 
 
 const ProductWithLoadingSpinner = LoadingSpinner(Product); 

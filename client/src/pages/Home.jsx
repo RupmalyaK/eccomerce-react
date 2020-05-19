@@ -1,26 +1,19 @@
 import React, {useState, useEffect} from "react"; 
 import styled from "styled-components"; 
-import MenuItems from "../components/MenuItems.jsx";
-import Slider from "../components/Slider.jsx";
+import MenuItems from "../components/MenuItems";
+import Slider from "../components/Slider";
 import {useDispatch, useSelector} from "react-redux";
 import {selectFeaturedItems} from "../redux/shop/shop.selector.js";
-import {Carousel,Container} from "react-bootstrap"; 
-import CollectionOverview from "../components/CollectionsOverview.jsx";
+import CollectionOverview from "../components/CollectionsOverview";
 import {selectIsFetchingFeaturedItems} from "../redux/shop/shop.selector.js"
-import LoadingSpinner from "../components/LoadingSpinner.jsx";
 import {fetchFeaturedItemsAsync} from "../redux/shop/shop.actions.js";
 
-//const CollectionOverviewWithSpinner = LoadingSpinner(CollectionOverview);
+
 const HomepageContainer = styled.div`
 overflow:hidden;
 `;
 
-
-
-
-
 const Homepage = () => {
-
     const [index, setIndex] = useState(0);
     const [direction, setDirection] = useState(null);
     const featuredItems = useSelector(selectFeaturedItems);

@@ -1,10 +1,11 @@
 import React from "react"; 
 import styled from "styled-components"; 
 import {useSelector} from "react-redux"; 
-import CollectionItem from "../components/CollectionItem.jsx"; 
+import {Row, Col , Container as BContainer} from "react-bootstrap"; 
 import {selectCollection} from "../redux/shop/shop.selector.js";
 import {useParams} from "react-router-dom";
-import {Row, Col , Container as BContainer} from "react-bootstrap"; 
+import CollectionItem from "../components/CollectionItem"; 
+
 
 //margin:100px 20px 0px 20px;
 const Container = styled.div`
