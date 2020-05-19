@@ -1,53 +1,17 @@
 import React from "react"; 
-import styled from "styled-components"; 
 import {useSelector, useDispatch} from "react-redux"; 
 import {hideCartDropdown,showCartDropdown} from "../../redux/cart/cart.action.js";
 import {selectCartItems } from "../../redux/cart/cart.selector.js";
 import {useHistory} from "react-router-dom";
-import Button from "../CustomButton"; 
 import CartItem from "../CartItem"; 
+import {Container,CartItems,CheckOutButton,EmptyMessage} from "./style.jsx";
 
-const Container = styled.div`
-position: absolute;
-width: 300px;
-height: 420px;
-display: flex;
-flex-direction: column;
-padding: 20px 5px;
-border: 1px solid black;
-background-color: white;
-top: 50px;
-right: 30px;
-z-index: 5;
-  `;
-
-
-const CartItems = styled.div`
-height:100%;
-width:100%%;
-display: flex;
-flex-direction: column;
-overflow-x:hieen;
-overflow-y:auto;
-`;
-
-const CheckOutButton = styled(Button)`
-margin-top: auto;
-font-size:11px;
-`
-
-const EmptyMessage = styled.span`
-font-size:18px;
-margin:50px auto;
-
-`;
 
 const CartDropdown = (props) => {
 
 const cartItems = useSelector(selectCartItems);
 const dispatch = useDispatch(); 
 const history = useHistory();
-
 
 const handleClick = e => {
 history.push("/checkout/false");

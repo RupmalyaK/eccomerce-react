@@ -1,74 +1,8 @@
 import React from "react"; 
-import styled from "styled-components"; 
 import {useDispatch} from "react-redux"; 
 import {removeItemFromCartCompletely, removeItemFromCart, addItemToCart, addBuyNowItem, removeBuyNowItem} from "../../redux/cart/cart.action.js";
 import {Row,Col} from "react-bootstrap";
-
-
-const nameQuantityPriceStyle = {
-    "width":"23%",
-}
-const Container = styled.div`
-width: 100%;
-display: flex;
-min-height: 100px;
-border-bottom: 1px solid darkgrey;
-padding: 15px 0;
-font-size: 20px;
-align-items: center;
-
-`;
-
-const ImageContainer = styled.div`
-width: 23%;
-padding-right: 99px;
-`;
-
-const Image = styled.img`
-width: 100%;
-height: 100%;
-`;
-
-
-
-const Name = styled.span`
-${nameQuantityPriceStyle}
-text-align:center;
-`;
-
-const Size = styled.span`
-text-align:center;
-`;
-
-
-const Quantity = styled.span`
-${nameQuantityPriceStyle};
-margin-left:10%;
-display:flex;
-`;
-
-const Value = styled.span`
-margin:0 10px;
-padding-top:2px;
-`;
-
-const Price = styled.span`
-${nameQuantityPriceStyle};
-text-align:center;
-
-
-`;
-
-const RemoveButton = styled.span`
-margin-left:12%;
-text-align:center;
-cursor: pointer;
-
-`;
-
-const Arrow = styled.div`
-cursor:pointer;
-`
+import {Container,ImageContainer,Image,Name,Size,Quantity,Value,Price,RemoveButton,Arrow} from "./style.jsx"
 
 
 const CheckoutItem = (props) => {  

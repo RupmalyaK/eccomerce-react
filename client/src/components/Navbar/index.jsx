@@ -1,27 +1,17 @@
-import React, {useState} from "react"; 
-import styled from "styled-components"; 
+import React from "react"; 
 import {NavLink, Link} from "react-router-dom";
 import {ReactComponent as Logo} from "../../images/crown.svg";
 import {useSelector , useDispatch} from "react-redux";
 import {selectCurrentUser} from "../../redux/user/user.selector.js";
 import {signOutAsync} from "../../redux/user/user.action.js";
 import {Navbar, Nav, NavItem , Container as BContainer} from "react-bootstrap";
+import {Container,CustomBContainer} from "./style.jsx";
 import SearchBar from "../SearchBar";
 import CartIcon from "../CartIcon";
 const {Link:BLink} = Nav;
 
 
 
-
-const Container = styled.div`
-
-.active{
-    border-bottom: 1px inset black;
-};`;
-
-const CustomBContainer = styled(BContainer)`
-max-width:1450px;
-`;
 
 
 const CustomNavbar = (props) => {

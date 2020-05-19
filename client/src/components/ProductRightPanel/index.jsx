@@ -1,5 +1,4 @@
 import React,{useState} from "react";
-import styled from "styled-components";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {selectCurrentItem} from "../../redux/browse/browse.selector.js"; 
@@ -8,15 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 import {useSelector} from "react-redux"; 
 import {Col} from "react-bootstrap";
-import CustomButton from "../CustomButton";
 import Sizes from "../Sizes";
 import Offers from "../Offers";
 import Specifications from "../Specifications";
+import {BuyNowButton} from "./style.jsx";
 
-const BuyNowButton = styled(CustomButton)`
-margin-top:10px;
-margin-buttom:10px;
-`; 
 
 const ProductRightPanel = () => {
     const item = useSelector(selectCurrentItem); 

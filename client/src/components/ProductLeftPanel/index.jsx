@@ -8,9 +8,6 @@ import CustomButton from "../CustomButton";
 
 
 
-const AddToCartButton = styled(CustomButton)`
-`; 
-
 
 const ProductLeftPanel = () => {
     const item = useSelector(selectCurrentItem);
@@ -54,8 +51,8 @@ const ProductLeftPanel = () => {
                         <Col sm={11}>
                             <img className="primary-img" src={mainImageUrl} alt="primary image"/>
                             <div className="addtocart-wishlist-button" style={{marginTop:"5px",display:"flex",width:"70%",justifyContent:"center"}}>
-                                <AddToCartButton onClick = {handleClickAddToCart} style={{display:"block"}}>Add To Cart</AddToCartButton>
-                                <AddToCartButton  style={{display:"block", marginLeft:"10px"}}>Add to Wishlist</AddToCartButton>
+                                <CustomButton onClick = {handleClickAddToCart} style={{display:"block"}}>Add To Cart</CustomButton>
+                                <CustomButton  style={{display:"block", marginLeft:"10px"}}>Add to Wishlist</CustomButton>
                             </div>
                             
                         </Col>

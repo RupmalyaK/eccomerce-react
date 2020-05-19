@@ -1,16 +1,9 @@
-import React , {useState} from "react"; 
-import styled from "styled-components"; 
+import React from "react"; 
 import {useSelector} from "react-redux"; 
 import {selectItems} from "../../redux/directory/directory.selector.js";
 import {Row, Col} from "react-bootstrap";
 import MenuItem from "../MenuItem"; 
-
-
-const Container = styled.div`
-padding:50px 10px;
-border:1px solid black;
-margin:10px;
-`;
+import {Container} from "./style.jsx";
 
 const MenuItems = (props) => {
 

@@ -1,30 +1,10 @@
 import React from "react"; 
-import styled from "styled-components"; 
 import {useSelector} from "react-redux"; 
 import {selectFeaturedItems} from "../../redux/shop/shop.selector.js";
 import {Row,Col} from "react-bootstrap";
 import CollectionPreview from "../CollectionPreview"; 
+import {Container} from "./style.jsx";
 
-const Container = styled.div`
-border:1px solid black;
-margin-left:10px;
-margin-top:55px;
-position:relative;
-
-.border-text{
-    width:auto;
-    top:-30px;
-    font-size:2rem;
-    height:40px;
-    background:#ffff;
-}
-
-.sm-text{
-    width:200px;
-    margin: 20px 0px;
-}
-
-`;
 
 const CollectionsOverview = (props) => {
     const featuredCollection = useSelector(selectFeaturedItems); 
