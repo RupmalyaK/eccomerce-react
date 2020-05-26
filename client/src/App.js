@@ -6,6 +6,7 @@ import {selectCurrentUser} from "./redux/user/user.selector.js";
 import {checkSessionAsync} from "./redux/user/user.action.js";
 import {selectIsSigningIn, selectIsCheckingSession, selectSignInError, selectSignUpError, selectIsSigningUp} from "./redux/user/user.selector.js";
 import {selectIsFetching as selectIsFetchingItems} from "./redux/browse/browse.selector.js";
+import Layout from "./components/Layout"; 
 import Itempage from "./pages/Item";
 import ReviewsAndRatings from "./components/ReviewsAndRatings";
 import SignInAndSignUpPage from "./pages/SignIn&SignUp";
@@ -14,9 +15,10 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import Header from "./components/Header";
 import Homepage from "./pages/Home"; 
 import Shoppage from "./pages/Shop";
-import Layout from "./components/Layout"; 
 import BrowsePage from "./pages/Browse";
+import ProfilePage from "./pages/Profile";
 import GlobalStyle from "./components/GlobalStyle";
+
 
 
 const LayoutWithLoadingSpinner = LoadingSpinner(Layout);
@@ -79,6 +81,9 @@ const App = () => {
             () => (
               currentUser ? <Redirect to='/'/> : <SignInAndSignUpPage/>)
               }  /> 
+           <Route path="/myprofile" exact render = {() => {
+            return currentUser ? <Redirect to='/signin'/> : <ProfilePage/> 
+           }} />   
            <Route path="/checkout/:isBuyNow" exact component={CheckoutPage} />   
         </Switch>
        </LayoutWithLoadingSpinner>

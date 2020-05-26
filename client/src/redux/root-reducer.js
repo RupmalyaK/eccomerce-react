@@ -6,6 +6,7 @@ import cartReducer from "./cart/cart.reducer.js";
 import directoryReducer from "./directory/directory.reducer.js";
 import shopReducer from "./shop/shop.reducer.js";
 import browseReducer from "./browse/browse.reducer.js";
+import systemReducer from "./system/system.reducer.js"; 
 
 
 const persistConfig = {
@@ -22,6 +23,7 @@ const rootReducer = combineReducers(
         directory:directoryReducer,
         shop:shopReducer,
         browse:browseReducer,
+        system:systemReducer,
     }
 );
 

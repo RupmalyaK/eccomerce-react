@@ -19,7 +19,7 @@ const Slider = (props) => {
               <PHDiv color="white" url={process.env.PUBLIC_URL + "/images/" + slide.imageName}>
               </PHDiv>
                 
-                <Carousel.Caption as={Jumbotron} style={{background:"#282828aa"}}>
+                <Carousel.Caption as={Jumbotron} style={{background:"#282828aa", zIndex:5}}>
                 <h1>{slide.mainText}</h1>
                 <p>{slide.secondaryText}</p>
                 <ShopNowButton>Shop Now</ShopNowButton>

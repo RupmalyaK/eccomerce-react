@@ -16,6 +16,7 @@ export const Container = styled.div`
         justify-content:center;
         opacity:0.8;
     };
+    position:relative;
 `;
 
 export const IconContainer = styled(FontAwesomeIcon)`
