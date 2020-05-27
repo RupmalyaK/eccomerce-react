@@ -9,7 +9,7 @@ export const Container = styled.div`
 }
 .link{
     font-size:1rem;
-    font-weight:${props => props.isPageYTop ? "bold" : "normal"};
+    font-weight:${props => props.isPageYTop ? 550 : "normal"};
     
 }
 ;`;

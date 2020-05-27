@@ -11,7 +11,7 @@ const Container = styled.div`
     top:50%;
     left:50%;
     width:500px;
-    height:200px;
+    height:102px;
     border-radius:2%;
     margin-left:-250px;
     margin-top:-100px;
@@ -22,11 +22,10 @@ const Container = styled.div`
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
-   // overflow:hidden;
+    overflow:hidden;
     .text{
-        height:100px;
         font-size:1.2rem;
-       background:yellow;
+       //background:yellow;
      
     }
     .buttons{
