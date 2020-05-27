@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import ConfirmationBox from "../ConfirmationPopup";
+
+
 
 const Container = styled.div`
 padding:0px 20%;
@@ -22,8 +23,9 @@ const Icon = styled.img`
 `;
 
 const ProfileDropdownItem = ({children, src , alt , ...extraProps}) => {
+   
     return (
-        <Container {...extraProps}>
+        <Container {...extraProps} >
             <Item>{children}</Item> <Icon src={src} alt={alt}/>
         </Container>
     );

@@ -6,9 +6,8 @@ import womandAvatarSvg from "../../images/woman-avatar.svg";
 import {useSelector,useDispatch} from "react-redux";
 import {selectCurrentUser} from "../../redux/user/user.selector.js";
 import {setSignOutBoxOpen} from "../../redux/system/system.action.js";
-
 import gearSvg from "../../images/gear.svg";
-
+import {NavLink} from "react-router-dom";
 
 
 const Container = styled.div`
@@ -33,6 +32,14 @@ display: flex;
 flex-direction: column;
 overflow-x:hieen;
 overflow-y:auto;
+a{
+    color:black;
+    text-decoration:none;
+    &:hover{
+        color:black;
+        text-decoration:none;
+    }
+}
 `;
 
 
@@ -46,12 +53,12 @@ const ProfileDropdown = (props) => {
     return (
         <Container>
             <DropdownItems>
-                <Item src={manAvatarSvg} alt="man-avatar">My profile</Item>
-                <Item >Order</Item>
-                <Item >Manage Adress</Item>
-                <Item >Wishlist</Item>
-                <Item src={gearSvg}>Settings</Item>
-                {!currentUser ? <Item onClick={signOutClickHandler} >Sign out!</Item> : <></>}
+                <Item as={NavLink} activeStyle={{border:"0px"}} exact to="/myprofile" src={manAvatarSvg} alt="man-avatar">My profile</Item>
+                <Item as={NavLink} activeStyle={{border:"0px"}} exact to="/myorder">Order</Item>
+                <Item as={NavLink} activeStyle={{border:"0px"}} exact to="/myaddress">Manage Adress</Item>
+                <Item as={NavLink} activeStyle={{border:"0px"}} exact to="/mywishlist">Wishlist</Item>
+                <Item as={NavLink} activeStyle={{border:"0px"}} exact to="/mysettings"src={gearSvg}>Settings</Item>
+                {currentUser ? <Item  onClick={signOutClickHandler} >Sign out!</Item> : <></>}
             </DropdownItems>
         </Container>
     );

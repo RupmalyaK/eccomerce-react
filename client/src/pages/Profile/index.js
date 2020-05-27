@@ -1,9 +1,10 @@
 import React from "react"; 
 import styled from "styled-components";
-import RatingStar, {} from "../../components/RatingStar";
+import RatingStar from "../../components/RatingStar";
+import Reviews from "../../components/SellerProfileReviews";
 
 const Container = styled.div`
-margin-top:102px;
+margin-top:85px;
 width:100%;
 display:flex;
 align-items:flex-start;
@@ -13,13 +14,13 @@ height:100vh;
 `;
 
 const LeftPanel = styled.div`
-min-width:550px;
+min-width:570px;
 height:100%;
 background:olive;
 display:flex;
 flex-direction:column;
 align-items:center;
-
+max-height:60vh;
 .name{
     font-size:2rem;
 }
@@ -35,25 +36,14 @@ align-items:center;
 }
 `;
 
-const RightPanel = styled.div`
-width:70%;
-height:100%;
-background:coral;
-`;
 
 const ProfilePic = styled.div`
 width:350px;
 height:350px;
-border:1px solid black;
+border:0px solid black;
 border-radius:100%;
 background:orange;
 margin-top:25px;
-
-&:after{
-    content:"Change profile pic";
-    position:relative;
-    display:block;
-}
 `;
 
 const CustomRatingStar = styled(RatingStar)`
@@ -68,6 +58,28 @@ const ReviewsContainer = styled.div`
     background:blue;
 `;
 
+const RightPanel = styled.div`
+width:70%;
+height:100%;
+background:coral;
+display:flex;
+flex-direction:column;
+`;
+
+const ProfileNavBar = styled.div`
+   position:relative;
+   background:grey;
+   width:25%;
+   height:70px;
+   align-self:center;
+   display:flex;
+   flex-direction:row;
+   justify-content:space-around;
+   span{
+       font-size:2rem;
+       cursor:pointer;
+   }
+`;
 
 
 const ProfilePage = props => {
@@ -82,13 +94,13 @@ const ProfilePage = props => {
                     starSize={"2rem"}
                     spacing={3}
                 />
-                <span className="reviews">Reviews</span>
-                <ReviewsContainer>
-
-                </ReviewsContainer>
             </LeftPanel>
             <RightPanel>
-                
+                <ProfileNavBar>
+                        <span>Selling</span>
+                        <span>Reviews</span>
+                 </ProfileNavBar>  
+                 <Reviews/> 
             </RightPanel>
         </Container>
     );

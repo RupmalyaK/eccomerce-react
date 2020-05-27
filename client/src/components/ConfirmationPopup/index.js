@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
 import {setBlurOn,setBlurOff} from "../../redux/system/system.action.js"
-import CustomButton from "../CustomButton";
+import Button from "../CustomButton";
 
 const Container = styled.div`
     background:#f8f9fa;
@@ -12,55 +12,47 @@ const Container = styled.div`
     left:50%;
     width:500px;
     height:200px;
+    border-radius:2%;
     margin-left:-250px;
     margin-top:-100px;
    // background:coral;
     z-index:20;
     text-align:center;
-    padding-top:10px;
+    padding-top:5px;
     display:flex;
     flex-direction:column;
-    overflow:hidden;
+    justify-content:flex-end;
+   // overflow:hidden;
     .text{
         height:100px;
         font-size:1.2rem;
-      //  background:yellow;
-        flex:3;    
+       background:yellow;
+     
     }
     .buttons{
-        //background:red;
+        background:red;
         flex:1;
         width:100%;
         margin-top:5%;
-        padding:10px;
         display:flex;
         flex-direction:row;
         justify-content:space-between;
+        align-items:flex-end;
         z-index:22;
-        flex-grow:1;
-
-        .button{
-            width:200px;
-            height:50px;
-            background:grey; 
-            position:relative;
-            display:flex;
-            align-self:flex-end; 
-            text-align:center;
-            justify-content:center;
-            align-items:center;
-            //background:black;
-            span{
-                margin:0 auto;
-                display:inline-block;
-                font-size:1.2rem;
-                
-                color:white;
-            }
-        }
+        
     }
+`;
 
+const CustomButton = styled(Button)`
+width:90%;
+`;
 
+const ConfirmButton = styled(CustomButton)`
+background:green;
+`;
+
+const CancelButton = styled(CustomButton)`
+background:red;
 `;
 
 const ConfirmationPopup = (props) => {
@@ -87,8 +79,8 @@ const ConfirmationPopup = (props) => {
             <div>
                 <div className="text">{text}</div>
                 <div className="buttons">
-                    <CustomButton onClick={confirmHandlerWrapper}>Yes</CustomButton>
-                    <CustomButton onClick={cancelHandlerWrapper}>No</CustomButton>                      
+                    <ConfirmButton onClick={confirmHandlerWrapper}>Yes</ConfirmButton>
+                    <CancelButton onClick={cancelHandlerWrapper}>No</CancelButton >                      
                 </div>
             </div>    
         </Container>

@@ -6,7 +6,6 @@ import {Container} from "./style.jsx";
 
 const Header= (props) => {
     const isPageYTop = useSelector(selectIsPageYtop);
-    console.log("HELLO",isPageYTop);
 return(
 <Container isPageYTop={isPageYTop}>
     <CustomNavbar/>

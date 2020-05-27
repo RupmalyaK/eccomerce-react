@@ -40,14 +40,14 @@ const CustomNavbar = (props) => {
                                 <BLink as={NavLink} to="/Browse" className="link" exact>Browse</BLink>
                                 <BLink as={NavLink} to="/contactus" className="link" exact>Contact us</BLink>
                                 {currentUser?
-                                    <BLink  onClick = {handleSignOut} to={"/"}>Sign out</BLink> :
+                                    <></> :
                                     <BLink  as={NavLink} to="/signin" className="link">Sign in</BLink>
                                 }
                         </Nav>
                        
                 </Navbar.Collapse> 
                <CartIcon className= "d-none d-sm-flex ml-3" styled={{flex:1}}/> 
-                <ProfileIcon src={profileIconSvg} alt={"profile icon"}/>
+                {currentUser ? <ProfileIcon src={profileIconSvg} alt={"profile icon"}/> : <></>}
                 </CustomBContainer>
                 </Navbar>     
         </Container>
