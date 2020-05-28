@@ -42,7 +42,7 @@ const browseReducer = (state = INITIAL_STATE, action) => {
             case actionTypes.POST_REVIEW_START:
                         return {...state,isPostingReview:true};
             case actionTypes.POST_REVIEW_SUCCESS:
-                        return {...state,isPostingReview:false};
+                        return {...state,isPostingReview:false,currentItem:{...state.currentItem,reviews:payLoad}};
             case actionTypes.POST_REVIEW_FAILURE:            
                          return {...state,isPostingReview:false,postingReviewError:payLoad};   
                 

@@ -5,7 +5,6 @@ import {isAuthenticated} from "../controller/authController.js";
 const reviewRoutes = (app, admin) => {
     const db = admin.firestore();
     const routeString = "/api/collections/collection/item";
-    console.log("USERS OBJECT FROM ROUTE",usersReviewing);
     app.route(routeString + "/review")
     .post(isAuthenticated,limitRequestFromTheUser,async (req, res, next) => {
         const {rating, text , itemObjectId, itemType,  userObjectId} = req.body; 
@@ -35,7 +34,8 @@ const reviewRoutes = (app, admin) => {
             item.averageRating = calculateAverageRating(item.reviews); 
             const ret = await collection.save();
             delete global.usersReviewing[userObjectId];
-            res.status(200).send({operation:"success"});
+            res.status(200).send({operation:"success",reviews:item.reviews});
+        
         }
         catch(error)
             {
@@ -45,12 +45,41 @@ const reviewRoutes = (app, admin) => {
                 next({error});
             }
        
+    })
+    .get(async(req,res,next) => {
+        const {_id,type} = req.query;
+    
+        try{
+            const collection = await CollectionsModel.findOne({title:type});
+            const item = collection.items.id(_id);
+            res.status(200).json({reviews:item.reviews});
+        }
+        catch(error)
+            {
+                res.status(400);
+                next(error);
+            }
     });
-
-
 }
 
+
+/*( async() => {
+    const collections = await CollectionsModel.find({});
+     collections.forEach(
+         async (collection) => {
+             collection.items.forEach(
+                 async (item) => {
+                     item.reviews = [];
+                 }
+             );
+             await collection.save();
+         }
+     )
+}
+)();*/
+
 export default reviewRoutes; 
+
 
 
 /**

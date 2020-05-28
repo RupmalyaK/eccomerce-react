@@ -126,8 +126,8 @@ export const postReviewFailure = (error) => {
     return({type:actionTypes.POST_REVIEW_FAILURE,payLoad:error});
 }
 
-export const postReviewSuccess = (review) => {
-    return({type:actionTypes.POST_REVIEW_SUCCESS,payLoad:review});
+export const postReviewSuccess = (reviews) => {
+    return({type:actionTypes.POST_REVIEW_SUCCESS,payLoad:reviews});
 }
 
 export const postReviewAsync = (text,currentRating) => {
@@ -136,10 +136,9 @@ export const postReviewAsync = (text,currentRating) => {
         const currentItem = getState().browse.currentItem;
         const userObjectId = getState().user.currentUser.id;
         const {type:itemType,_id:itemObjectId} = currentItem;
-        console.log("DEBUG",{itemType,itemObjectId,userObjectId,currentRating,text});
         try{
             const accessToken = await auth.currentUser.getIdToken();
-           await axios(
+           const {data} = await axios(
                 {
                     method:"POST",
                     url:"/api/collections/collection/item/review",
@@ -155,9 +154,8 @@ export const postReviewAsync = (text,currentRating) => {
                     }
                 }
             );
-           window.location.reload(false);   
-           dispatch(postReviewSuccess());
-           
+           const {reviews} = data;
+           dispatch(postReviewSuccess(reviews));
     } 
     catch(error)
         {

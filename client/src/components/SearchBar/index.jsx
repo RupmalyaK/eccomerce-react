@@ -93,10 +93,21 @@ const SearchBar = (props) => {
         history.push("/browse"); 
     }
 
+    const handleEnterPress = e => {
+        if(!items[0])
+            {
+                return;
+            }
+        if (e.key === "Enter") {
+         dispatch(setCurrentItem(items[0]));    
+        history.push(`/browse/item/${items[0].type}/${items[0]._id}/`);
+        }
+    }
+
 return(
     <Form inline style={{position:"relative"}} {...rest} ref={suggestionBoxRef}>
-        <FormControl type="text" onChange={handleChange} placeholder="Search product..." className=" m-0 w-75" />
-        {compact ? <></> : <Button className="ml-1" onClick={handleClickSearch} variant="outline-success">Search</Button>}
+        <FormControl type="text" onChange={handleChange} onKeyPress={handleEnterPress}  placeholder="Search product..." className=" m-0 w-75" />
+        {compact ? <></> : <Button className="ml-1"  onClick={handleClickSearch} variant="outline-success">Search</Button>}
         {(!isOpen || items.length === 0 )? <></> :(
         <SuggestionBox >
             {displaySuggestions()}

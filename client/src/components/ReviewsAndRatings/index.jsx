@@ -14,13 +14,13 @@ import {Container,StarIcon} from "./style.jsx";
 
 
 const ReviewsAndRatings = props => {
-        const {averageRating, reviews, itemObjectId, itemType,postReviewAsync} = props; 
+        const {averageRating, reviews, postReviewAsync} = props; 
         const [currentRating, setCurrentRating] = useState(1);
         const [text, setText] = useState(""); 
         const currentUser = useSelector(selectCurrentUser); 
         const dispatch = useDispatch(postReviewAsync);
         const maxLengthOfTextArea = "120";
-
+        
         const currentUserReviewIndex = reviews.findIndex(review => {
             if(currentUser && review.user.uid === currentUser.id)
                 {

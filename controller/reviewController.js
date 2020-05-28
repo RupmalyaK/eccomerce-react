@@ -17,7 +17,6 @@ export const calculateAverageRating = (reviews) => {
 
 export const limitRequestFromTheUser = (req,res,next) => {
     const {userObjectId} = req.body; 
-    console.log(usersReviewing);
     if(!usersReviewing[userObjectId]) 
         {
             usersReviewing[userObjectId] = true;

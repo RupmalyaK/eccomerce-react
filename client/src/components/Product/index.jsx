@@ -1,16 +1,21 @@
 import React from "react"; 
-import {useSelector} from "react-redux"; 
-import {selectCurrentItem} from "../../redux/browse/browse.selector.js"; 
+import {useSelector,useDispatch} from "react-redux"; 
+import {selectCurrentItem,selectIsPostingReview} from "../../redux/browse/browse.selector.js"; 
 import {postReviewAsync} from "../../redux/browse/browse.actions.js";
 import {Row} from "react-bootstrap";
 import ReviewsAndRatings from "../ReviewsAndRatings";
 import ProductLeftPanel from "../ProductLeftPanel";
 import ProductRightPanel from "../ProductRightPanel";
+import LoadingSpinner from "../LoadingSpinner";
 import {Container} from "./style.jsx";
 
+const ReviewsAndRatingsWithLoadingSpinner = LoadingSpinner(ReviewsAndRatings);
 
 const Product = props => {
     const item = useSelector(selectCurrentItem); 
+    const isPostingReview = useSelector(selectIsPostingReview);
+
+    const dispatch = useDispatch();
     const {_id,averageRating,reviews, type} = item;  
 
 
@@ -25,7 +30,7 @@ const Product = props => {
                 <ProductRightPanel/>
              </Row>
              <hr/>
-             <ReviewsAndRatings reviews={reviews} averageRating={averageRating}  postReviewAsync={postReviewAsync}/>
+             <ReviewsAndRatings isLoading={isPostingReview} reviews={reviews} averageRating={averageRating}  postReviewAsync={postReviewAsync}/>
         </Container>
     );
 }
