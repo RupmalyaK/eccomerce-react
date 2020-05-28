@@ -1,14 +1,13 @@
 import CollectionsModel from "../model/CollectionsModel.js";
-import mongoose from "mongoose";
-import {calculateAverageRating} from "../controller/reviewController.js"
+import {calculateAverageRating,limitRequestFromTheUser} from "../controller/reviewController.js"
 import {isAuthenticated} from "../controller/authController.js";
 
-const reveiwRoutes = (app, admin) => {
+const reviewRoutes = (app, admin) => {
     const db = admin.firestore();
     const routeString = "/api/collections/collection/item";
-
+    console.log("USERS OBJECT FROM ROUTE",usersReviewing);
     app.route(routeString + "/review")
-    .post(isAuthenticated,async (req, res, next) => {
+    .post(isAuthenticated,limitRequestFromTheUser,async (req, res, next) => {
         const {rating, text , itemObjectId, itemType,  userObjectId} = req.body; 
         if(typeof rating === undefined || rating > 5 || rating < 0)
             {
@@ -21,12 +20,13 @@ const reveiwRoutes = (app, admin) => {
             const userRef = await db.collection("users").doc(userObjectId)
             const userDoc = await userRef.get();
             const {displayName, email} = userDoc.data(); 
+            
             const review = {user:{uid:userObjectId, displayName, email},rating,text}; 
             let flag = false;
             item.reviews.forEach(review => { 
+                
                 if(review.user.uid === userObjectId)
                     {
-                        console.log("DEBUG");
                         flag = true;
                         throw new Error("User already reviewed this product");
                     }
@@ -34,10 +34,12 @@ const reveiwRoutes = (app, admin) => {
             item.reviews.push(review);
             item.averageRating = calculateAverageRating(item.reviews); 
             const ret = await collection.save();
+            delete global.usersReviewing[userObjectId];
             res.status(200).send({operation:"success"});
         }
         catch(error)
             {
+                delete global.usersReviewing[userObjectId];
                 res.status(400);
                 console.log(error)
                 next({error});
@@ -48,7 +50,7 @@ const reveiwRoutes = (app, admin) => {
 
 }
 
-export default reveiwRoutes; 
+export default reviewRoutes; 
 
 
 /**

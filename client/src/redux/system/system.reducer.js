@@ -32,7 +32,6 @@ const profileReducer = (state = INITIAL_STATE, action )  =>  {
                         return {...state,isSignOutBoxOpen:false};
             case actionTypes.SET_PAGE_Y_TOP:
                         const considerTopValue = 10;
-                        console.log(state);
                         return {...state,isPageYTop:payLoad <= considerTopValue ? true : false};                     
             default: return state;
         }

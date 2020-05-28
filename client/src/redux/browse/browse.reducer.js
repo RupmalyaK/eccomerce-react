@@ -1,4 +1,4 @@
-import browseActionTypes from "./browse.types.js"; 
+import actionTypes from "./browse.types.js"; 
 
 const INITIAL_STATE = {
     items:[],
@@ -14,6 +14,8 @@ const INITIAL_STATE = {
     currentItem:{},
     isFetchingCurrentItem:false,
     fetchCurrentItemError:null,
+    isPostingReview:false,
+    postingReviewError:null,
 };
 
 const browseReducer = (state = INITIAL_STATE, action) => {
@@ -21,23 +23,30 @@ const browseReducer = (state = INITIAL_STATE, action) => {
 
     switch(type)
         {
-            case browseActionTypes.FETCH_ITEMS_START:
+            case actionTypes.FETCH_ITEMS_START:
                     return {...state, isFetching:true };
-            case browseActionTypes.FETCH_ITEMS_FAILURE:
+            case actionTypes.FETCH_ITEMS_FAILURE:
                     return {...state, isFetching:false, fetchError:payLoad};
-            case browseActionTypes.FETCH_ITEMS_SUCCESS:
+            case actionTypes.FETCH_ITEMS_SUCCESS:
                     const {items, searchString, priceRange, sortBy, categories, isFeatured,isAsc} = payLoad;
                     const numberOfItems = items.length.toString(); 
                     return {...state, isFetching:false, items, searchString, priceRange, sortBy, numberOfItems, categories, isFeatured,isAsc}; 
                     
-            case browseActionTypes.FETCH_CURRENT_ITEM_START:
+            case actionTypes.FETCH_CURRENT_ITEM_START:
                      return {...state, isFetchingCurrentItem:true}; 
-            case browseActionTypes.FETCH_CURRENT_ITEM_FAILURE:
+            case actionTypes.FETCH_CURRENT_ITEM_FAILURE:
                       return {...state, isFetchingCurrentItem:false, fetchCurrentItemError:payLoad};
-            case browseActionTypes.FETCH_CURRENT_ITEM_SUCCESS:
+            case actionTypes.FETCH_CURRENT_ITEM_SUCCESS:
                        return {...state, isFetchingCurrentItem:false, currentItem:payLoad};  
-                       
-             case browseActionTypes.SET_CURRENT_ITEM:
+            
+            case actionTypes.POST_REVIEW_START:
+                        return {...state,isPostingReview:true};
+            case actionTypes.POST_REVIEW_SUCCESS:
+                        return {...state,isPostingReview:false};
+            case actionTypes.POST_REVIEW_FAILURE:            
+                         return {...state,isPostingReview:false,postingReviewError:payLoad};   
+                
+             case actionTypes.SET_CURRENT_ITEM:
                         return {...state, currentItem:payLoad};          
             default:
                     return state; 

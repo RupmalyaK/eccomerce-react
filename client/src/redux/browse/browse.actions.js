@@ -1,16 +1,18 @@
-import browseActionTypes from "./browse.types.js"; 
+import actionTypes from "./browse.types.js"; 
 import axios from "axios"; 
+import {auth} from "../../firebase/firebase.util.js";
+
 
 export const fetchItemsStart = () => {
-    return ({type:browseActionTypes.FETCH_ITEMS_START});
+    return ({type:actionTypes.FETCH_ITEMS_START});
 }
 
 export const fetchItemsFailure = error => {
-    return ({type:browseActionTypes.FETCH_ITEMS_FAILURE, payLoad:error});
+    return ({type:actionTypes.FETCH_ITEMS_FAILURE, payLoad:error});
 }
 
 export const fetchItemsSuccess = (search) => {
-    return ({type:browseActionTypes.FETCH_ITEMS_SUCCESS , payLoad: {...search}});
+    return ({type:actionTypes.FETCH_ITEMS_SUCCESS , payLoad: {...search}});
 }
 
 export const fetchItemsAsync = (search) => {
@@ -79,15 +81,15 @@ export const fetchItemsAsync = (search) => {
 
 
 export const fetchCurrentItemStart = () => {
-    return {type:browseActionTypes.FETCH_CURRENT_ITEM_START};
+    return {type:actionTypes.FETCH_CURRENT_ITEM_START};
 }
 
 export const fetchCurrentItemSuccess = (currentItem) => {
-    return {type:browseActionTypes.FETCH_CURRENT_ITEM_SUCCESS, payLoad:currentItem};
+    return {type:actionTypes.FETCH_CURRENT_ITEM_SUCCESS, payLoad:currentItem};
 }
 
 export const fetchCurrentItemFailure = error => {
-    return {type:browseActionTypes.FETCH_CURRENT_ITEM_FAILURE, payLoad:error};
+    return {type:actionTypes.FETCH_CURRENT_ITEM_FAILURE, payLoad:error};
 }
 
 export const fetchCurrentItemAsync = (_id, type) => {
@@ -101,7 +103,7 @@ export const fetchCurrentItemAsync = (_id, type) => {
                     _id,
                     type
                 }
-            });
+            }); 
             dispatch(fetchCurrentItemSuccess(currentItem));
            }
         catch(error)
@@ -113,5 +115,53 @@ export const fetchCurrentItemAsync = (_id, type) => {
 }
 
 export const setCurrentItem = (currentItem) => {
-    return  {type:browseActionTypes.SET_CURRENT_ITEM, payLoad:currentItem};
+    return  {type:actionTypes.SET_CURRENT_ITEM, payLoad:currentItem};
+}
+
+export const postReviewStart = () => {
+    return({type:actionTypes.POST_REVIEW_START});
+}
+
+export const postReviewFailure = (error) => {
+    return({type:actionTypes.POST_REVIEW_FAILURE,payLoad:error});
+}
+
+export const postReviewSuccess = (review) => {
+    return({type:actionTypes.POST_REVIEW_SUCCESS,payLoad:review});
+}
+
+export const postReviewAsync = (text,currentRating) => {
+    return async (dispatch,getState) => {
+        dispatch(postReviewStart());
+        const currentItem = getState().browse.currentItem;
+        const userObjectId = getState().user.currentUser.id;
+        const {type:itemType,_id:itemObjectId} = currentItem;
+        console.log("DEBUG",{itemType,itemObjectId,userObjectId,currentRating,text});
+        try{
+            const accessToken = await auth.currentUser.getIdToken();
+           await axios(
+                {
+                    method:"POST",
+                    url:"/api/collections/collection/item/review",
+                    data:{
+                        itemType,
+                        itemObjectId,
+                        userObjectId,
+                        rating:currentRating,
+                        text
+                    },
+                    headers: {
+                        authorization:"Bearer " + accessToken,
+                    }
+                }
+            );
+           window.location.reload(false);   
+           dispatch(postReviewSuccess());
+           
+    } 
+    catch(error)
+        {
+            dispatch(postReviewFailure(error));
+        }
+}
 }

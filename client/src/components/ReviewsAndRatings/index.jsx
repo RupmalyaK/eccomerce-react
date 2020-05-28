@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
-import {useSelector} from "react-redux";
+import {useSelector,useDispatch} from "react-redux";
+import {selectCurrentUser} from "../../redux/user/user.selector.js";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
 import StarRatings from "react-star-ratings"; 
-import {selectCurrentUser} from "../../redux/user/user.selector.js";
+
 import {Form} from "react-bootstrap";
 import axios from "axios";
 import {auth} from "../../firebase/firebase.util";
@@ -13,11 +14,11 @@ import {Container,StarIcon} from "./style.jsx";
 
 
 const ReviewsAndRatings = props => {
-        const {averageRating, reviews, itemObjectId, itemType} = props; 
+        const {averageRating, reviews, itemObjectId, itemType,postReviewAsync} = props; 
         const [currentRating, setCurrentRating] = useState(1);
         const [text, setText] = useState(""); 
-        const [justReviewed, setJustReviewed] = useState(false);
         const currentUser = useSelector(selectCurrentUser); 
+        const dispatch = useDispatch(postReviewAsync);
         const maxLengthOfTextArea = "120";
 
         const currentUserReviewIndex = reviews.findIndex(review => {
@@ -66,32 +67,8 @@ const ReviewsAndRatings = props => {
 
         const handleSendReviewClick = async e => {
             e.preventDefault();
-            const accessToken = await auth.currentUser.getIdToken();
+            dispatch(postReviewAsync(text,currentRating));
             
-            try{
-                await axios(
-                    {
-                        method:"POST",
-                        url:"/api/collections/collection/item/review",
-                        data:{
-                            itemType,
-                            itemObjectId,
-                            userObjectId:currentUser.id,
-                            rating:currentRating,
-                            text
-                        },
-                        headers: {
-                            authorization:"Bearer " + accessToken,
-                        }
-                    }
-                );
-                window.location.reload(false);
-            }
-            catch(error)
-                {
-
-                }
-          
         }
         
         const displayCurrentUserReview = () => {
