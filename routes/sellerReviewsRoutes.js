@@ -7,7 +7,7 @@ import SellerProfileReviews from "../client/src/components/SellerProfileReviews"
 const sellerReviewsRoute = (app,admin) => {
     const routeString = "/api/seller/"
     app.use(routeString)
-    .post(async(req,res) => {
+    .post(/*isAuthenticated,limitRequestFromTheUser,*/async(req,res) => {
         const {rating, text , sellerObjectId, userObjectId} = req.body; 
         if(typeof rating === undefined || rating > 5 || rating < 0)
             {
