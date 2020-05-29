@@ -28,7 +28,7 @@ const handleSubmit = async (e) => {
         return; 
     }
        dispatch(signUpAsync({
-            displayName, email, password, confirmPassword,
+            displayName, email, password, confirmPassword, role,
         }));
         history.push('/');
         setDisplayName('');

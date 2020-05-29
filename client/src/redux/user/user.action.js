@@ -155,11 +155,11 @@ export const signUpFailure = (error) => {
 export const signUpAsync = (userInfo) => {
     return async dispatch => {
             dispatch(signUpStart()); 
-            const {email ,password, displayName, user} = userInfo;
+            const {email ,password, displayName, user, role} = userInfo;
            
             try{
                 const {user} = await auth.createUserWithEmailAndPassword(email , password);
-                await createUserProfileDoc(user , {displayName});
+                await createUserProfileDoc(user , {displayName,role});
                 dispatch(signUpSuccess());
             }
             catch(error){

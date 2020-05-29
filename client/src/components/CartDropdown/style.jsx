@@ -30,6 +30,7 @@ overflow-y:auto;
 export const CheckOutButton = styled(Button)`
 margin-top: auto;
 font-size:11px;
+border-radius:0px;
 
 `
 

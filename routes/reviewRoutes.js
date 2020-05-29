@@ -32,7 +32,7 @@ const reviewRoutes = (app, admin) => {
             });
             item.reviews.push(review);
             item.averageRating = calculateAverageRating(item.reviews); 
-            const ret = await collection.save();
+            await collection.save();
             delete global.usersReviewing[userObjectId];
             res.status(200).send({operation:"success",reviews:item.reviews});
         

@@ -1,12 +1,13 @@
 import mongoose from "mongoose"; 
 
 
-const reviewSchema = new mongoose.Schema({
-    user:{uid:{type:String,maxLength:32,required:true},
-      displayName:{type:String,maxLength:32,required:true,trim:true},
-      email:{type:String,maxLength:32,required:true}},
+export const reviewSchema = new mongoose.Schema({
+    user:
+      {uid:{type:String,maxLength:32,required:true},
+        displayName:{type:String,maxLength:32,required:true,trim:true},
+        email:{type:String,maxLength:32,required:true}},
     text: {type:String,default:"",trim:true},
-     rating:{type:Number,max:5,required:true}    
+    rating:{type:Number,max:5,required:true}    
 });
 
 const offerSchema = new mongoose.Schema({
@@ -18,7 +19,7 @@ const offerSchema = new mongoose.Schema({
 });
 
 
-const itemsSchema = new mongoose.Schema({
+const itemSchema = new mongoose.Schema({
     name:{type:String,required:true,trim:true,maxLength:32},
     primaryImageUrl:{type:String, required:true,maxLength:32},
     secondaryImageUrls:{type:[String], default:[]},
@@ -28,13 +29,14 @@ const itemsSchema = new mongoose.Schema({
     sizes:{type:[String],default:[]},
     reviews:{type:[reviewSchema],default:[]},
     viewsNumber:{type:Number,default:0},
-    averageRating:{type:Number,default:0}                            
+    averageRating:{type:Number,default:0},
+    sellerId:{type:String,maxLength:32,required:true}                           
 },{timestamp:{createdAt:true,updatesAt:true}});
 
 const collectionsSchema = new mongoose.Schema({
     title:{type:String,required:true,maxLength:32},
     routeName:{type:String,required:true,lowercase:true,maxLength:32},
-    items:{ type: [itemsSchema], default:[]},
+    items:{ type: [itemSchema], default:[]},
     numberOfItems: {type:Number, default:0}
 });
 

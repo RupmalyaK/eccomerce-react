@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import RatingStar from "../../components/RatingStar";
 import Reviews from "../../components/SellerProfileReviews";
+import {useSelector} from "react-redux";
+import {selectCurrentUser} from "../../redux/user/user.selector.js";
 
 const Container = styled.div`
 margin-top:85px;
@@ -83,12 +85,14 @@ const ProfileNavBar = styled.div`
 
 
 const ProfilePage = props => {
+    const currentUser = useSelector(selectCurrentUser);
+    console.log(currentUser);
     return(
         <Container>
             <LeftPanel>
                 <ProfilePic />
-                <span className="name">Rupmalya Kumar</span>
-                <span className="role">Buyer</span>
+                <span className="name">{currentUser.displayName}</span>
+                <span className="role">{currentUser.role}</span>
                 <CustomRatingStar
                     rating={4}
                     starSize={"2rem"}
