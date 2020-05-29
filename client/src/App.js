@@ -9,7 +9,6 @@ import {selectIsFetching as selectIsFetchingItems} from "./redux/browse/browse.s
 import Layout from "./components/Layout"; 
 import Itempage from "./pages/Item";
 import ReviewsAndRatings from "./components/ReviewsAndRatings";
-import SignInAndSignUpPage from "./pages/SignIn&SignUp";
 import CheckoutPage from "./pages/Checkout";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Header from "./components/Header";
@@ -18,6 +17,8 @@ import Shoppage from "./pages/Shop";
 import BrowsePage from "./pages/Browse";
 import ProfilePage from "./pages/Profile";
 import GlobalStyle from "./components/GlobalStyle";
+import SignInPage from "./pages/Signin";
+import SignUpPage from "./pages/Signup";
 
 
 
@@ -79,11 +80,18 @@ const App = () => {
 
           <Route path="/signin" exact render = {
             () => (
-              currentUser ? <Redirect to='/'/> : <SignInAndSignUpPage/>)
+              currentUser ? <Redirect to='/'/> : <SignInPage/>)
               }  /> 
+
+          <Route path="/signup" exact render = {
+            () => (
+              currentUser ? <Redirect to='/'/> : <SignUpPage/>)
+              }  /> 
+
            <Route path="/myprofile" exact render = {() => {
             return !currentUser ? <Redirect to='/signin'/> : <ProfilePage/> 
            }} />   
+
            <Route path="/checkout/:isBuyNow" exact component={CheckoutPage} />   
         </Switch>
        </LayoutWithLoadingSpinner>

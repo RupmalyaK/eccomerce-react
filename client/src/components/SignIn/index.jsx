@@ -10,12 +10,17 @@ import Button from "../CustomButton";
 import {Container,Title,Form,ButtonsContainer} from "./style.jsx";
 
 
+
+
+
+
 const SignIn = (props) => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const signInError = useSelector(selectSignInError);
 const dispatch = useDispatch();  
 const history = useHistory();
+
 
 
 
@@ -35,6 +40,8 @@ useEffect(() => {
         dispatch(clearSignInError());
 } , []);
 
+
+
 return(
 <Container>
     <Title>I already have an account</Title>
@@ -42,6 +49,9 @@ return(
     <Form>
         <FormInput name="email" type="email" value={email} label="Email" setState={setEmail} required />
         <FormInput name="password" type="password" value={password} label="Password" setState={setPassword} required />
+        
+     
+        
         <ButtonsContainer>
                 <Button type="submit" handleClick={handleSubmit}>Sign in</Button>
                 <Button onClick = {signInWithGoogle} isGoogleSignIn >Sign in with Google </Button>
@@ -56,3 +66,11 @@ return(
 
 export default SignIn; 
 
+
+
+/**
+ * Email-id
+ * password
+ * Role
+ * DisplayName
+ */

@@ -9,7 +9,7 @@ const handleChange = e => {
 }
 return(
 <Container>
-        <Input onChange = {handleChange } {...otherProps} />
+        <Input  onChange = {setState ? handleChange : undefined}  {...otherProps} />
         {
             label ? (
                 <InputLabel value = {otherProps.value}>

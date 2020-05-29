@@ -6,6 +6,11 @@ export const Container = styled.div`
 width:500px;
 display:flex;
 flex-direction:column;
+//margin-left:20%;
+border:0.1px solid #D3D3D3;
+padding:20px;
+border-radius:5%;
+z-index:25;
 `;
 
 

@@ -6,7 +6,7 @@ const mainColor = "black";
 const subColor = "grey"; 
 
 const shrinkLabel = css`
-top: -14px;
+top: -20px;
 font-size: 12px;
 color: mainColor;
 `;
@@ -27,22 +27,22 @@ export const InputLabel = styled.label`
     left: 5px;
     top: 10px;
     transition: 300ms ease all;
-    
+     
     ${props => (props.value.length ? shrinkLabel : null)}
 `;
 
 
 export const Input = styled.input`
 background: none;
-background-color: white;
+background-color:#F0FFFF;
 color: ${subColor};
 font-size: 18px;
 padding: 10px 10px 10px 5px;
 display: block;
 width: 100%;
 border: none;
-border-radius: 0;
-border-bottom: 1px solid ${subColor};
+border-radius: 5%;
+border-radius:5px;
 margin: 25px 0;
 
     &:focus {

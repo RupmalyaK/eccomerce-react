@@ -5,13 +5,10 @@ import styled , {css} from "styled-components";
 export const invertedStyle = css`
 background-color: white;
 color: black;
-border: 1px solid black;
+border: 2px solid black;
+margin:-2px;
+box-sizing:border-box;
 
-&:hover: {
-  background-color: black;
-  color: white;
-  border: none;
-}
 `;
 
 
@@ -44,14 +41,15 @@ cursor: pointer;
 display:flex;
 justify-content:center;
 padding:0px;
-
+border-radius:5px;
 &:hover {
-  background-color: white;
-  color: black;
-  border: 1px solid black;
+  background-color: ${props => props.isInverted ? "black" : "white"};
+  color: ${props => props.isInverted ? "white" : "black"};
+  border: ${props => props.isInverted ? "1px solid black":"white" };
 }
-${props => (props.isGoogleSignIn ? googleSignInButtonStyle : null) };
 ${props => (props.isInverted ? invertedStyle : null)};
+${props => (props.isGoogleSignIn ? googleSignInButtonStyle : null) };
+
 `;
 
 
