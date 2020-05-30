@@ -1,4 +1,4 @@
-import React from "react"; 
+import React, {useState} from "react"; 
 import {useSelector,useDispatch} from "react-redux"; 
 import {selectCurrentItem,selectIsPostingReview} from "../../redux/browse/browse.selector.js"; 
 import {postReviewAsync} from "../../redux/browse/browse.actions.js";
@@ -9,15 +9,15 @@ import ProductRightPanel from "../ProductRightPanel";
 import LoadingSpinner from "../LoadingSpinner";
 import {Container} from "./style.jsx";
 
+
 const ReviewsAndRatingsWithLoadingSpinner = LoadingSpinner(ReviewsAndRatings);
 
 const Product = props => {
     const item = useSelector(selectCurrentItem); 
     const isPostingReview = useSelector(selectIsPostingReview);
-
+    const [seller, setSeller] = useState("");
     const dispatch = useDispatch();
-    const {_id,averageRating,reviews, type} = item;  
-
+    const {_id,averageRating,reviews, type,sellerId} = item;  
 
     if(Object.keys(item).length === 0)
         {

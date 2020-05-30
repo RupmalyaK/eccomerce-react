@@ -2,7 +2,7 @@ import React from "react";
 import {Col} from "react-bootstrap";
 import {useDispatch} from "react-redux"; 
 import {addItemToCart} from "../../redux/cart/cart.action.js"; 
-import {setCurrentItem} from "../../redux/browse/browse.actions";
+import {setCurrentItemAsync} from "../../redux/browse/browse.actions";
 import {useHistory} from "react-router-dom";
 import {Container, AddToCartButton} from "./style.jsx"
 
@@ -13,7 +13,7 @@ const BrowseItem = props => {
     const history = useHistory(); 
 
     const handleGoToItemPage = e => {
-        dispatch(setCurrentItem(props.item));
+       // dispatch(setCurrentItem(props.item));
         history.push({
             pathname:`/browse/item/${type}/${_id}`,
     });

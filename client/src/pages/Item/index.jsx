@@ -15,9 +15,9 @@ const ItemPage = props => {
     const currentItem = useSelector(selectCurrentItem);
     const dispatch = useDispatch();
     const {itemid, type} = useParams();
-
+    
    useEffect(() => {
-       if(Object.keys(currentItem).length === 0 && currentItem.constructor === Object)
+       if(Object.keys(currentItem).length === 0 && currentItem.constructor === Object && !isFetchingCurrentItem)
         {
             dispatch(fetchCurrentItemAsync(itemid,type));
         }

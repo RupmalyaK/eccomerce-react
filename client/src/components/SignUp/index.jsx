@@ -48,7 +48,6 @@ if (signUpError)
         dispatch(clearSignUpError());   
     }    
 },[signUpError]);
-console.log(role);
 return(
 <Container>
     <Title>If you don't have an account</Title>

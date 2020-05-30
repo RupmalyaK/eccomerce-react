@@ -19,6 +19,7 @@ import ProfilePage from "./pages/Profile";
 import GlobalStyle from "./components/GlobalStyle";
 import SignInPage from "./pages/Signin";
 import SignUpPage from "./pages/Signup";
+//import {toMongoDB} from "./util.js";
 
 
 
@@ -35,7 +36,6 @@ const App = () => {
   const isSigningUp = useSelector(selectIsSigningUp);
   const signInError = useSelector(selectSignInError);
   const signUpError = useSelector(selectSignUpError);
-
   const history = useHistory();
   const dispatch = useDispatch();
   
@@ -88,7 +88,7 @@ const App = () => {
               currentUser ? <Redirect to='/'/> : <SignUpPage/>)
               }  /> 
 
-           <Route path="/myprofile" exact render = {() => {
+           <Route path="/profile/:sellerId?" exact render = {() => {
             return !currentUser ? <Redirect to='/signin'/> : <ProfilePage/> 
            }} />   
 

@@ -53,7 +53,7 @@ const ProfileDropdown = (props) => {
     return (
         <Container>
             <DropdownItems>
-                <Item as={NavLink} activeStyle={{border:"0px"}} exact to="/myprofile" src={manAvatarSvg} alt="man-avatar">My profile</Item>
+                <Item as={NavLink} activeStyle={{border:"0px"}} exact to="/profile" src={manAvatarSvg} alt="man-avatar">My profile</Item>
                 <Item as={NavLink} activeStyle={{border:"0px"}} exact to="/myorder">Order</Item>
                 <Item as={NavLink} activeStyle={{border:"0px"}} exact to="/myaddress">Manage Adress</Item>
                 <Item as={NavLink} activeStyle={{border:"0px"}} exact to="/mywishlist">Wishlist</Item>

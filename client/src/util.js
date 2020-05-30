@@ -71,7 +71,8 @@ export const toMongoDB = async () => {
                   price,
                   isFeatured,
                   offers,
-                  sizes
+                  sizes,
+                  sellerId:"ncchs7JxOVZyA5K7ZSzFR8pXxkq1",
 
                 },   
              });

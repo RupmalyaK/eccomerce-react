@@ -5,14 +5,14 @@ const collectionsRoutesCreator = (app) => {
 const routeString = "/api/collections/collection/";    
 app.route(routeString + "items")
 .post(async (req , res, next) => {
-    const {collectionTitle,name, primaryImageUrl, isFeatured, price,offers,sizes} = req.body; 
+    const {collectionTitle,name, primaryImageUrl, isFeatured, price,offers,sizes,sellerId} = req.body; 
     if (typeof collectionTitle === "undefined" || typeof name === "undefined "|| typeof primaryImageUrl === "undefined" || typeof isFeatured === "undefined")
         {
             res.status(400).json({error: "all the required fields are not present"});
             return;
         }
    
-    const newItem = {collectionTitle, name , primaryImageUrl , isFeatured, price,offers,sizes};
+    const newItem = {collectionTitle, name , primaryImageUrl , isFeatured, price,offers,sizes,sellerId};
     try {
         const collection = await CollectionsModel.findOne({title:collectionTitle});
         collection.items.push(newItem); 

@@ -2,7 +2,7 @@ import React, {useState, useRef} from "react";
 import {Form, FormControl, Button} from "react-bootstrap";
 import {fetchAutocompleteAsync} from "../../redux/shop/shop.actions.js"
 import {selectAutocompleteCollections} from "../../redux/shop/shop.selector.js";
-import {fetchItemsAsync, setCurrentItem} from "../../redux/browse/browse.actions.js";
+import {fetchItemsAsync, setCurrentItemAsync} from "../../redux/browse/browse.actions.js";
 import {selectSortBy} from "../../redux/browse/browse.selector.js";
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
@@ -40,7 +40,7 @@ const SearchBar = (props) => {
 
     const handleSuggestionClick =  item => {
         setIsOpen(false);
-        dispatch(setCurrentItem(item));
+        dispatch(setCurrentItemAsync(item));
         history.push(`/browse/item/${item.type}/${item._id}/`);
     }
 
@@ -99,7 +99,7 @@ const SearchBar = (props) => {
                 return;
             }
         if (e.key === "Enter") {
-         dispatch(setCurrentItem(items[0]));    
+        dispatch(setCurrentItemAsync(items[0]));    
         history.push(`/browse/item/${items[0].type}/${items[0]._id}/`);
         }
     }

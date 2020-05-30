@@ -1,6 +1,6 @@
 import actionTypes from "./browse.types.js"; 
 import axios from "axios"; 
-import {auth} from "../../firebase/firebase.util.js";
+import {auth,getFirebaseUserById} from "../../firebase/firebase.util.js";
 
 
 export const fetchItemsStart = () => {
@@ -104,6 +104,8 @@ export const fetchCurrentItemAsync = (_id, type) => {
                     type
                 }
             }); 
+            const seller = await getFirebaseUserById(currentItem.sellerId);
+            currentItem.seller = seller;
             dispatch(fetchCurrentItemSuccess(currentItem));
            }
         catch(error)
@@ -114,8 +116,31 @@ export const fetchCurrentItemAsync = (_id, type) => {
     });
 }
 
-export const setCurrentItem = (currentItem) => {
-    return  {type:actionTypes.SET_CURRENT_ITEM, payLoad:currentItem};
+export const setCurrentItemStart = (currentItem) => {
+    return  {type:actionTypes.SET_CURRENT_ITEM_START, payLoad:currentItem};
+}
+
+export const setCurrentItemFailure = (error) => {
+    return {type:actionTypes.SET_CURRENT_ITEM_FAILURE,payLoad:error};
+}
+
+export const setCurrentItemSuccess = (item) => {
+    return {type:actionTypes.SET_CURRENT_ITEM_SUCCESS,payLoad:item};
+}
+
+export const setCurrentItemAsync = (item) => {
+    return async(dispatch) => {
+        dispatch(setCurrentItemStart());
+        try{
+            const seller = await getFirebaseUserById(item.sellerId);
+            item.seller = seller;
+            dispatch(setCurrentItemSuccess(item));
+        }
+        catch{
+            dispatch(setCurrentItemFailure());
+        }
+
+    }
 }
 
 export const postReviewStart = () => {
@@ -162,4 +187,33 @@ export const postReviewAsync = (text,currentRating) => {
             dispatch(postReviewFailure(error));
         }
 }
+}
+
+export const fetchCurrentProfileStart = () => {
+    return {type:actionTypes.FETCH_CURRENT_PROFILE_START};
+}
+
+export const fetchCurrentProfilefailure = (error) => {
+    return {type:actionTypes.FETCH_CURRENT_PROFILE_FAILURE,payLoad:error};
+}
+
+export const fetchCurrentProfileSuccess = (seller) => {
+    return {type:actionTypes.FETCH_CURRENT_PROFILE_SUCCESS,payLoad:seller};
+}
+
+export const fetchCurrentProfileAsync = (id) => {
+    return async (dispatch) => {
+        try{
+        const seller = await getFirebaseUserById(id);
+        dispatch(fetchCurrentProfileSuccess(seller));
+        }
+        catch(error)
+            {
+                dispatch(fetchCurrentProfilefailure(error));
+            }
+    }
+}
+
+export const setCurrentProfile = (seller) => {
+    return {type:actionTypes.SET_CURRENT_PROFILE,payLoad:seller};
 }

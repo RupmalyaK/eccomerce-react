@@ -30,4 +30,8 @@ export const selectIsFetchingCurrentItem = createSelector(selectBrowse, state =>
 
 export const selectIsPostingReview = createSelector(selectBrowse, state => state.isPostingReview);
 
+export const selectIsFetchingCurrentProfile = createSelector(selectBrowse, state => state.isFetchingCurrentProfile);
+
+export const selectCurrentProfile = createSelector(selectBrowse, state => state.currentProfile);
+
 

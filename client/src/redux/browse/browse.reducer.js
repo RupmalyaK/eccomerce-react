@@ -16,6 +16,11 @@ const INITIAL_STATE = {
     fetchCurrentItemError:null,
     isPostingReview:false,
     postingReviewError:null,
+    currentProfile:null,
+    isFetchingCurrentProfile:false,
+    fetchingCurrentProfileError:null,
+    isSettingCurrentItem:false, 
+    settingCurrentItemError:null,
 };
 
 const browseReducer = (state = INITIAL_STATE, action) => {
@@ -46,8 +51,24 @@ const browseReducer = (state = INITIAL_STATE, action) => {
             case actionTypes.POST_REVIEW_FAILURE:            
                          return {...state,isPostingReview:false,postingReviewError:payLoad};   
                 
-             case actionTypes.SET_CURRENT_ITEM:
-                        return {...state, currentItem:payLoad};          
+            case actionTypes.SET_CURRENT_ITEM_START:
+                        return {...state, isSettingCurrentItem:true};
+            case actionTypes.SET_CURRENT_ITEM_FAILURE:
+                        return {...state,isSettingCurrentItem:false,settingCurrentItemError:payLoad};
+            case actionTypes.SET_CURRENT_ITEM_SUCCESS:
+                        return {...state,isSettingCurrentItem:false,currentItem:payLoad};           
+                        
+                        
+            case actionTypes.FETCH_CURRENT_PROFILE_START:
+                        return {...state,isFetchingCurrentProfile:true};
+            case actionTypes.FETCH_CURRENT_PROFILE_FAILURE:
+                        return {...state,isFetchingCurrentProfile:false,fetchingCurrentProfileError:payLoad};
+            case actionTypes.FETCH_CURRENT_PROFILE_SUCCESS:
+                        return {...state,isFetchingCurrentProfile:false,currentProfile:payLoad};
+            
+            case actionTypes.SET_CURRENT_PROFILE:
+                        return{...state,currentProfile:payLoad};
+            
             default:
                     return state; 
         }
