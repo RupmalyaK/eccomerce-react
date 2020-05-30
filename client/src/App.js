@@ -88,9 +88,7 @@ const App = () => {
               currentUser ? <Redirect to='/'/> : <SignUpPage/>)
               }  /> 
 
-           <Route path="/profile/:sellerId?" exact render = {() => {
-            return !currentUser ? <Redirect to='/signin'/> : <ProfilePage/> 
-           }} />   
+            <Route path='/profile/:sellerid?' exact component={ProfilePage} /> 
 
            <Route path="/checkout/:isBuyNow" exact component={CheckoutPage} />   
         </Switch>

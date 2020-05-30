@@ -21,6 +21,9 @@ const INITIAL_STATE = {
     fetchingCurrentProfileError:null,
     isSettingCurrentItem:false, 
     settingCurrentItemError:null,
+    profileReview:[],
+    isFetchingProfileReviews:false,
+    fetchingProfileReviewsError:null,
 };
 
 const browseReducer = (state = INITIAL_STATE, action) => {
@@ -68,6 +71,13 @@ const browseReducer = (state = INITIAL_STATE, action) => {
             
             case actionTypes.SET_CURRENT_PROFILE:
                         return{...state,currentProfile:payLoad};
+             
+            case actionTypes.FETCH_SELLER_REVIEWS_START:
+                        return {...state,isFetchingProfileReviews:true};
+            case actionTypes.FETCH_SELLER_REVIEWS_FAILURE:
+                        return {...state,isFetchingProfileReviews:false,fetchingCurrentProfileError:payLoad};
+            case actionTypes.FETCH_SELLER_REVIEWS_SUCCESS:
+                        return {...state,isFetchingProfileReviews:false,profileReview:payLoad};                                    
             
             default:
                     return state; 

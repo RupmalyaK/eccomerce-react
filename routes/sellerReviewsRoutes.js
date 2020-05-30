@@ -1,7 +1,7 @@
 import SellerReviewsModel from "../model/SellerReviewsModel";
 import {calculateAverageRating,limitRequestFromTheUser} from "../controller/reviewController.js"
 import {isAuthenticated} from "../controller/authController.js";
-import SellerProfileReviews from "../client/src/components/SellerProfileReviews";
+
 
 
 const sellerReviewsRoute = (app,admin) => {
@@ -28,10 +28,10 @@ const sellerReviewsRoute = (app,admin) => {
                     const seller = await SellerReviewsModel.findOne({uid:sellerObjectId});
                     if(!seller)
                         {
-                            await SellerProfileReviews.create({
+                            await SellerReviewsModel.create({
                                 uid:sellerObjectId,
                             });  
-                            seller = await SellerReviewsModel.findOne({uid:sellerObjectId});        
+                            seller = await SellerReviewsModel.findOne({sellerId:sellerObjectId});        
                         }
                     
                     seller.reviews.forEach(review => { 
@@ -52,6 +52,18 @@ const sellerReviewsRoute = (app,admin) => {
         catch(error)
         {
             delete global.usersReviewing[userObjectId];
+            res.status(400);
+            console.log(error)
+            next({error});
+        }
+    })
+    .get(async (req,res) => {
+        const {sellerId} = req.params;
+        try{
+            const sellerReviews = await SellerReviewsModel.findOne({sellerId});
+            res.status(200).json(sellerReviews);
+        }
+        catch(error){
             res.status(400);
             console.log(error)
             next({error});

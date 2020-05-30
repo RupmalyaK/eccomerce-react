@@ -22,6 +22,10 @@ const ItemPage = props => {
             dispatch(fetchCurrentItemAsync(itemid,type));
         }
     },[itemid,type]);
+    if((Object.keys(currentItem).length === 0 && currentItem.constructor === Object) && !isFetchingCurrentItem)
+        {
+            return(<></>);
+        }
     return (
         <div style={{marginTop:"100px"}}>
            <ProductWithLoadingSpinner isLoading={isFetchingCurrentItem} /> 

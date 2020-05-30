@@ -203,6 +203,7 @@ export const fetchCurrentProfileSuccess = (seller) => {
 
 export const fetchCurrentProfileAsync = (id) => {
     return async (dispatch) => {
+        dispatch(fetchCurrentProfileStart());
         try{
         const seller = await getFirebaseUserById(id);
         dispatch(fetchCurrentProfileSuccess(seller));
@@ -217,3 +218,5 @@ export const fetchCurrentProfileAsync = (id) => {
 export const setCurrentProfile = (seller) => {
     return {type:actionTypes.SET_CURRENT_PROFILE,payLoad:seller};
 }
+
+
