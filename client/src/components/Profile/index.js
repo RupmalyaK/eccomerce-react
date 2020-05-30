@@ -1,9 +1,15 @@
 import React from "react"; 
 import styled from "styled-components";
 import RatingStar from "../../components/RatingStar";
-import Reviews from "../../components/SellerProfileReviews";
+import ReviewsAndRatings from "../../components/ReviewsAndRatings";
 import {useSelector} from "react-redux";
-import {selectCurrentProfile} from "../../redux/browse/browse.selector.js";
+import {selectCurrentProfile,selectIsPostingReview} from "../../redux/browse/browse.selector.js";
+import {postSellerReviewAsync} from "../../redux/browse/browse.actions.js";
+import LoadingSpinner from "../LoadingSpinner";
+
+const ReviewsAndRatingsWithLoadingSpinner = LoadingSpinner(ReviewsAndRatings);
+
+
 
 const Container = styled.div`
 margin-top:85px;
@@ -86,17 +92,21 @@ const ProfileNavBar = styled.div`
 
 const Profile = props => {
     const profile = useSelector(selectCurrentProfile);
+    const {displayName,role,reviewsData} = profile;
+    const {reviews,averageRating} = reviewsData;
+
 
     return(
         <Container>
+           
             <LeftPanel>
                 <ProfilePic />
-                <span className="name">{profile.displayName}</span>
-                <span className="role">{profile.role}</span>
+                <span className="name">{displayName}</span>
+                <span className="role">{role}</span>
                 <CustomRatingStar
                     rating={4}
                     starSize={"2rem"}
-                    spacing={3}
+                    spacing={"3"}
                 />
             </LeftPanel>
             <RightPanel>
@@ -104,7 +114,7 @@ const Profile = props => {
                         <span>Selling</span>
                         <span>Reviews</span>
                  </ProfileNavBar>  
-                 <Reviews/> 
+                  <ReviewsAndRatings reviews={reviews} averageRating={averageRating}  postReviewAsync={true} />
             </RightPanel>
         </Container>
     );

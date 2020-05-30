@@ -133,6 +133,7 @@ export const setCurrentItemAsync = (item) => {
         dispatch(setCurrentItemStart());
         try{
             const seller = await getFirebaseUserById(item.sellerId);
+         
             item.seller = seller;
             dispatch(setCurrentItemSuccess(item));
         }
@@ -197,16 +198,25 @@ export const fetchCurrentProfilefailure = (error) => {
     return {type:actionTypes.FETCH_CURRENT_PROFILE_FAILURE,payLoad:error};
 }
 
-export const fetchCurrentProfileSuccess = (seller) => {
-    return {type:actionTypes.FETCH_CURRENT_PROFILE_SUCCESS,payLoad:seller};
+export const fetchCurrentProfileSuccess = (profile) => {
+    return {type:actionTypes.FETCH_CURRENT_PROFILE_SUCCESS,payLoad:profile};
 }
 
 export const fetchCurrentProfileAsync = (id) => {
     return async (dispatch) => {
         dispatch(fetchCurrentProfileStart());
         try{
-        const seller = await getFirebaseUserById(id);
-        dispatch(fetchCurrentProfileSuccess(seller));
+        const profile = await getFirebaseUserById(id);
+        const {data}= await axios({
+            method:"GET",
+            url:"/api/seller/",
+            params:{
+                sellerid:id
+            },
+        });
+        profile.reviewsData = data;
+        profile.id = id;
+        dispatch(fetchCurrentProfileSuccess(profile));
         }
         catch(error)
             {
@@ -215,8 +225,67 @@ export const fetchCurrentProfileAsync = (id) => {
     }
 }
 
-export const setCurrentProfile = (seller) => {
-    return {type:actionTypes.SET_CURRENT_PROFILE,payLoad:seller};
+export const setCurrentProfileStart = () => {
+    return {type:actionTypes.SET_CURRENT_PROFILE_START};
+}
+
+export const setCurrentProfileFailure = (error) => {
+    return {type:actionTypes.SET_CURRENT_PROFILE_FAILURE,payLoad:error};
+}
+
+export const setCurrentProfileSuccess = (currentProfile) => {
+    return {type:actionTypes.SET_CURRENT_PROFILE_SUCCESS,payLoad:currentProfile};
+}
+
+export const setCurrentProfileAsync = (profile,id) => {
+    return async (dispatch) => {
+            dispatch(setCurrentProfileStart());
+            try{
+            const {data}= await axios({
+                method:"GET",
+                url:"/api/seller/",
+                params:{
+                   sellerid:id,
+                },
+            });
+            profile.reviewsData = data;
+            dispatch(setCurrentProfileSuccess(profile));
+            }
+            catch(error)
+                {
+                    dispatch(setCurrentProfileFailure(error));
+                }
+    }
+}
+
+export const postSellerReviewStart = () => {
+    return {type:actionTypes.POST_REVIEW_SELLER_START};
+}
+
+export const postSellerReviewFailure = (error) => {
+    return {type:actionTypes.POST_REVIEW_SELLER_FAILURE,payLoad:error};
+}
+
+export const postSellerReviewSuccess = (reviewsData) => {
+    return {type:actionTypes.POST_REVIEW_SELLER_SUCCESS,payLoad:reviewsData};
+}
+
+export const postSellerReviewAsync = (text,rating,sellerObjectId,userObjectId) => {
+    return async (dispatch,getState) => {
+
+        dispatch(postSellerReviewStart());
+        try{
+            const {data:reviewData} = await axios({
+                method:"POST",
+                url:"/api/seller/",
+                data:{rating,sellerObjectId,userObjectId}
+            }); 
+            dispatch(postReviewSuccess(reviewData));
+        }
+        catch(error){
+            dispatch(postSellerReviewFailure(error))
+        }
+    }
 }
 
 

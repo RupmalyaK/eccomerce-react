@@ -14,7 +14,7 @@ import {Container,StarIcon} from "./style.jsx";
 
 
 const ReviewsAndRatings = props => {
-        const {averageRating, reviews, postReviewAsync} = props; 
+        const {averageRating, reviews, postReviewAsync,onSubmit,...extraProps} = props; 
         const [currentRating, setCurrentRating] = useState(1);
         const [text, setText] = useState(""); 
         const currentUser = useSelector(selectCurrentUser); 
@@ -65,11 +65,16 @@ const ReviewsAndRatings = props => {
             setText(e.target.value);
         }
 
-        const handleSendReviewClick = async e => {
+        const sendClickHandler = e => {
+            e.preventDefault();
+            onSubmit(text,currentRating);
+        }
+
+     /*   const handleSendReviewClick = async e => {
             e.preventDefault();
             dispatch(postReviewAsync(text,currentRating));
             
-        }
+        }*/
         
         const displayCurrentUserReview = () => {
             
@@ -117,12 +122,12 @@ const ReviewsAndRatings = props => {
                                 <Form.Label>Write your own review here (Limit:{maxLengthOfTextArea - text.length} more characters)</Form.Label>
                                 <Form.Control as="textarea" rows="3" maxLength={maxLengthOfTextArea} onChange={handleWriteYourReviewChange}/>
                             </Form.Group>
-                            <CustomButton onClick={handleSendReviewClick}>Send</CustomButton>    
+                            <CustomButton onClick={sendClickHandler}>Send</CustomButton>    
                     </div>
                 );
         }
     return (
-        <Container>
+        <Container {...extraProps}>
             <div className="averageRating"> 
             <h2 className="average-rating-points">{averageRating}/5</h2>
                  <StarIcon icon={faStar}/>

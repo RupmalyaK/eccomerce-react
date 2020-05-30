@@ -7,6 +7,7 @@ const reviewRoutes = (app, admin) => {
     const routeString = "/api/collections/collection/item";
     app.route(routeString + "/review")
     .post(isAuthenticated,limitRequestFromTheUser,async (req, res, next) => {
+        console.log("HLLO DARKNESS");
         const {rating, text , itemObjectId, itemType,  userObjectId} = req.body; 
         if(typeof rating === undefined || rating > 5 || rating < 0)
             {
@@ -19,7 +20,6 @@ const reviewRoutes = (app, admin) => {
             const userRef = await db.collection("users").doc(userObjectId)
             const userDoc = await userRef.get();
             const {displayName, email} = userDoc.data(); 
-            
             const review = {user:{uid:userObjectId, displayName, email},rating,text}; 
             let flag = false;
             item.reviews.forEach(review => { 

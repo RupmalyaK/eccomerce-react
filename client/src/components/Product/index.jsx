@@ -18,7 +18,10 @@ const Product = props => {
     const [seller, setSeller] = useState("");
     const dispatch = useDispatch();
     const {_id,averageRating,reviews, type,sellerId} = item;  
-
+   
+    const sendReviewHandler = async (text,currentRating) => {
+        dispatch(postReviewAsync(text,currentRating));
+    }
     if(Object.keys(item).length === 0)
         {
             return(<></>);
@@ -30,7 +33,7 @@ const Product = props => {
                 <ProductRightPanel/>
              </Row>
              <hr/>
-             <ReviewsAndRatings isLoading={isPostingReview} reviews={reviews} averageRating={averageRating}  postReviewAsync={postReviewAsync}/>
+             <ReviewsAndRatings isLoading={isPostingReview} onSubmit={sendReviewHandler} reviews={reviews} averageRating={averageRating}  postReviewAsync={postReviewAsync}/>
         </Container>
     );
 }

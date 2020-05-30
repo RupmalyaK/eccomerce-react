@@ -21,9 +21,12 @@ const INITIAL_STATE = {
     fetchingCurrentProfileError:null,
     isSettingCurrentItem:false, 
     settingCurrentItemError:null,
-    profileReview:[],
     isFetchingProfileReviews:false,
     fetchingProfileReviewsError:null,
+    isPostingSellerReview:false,
+    postingSellerReviewError:null,
+    isSettingCurrentProfile:false,
+    settingCurrentProfileError:null,
 };
 
 const browseReducer = (state = INITIAL_STATE, action) => {
@@ -69,15 +72,26 @@ const browseReducer = (state = INITIAL_STATE, action) => {
             case actionTypes.FETCH_CURRENT_PROFILE_SUCCESS:
                         return {...state,isFetchingCurrentProfile:false,currentProfile:payLoad};
             
-            case actionTypes.SET_CURRENT_PROFILE:
-                        return{...state,currentProfile:payLoad};
+            case actionTypes.SET_CURRENT_PROFILE_START:
+                        return{...state,isSettingCurrentProfile:true};
+            case actionTypes.SET_CURRENT_PROFILE_FAILURE:
+                        return {...state,isSettingCurrentProfile:false,settingCurrentProfileError:payLoad};
+            case actionTypes.SET_CURRENT_PROFILE_SUCCESS:
+                        return {...state,isSettingCurrentProfile:false,currentProfile:payLoad};                       
              
             case actionTypes.FETCH_SELLER_REVIEWS_START:
                         return {...state,isFetchingProfileReviews:true};
             case actionTypes.FETCH_SELLER_REVIEWS_FAILURE:
                         return {...state,isFetchingProfileReviews:false,fetchingCurrentProfileError:payLoad};
             case actionTypes.FETCH_SELLER_REVIEWS_SUCCESS:
-                        return {...state,isFetchingProfileReviews:false,profileReview:payLoad};                                    
+                        return {...state,isFetchingProfileReviews:false,currentProfile:{...state.currentProfile,reviews:payLoad}};  
+                        
+            case actionTypes.POST_REVIEW_SELLER_START:
+                        return {...state,isPostingReview:true};
+            case actionTypes.POST_REVIEW_SELLER_FAILURE:
+                        return {...state,isPostingReview:false,postingReviewError:payLoad};
+             case actionTypes.POST_REVIEW_SELLER_SUCCESS:
+                        return {...state,isPostingReview:false,currentProfile:{...state.currentProfile,reviewsData:payLoad}};                                  
             
             default:
                     return state; 

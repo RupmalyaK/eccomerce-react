@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {selectCurrentItem} from "../../redux/browse/browse.selector.js"; 
-import {setCurrentProfile} from "../../redux/browse/browse.actions.js"; 
+import {setCurrentProfileAsync} from "../../redux/browse/browse.actions.js"; 
 import {addNewBuyNowItem} from "../../redux/cart/cart.action.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
@@ -33,7 +33,7 @@ const ProductRightPanel = () => {
     }
     
     const handleClickSeller = e => {
-        dispatch(setCurrentProfile(item.seller));
+        dispatch(setCurrentProfileAsync(item.seller,item.sellerId));
         history.push(`/profile/${item.sellerId}`);
     }
 

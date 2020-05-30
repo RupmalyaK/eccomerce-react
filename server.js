@@ -9,7 +9,9 @@ import collectionsRoutes from "./routes/collectionsRoutes.js";
 import collectionRoutes from "./routes/collectionRoutes.js";
 import itemsRoutes from "./routes/itemsRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
+import sellerReviewsRoutes from "./routes/sellerReviewsRoutes.js";
 import admin from "firebase-admin";
+import sellerReviewsRoute from "./routes/sellerReviewsRoutes.js";
 
 
 
@@ -51,6 +53,7 @@ collectionsRoutes(app);
 collectionRoutes(app);
 itemsRoutes(app);
 reviewRoutes(app, admin);
+sellerReviewsRoute(app,admin);
 
 /*PRODUCTION CONFIG*/
 

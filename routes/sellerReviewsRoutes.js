@@ -6,7 +6,7 @@ import {isAuthenticated} from "../controller/authController.js";
 
 const sellerReviewsRoute = (app,admin) => {
     const routeString = "/api/seller/"
-    app.use(routeString)
+    app.route(routeString)
     .post(/*isAuthenticated,limitRequestFromTheUser,*/async(req,res) => {
         const {rating, text , sellerObjectId, userObjectId} = req.body; 
         if(typeof rating === undefined || rating > 5 || rating < 0)
@@ -45,7 +45,7 @@ const sellerReviewsRoute = (app,admin) => {
                 seller.averageRating = calculateAverageRating(seller.reviews);
                 await seller.save();
                 delete global.usersReviewing[userObjectId];
-                res.status(200).send({operation:"success",reviews:item.reviews});     
+                res.status(200).send({operation:"success",reviews:seller});     
                 }
 
         }
@@ -57,11 +57,16 @@ const sellerReviewsRoute = (app,admin) => {
             next({error});
         }
     })
+
     .get(async (req,res) => {
         const {sellerId} = req.params;
         try{
             const sellerReviews = await SellerReviewsModel.findOne({sellerId});
-            res.status(200).json(sellerReviews);
+            res.status(200).json(sellerReviews ? sellerReviews : 
+                {averageRating:0,
+                 reviews:[],   
+                }
+            );
         }
         catch(error){
             res.status(400);
