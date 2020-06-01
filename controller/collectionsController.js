@@ -1,5 +1,6 @@
 export const searchItemsByName = (searchObj) => {
-    const {CollectionsModel, searchString,categories,isFeatured} = searchObj;
+    const {CollectionsModel, searchString,categories,isFeatured,sellerId} = searchObj;
+  
     let {priceMin, priceMax} = searchObj; 
     if (!priceMin)
         {
@@ -30,7 +31,7 @@ export const searchItemsByName = (searchObj) => {
                       
                         flag = false; 
                     }
-            
+                  
                  if(categories)
                     {
                         if(categories.indexOf(item.type.toLowerCase()) === -1)
@@ -38,12 +39,22 @@ export const searchItemsByName = (searchObj) => {
                                
                                 flag = false;
                             }
-                    }           
-               if (item.name.match(new RegExp(`^${searchString}`, 'i')) && flag)
+                    }
+                   
+                 if(sellerId)
+                    {
+                        
+                        if(item.sellerId !== sellerId)
+                            {
+                                flag = false;
+                            }
+                    }  
+
+               if (flag && item.name.match(new RegExp(`^${searchString}`, 'i')))
                 {
                     itemsStartWithFromCollections.push(item)
                 }
-                else if  ( (item.name.match(new RegExp(searchString, 'i')) !== null) && flag)
+                else if  (flag && (item.name.match(new RegExp(searchString, 'i')) !== null))
                     {
                         itemsFromCollections.push(item); 
                     }

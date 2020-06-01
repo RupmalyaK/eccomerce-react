@@ -5,9 +5,10 @@ import {isAuthenticated} from "../controller/authController.js";
 
 
 const sellerReviewsRoute = (app,admin) => {
+    const db = admin.firestore();
     const routeString = "/api/seller/"
     app.route(routeString)
-    .post(/*isAuthenticated,limitRequestFromTheUser,*/async(req,res) => {
+    .post(isAuthenticated,limitRequestFromTheUser,async(req,res) => {
         const {rating, text , sellerObjectId, userObjectId} = req.body; 
         if(typeof rating === undefined || rating > 5 || rating < 0)
             {
@@ -19,17 +20,18 @@ const sellerReviewsRoute = (app,admin) => {
             const userRef = await db.collection("users").doc(userObjectId)
             const userDoc = await userRef.get();
             const userData = userDoc.data(); 
+            const {displayName, email} = userData;
            
             const sellerRef = await db.collection("users").doc(sellerObjectId)
             const sellerDoc = await sellerRef.get();
             if(sellerDoc.exists)
                 {
                     const review = {user:{uid:userObjectId, displayName, email},rating,text}; 
-                    const seller = await SellerReviewsModel.findOne({uid:sellerObjectId});
+                    let seller = await SellerReviewsModel.findOne({sellerId:sellerObjectId});
                     if(!seller)
                         {
                             await SellerReviewsModel.create({
-                                uid:sellerObjectId,
+                                sellerId:sellerObjectId,
                             });  
                             seller = await SellerReviewsModel.findOne({sellerId:sellerObjectId});        
                         }
@@ -37,7 +39,6 @@ const sellerReviewsRoute = (app,admin) => {
                     seller.reviews.forEach(review => { 
                         if(review.user.uid === userObjectId)
                             {
-                                flag = true;
                                 throw new Error("User already reviewed this product");
                             }
                     });
@@ -45,23 +46,39 @@ const sellerReviewsRoute = (app,admin) => {
                 seller.averageRating = calculateAverageRating(seller.reviews);
                 await seller.save();
                 delete global.usersReviewing[userObjectId];
-                res.status(200).send({operation:"success",reviews:seller});     
+                console.log("THIS IS AFTER INSERT",seller);
+                res.status(200).send({operation:"success",reviewData:seller});     
                 }
 
         }
         catch(error)
         {
             delete global.usersReviewing[userObjectId];
-            res.status(400);
             console.log(error)
+            res.status(400);
             next({error});
         }
     })
-
-    .get(async (req,res) => {
-        const {sellerId} = req.params;
+    .get(async(req, res) => {
         try{
-            const sellerReviews = await SellerReviewsModel.findOne({sellerId});
+            const allSellerReviews = await SellerReviewsModel.find({});
+            res.status(200).json(allSellerReviews);
+        }
+        catch(error)
+            {
+                res.status(400);
+                console.log(error)
+                next({error});
+            }
+        
+
+    });
+
+    app.route(routeString + ":sellerid")
+    .get(async (req,res) => {
+        const {sellerid} = req.params;
+        try{
+            const sellerReviews = await SellerReviewsModel.findOne({sellerId:sellerid});
             res.status(200).json(sellerReviews ? sellerReviews : 
                 {averageRating:0,
                  reviews:[],   
@@ -78,3 +95,8 @@ const sellerReviewsRoute = (app,admin) => {
 
 
 export default sellerReviewsRoute;
+
+
+/*(async () => {
+    await SellerReviewsModel.deleteMany({});
+})();*/

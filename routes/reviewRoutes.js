@@ -21,12 +21,12 @@ const reviewRoutes = (app, admin) => {
             const userDoc = await userRef.get();
             const {displayName, email} = userDoc.data(); 
             const review = {user:{uid:userObjectId, displayName, email},rating,text}; 
-            let flag = false;
+
             item.reviews.forEach(review => { 
                 
                 if(review.user.uid === userObjectId)
                     {
-                        flag = true;
+                     
                         throw new Error("User already reviewed this product");
                     }
             });
@@ -40,8 +40,8 @@ const reviewRoutes = (app, admin) => {
         catch(error)
             {
                 delete global.usersReviewing[userObjectId];
-                res.status(400);
                 console.log(error)
+                res.status(400);
                 next({error});
             }
        

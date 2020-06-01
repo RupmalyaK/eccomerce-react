@@ -58,9 +58,9 @@ app.route(routeString + "/autocomplete")
 
 app.route(routeString + "/itemName")
 .get(async(req, res, next) => {
-    const {searchString, isSplice, sortBy, isAsc,priceMin, priceMax,categories, isFeatured} = req.query;  
+    const {searchString, isSplice, sortBy, isAsc,priceMin, priceMax,categories, isFeatured,sellerId} = req.query;  
     try{
-         let items = await searchItemsByName({CollectionsModel, searchString, categories, priceMin, priceMax, isFeatured});
+         let items = await searchItemsByName({CollectionsModel, searchString, categories, priceMin, priceMax, isFeatured,sellerId});
          if(isSplice)
             {
                 items.splice(9,items.length - 1); 

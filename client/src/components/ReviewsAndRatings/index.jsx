@@ -1,12 +1,10 @@
-import React, {useState, useEffect} from "react";
-import {useSelector,useDispatch} from "react-redux";
+import React, {useState} from "react";
+import {useSelector} from "react-redux";
 import {selectCurrentUser} from "../../redux/user/user.selector.js";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
 import StarRatings from "react-star-ratings"; 
 
 import {Form} from "react-bootstrap";
-import axios from "axios";
-import {auth} from "../../firebase/firebase.util";
 import CustomButton from "../CustomButton";
 import {Container,StarIcon} from "./style.jsx";
 
@@ -14,13 +12,11 @@ import {Container,StarIcon} from "./style.jsx";
 
 
 const ReviewsAndRatings = props => {
-        const {averageRating, reviews, postReviewAsync,onSubmit,...extraProps} = props; 
+        const {averageRating, reviews, onSubmit,...extraProps} = props; 
         const [currentRating, setCurrentRating] = useState(1);
         const [text, setText] = useState(""); 
         const currentUser = useSelector(selectCurrentUser); 
-        const dispatch = useDispatch(postReviewAsync);
         const maxLengthOfTextArea = "120";
-        
         const currentUserReviewIndex = reviews.findIndex(review => {
             if(currentUser && review.user.uid === currentUser.id)
                 {
@@ -28,7 +24,7 @@ const ReviewsAndRatings = props => {
                 }
              }
             );
-            const currentUserReview = currentUserReviewIndex > -1 ? reviews[currentUserReviewIndex] : null; 
+           const currentUserReview = currentUserReviewIndex > -1 ? reviews[currentUserReviewIndex] : null; 
            
             if(currentUserReview)
                 {
@@ -70,11 +66,6 @@ const ReviewsAndRatings = props => {
             onSubmit(text,currentRating);
         }
 
-     /*   const handleSendReviewClick = async e => {
-            e.preventDefault();
-            dispatch(postReviewAsync(text,currentRating));
-            
-        }*/
         
         const displayCurrentUserReview = () => {
             
@@ -98,7 +89,7 @@ const ReviewsAndRatings = props => {
                                 
                         </div>);
         }
-        const getNumberOfReviews = () => {
+       const getNumberOfReviews = () => {
             return reviews.length + (currentUserReview ? 1 : 0);
         }
         const displayWriteReviewForm = () => {
@@ -128,12 +119,12 @@ const ReviewsAndRatings = props => {
         }
     return (
         <Container {...extraProps}>
-            <div className="averageRating"> 
+       <div className="averageRating"> 
             <h2 className="average-rating-points">{averageRating}/5</h2>
                  <StarIcon icon={faStar}/>
                  <em>out of {reviews ? getNumberOfReviews() : <></>} reviews</em>
             </div>
-               {currentUserReview ? displayCurrentUserReview() : displayWriteReviewForm()}
+    {currentUserReview ? displayCurrentUserReview() : displayWriteReviewForm()}
              {reviews && reviews.length != 0 ? displayAllReviews():
              <h4 style={{marginTop:"-20px"}}>No reviews</h4>
              }

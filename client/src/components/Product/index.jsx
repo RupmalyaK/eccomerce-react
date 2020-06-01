@@ -33,7 +33,7 @@ const Product = props => {
                 <ProductRightPanel/>
              </Row>
              <hr/>
-             <ReviewsAndRatings isLoading={isPostingReview} onSubmit={sendReviewHandler} reviews={reviews} averageRating={averageRating}  postReviewAsync={postReviewAsync}/>
+             <ReviewsAndRatings isLoading={isPostingReview} onSubmit={sendReviewHandler} reviews={[...reviews]} averageRating={averageRating}  postReviewAsync={postReviewAsync}/>
         </Container>
     );
 }

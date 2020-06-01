@@ -13,7 +13,7 @@ const BrowseItem = props => {
     const history = useHistory(); 
 
     const handleGoToItemPage = e => {
-       // dispatch(setCurrentItem(props.item));
+       dispatch(setCurrentItemAsync(props.item));
         history.push({
             pathname:`/browse/item/${type}/${_id}`,
     });

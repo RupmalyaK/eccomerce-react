@@ -10,4 +10,4 @@ const sellerReviewsSchema = new Schema({
 },{timestamps:{createdAt:true,updatedAt:true}});
 
 
-export default mongoose.model("sellerReviews", sellerReviewsSchema);
+export default mongoose.model("SellerReviews", sellerReviewsSchema);

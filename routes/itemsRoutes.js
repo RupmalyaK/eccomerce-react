@@ -30,7 +30,8 @@ app.route(routeString + "items")
 app.route(routeString + "items/:title")
 .get( async (req, res, next) => {
     const {title:collectionTitle} = req.params; 
-    const {isFeatured} = req.query;
+    const {isFeatured,sellerid} = req.query;
+
     if(collectionTitle === "all")
         {
             if(isFeatured)
@@ -41,6 +42,7 @@ app.route(routeString + "items/:title")
                     collections.forEach(collection => {
                         const {title, routeName, items, _id} = collection; 
                         const featuredItems = items.filter(item => item.isFeatured);
+
                         newObj[title.toLowerCase()] = {_id, title,routeName,items:featuredItems}; 
                         return; 
                          });

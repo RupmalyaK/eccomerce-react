@@ -16,12 +16,12 @@ export const fetchItemsSuccess = (search) => {
 }
 
 export const fetchItemsAsync = (search) => {
-    let {searchString,priceRange,type, sortBy, isAsc,categories, isFeatured} = search; 
-    
+    let {searchString,priceRange,type, sortBy, isAsc,categories, isFeatured,sellerId} = search; 
+        
     return async (dispatch, getState) => {
         dispatch(fetchItemsStart());
          const currentBrowseState = getState().browse; 
-         if(typeof searchString === "undefined")
+         if(typeof searchString === "undefined" && !sellerId)
             {
                 searchString = currentBrowseState.searchString; 
             }
@@ -50,11 +50,11 @@ export const fetchItemsAsync = (search) => {
             {
                 isFeatured = currentBrowseState.isFeatued; 
             }       
-         if(searchString === "")
+         if(searchString === "" && !sellerId)
             {
                 dispatch(fetchItemsSuccess({items:[],searchString,priceRange, sortBy, isAsc, categories, isFeatured})); 
-                return; 
-            }   
+                 isFeatured = true;
+            }    
         try {
             const {data:items} = await axios({
                 url:"/api/collections/itemName",
@@ -66,10 +66,10 @@ export const fetchItemsAsync = (search) => {
                    isFeatured,
                    priceMin:priceRange[0],
                    priceMax:priceRange[1], 
-                   categories 
+                   categories,
+                   sellerId 
                 },
             }); 
-            
             dispatch(fetchItemsSuccess({items, searchString,priceRange, sortBy, isAsc, categories, isFeatured})); 
             }
          catch(error)
@@ -209,11 +209,9 @@ export const fetchCurrentProfileAsync = (id) => {
         const profile = await getFirebaseUserById(id);
         const {data}= await axios({
             method:"GET",
-            url:"/api/seller/",
-            params:{
-                sellerid:id
-            },
+            url:`/api/seller/${id}`,
         });
+        
         profile.reviewsData = data;
         profile.id = id;
         dispatch(fetchCurrentProfileSuccess(profile));
@@ -239,16 +237,15 @@ export const setCurrentProfileSuccess = (currentProfile) => {
 
 export const setCurrentProfileAsync = (profile,id) => {
     return async (dispatch) => {
+           
             dispatch(setCurrentProfileStart());
-            try{
+            try{    
             const {data}= await axios({
                 method:"GET",
-                url:"/api/seller/",
-                params:{
-                   sellerid:id,
-                },
+                url:`/api/seller/${id}`,
             });
             profile.reviewsData = data;
+            profile.id = id;
             dispatch(setCurrentProfileSuccess(profile));
             }
             catch(error)
@@ -275,10 +272,14 @@ export const postSellerReviewAsync = (text,rating,sellerObjectId,userObjectId) =
 
         dispatch(postSellerReviewStart());
         try{
+            const accessToken = await auth.currentUser.getIdToken();  
             const {data:reviewData} = await axios({
                 method:"POST",
                 url:"/api/seller/",
-                data:{rating,sellerObjectId,userObjectId}
+                data:{rating,sellerObjectId,userObjectId,text},
+                headers: {
+                    authorization:"Bearer " + accessToken,
+                },
             }); 
             dispatch(postReviewSuccess(reviewData));
         }

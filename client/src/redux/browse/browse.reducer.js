@@ -31,7 +31,6 @@ const INITIAL_STATE = {
 
 const browseReducer = (state = INITIAL_STATE, action) => {
     const {type, payLoad} = action; 
-
     switch(type)
         {
             case actionTypes.FETCH_ITEMS_START:
