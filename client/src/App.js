@@ -42,7 +42,6 @@ const App = () => {
   
   useEffect(() => {
     dispatch(checkSessionAsync());
-    
     //toMongoDB();
     const handleUnmount = () => console.log("App unmounted"); 
     return handleUnmount; 
@@ -69,29 +68,28 @@ const App = () => {
       <div>
         <GlobalStyle />
         <LayoutWithLoadingSpinner isLoading={isSigningIn || isCheckingSession || isSigningUp}>
-        <Header/>
-        <Route path="/reviews"  component={ReviewsAndRatings} />
-        <Switch>
-          <Route path='/test' exact component={LoadingSpinner} />
-          <Route path='/' exact component={Homepage} />
-          <Route path="/shop/:match?"  component={Shoppage} />
-          <Route exact path="/browse" render={props => <BrowsePageWithLoadingSpinner isLoading={isFetchingItems}/>} />
-          <Route path="/browse/item/:type/:itemid/"  component={Itempage}/>
+            <Header/>
+            <Switch>
+                <Route path='/' exact component={Homepage} />
+                <Route path="/shop/:match?"  component={Shoppage}/>
+                <Route exact path="/browse">
+                    <BrowsePageWithLoadingSpinner isLoading={isFetchingItems}/>
+                </Route> 
+                <Route path="/browse/item/:type/:itemid/"  component={Itempage}/>
 
-          <Route path="/signin" exact render = {
-            () => (
-              currentUser ? <Redirect to='/'/> : <SignInPage/>)
-              }  /> 
+                <Route path="/signin" exact render = {
+                  () => (
+                    currentUser ? <Redirect to='/'/> : <SignInPage/>)
+                    }  /> 
 
-          <Route path="/signup" exact render = {
-            () => (
-              currentUser ? <Redirect to='/'/> : <SignUpPage/>)
-              }  /> 
+                <Route path="/signup" exact render = {
+                  () => (
+                    currentUser ? <Redirect to='/'/> : <SignUpPage/>)
+                    }  /> 
 
-            <Route path='/profile/:sellerid?' exact component={ProfilePage} /> 
-
-           <Route path="/checkout/:isBuyNow" exact component={CheckoutPage} />   
-        </Switch>
+                <Route path='/profile/:sellerid?' exact component={ProfilePage} /> 
+                <Route path="/checkout/:isBuyNow" exact component={CheckoutPage} />   
+            </Switch>
        </LayoutWithLoadingSpinner>
       </div>
   );

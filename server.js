@@ -55,6 +55,27 @@ itemsRoutes(app);
 reviewRoutes(app, admin);
 sellerReviewsRoute(app,admin);
 
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
+const test = app.post("/api/payment" , (req, res) => { 
+    const {token,amount,description} = req.body; 
+    const body = {
+        source:token.id,
+        amount:amount,
+        description:description,
+        currency:"usd",
+    }
+
+    stripe.charges.create(body, (err , result) => {
+        if (err)
+            {
+                res.status(500).send({"error":err});
+                return;
+            }
+            res.status(200).send({"res":result}); 
+    });
+});
+
 /*PRODUCTION CONFIG*/
 
 if(process.env.NODE_ENV ==="production")
@@ -92,26 +113,7 @@ app.listen(port , err => {
 
 
 /*STRIPE CONFIG*/
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-const test = app.post("/payment" , (req, res) => { 
-    const body = {
-        source:req.body.token.id,
-        amount:req.body.amount,
-        description:req.body.description,
-        currency:"usd",
-    }
-
-    stripe.charges.create(body, (err , result) => {
-        if (err)
-            {
-                console.error(err);
-                res.status(500).send({"error":err});
-                return;
-            }
-            res.status(200).send({"res":result}); 
-    });
-});
 
 
 

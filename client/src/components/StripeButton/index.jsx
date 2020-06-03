@@ -11,18 +11,19 @@ const publishableKey = "pk_test_qhHgNG3x3y8JTmQuCZG96jDu00Y43Njp5E";
 const handleToken = async token => {
    try{ 
      await axios({
-        url:"payment",
+        url:"/api/payment",
         method:"post",
         data:{
             amount:centsPrice,
             token,
             description:"P0213",
-        }
+        },
     });
     alert("payment successful");
 }
     catch(error)
         {
+            console.log(error);
             alert("There is an issue with your payment"); 
         }
 }

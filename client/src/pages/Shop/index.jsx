@@ -28,15 +28,12 @@ const Shop = (props) => {
 
 return(
        <Container>
-            <Route exact path={"/shop"} render={(props) => {
-              return (
+            <Route exact path={"/shop"}>
                 <CollectionOverviewWithSpinner isLoading = {isFetching} />
-              );
-            }} />
-
-            <Route exact path={"/shop/:categoryid"} render = {(props) => {
-                return (<CollectionPageWithSpinner isLoading={isFetching} /> )
-            }} />
+            </Route>  
+            <Route exact path={"/shop/:categoryid"} >
+                <CollectionPageWithSpinner isLoading={isFetching} />
+            </Route>
        </Container>
 
     )
