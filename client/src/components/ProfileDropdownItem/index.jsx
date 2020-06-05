@@ -15,6 +15,10 @@ cursor:pointer;
 
 const Item = styled.h6`
     flex:1;
+    .text{
+        color:${props => props.theme.alternateTextColor};
+        font-size:0.8rem;
+    }
 `;
 
 const Icon = styled.img`
@@ -26,7 +30,7 @@ const ProfileDropdownItem = ({children, src , alt , ...extraProps}) => {
    
     return (
         <Container {...extraProps} >
-            <Item>{children}</Item> <Icon src={src} alt={alt}/>
+            <Item><span className="text">{children}</span></Item> <Icon src={src} alt={alt}/>
         </Container>
     );
 }

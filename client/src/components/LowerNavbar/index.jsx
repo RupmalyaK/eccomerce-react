@@ -42,7 +42,15 @@ const UpperNavbar = (props) => {
                           <BLink as={NavLink} to="/Browse" className="link" exact>
                             <span>Browse</span><FontAwesomeIcon icon={faCaretRight} className="icon"/>
                          </BLink>
-                  </Nav>
+                         <BLink as={NavLink} to="/Browse" className="link" exact>
+                            <span>Collections</span><FontAwesomeIcon icon={faCaretRight} className="icon"/>
+                         </BLink>
+                    </Nav>
+                    <Nav className="ml-auto text-uppercase w-100 justify-content-end text-center">
+                        <BLink as={NavLink} to="/contactus" activeClassName="active" className="link"  exact>
+                                <span>Contact</span>
+                        </BLink>
+                    </Nav>
                  
           </Navbar.Collapse> 
           </Navbar>     

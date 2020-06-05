@@ -11,6 +11,7 @@ position:relative;
     &:focus{
         background:${props => props.theme.transparentBackgroundColor};    
     }
+    width:100%;
 }
 .icon-wrapper{
     position:relative;

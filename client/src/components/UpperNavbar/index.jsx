@@ -36,11 +36,9 @@ const UpperNavbar = (props) => {
               <Navbar.Brand  as={Link} to='/' style={{flex:1}}><Logo /></Navbar.Brand> 
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav px-0 text-center w-100">
-                <SearchBar className="w-50  justify-content-end" style={{flex:1}}/>
+                <SearchBar className="w-75  justify-content-start"/>
                         <Nav className="ml-auto text-uppercase w-100 justify-content-end text-center" style={{flex:1}}>       
-                                <div className="icon-wrapper">
-                                    <FontAwesomeIcon icon={faUser} className="icon"/>
-                                </div>
+                                <ProfileIcon />
                                 <div className="icon-wrapper">
                                     <FontAwesomeIcon icon={faHeart} className="icon"/>
                                 </div>

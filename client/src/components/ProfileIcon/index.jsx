@@ -4,15 +4,26 @@ import Dropdown from "../ProfileDropdown";
 import {useSelector,useDispatch} from "react-redux";
 import {selectIsProfileMenuOpen} from "../../redux/system/system.selector.js";
 import {setProfileMenuOpen, setProfileMenuClose} from "../../redux/system/system.action.js";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUser} from "@fortawesome/free-solid-svg-icons";
 
-const Icon = styled.img`
-    display:flex;
-    flex-direction:column;
-    height:28px;
-    width:28px;
-    cursor:pointer;
+const Container = styled.div`
     position:relative;
-    display:inline-block;
+    margin-right:10px;
+    border-radius:100px;
+    width:35px;
+    height:35px;
+    background:yellow;
+    text-align:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    background:${props => props.theme.transparentBackgroundColor};
+
+    &:hover{
+        color:${props => props.theme.primaryButtonColor};
+    }
 `;
 
 const ProfileIcon = (props) => {
@@ -29,12 +40,19 @@ const ProfileIcon = (props) => {
     }
 
     return (
-        <div onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
-        <Icon alt={alt} src={src}/>
+    <Container onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
+        <FontAwesomeIcon icon={faUser} className="icon"/>
         { isProfileMenuOpen ? <Dropdown/> : <></>}
-        </div>
+    </Container>
     );
 }
 
 
 export default ProfileIcon;
+
+
+/**
+<div onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
+<Icon alt={alt} src={src}/>
+{ isProfileMenuOpen ? <Dropdown/> : <></>}
+</div> */

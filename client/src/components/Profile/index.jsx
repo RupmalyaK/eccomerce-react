@@ -149,7 +149,6 @@ const Profile = props => {
             </LeftPanel>
             <RightPanel>
                  {storeOrReviews === "reviews" ?  (<ReviewsAndRatings onSubmit={handleReviewSend} reviews={[...reviews]} averageRating={averageRating} />) : ( <BrowseWithLoadingSpinner isLoading={isFetchingItems} />)}
-                
             </RightPanel>
         </Container>
     );

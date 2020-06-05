@@ -10,10 +10,9 @@ display: flex;
 flex-direction: column;
 padding-top: 20px;
 border: 1px solid black;
-background-color: white;
-top: 80%;
+background-color: ${props => props.theme.secondaryBackgroundColor};
+top:120%;
 z-index: 5;
-transform:translateX(-50%);
   `;
 
 

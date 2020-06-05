@@ -10,6 +10,12 @@ export const Container = styled(BContainer)`
     flex-direction:row;
     align-items:center;
     justify-content:center;
+    &:before{
+        content:"";
+        width:100%;
+        height:10px;
+        background:orange;
+    }
 }
 .active{
     border-bottom: 1px inset black;
