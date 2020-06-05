@@ -43,7 +43,7 @@ justify-content:center;
 padding:0px;
 border-radius:5px;
 &:hover {
-  background-color: ${props => props.isInverted ? "black" : "white"};
+  background-color: ${props => props.isInverted ? /*"black"*/  props.theme.primaryButtonColor: "white"};
   color: ${props => props.isInverted ? "white" : "black"};
   border: ${props => props.isInverted ? "1px solid black":"white" };
 }

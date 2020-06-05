@@ -3,25 +3,27 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Container = styled.div`
-    margin-left:auto;
-    margin-right:25px;
-    display:inline-flex;
-    &:after{
-        content: "${props => props.itemCount}";
-        display:flex;
-        position:relative;
-        width:20px;
-        height:20px;
-        top:0px;
-        justify-content:center;
-        opacity:0.8;
-    };
-    position:relative;
-`;
+position:relative;
+width:140px;
+height:40px;
+background:yellow;
+display:flex;
+flex-direction:row;
+align-items:center;
+justify-content:space-around;
+font-size:.7rem;
+cursour:pointer;
+background:${props => props.theme.transparentBackgroundColor};
+padding:1px;
 
-export const IconContainer = styled(FontAwesomeIcon)`
-    cursor:pointer;
-    width:120px;
-    height:50px;
+&:hover{
+    background:${props => props.theme.primaryButtonColor};
+}
+
+.text{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;         
 }
 `;

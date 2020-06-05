@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react"; 
-import {Form, FormControl, Button} from "react-bootstrap";
+import {FormControl} from "react-bootstrap";
 import {fetchAutocompleteAsync} from "../../redux/shop/shop.actions.js"
 import {selectAutocompleteCollections} from "../../redux/shop/shop.selector.js";
 import {fetchItemsAsync, setCurrentItemAsync} from "../../redux/browse/browse.actions.js";
@@ -7,7 +7,9 @@ import {selectSortBy} from "../../redux/browse/browse.selector.js";
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
 import {useHistory} from "react-router-dom";
-import {SuggestionBox,Suggestion} from "./style.jsx";
+import {CustomForm,SuggestionBox,Suggestion} from "./style.jsx";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -105,19 +107,33 @@ const SearchBar = (props) => {
     }
 
 return(
-    <Form inline style={{position:"relative"}} {...rest} ref={suggestionBoxRef}>
-        <FormControl type="text" onChange={handleChange} onKeyPress={handleEnterPress}  placeholder="Search product..." className=" m-0 w-75" />
-        {compact ? <></> : <Button className="ml-1"  onClick={handleClickSearch} variant="outline-success">Search</Button>}
+    <CustomForm inline  {...rest} ref={suggestionBoxRef}>
+        <FormControl  type="text" onChange={handleChange} onKeyPress={handleEnterPress}  placeholder="Search ..." className=" m-0 w-75 text-input"/>
+        <div className="icon-wrapper">
+           <FontAwesomeIcon icon={faSearch} className="icon" onClick={handleClickSearch}/>
+        </div>
         {(!isOpen || items.length === 0 )? <></> :(
         <SuggestionBox >
             {displaySuggestions()}
         </SuggestionBox>
         )}
-    </Form>  
+    </CustomForm>  
 );
 }
 
 
 
 export default SearchBar; 
+
+/**
+ *  <Form inline  {...rest} ref={suggestionBoxRef}>
+        <FormControl  type="text" onChange={handleChange} onKeyPress={handleEnterPress}  placeholder="Search product..." className=" m-0 w-75" />
+        {compact ? <></> : <Button className="ml-1"  onClick={handleClickSearch} variant="outline-success">Search</Button>}
+        {(!isOpen || items.length === 0 )? <></> :(
+        <SuggestionBox >
+            {displaySuggestions()}
+        </SuggestionBox>
+        )}
+    </Form> 
+ */
 

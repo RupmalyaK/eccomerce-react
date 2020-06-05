@@ -16,9 +16,11 @@ import Homepage from "./pages/Home";
 import Shoppage from "./pages/Shop";
 import BrowsePage from "./pages/Browse";
 import ProfilePage from "./pages/Profile";
-import GlobalStyle from "./components/GlobalStyle";
+import {GlobalStyle,theme} from "./components/GlobalStyle";
 import SignInPage from "./pages/Signin";
+import {ThemeProvider} from "styled-components";
 import SignUpPage from "./pages/Signup";
+import { faPray } from '@fortawesome/free-solid-svg-icons';
 //import {toMongoDB} from "./util.js";
 
 
@@ -66,31 +68,33 @@ const App = () => {
 
     return (
       <div>
-        <GlobalStyle />
-        <LayoutWithLoadingSpinner isLoading={isSigningIn || isCheckingSession || isSigningUp}>
-            <Header/>
-            <Switch>
-                <Route path='/' exact component={Homepage} />
-                <Route path="/shop/:match?"  component={Shoppage}/>
-                <Route exact path="/browse">
-                    <BrowsePageWithLoadingSpinner isLoading={isFetchingItems}/>
-                </Route> 
-                <Route path="/browse/item/:type/:itemid/"  component={Itempage}/>
+        <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <LayoutWithLoadingSpinner isLoading={isSigningIn || isCheckingSession || isSigningUp}>
+                <Header/>
+                <Switch>
+                    <Route path='/' exact component={Homepage} />
+                    <Route path="/shop/:match?"  component={Shoppage}/>
+                    <Route exact path="/browse">
+                        <BrowsePageWithLoadingSpinner isLoading={isFetchingItems}/>
+                    </Route> 
+                    <Route path="/browse/item/:type/:itemid/"  component={Itempage}/>
 
-                <Route path="/signin" exact render = {
-                  () => (
-                    currentUser ? <Redirect to='/'/> : <SignInPage/>)
-                    }  /> 
+                    <Route path="/signin" exact render = {
+                      () => (
+                        currentUser ? <Redirect to='/'/> : <SignInPage/>)
+                        }  /> 
 
-                <Route path="/signup" exact render = {
-                  () => (
-                    currentUser ? <Redirect to='/'/> : <SignUpPage/>)
-                    }  /> 
+                    <Route path="/signup" exact render = {
+                      () => (
+                        currentUser ? <Redirect to='/'/> : <SignUpPage/>)
+                        }  /> 
 
-                <Route path='/profile/:sellerid?' exact component={ProfilePage} /> 
-                <Route path="/checkout/:isBuyNow" exact component={CheckoutPage} />   
-            </Switch>
-       </LayoutWithLoadingSpinner>
+                    <Route path='/profile/:sellerid?' exact component={ProfilePage} /> 
+                    <Route path="/checkout/:isBuyNow" exact component={CheckoutPage} />   
+                </Switch>
+          </LayoutWithLoadingSpinner>
+       </ThemeProvider>
       </div>
   );
 }

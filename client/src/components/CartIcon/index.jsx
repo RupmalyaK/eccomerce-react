@@ -2,9 +2,10 @@ import React from "react";
 import {useSelector, useDispatch} from "react-redux";  
 import {showCartDropdown, hideCartDropdown} from "../../redux/cart/cart.action.js";
 import {selectIsDropdownHidden, selectCartItemsTotalQuantity} from "../../redux/cart/cart.selector";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"; 
 import CartDropdown from "../CartDropdown";
 import {Container,IconContainer} from "./style.jsx";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 
 const CartIcon = (props) => {
 const isDropdownHidden = useSelector(selectIsDropdownHidden);
@@ -21,16 +22,19 @@ const handleMouseOut = e => {
 }
 
 return(
+    <Container onMouseEnter = {handleOnMouseOver} onMouseLeave = {handleMouseOut} {...props}>
+         <div className="text">
+            <span>Shopping cart</span>
+            <span>{itemsTotalQuantity} item(s)-0.0</span>
+         </div>
+         <FontAwesomeIcon icon={faShoppingCart} className="icon"/>
+         {!isDropdownHidden ? <CartDropdown/> : <></>} 
+    </Container>
 
-<Container itemCount= {itemsTotalQuantity} onMouseEnter = {handleOnMouseOver} onMouseLeave = {handleMouseOut} {...props}>
-    <IconContainer icon={faShoppingCart}  />
-    {!isDropdownHidden ? <CartDropdown/> : <></>} 
-</Container>
 );
 }
 
 
 
 export default CartIcon; 
-
 

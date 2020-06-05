@@ -1,6 +1,6 @@
 import {createGlobalStyle} from "styled-components";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
 
 body {
     font-family: 'Open Sans Condensed';
@@ -9,11 +9,24 @@ body {
     background-color:#f8f9fa;
 
   }
-  
-  
   * {
   }  
 `;
 
+export const theme = {
+  primaryButtonColor:"#eb2c33", 
+  secondaryButtonColor:"#82b440",
+  alternateButtonColor:"white",
 
-export default GlobalStyle;
+  primaryBackgroundColor:"#eaeaea",
+  secondaryBackgroundColor:"rgba(0, 0, 0, 0.95)",
+  transparentBackgroundColor:"rgba(14, 14, 14, 0.5)",
+
+  primaryTextColor:"#eb2c33",
+  secondaryTextColor:"#eaeaea",
+  alternateTextColor:"white",
+  
+}
+
+
+

@@ -5,11 +5,14 @@ import {useSelector , useDispatch} from "react-redux";
 import {selectCurrentUser} from "../../redux/user/user.selector.js";
 import {signOutAsync} from "../../redux/user/user.action.js";
 import {selectIsPageYtop} from "../../redux/system/system.selector.js"
-import {Navbar, Nav} from "react-bootstrap";
+import {Navbar, Nav,Row,Col} from "react-bootstrap";
 import SearchBar from "../SearchBar";
 import CartIcon from "../CartIcon";
-import {Container,CustomBContainer} from "./style.jsx";
+import {Container} from "./style.jsx";
 import profileIconSvg from  "../../images/profile-icon.svg";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCaretRight} from "@fortawesome/free-solid-svg-icons";
+
 import ProfileIcon from "../ProfileIcon";
 const {Link:BLink} = Nav;
 
@@ -18,7 +21,8 @@ const {Link:BLink} = Nav;
 
 
 
-const CustomNavbar = (props) => {
+
+const UpperNavbar = (props) => {
     const currentUser = useSelector(selectCurrentUser);
     const isPageYTop = useSelector(selectIsPageYtop);
     const dispatch = useDispatch(); 
@@ -28,6 +32,32 @@ const CustomNavbar = (props) => {
     }
     return (
         <Container isPageYTop={isPageYTop} >
+        <Navbar expand="sm" variant="light" className="navBar"> 
+          <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+          <Navbar.Collapse id="basic-navbar-nav px-0 text-center w-100">
+                  <Nav className="ml-auto text-uppercase w-100 justify-content-start text-center">       
+                          <BLink as={NavLink} to='/' activeClassName="active" className="link"  exact>
+                              <span>Home</span>
+                          </BLink>
+                          <BLink as={NavLink} to="/Browse" className="link" exact>
+                            <span>Browse</span><FontAwesomeIcon icon={faCaretRight} className="icon"/>
+                         </BLink>
+                  </Nav>
+                 
+          </Navbar.Collapse> 
+          </Navbar>     
+  </Container>
+    )
+}
+
+
+
+export default UpperNavbar; 
+
+
+
+/**
+ * <Container isPageYTop={isPageYTop} >
               <Navbar expand="sm" variant="light" className="navBar"> 
               <CustomBContainer fluid>
               <Navbar.Brand  as={Link} to='/' style={{flex:1}}><Logo /></Navbar.Brand> 
@@ -51,13 +81,7 @@ const CustomNavbar = (props) => {
                 </CustomBContainer>
                 </Navbar>     
         </Container>
-    )
-}
-
-
-
-export default CustomNavbar; 
-
+ */
      
     
 
