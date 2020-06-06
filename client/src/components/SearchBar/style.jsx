@@ -4,6 +4,7 @@ import {Form} from "react-bootstrap";
 
 export const CustomForm = styled(Form)`
 color:${props => props.theme.alternateTextColor};
+min-width:190px !important;
 position:relative;
 .text-input{
     background:${props => props.theme.transparentBackgroundColor};
@@ -31,17 +32,22 @@ position:relative;
 `;
 
 export const SuggestionBox = styled.div`
-background:${props => props.theme.transparentBackgroundColor};
+background:${props => props.theme.secondaryBackgroundColor};
 width:80%;
 height:240px;
 bottom:-250px;
 transform:translateX(-20px);
 position:absolute;
 overflow:hidden;
+z-index:10;
 `;
 
 export const Suggestion = styled.div
 `
+&:hover{
+color:${props => props.theme.primaryTextColor};
+}
+
 border-bottom:1px solid black;
 padding:10px 10px 5px 10px;
 `; 

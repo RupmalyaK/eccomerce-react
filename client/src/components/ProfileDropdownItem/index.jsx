@@ -9,15 +9,19 @@ display:inline-flex;
 align-items:center;
 justify-content:center;
 height:15%;
-margin-bottom:2px;
+margin-bottom:5px;
 cursor:pointer;
+color:${props => props.theme.alternateTextColor};
 `;
 
 const Item = styled.h6`
     flex:1;
     .text{
-        color:${props => props.theme.alternateTextColor};
+       
         font-size:0.8rem;
+        &:hover{
+          color:${props => props.theme.primaryTextColor};  
+        }
     }
 `;
 

@@ -3,6 +3,7 @@ import {Container as BContainer} from "react-bootstrap";
 
 
 export const Container = styled(BContainer)`
+
 color:${props => props.theme.alternateButtonColor};
 .icon-wrapper{
     margin-right:10px;

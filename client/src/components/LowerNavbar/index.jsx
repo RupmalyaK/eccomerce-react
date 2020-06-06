@@ -11,7 +11,7 @@ import CartIcon from "../CartIcon";
 import {Container} from "./style.jsx";
 import profileIconSvg from  "../../images/profile-icon.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCaretRight} from "@fortawesome/free-solid-svg-icons";
+import {faCaretRight,faHome} from "@fortawesome/free-solid-svg-icons";
 
 import ProfileIcon from "../ProfileIcon";
 const {Link:BLink} = Nav;
@@ -32,21 +32,21 @@ const UpperNavbar = (props) => {
     }
     return (
         <Container isPageYTop={isPageYTop} >
-        <Navbar expand="sm" variant="light" className="navBar"> 
-          <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+        <Navbar  expand="sm" variant="dark" className="navBar"> 
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="nav-toggler"/>
           <Navbar.Collapse id="basic-navbar-nav px-0 text-center w-100">
-                  <Nav className="ml-auto text-uppercase w-100 justify-content-start text-center">       
+                  <Nav className="nav text-uppercase w-100 justify-content-md-start justify-content-sm-center text-center">       
                           <BLink as={NavLink} to='/' activeClassName="active" className="link"  exact>
-                              <span>Home</span>
+                              <FontAwesomeIcon icon={faHome} style={{fontSize:"20px"}}/>
                           </BLink>
                           <BLink as={NavLink} to="/Browse" className="link" exact>
                             <span>Browse</span><FontAwesomeIcon icon={faCaretRight} className="icon"/>
                          </BLink>
-                         <BLink as={NavLink} to="/Browse" className="link" exact>
+                         <BLink as={NavLink} to="/collection" className="link" exact>
                             <span>Collections</span><FontAwesomeIcon icon={faCaretRight} className="icon"/>
                          </BLink>
                     </Nav>
-                    <Nav className="ml-auto text-uppercase w-100 justify-content-end text-center">
+                    <Nav className="ml-auto text-uppercase w-100 justify-content-md-end justify-content-sm-center text-center">
                         <BLink as={NavLink} to="/contactus" activeClassName="active" className="link"  exact>
                                 <span>Contact</span>
                         </BLink>

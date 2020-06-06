@@ -32,23 +32,19 @@ const UpperNavbar = (props) => {
     }
     return (
         <Container>  
-              <Navbar expand="sm" variant="light" className="navBar"> 
-              <Navbar.Brand  as={Link} to='/' style={{flex:1}}><Logo /></Navbar.Brand> 
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse id="basic-navbar-nav px-0 text-center w-100">
-                <SearchBar className="w-75  justify-content-start"/>
-                        <Nav className="ml-auto text-uppercase w-100 justify-content-end text-center" style={{flex:1}}>       
-                                <ProfileIcon />
-                                <div className="icon-wrapper">
-                                    <FontAwesomeIcon icon={faHeart} className="icon"/>
-                                </div>
-                                <div className="icon-wrapper">
-                                    <FontAwesomeIcon icon={faBell} className="icon"/>
-                                </div>
-                                <CartIcon />
-                        </Nav>
-                       
-                </Navbar.Collapse>                         
+              <Navbar expand="sm" variant="dark" className="navBar flex-column flex-sm-row p-0"> 
+                    <Navbar.Brand  as={Link} to='/' style={{flex:1}} className="mb-3 mb-sm-0"><Logo /></Navbar.Brand> 
+                    <SearchBar className="w-100  justify-content-center "/>
+                    <Nav className="text-uppercase w-100 justify-content-center justify-content-sm-end flex-row text-center pt-5 pt-sm-0 mb-2 mb-sm-0" style={{flex:1}}>       
+                            <ProfileIcon />
+                            <div className="icon-wrapper">
+                                <FontAwesomeIcon icon={faHeart} className="icon"/>
+                            </div>
+                            <div className="icon-wrapper">
+                                <FontAwesomeIcon icon={faBell} className="icon"/>
+                            </div>
+                            <CartIcon />
+                    </Nav>                     
                 </Navbar>     
         </Container>
     )

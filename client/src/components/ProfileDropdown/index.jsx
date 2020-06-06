@@ -20,7 +20,7 @@ padding: 0px;
 border: 1px solid black;
 background-color: ${props => props.theme.secondaryBackgroundColor};
 z-index: 5;
-transform:translateY(75%);
+transform:translateY(70%);
 padding:5px;
 
 .welcome-text{
@@ -37,13 +37,6 @@ display: flex;
 flex-direction: column;
 overflow-x:hieen;
 overflow-y:auto;
-a{
-    color:black;
-    text-decoration:none;
-    &:hover{
-        color:black;
-        text-decoration:none;
-    }
 }
 `;
 
@@ -60,7 +53,7 @@ const ProfileDropdown = (props) => {
             <span className="welcome-text">Hello, {currentUser.displayName} !</span>
             <DropdownItems>
                 <Item as={NavLink} activeStyle={{border:"0px"}} exact to="/profile" src={manAvatarSvg} alt="man-avatar">My profile</Item>
-                {currentUser ? <Item  onClick={signOutClickHandler} >Sign out!</Item> : <></>}
+                {currentUser ? <Item  onClick={signOutClickHandler} >Sign out</Item>:<></>}
             </DropdownItems>
         </Container>
     );

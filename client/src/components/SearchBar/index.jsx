@@ -22,7 +22,7 @@ const SearchBar = (props) => {
     const sortBy = useSelector(selectSortBy); 
     const items = useSelector(selectAutocompleteCollections);
     const history = useHistory(); 
-    const suggestionBoxRef = useRef(null); 
+    const formRef = useRef(null); 
  
     
     
@@ -64,7 +64,7 @@ const SearchBar = (props) => {
     }
 
     const handleClickOutsideSuggestionBox = e => {
-        if(suggestionBoxRef.current.contains(e.target))
+        if(formRef.current.contains(e.target))
             {
     
                 setIsOpen(true);
@@ -107,7 +107,7 @@ const SearchBar = (props) => {
     }
 
 return(
-    <CustomForm inline  {...rest} ref={suggestionBoxRef}>
+    <CustomForm inline  {...rest} ref={formRef}>
         <FormControl  type="text" onChange={handleChange} onKeyPress={handleEnterPress}  placeholder="Search ..." className=" m-0 w-75 text-input"/>
         <div className="icon-wrapper">
            <FontAwesomeIcon icon={faSearch} className="icon" onClick={handleClickSearch}/>
@@ -126,7 +126,7 @@ return(
 export default SearchBar; 
 
 /**
- *  <Form inline  {...rest} ref={suggestionBoxRef}>
+ *  <Form inline  {...rest} ref={formRef}>
         <FormControl  type="text" onChange={handleChange} onKeyPress={handleEnterPress}  placeholder="Search product..." className=" m-0 w-75" />
         {compact ? <></> : <Button className="ml-1"  onClick={handleClickSearch} variant="outline-success">Search</Button>}
         {(!isOpen || items.length === 0 )? <></> :(
