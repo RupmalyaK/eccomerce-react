@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Dropdown from "../ProfileDropdown";
+import ProfileDropdown from "../ProfileDropdown";
 import {useSelector,useDispatch} from "react-redux";
 import {selectIsProfileMenuOpen} from "../../redux/system/system.selector.js";
 import {setProfileMenuOpen, setProfileMenuClose} from "../../redux/system/system.action.js";
@@ -42,7 +42,7 @@ const ProfileIcon = (props) => {
     return (
     <Container onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
         <FontAwesomeIcon icon={faUser} className="icon"/>
-        { isProfileMenuOpen ? <Dropdown/> : <></>}
+        { isProfileMenuOpen ? <ProfileDropdown/> : <></>}
     </Container>
     );
 }

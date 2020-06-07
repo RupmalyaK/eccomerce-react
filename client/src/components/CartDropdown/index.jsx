@@ -5,6 +5,7 @@ import {selectCartItems } from "../../redux/cart/cart.selector.js";
 import {useHistory} from "react-router-dom";
 import CartItem from "../CartItem"; 
 import {Container,CartItems,CheckOutButton,EmptyMessage} from "./style.jsx";
+import Dropdown from "../Dropdown";
 
 
 const CartDropdown = (props) => {
@@ -39,14 +40,16 @@ const displayCartitems = () => {
 }
 
 return(
-<Container onMouseOver = {handleOnMouseOver} onMouseLeave={handleMouseOut}>
-    <CartItems>
-      {cartItems.length ? displayCartitems() :
-        <EmptyMessage>Your cart is empty!</EmptyMessage>
-      }
-    </CartItems>
-    <CheckOutButton onClick={handleClick}>Go to Checkout</CheckOutButton>
-</Container>
+<Dropdown> 
+  <Container onMouseOver = {handleOnMouseOver} onMouseLeave={handleMouseOut}>
+      <CartItems>
+        {cartItems.length ? displayCartitems() :
+          <EmptyMessage>Your cart is empty!</EmptyMessage>
+        }
+      </CartItems>
+      <CheckOutButton onClick={handleClick}>Go to Checkout</CheckOutButton>
+  </Container>
+</Dropdown> 
 );
 }
 

@@ -3,16 +3,12 @@ import styled from "styled-components";
 import Button from "../CustomButton";
 
 export const Container = styled.div`
-position: absolute;
 width: 300px;
 height: 420px;
 display: flex;
 flex-direction: column;
 padding-top: 20px;
 border: 1px solid black;
-background-color: ${props => props.theme.secondaryBackgroundColor};
-top:120%;
-z-index: 5;
   `;
 
 
