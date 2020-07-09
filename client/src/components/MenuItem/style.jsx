@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export const BackgroundImageContainer = styled.div`
-background-image: url(${(props => props.imageUrl)});
+background-image: url(${(props => props.imageUrl)}) !important;
 position:absolute;
 background-position:center;
 background-size:cover;
@@ -18,22 +18,23 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-border: 1px solid black;
 background:white
-opacity:70%;
+background:${props => props.theme.primaryButtonColor};
+color:${props => props.theme.secondaryTextColor};
+opacity:95%;
 `;
 
 
 export const MenuItemContainer = styled.div`
 position:relative;
 min-width: 30%;
-height: ${(props) => (props.size === "large" ? "400px" : "240px")} ; 
+z-index:5;
+height: ${(props) => (props.size === "large" ? "300px" : "200px")} ; 
 flex: 1 1 auto;
 display: flex;
 align-items: center;
 justify-content: center;
-border: 1px solid black;
-margin: 0 7.5px 15px; 
+margin: 0 0px 15px; 
 overflow:hidden;
 &:first-child {
     margin-right: 7.5px;
@@ -52,12 +53,21 @@ overflow:hidden;
       }
 
     ${Content}{
-        opacity: 1;
+     opacity:1;
+     color:${props => props.theme.alternateTextColor};
+        
     }
     }
     @media screen and (max-width:800px)
     {
         height:200px;
+        &:first-child {
+          margin-right: 0px;
+        }
+      
+        &:last-child {
+          margin-left: 0px;
+        } 
     }
   }
 `;

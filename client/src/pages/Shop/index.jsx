@@ -5,11 +5,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchCollectionsStartAsync} from "../../redux/shop/shop.actions.js";
 import {selectIsFetching} from "../../redux/shop/shop.selector.js"
 import LoadingSpinner from "../../components/LoadingSpinner";
-import CollectionOverview from "../../components/CollectionsOverview";
+import FeaturedOverview from "../../components/FeaturedOverview";
 import CollectionPage from "./../Collection";
 import {Container} from "./style.jsx";
 
-const CollectionOverviewWithSpinner = LoadingSpinner(CollectionOverview);
+const CollectionOverviewWithSpinner = LoadingSpinner(FeaturedOverview);
 const CollectionPageWithSpinner = LoadingSpinner(CollectionPage);
 
 

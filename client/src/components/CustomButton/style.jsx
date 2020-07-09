@@ -1,5 +1,6 @@
 import React from "react";
 import styled , {css} from "styled-components"; 
+import {motion} from "framer-motion";
 
 
 export const invertedStyle = css`
@@ -23,10 +24,9 @@ color:white;
 `;
 
 
-export const Container = styled.button`
-min-width: 165px;
-width: auto;
-height: 50px;
+export const Container = styled(motion.div)`
+
+
 letter-spacing: 0.5px;
 line-height: 50px;
 padding: 0px 35px 0px 35px;
@@ -35,13 +35,12 @@ background-color: black;
 color: white;
 text-transform: uppercase;
 font-family: 'Open Sans Condensed';
-font-weight: bolder;
 border: none;
 cursor: pointer;
 display:flex;
 justify-content:center;
+align-items:center;
 padding:0px;
-border-radius:5px;
 &:hover {
   background-color: ${props => props.isInverted ?  props.theme.secondaryButtonColor: props.theme.primaryButtonColor};
   color: ${props => props.isInverted ? props.theme.primaryTextColor : props.theme.secondaryTextColor};
