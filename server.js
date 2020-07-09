@@ -21,11 +21,11 @@ if(process.env.NODE_ENV !== "production")
         dotEnv.config(); 
     }
 
-
-    admin.initializeApp({
-        credential: admin.credential.cert(fireBaseCred),
-        databaseURL: "https://react-rupkart-d6edf.firebaseio.com"
-      });
+//initializing firebase 
+admin.initializeApp({
+    credential: admin.credential.cert(fireBaseCred),
+    databaseURL: "https://react-rupkart-d6edf.firebaseio.com"
+    });
 
 
 
@@ -101,6 +101,7 @@ console.log("CHECK THIS OUT", process.env.MONGODB_URL);
             console.log("MONGODB ERROR: ",error);
         }
 })();
+
 
 
 
