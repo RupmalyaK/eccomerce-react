@@ -24,7 +24,7 @@ export const theme = {
 
 export const GlobalStyle = createGlobalStyle`
 body {
-    font-family: 'Open Sans Condensed' !important;
+    font-family: Arial, Helvetica, sans-serif !important;
 
     background:${props => props.theme.secondaryBackgroundColor} !important;
 
