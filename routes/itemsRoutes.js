@@ -79,7 +79,7 @@ app.route(routeString + "items/:title")
                         return; 
                     }
                 const featuredItemsArr = collection.items.filter(item => item.isFeatured);
-                console.log(collection.title,featuredItemsArr);
+         
                 res.status(200).json({title:collection.title,featuredItems:featuredItemsArr});
             }
             catch(error)

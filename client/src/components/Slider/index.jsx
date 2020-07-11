@@ -87,7 +87,7 @@ const Slider = (props) => {
     
     useEffect(
       () => {
-      console.log(mainTextControl);
+ 
        animateSequence();
       }
       ,[currentIndex]);

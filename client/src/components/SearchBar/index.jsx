@@ -2,7 +2,8 @@ import React, {useState, useRef} from "react";
 import {FormControl} from "react-bootstrap";
 import {fetchAutocompleteAsync} from "../../redux/shop/shop.actions.js"
 import {selectAutocompleteCollections} from "../../redux/shop/shop.selector.js";
-import {fetchItemsAsync, setCurrentItemAsync} from "../../redux/browse/browse.actions.js";
+import {fetchItemsAsync} from "../../redux/browse/browse.actions.js";
+import {setCurrentItemAsync} from "../../redux/currentItem/currentItem.actions.js";
 import {selectSortBy} from "../../redux/browse/browse.selector.js";
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";

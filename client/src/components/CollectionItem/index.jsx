@@ -1,7 +1,7 @@
 import React from "react"; 
 import {useDispatch} from "react-redux"; 
 import {addItemToCart} from "../../redux/cart/cart.action.js"; 
-import {setCurrentItemAsync} from "../../redux/browse/browse.actions.js";
+import {setCurrentItemAsync} from "../../redux/currentItem/currentItem.actions.js";
 import {Card} from "react-bootstrap";
 import {CustomCard,AddToCartButton,PreviewButton} from "./style.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -12,13 +12,12 @@ import RatingStar from "../RatingStar";
 import Button from "../CustomButton";
 
 const  CollectionItem = (props) => {
-const {item, selected} = props; 
+
+const {item, selected,type} = props; 
 const dispatch = useDispatch(); 
 const history = useHistory(); 
 const addToCartAnmControl = useAnimation();
 
-
-console.log(item);
 const INITIAL_CARD_ANM = {
     x:40
 };
@@ -36,8 +35,8 @@ const handlerMouseLeaveCard = e => {
 
 const handlerGoToPreviewPage = e => {
     e.preventDefault(); 
-    dispatch(setCurrentItemAsync(item)); 
-    history.push({  pathname:`/browse/item/${item.type}/${item._id}` });
+    dispatch(setCurrentItemAsync(item,type)); 
+    history.push({  pathname:`/browse/item/${type.toLowerCase()}/${item._id}` });
 }
 
 return(

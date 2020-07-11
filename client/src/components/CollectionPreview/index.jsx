@@ -35,7 +35,7 @@ const CollectionPreview = (props) => {
           (item,index) => {
               return (
                   <div key= {index} style={{paddingLeft:"30px", paddingRight:"30px"}}>
-                      <CollectionItem  key= {index} item={item} selected={selected}/>
+                      <CollectionItem  key= {index} type={section.title} item={item} selected={selected}/>
                   </div> 
                   
              

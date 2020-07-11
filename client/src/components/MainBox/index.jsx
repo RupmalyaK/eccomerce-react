@@ -66,7 +66,7 @@ z-index:10;
 
 const MainBox = (props) => {
     const {icon,heading,isFirstChild,...extraProps} = props; 
-    console.log(isFirstChild)
+
 
     return(
         <Container className="main-box man-box" {...extraProps} className="wrapper">

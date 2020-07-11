@@ -16,7 +16,7 @@ const FeaturedOverview = (props) => {
                     { 
                        collectionArr.push(
                      
-                        <CollectionPreview  section = {featuredCollection[key]} />
+                        <CollectionPreview  section = {featuredCollection[key]} type={key}/>
               
                        );
                     }

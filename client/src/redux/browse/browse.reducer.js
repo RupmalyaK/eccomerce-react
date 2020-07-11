@@ -42,7 +42,7 @@ const browseReducer = (state = INITIAL_STATE, action) => {
                     const numberOfItems = items.length.toString(); 
                     return {...state, isFetching:false, items, searchString, priceRange, sortBy, numberOfItems, categories, isFeatured,isAsc}; 
                     
-            case actionTypes.FETCH_CURRENT_ITEM_START:
+         /*   case actionTypes.FETCH_CURRENT_ITEM_START:
                      return {...state, isFetchingCurrentItem:true}; 
             case actionTypes.FETCH_CURRENT_ITEM_FAILURE:
                       return {...state, isFetchingCurrentItem:false, fetchCurrentItemError:payLoad};
@@ -61,7 +61,7 @@ const browseReducer = (state = INITIAL_STATE, action) => {
             case actionTypes.SET_CURRENT_ITEM_FAILURE:
                         return {...state,isSettingCurrentItem:false,settingCurrentItemError:payLoad};
             case actionTypes.SET_CURRENT_ITEM_SUCCESS:
-                        return {...state,isSettingCurrentItem:false,currentItem:payLoad};           
+                        return {...state,isSettingCurrentItem:false,currentItem:payLoad};  */         
                         
                         
             case actionTypes.FETCH_CURRENT_PROFILE_START:

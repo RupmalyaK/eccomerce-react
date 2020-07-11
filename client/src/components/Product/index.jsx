@@ -1,7 +1,7 @@
 import React, {useState} from "react"; 
 import {useSelector,useDispatch} from "react-redux"; 
-import {selectCurrentItem,selectIsPostingReview} from "../../redux/browse/browse.selector.js"; 
-import {postReviewAsync} from "../../redux/browse/browse.actions.js";
+import {selectCurrentItem,selectIsPostingReview} from "../../redux/currentItem/currentItem.selector.js"; 
+import {postReviewAsync} from "../../redux/currentItem/currentItem.actions.js";
 import {Row} from "react-bootstrap";
 import ReviewsAndRatings from "../ReviewsAndRatings";
 import ProductLeftPanel from "../ProductLeftPanel";

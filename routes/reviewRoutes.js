@@ -7,7 +7,6 @@ const reviewRoutes = (app, admin) => {
     const routeString = "/api/collections/collection/item";
     app.route(routeString + "/review")
     .post(isAuthenticated,limitRequestFromTheUser,async (req, res, next) => {
-        console.log("HLLO DARKNESS");
         const {rating, text , itemObjectId, itemType,  userObjectId} = req.body; 
         if(typeof rating === undefined || rating > 5 || rating < 0)
             {

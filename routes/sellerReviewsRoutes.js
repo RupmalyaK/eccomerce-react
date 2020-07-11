@@ -46,7 +46,7 @@ const sellerReviewsRoute = (app,admin) => {
                 seller.averageRating = calculateAverageRating(seller.reviews);
                 await seller.save();
                 delete global.usersReviewing[userObjectId];
-                console.log("THIS IS AFTER INSERT",seller);
+             
                 res.status(200).send({operation:"success",reviewData:seller});     
                 }
 

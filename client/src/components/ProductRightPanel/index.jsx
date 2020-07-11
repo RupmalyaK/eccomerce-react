@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {selectCurrentItem} from "../../redux/browse/browse.selector.js"; 
+import {selectCurrentItem} from "../../redux/currentItem/currentItem.selector.js"; 
 import {setCurrentProfileAsync} from "../../redux/browse/browse.actions.js"; 
 import {addNewBuyNowItem} from "../../redux/cart/cart.action.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,7 +19,7 @@ const ProductRightPanel = () => {
     const {isFeatured, name,price, type,offers,sizes } = item;  
     const history = useHistory();
     const dispatch = useDispatch(); 
-    
+    console.log(item);
     const [selectedSize, setSelectedSize] = useState(sizes ? sizes[0] : null);
 
     const handleClickSize = (e) => {

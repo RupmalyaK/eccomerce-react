@@ -70,6 +70,7 @@ export const fetchItemsAsync = (search) => {
                    sellerId 
                 },
             }); 
+        
             dispatch(fetchItemsSuccess({items, searchString,priceRange, sortBy, isAsc, categories, isFeatured})); 
             }
          catch(error)
@@ -80,7 +81,7 @@ export const fetchItemsAsync = (search) => {
 }
 
 
-export const fetchCurrentItemStart = () => {
+/*export const fetchCurrentItemStart = () => {
     return {type:actionTypes.FETCH_CURRENT_ITEM_START};
 }
 
@@ -189,7 +190,7 @@ export const postReviewAsync = (text,currentRating) => {
         }
 }
 }
-
+*/
 export const fetchCurrentProfileStart = () => {
     return {type:actionTypes.FETCH_CURRENT_PROFILE_START};
 }
@@ -281,7 +282,7 @@ export const postSellerReviewAsync = (text,rating,sellerObjectId,userObjectId) =
                     authorization:"Bearer " + accessToken,
                 },
             }); 
-            dispatch(postReviewSuccess(reviewData));
+            dispatch(postSellerReviewSuccess(reviewData));
         }
         catch(error){
             dispatch(postSellerReviewFailure(error))

@@ -49,7 +49,17 @@ app.route("/api/itemsname")
 
 app.route("/api/item/")
 .get(async(req, res, next) => { 
-    const {_id, type} = req.query; 
+    const {_id} = req.query; 
+  
+  const type = req.query.type.split('').map((char,index) => {
+     
+        if(index === 0)
+            {  
+                char = char.toUpperCase();
+            }
+            return char; 
+    }).join('');
+
     
     try{
         const collection = await CollectionsModel.findOne({title:type});

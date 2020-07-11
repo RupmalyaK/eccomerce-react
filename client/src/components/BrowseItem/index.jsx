@@ -2,7 +2,7 @@ import React from "react";
 import {Col} from "react-bootstrap";
 import {useDispatch} from "react-redux"; 
 import {addItemToCart} from "../../redux/cart/cart.action.js"; 
-import {setCurrentItemAsync} from "../../redux/browse/browse.actions";
+import {setCurrentItemAsync} from "../../redux/currentItem/currentItem.actions";
 import {useHistory} from "react-router-dom";
 import {Container, AddToCartButton} from "./style.jsx"
 
@@ -11,7 +11,7 @@ const BrowseItem = props => {
     const {name,price, isFeatured, primaryImageUrl, type, _id} = props.item;  
     const dispatch = useDispatch();
     const history = useHistory(); 
-
+    console.log("debug", type);
     const handleGoToItemPage = e => {
        dispatch(setCurrentItemAsync(props.item));
         history.push({

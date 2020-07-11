@@ -86,7 +86,7 @@ app.listen(port , err => {
         }
      console.log("server running on port ", + port);     
 });  
-console.log("CHECK THIS OUT", process.env.MONGODB_URL);
+
 /*MONGOOSE CONFIG*/
 (async () => {
     try {
