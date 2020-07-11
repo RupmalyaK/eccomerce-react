@@ -5,7 +5,7 @@ import path from "path";
 import Stripe from "stripe";
 import dotEnv from "dotenv";
 import mongoose from "mongoose";
-import fireBaseCred from "./fireBaseCred.json";
+import fireBaseCred from "./fb_keys.json";
 import collectionsRoutes from "./routes/collectionsRoutes.js";
 import collectionRoutes from "./routes/collectionRoutes.js";
 import itemsRoutes from "./routes/itemsRoutes.js";

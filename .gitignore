@@ -20,6 +20,7 @@
 .env.production.local
 .env
 secrets.js
+fb_keys.json
 
 npm-debug.log*
 yarn-debug.log*
