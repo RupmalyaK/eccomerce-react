@@ -24,16 +24,5 @@ export const selectIsFeatured = createSelector(selectBrowse, state => state.isFe
 
 export const selectCategories = createSelector(selectBrowse, state => state.categories);
 
-/*export const selectCurrentItem = createSelector(selectBrowse, state => state.currentItem); 
-
-export const selectIsFetchingCurrentItem = createSelector(selectBrowse, state => state.isFetchingCurrentItem);
-
-export const selectIsPostingReview = createSelector(selectBrowse, state => state.isPostingReview);*/
-
-export const selectIsFetchingCurrentProfile = createSelector(selectBrowse, state => state.isFetchingCurrentProfile);
-
-export const selectCurrentProfile = createSelector(selectBrowse, state => state.currentProfile);
-
-export const isPostingSellerReview = createSelector(selectBrowse, state => state.isPostingSellerReview); 
 
 

@@ -11,7 +11,7 @@ const BrowseItem = props => {
     const {name,price, isFeatured, primaryImageUrl, type, _id} = props.item;  
     const dispatch = useDispatch();
     const history = useHistory(); 
-    console.log("debug", type);
+
     const handleGoToItemPage = e => {
        dispatch(setCurrentItemAsync(props.item));
         history.push({

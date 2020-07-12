@@ -8,6 +8,7 @@ import shopReducer from "./shop/shop.reducer.js";
 import browseReducer from "./browse/browse.reducer.js";
 import systemReducer from "./system/system.reducer.js"; 
 import currentItemReducer from "./currentItem/currentItem.reducer.js";
+import profileReducer from "./profile/profile.reducer.js";
 
 
 const persistConfig = {
@@ -26,6 +27,7 @@ const rootReducer = combineReducers(
         browse:browseReducer,
         system:systemReducer,
         currentItem:currentItemReducer,
+        profile:profileReducer,
     }
 );
 

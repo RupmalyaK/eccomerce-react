@@ -11,22 +11,6 @@ const INITIAL_STATE = {
     numberOfItems:"",
     isFeatured:false, 
     categories:[],
-    currentItem:{},
-    isFetchingCurrentItem:false,
-    fetchCurrentItemError:null,
-    isPostingReview:false,
-    postingReviewError:null,
-    currentProfile:null,
-    isFetchingCurrentProfile:false,
-    fetchingCurrentProfileError:null,
-    isSettingCurrentItem:false, 
-    settingCurrentItemError:null,
-    isFetchingProfileReviews:false,
-    fetchingProfileReviewsError:null,
-    isPostingSellerReview:false,
-    postingSellerReviewError:null,
-    isSettingCurrentProfile:false,
-    settingCurrentProfileError:null,
 };
 
 const browseReducer = (state = INITIAL_STATE, action) => {
@@ -41,57 +25,7 @@ const browseReducer = (state = INITIAL_STATE, action) => {
                     const {items, searchString, priceRange, sortBy, categories, isFeatured,isAsc} = payLoad;
                     const numberOfItems = items.length.toString(); 
                     return {...state, isFetching:false, items, searchString, priceRange, sortBy, numberOfItems, categories, isFeatured,isAsc}; 
-                    
-         /*   case actionTypes.FETCH_CURRENT_ITEM_START:
-                     return {...state, isFetchingCurrentItem:true}; 
-            case actionTypes.FETCH_CURRENT_ITEM_FAILURE:
-                      return {...state, isFetchingCurrentItem:false, fetchCurrentItemError:payLoad};
-            case actionTypes.FETCH_CURRENT_ITEM_SUCCESS:
-                       return {...state, isFetchingCurrentItem:false, currentItem:payLoad};  
-            
-            case actionTypes.POST_REVIEW_START:
-                        return {...state,isPostingReview:true};
-            case actionTypes.POST_REVIEW_SUCCESS:
-                        return {...state,isPostingReview:false,currentItem:{...state.currentItem,reviews:payLoad}};
-            case actionTypes.POST_REVIEW_FAILURE:            
-                         return {...state,isPostingReview:false,postingReviewError:payLoad};   
-                
-            case actionTypes.SET_CURRENT_ITEM_START:
-                        return {...state, isSettingCurrentItem:true};
-            case actionTypes.SET_CURRENT_ITEM_FAILURE:
-                        return {...state,isSettingCurrentItem:false,settingCurrentItemError:payLoad};
-            case actionTypes.SET_CURRENT_ITEM_SUCCESS:
-                        return {...state,isSettingCurrentItem:false,currentItem:payLoad};  */         
-                        
-                        
-            case actionTypes.FETCH_CURRENT_PROFILE_START:
-                        return {...state,isFetchingCurrentProfile:true};
-            case actionTypes.FETCH_CURRENT_PROFILE_FAILURE:
-                        return {...state,isFetchingCurrentProfile:false,fetchingCurrentProfileError:payLoad};
-            case actionTypes.FETCH_CURRENT_PROFILE_SUCCESS:
-                        return {...state,isFetchingCurrentProfile:false,currentProfile:payLoad};
-            
-            case actionTypes.SET_CURRENT_PROFILE_START:
-                        return{...state,isSettingCurrentProfile:true};
-            case actionTypes.SET_CURRENT_PROFILE_FAILURE:
-                        return {...state,isSettingCurrentProfile:false,settingCurrentProfileError:payLoad};
-            case actionTypes.SET_CURRENT_PROFILE_SUCCESS:
-                        return {...state,isSettingCurrentProfile:false,currentProfile:payLoad};                       
-             
-            case actionTypes.FETCH_SELLER_REVIEWS_START:
-                        return {...state,isFetchingProfileReviews:true};
-            case actionTypes.FETCH_SELLER_REVIEWS_FAILURE:
-                        return {...state,isFetchingProfileReviews:false,fetchingCurrentProfileError:payLoad};
-            case actionTypes.FETCH_SELLER_REVIEWS_SUCCESS:
-                        return {...state,isFetchingProfileReviews:false,currentProfile:{...state.currentProfile,reviews:payLoad}};  
-                        
-            case actionTypes.POST_REVIEW_SELLER_START:
-                        return {...state,isPostingReview:true};
-            case actionTypes.POST_REVIEW_SELLER_FAILURE:
-                        return {...state,isPostingReview:false,postingReviewError:payLoad};
-             case actionTypes.POST_REVIEW_SELLER_SUCCESS:
-                        return {...state,isPostingReview:false,currentProfile:{...state.currentProfile,reviewsData:payLoad}};                                  
-            
+
             default:
                     return state; 
         }

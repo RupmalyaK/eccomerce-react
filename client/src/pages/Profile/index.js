@@ -3,9 +3,9 @@ import styled from "styled-components";
 import RatingStar from "../../components/RatingStar";
 import Reviews from "../../components/SellerProfileReviews";
 import {useSelector,useDispatch} from "react-redux";
-import {selectIsFetchingCurrentProfile,selectCurrentProfile} from "../../redux/browse/browse.selector.js";
+import {selectIsFetchingCurrentProfile,selectCurrentProfile} from "../../redux/profile/profile.selector.js";
 import {useParams} from "react-router-dom";
-import {fetchCurrentProfileAsync} from "../../redux/browse/browse.actions.js";
+import {fetchCurrentProfileAsync} from "../../redux/profile/profile.actions.js";
 import LoadingSpinner from "../../components/LoadingSpinner"
 import Profile from "../../components/Profile";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";

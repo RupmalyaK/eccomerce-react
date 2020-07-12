@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useSelector} from "react-redux";
 import {selectCurrentUser} from "../../redux/user/user.selector.js";
+import {selectCurrentProfile} from "../../redux/profile/profile.selector.js";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
 import StarRatings from "react-star-ratings"; 
 
@@ -16,6 +17,7 @@ const ReviewsAndRatings = props => {
         const [currentRating, setCurrentRating] = useState(1);
         const [text, setText] = useState(""); 
         const currentUser = useSelector(selectCurrentUser); 
+        const currentProfile = useSelector(selectCurrentProfile);
         const maxLengthOfTextArea = "120";
         const currentUserReviewIndex = reviews.findIndex(review => {
             if(currentUser && review.user.uid === currentUser.id)
@@ -97,6 +99,10 @@ const ReviewsAndRatings = props => {
                 {
                    return;
                 }
+             if(currentUser.id === currentProfile.id)
+                {
+                    return; 
+                }   
                 return(
                     <div style={{border:"1px solid black", padding:"10px",marginBottom:"40px"}}>
                         <p>Write this review as <em>{currentUser.displayName}.</em></p>
@@ -123,13 +129,12 @@ const ReviewsAndRatings = props => {
             <h2 className="average-rating-points">{averageRating}/5</h2>
                  <StarIcon icon={faStar}/>
                  <em>out of {reviews ? getNumberOfReviews() : <></>} reviews</em>
-            </div>
-    {currentUserReview ? displayCurrentUserReview() : displayWriteReviewForm()}
+      </div>
+      {currentUserReview ? displayCurrentUserReview() : displayWriteReviewForm()}
              {reviews && reviews.length != 0 ? displayAllReviews():
              <h4 style={{marginTop:"-20px"}}>No reviews</h4>
              }
              {!currentUser ? (<h3 style={{marginTop:"20px", marginLeft:"20px"}}>Sign in to write review about this product!</h3>) : <></>}
-            
         </Container>
     ); 
 }

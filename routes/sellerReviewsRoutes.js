@@ -15,6 +15,11 @@ const sellerReviewsRoute = (app,admin) => {
                 res.status(400).json({error:"rating is not correct"});
                 return; 
             }
+        if(sellerObjectId === userObjectId)
+            {
+                res.status(400).json({error:"User can't review themeselves"});
+                return;  
+            }    
 
         try{
             const userRef = await db.collection("users").doc(userObjectId)

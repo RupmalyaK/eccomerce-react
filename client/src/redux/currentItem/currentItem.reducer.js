@@ -1,5 +1,6 @@
 import actionTypes from "./currentItem.types.js";
 
+
 const INITIAL_STATE = {
     item:{},
     isFetchingCurrentItem:false,
@@ -11,7 +12,7 @@ const INITIAL_STATE = {
 
 const currentItemReducer = (state = INITIAL_STATE, action) => {
     const {type, payLoad} = action; 
-    
+   
     switch(type)
         {
             case actionTypes.FETCH_CURRENT_ITEM_START:
