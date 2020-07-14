@@ -6,14 +6,13 @@ const mainColor = "black";
 const subColor = "grey"; 
 
 const shrinkLabel = css`
-top: -20px;
+top: -30px;
 font-size: 12px;
 color: mainColor;
 `;
 
 export const Container = styled.div`
-position: relative;
-margin: 45px 0;
+position: ${props => props.isLabelPresent ? "relative" : "static"};
 `;
 
 
@@ -43,7 +42,7 @@ width: 100%;
 border: none;
 border-radius: 5%;
 border-radius:5px;
-margin: 25px 0;
+
 
     &:focus {
     outline: none;

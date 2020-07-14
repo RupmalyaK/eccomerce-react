@@ -47,8 +47,8 @@ return(
     <Title>I already have an account</Title>
     <span>let's sign in with email and password</span>
     <Form>
-        <FormInput name="email" type="email" value={email} label="Email" setState={setEmail} required />
-        <FormInput name="password" type="password" value={password} label="Password" setState={setPassword} required />
+        <FormInput name="email" type="email" value={email} label="Email" setState={setEmail} required className="mt-5"/>
+        <FormInput name="password" type="password" value={password} label="Password" setState={setPassword} required className="mt-5 mb-5"/>
         
      
         

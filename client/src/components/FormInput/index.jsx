@@ -8,7 +8,7 @@ const handleChange = e => {
     setState(e.target.value)
 }
 return(
-<Container>
+<Container isLabelPresent>
         <Input  onChange = {setState ? handleChange : undefined}  {...otherProps} />
         {
             label ? (

@@ -99,7 +99,7 @@ const ReviewsAndRatings = props => {
                 {
                    return;
                 }
-             if(currentUser.id === currentProfile.id)
+             if(currentProfile && currentUser.id === currentProfile.id)
                 {
                     return; 
                 }   

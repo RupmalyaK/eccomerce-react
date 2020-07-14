@@ -71,7 +71,7 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <GlobalStyle />
             <LayoutWithLoadingSpinner isLoading={isSigningIn || isCheckingSession || isSigningUp}>
-                <Header/>
+                
                 <Switch>
                     <Route path='/' exact component={Homepage} />
                     <Route path="/shop/:match?"  component={Shoppage}/>

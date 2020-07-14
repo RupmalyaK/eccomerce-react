@@ -16,7 +16,7 @@ const Container = styled.div`
     margin-left:-250px;
     margin-top:-100px;
    // background:coral;
-    z-index:20;
+    z-index:100;
     text-align:center;
     padding-top:5px;
     display:flex;

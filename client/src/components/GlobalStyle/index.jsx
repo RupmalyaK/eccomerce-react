@@ -7,6 +7,7 @@ export const theme = {
 
   primaryBackgroundColor:"#eaeaea",
   secondaryBackgroundColor:"rgba(0, 0, 0, 0.95)",
+  secondaryBackgroundColorLite:"#0e0e0e",
   transparentBackgroundColor:"rgba(14, 14, 14, 0.5)",
   
 

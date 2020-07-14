@@ -7,7 +7,7 @@ display:flex;
 flex-direction:column;
 position:fixed;
 top:0;
-z-index:100;
+z-index:50;
 background:${props => props.theme.transparentBackgroundColor};
 padding-bottom:0px;
 width:100%;
